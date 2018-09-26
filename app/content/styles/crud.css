@@ -1,0 +1,19 @@
+.label-required:after {
+    color: #d00;
+    content: "*";
+    margin-left: 8px;
+    top: 7px;
+}
+
+.validate-error {
+    color: #d00;
+    font-size: 14px;
+    font-weight: normal;
+    padding-top: 5px;
+    min-width: 400px;
+}
+
+.grid-crono {
+    width: 500px;
+    height: 180px;
+}

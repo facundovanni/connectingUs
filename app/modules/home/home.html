@@ -1,0 +1,12 @@
+<div ng-controller="HomeController as vm">
+  <div class="container">
+    <div class="row cda-row">
+      <h1 class="title">Bienvenido a CDA</h1>
+    </div>
+    <div class="row cda-row" ng-if="!vm.auth.isAuthenticated()">
+      <a class="not-active" href="" ng-click="vm.autenticar()">
+        <h2 class="">Por favor inicie sesión</h2>
+      </a>
+    </div>
+  </div>
+</div>
