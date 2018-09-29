@@ -1,7 +1,7 @@
 (function VacationsScope(angular) {
     'use strict';
-    angular.module('connectingUsCenter.materia')
-        .service('Materias', ['ServicesModel', function (ServicesModel) {
+    angular.module('connectingUsCenter.myAccount')
+        .service('MyAccount', ['ServicesModel', function (ServicesModel) {
             var that = this;
             angular.extend(this, ServicesModel.create('https://orttaller6.herokuapp.com/materias', null, {
                 grid: {
@@ -14,7 +14,7 @@
                 },
                 getusersList:{
                     method:'GET',
-                    url:'https://orttaller6.herokuapp.com/users/materias/:id',
+                    url:'https://orttaller6.herokuapp.com/myAccount/materias/:id',
                     isArray: true
                 }
             }));

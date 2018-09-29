@@ -1,8 +1,8 @@
 (function MateriaGridScope(angular) {
   'use strict';
 
-  angular.module('connectingUsCenter.materia').controller('MateriasGridController', ['$scope', 'Materias', '$state', '$uibModal','isLogged',
-    function ($scope, Materias, $state, $uibModal, isLogged) {
+  angular.module('connectingUsCenter.myAccount').controller('MateriasGridController', ['$scope', 'MyAccount', '$state', '$uibModal','isLogged',
+    function ($scope, MyAccount, $state, $uibModal, isLogged) {
       var that = this;
 
       that.init = function init() {
@@ -14,7 +14,7 @@
 
       that.getMaterias = function getMaterias() {
         that.isLoading = true;
-        Materias.grid().$promise.then(function (res) {
+        MyAccount.grid().$promise.then(function (res) {
           that.data = res;
           that.setGrid();
         }).finally(function onFinally() {
@@ -44,8 +44,8 @@
       };
 
       that.modalInstance = {
-        templateUrl: 'modules/materia/materia-crud.html',
-        controller: 'MateriasCRUDController as ctrl',
+        templateUrl: 'modules/myAccount/myAccount-crud.html',
+        controller: 'myAccountCRUDController as ctrl',
         size: 'md'
       };
 
@@ -63,7 +63,7 @@
       that.setLogged = function setLogged() {
         that.isLogged = isLogged();
         if (!that.isLogged) {
-          $state.go('home-login');
+          $state.go('login-login');
         }
         return that.isLogged;
       };

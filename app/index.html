@@ -9,7 +9,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>CDA Application</title>
+  <title>Connecting Us</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -23,41 +23,8 @@
   <div class="viewport " ui-view="viewport" ng-controller="AppController as ctrl">
     <div class="headerMenu">
       <div class="col-xs-8">
-        <div class="headerTitle">CDA - Control de Asistencia</div>
+        <div class="headerTitle">Connecting Us</div>
       </div>
-      <div class="col-xs-4 pull-right">
-        <div class="" ng-if="ctrl.isLogged">
-          <a class="logout" ng-click="ctrl.logout()">Cerrar sesión</a>
-        </div>
-      </div>
-    </div>
-    <div ng-if="ctrl.isLogged" class="sidebar col-md-2 d-none d-md-block bg-light">
-      <ul class="nav flex-column">
-        <li class="nav-item">
-          <a class="nav-link" href="#/cronograma/index">
-            <span class="glyphicon glyphicon-calendar"></span>
-            Cronograma
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#/users/index">
-            <span class="glyphicon glyphicon-user"></span>
-            users
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#/materia/index">
-            <span class="glyphicon glyphicon-book"></span>
-            Materias
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#/asistencia/index">
-            <span class="glyphicon glyphicon-list"></span>
-            Asistencias
-          </a>
-        </li>
-      </ul>
     </div>
     <div class="main" ng-view></div>
   </div>
@@ -73,41 +40,17 @@
   <script type="text/javascript" src="bower_components/angular-resource/angular-resource.js"></script>
   <script type="text/javascript" src="bower_components/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min.js"></script>
 
-  <script type="text/javascript" src="bower_components/auth0.js/build/auth0.js"></script>
-  <script type="text/javascript" src="bower_components/angular-auth0/dist/angular-auth0.js"></script>
-  <script type="text/javascript" src="bower_components/angular-jwt/dist/angular-jwt.js"></script>
-  <script type="text/javascript" src="auth0-variables.js"></script>
-
   <script type="text/javascript" src="content/services/services-model.js"></script>
-  <script type="text/javascript" src="content/services/is-logged.js"></script>
   <script type="text/javascript" src="content/directives/cda-combo-box/cda-combo-box.js"></script>
 
-  <script type="text/javascript" src="modules/users/users-config.js "></script>
-  <script type="text/javascript" src="modules/users/users-srv.js "></script>
-  <script type="text/javascript" src="modules/users/users-grid-con.js "></script>
-  <script type="text/javascript" src="modules/users/users-crud-con.js "></script>
+  <script type="text/javascript" src="modules/myAccount/myAccount-config.js "></script>
+  <script type="text/javascript" src="modules/myAccount/myAccount-srv.js "></script>
+  <script type="text/javascript" src="modules/myAccount/myAccount-crud-con.js "></script>
 
-  <script type="text/javascript" src="modules/materia/materia-config.js "></script>
-  <script type="text/javascript" src="modules/materia/materia-srv.js "></script>
-  <script type="text/javascript" src="modules/materia/materia-grid-con.js "></script>
-  <script type="text/javascript" src="modules/materia/materia-crud-con.js "></script>
-
-  <script type="text/javascript" src="modules/cronograma/cronograma-config.js "></script>
-  <script type="text/javascript" src="modules/cronograma/cronograma-srv.js "></script>
-  <script type="text/javascript" src="modules/cronograma/cronograma-grid-con.js "></script>
-  <script type="text/javascript" src="modules/cronograma/cronograma-crud-con.js "></script>
-
-  <script type="text/javascript" src="modules/asistencia/asistencia-config.js "></script>
-  <script type="text/javascript" src="modules/asistencia/asistencia-srv.js "></script>
-  <script type="text/javascript" src="modules/asistencia/asistencia-grid-con.js "></script>
-  <script type="text/javascript" src="modules/home/home-config.js"></script>
-  <script type="text/javascript" src="modules/home/home-con.js"></script>
+  <script type="text/javascript" src="modules/login/login-config.js"></script>
+  <script type="text/javascript" src="modules/login/login-con.js"></script>
 
   <script type="text/javascript" src="app.js "></script>
-
-
-  <script type="text/javascript" src="modules/auth/auth.service.js"></script>
-
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-<div ng-form="CRUDMateriasForm" class="modal-container crud" us-spinner spinner-on="ctrl.isLoading">
+<div ng-form="CRUDMyAccountForm" class="modal-container crud" us-spinner spinner-on="ctrl.isLoading">
   <!-- Modal Header -->
   <div class="modal-body">
     <div class="container-fluid">
@@ -8,13 +8,13 @@
       <div class="row cda-row">
         <div class="col-xs-6">
           <label class="label-required" for="abreviatura">Codigo</label>
-          <input name="abreviatura" ng-model="ctrl.materia.abreviatura" type="text" class="form-control" placeholder="Código"
+          <input name="abreviatura" ng-model="ctrl.myAccount.abreviatura" type="text" class="form-control" placeholder="Código"
           ng-disabled="ctrl.disabled">
           <div class="validate-error ng-cloak" ng-show="ctrl.validateError.abreviatura">{{ctrl.validateError.text}}</div>
         </div>
         <div class="col-xs-6">
           <label class="label-required" for="name">Nombre</label>
-          <input name="name" ng-model="ctrl.materia.name" type="text" class="form-control" placeholder="Nombre"
+          <input name="name" ng-model="ctrl.myAccount.name" type="text" class="form-control" placeholder="Nombre"
             ng-disabled="ctrl.disabled">
           <div class="validate-error ng-cloak" ng-show="ctrl.validateError.name">{{ctrl.validateError.text}}</div>
         </div>
@@ -22,13 +22,13 @@
       <div class="row cda-row">
           <div class="col-xs-6">
             <label class="label-required" for="year">Año</label>
-            <input name="year" ng-model="ctrl.materia.year" type="text" class="form-control" placeholder="Año"
+            <input name="year" ng-model="ctrl.myAccount.year" type="text" class="form-control" placeholder="Año"
             ng-disabled="ctrl.disabled">
             <div class="validate-error ng-cloak" ng-show="ctrl.validateError.year">{{ctrl.validateError.text}}</div>
           </div>
           <div class="col-xs-6">
             <label class="label-required" for="division">División</label>
-            <input name="division" ng-model="ctrl.materia.division" type="text" class="form-control" placeholder="División"
+            <input name="division" ng-model="ctrl.myAccount.division" type="text" class="form-control" placeholder="División"
               ng-disabled="ctrl.disabled">
             <div class="validate-error ng-cloak" ng-show="ctrl.validateError.division">{{ctrl.validateError.text}}</div>
           </div>
@@ -39,9 +39,9 @@
     <div class="container-fluid">
       <div class="row cda-row">
         <div class="col-xs-12">
-          <button ng-if="ctrl.materia._id && !ctrl.isEditing" class="btn btn-primary" type="button" ng-click="ctrl.setEdit(true)">Editar</button>
+          <button ng-if="ctrl.myAccount._id && !ctrl.isEditing" class="btn btn-primary" type="button" ng-click="ctrl.setEdit(true)">Editar</button>
           <button ng-if="ctrl.isEditing" class="btn btn-primary" type="button" ng-click="ctrl.save()">Guardar</button>
-          <button ng-if="ctrl.materia._id" class="btn btn-primary" type="button" ng-click="ctrl.delete()">Eliminar</button>
+          <button ng-if="ctrl.myAccount._id" class="btn btn-primary" type="button" ng-click="ctrl.delete()">Eliminar</button>
           <button ng-if="ctrl.isEditing" class="btn btn-warning" type="button" ng-click="ctrl.cancel()">Cancelar</button>
           <button ng-if="!ctrl.isEditing" class="btn btn-warning" type="button" ng-click="ctrl.cancel()">Salir</button>
         </div>

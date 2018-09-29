@@ -2,10 +2,10 @@
     'use strict';
 
     // tag::module[]
-    angular.module('connectingUsCenter.materia', ['ngResource'])
+    angular.module('connectingUsCenter.myAccount', ['ngResource'])
         .config(['$routeProvider', function ($routeProvider) {
-            $routeProvider.when('/materia/index', {
-                templateUrl: 'modules/materia/materia-grid.html'
+            $routeProvider.when('/myAccount', {
+                templateUrl: 'modules/myAccount/myAccount-crud.html'
             });
         }]);
 })(angular);

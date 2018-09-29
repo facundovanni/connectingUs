@@ -1,25 +1,25 @@
 (function MateriaGridScope(angular) {
     'use strict';
 
-    angular.module('connectingUsCenter.materia').controller('MateriasCRUDController', ['$scope', 'Materias', '$uibModalInstance', 'materiaId',
-        function ($scope, Materias, $uibModalInstance, materiaId) {
+    angular.module('connectingUsCenter.myAccount').controller('myAccountCRUDController', ['$scope', 'MyAccount', '$uibModalInstance', 'materiaId',
+        function ($scope, MyAccount, $uibModalInstance, materiaId) {
             var that = this;
             that.validateError = {
                 text: 'Campo requerido'
             };
             that.modalInstance = $uibModalInstance;
 
-            that.materia = Materias.getDefaultEntity();
+            that.myAccount = MyAccount.getDefaultEntity();
 
-            that.materia._id = materiaId;
+            that.myAccount._id = materiaId;
 
             that.init = function init() {
-                if (that.materia._id) {
-                    that.title = 'Consulta de materia';
+                if (that.myAccount._id) {
+                    that.title = 'Consulta de myAccount';
                     that.setMateria();
                     that.setEdit(false);
                 } else {
-                    that.title = 'Alta de materia';
+                    that.title = 'Alta de myAccount';
                     that.setEdit(true);
                 }
             };
@@ -31,8 +31,8 @@
 
             that.setMateria = function setMateria() {
                 that.isLoading = true;
-                Materias.get({id: that.materia._id}).$promise.then(function onThen(res) {
-                    that.materia = res;
+                MyAccount.get({id: that.myAccount._id}).$promise.then(function onThen(res) {
+                    that.myAccount = res;
                 }).finally(function onFinally() {
                     that.isLoading = false;
                 });
@@ -40,13 +40,13 @@
 
             that.save = function save() {
                 if (that.validate()) {
-                    that.materia._id ? that.update() : that.createNew();
+                    that.myAccount._id ? that.update() : that.createNew();
                 }
             };
 
             that.createNew = function createNew() {
                 that.isLoading = true;
-                Materias.save(that.materia).$promise.then(function onThen(res) {
+                MyAccount.save(that.myAccount).$promise.then(function onThen(res) {
                     that.modalInstance.close();
                 });
                 that.isLoading = false;
@@ -54,14 +54,14 @@
 
             that.update = function update() {
                 that.isLoading = true;
-                Materias.update(that.materia).$promise.then(function onThen(res) {
+                MyAccount.update(that.myAccount).$promise.then(function onThen(res) {
                     that.modalInstance.close();
                 });
                 that.isLoading = false;
             }
 
             that.delete = function update() {
-                Materias.remove([{ _id: that.materia._id }]).$promise.then(function onThen(res) {
+                MyAccount.remove([{ _id: that.myAccount._id }]).$promise.then(function onThen(res) {
                     that.modalInstance.close();
                 })
             }
@@ -75,17 +75,17 @@
             };
 
             that.validateCode = function validateCode() {
-                return !(that.validateError.abreviatura = !that.materia.abreviatura);
+                return !(that.validateError.abreviatura = !that.myAccount.abreviatura);
             };
             that.validateName = function validateName() {
-                return !(that.validateError.name = !that.materia.name);
+                return !(that.validateError.name = !that.myAccount.name);
             };
 
             that.validateYear = function validateYear() {
-                return !(that.validateError.year = !that.materia.year);
+                return !(that.validateError.year = !that.myAccount.year);
             };
             that.validateDivision = function validateDivision() {
-                return !(that.validateError.division = !that.materia.division);
+                return !(that.validateError.division = !that.myAccount.division);
             };
             
 
