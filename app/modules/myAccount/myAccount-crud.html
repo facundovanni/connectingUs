@@ -1,38 +1,36 @@
-<div ng-form="CRUDMyAccountForm" class="modal-container crud" us-spinner spinner-on="ctrl.isLoading">
-  <!-- Modal Header -->
-  <div class="modal-body">
+<div ng-form="CRUDMyAccountForm" class="crud" us-spinner spinner-on="ctrl.isLoading">
+  <div class="">
     <div class="container-fluid">
       <div class="row cda-row">
-        <h3 class="title">{{ctrl.title}}</h3>
+        <h1 class="col-xs-12 title">{{ctrl.title}}</h3>
+      </div>
+      <div class="row cda-row">
+        <h2 class="col-xs-12 title">{{'myAccount.general.title' | translate}}</h3>
       </div>
       <div class="row cda-row">
         <div class="col-xs-6">
-          <label class="label-required" for="abreviatura">Codigo</label>
-          <input name="abreviatura" ng-model="ctrl.myAccount.abreviatura" type="text" class="form-control" placeholder="Código"
-          ng-disabled="ctrl.disabled">
-          <div class="validate-error ng-cloak" ng-show="ctrl.validateError.abreviatura">{{ctrl.validateError.text}}</div>
+          <label class="label-required" translate="myAccount.general.firstName"></label>
+          <input ng-model="ctrl.myAccount.firstName" type="text" class="form-control" ng-disabled="ctrl.disabled">
+          <div class="validate-error ng-cloak" ng-show="ctrl.validateError.firstName">{{ctrl.validateError.text}}</div>
         </div>
         <div class="col-xs-6">
-          <label class="label-required" for="name">Nombre</label>
-          <input name="name" ng-model="ctrl.myAccount.name" type="text" class="form-control" placeholder="Nombre"
-            ng-disabled="ctrl.disabled">
+          <label class="label-required" translate="myAccount.general.lastName"></label>
+          <input name="name" ng-model="ctrl.myAccount.lastName" type="text" class="form-control" ng-disabled="ctrl.disabled">
           <div class="validate-error ng-cloak" ng-show="ctrl.validateError.name">{{ctrl.validateError.text}}</div>
         </div>
       </div>
       <div class="row cda-row">
-          <div class="col-xs-6">
-            <label class="label-required" for="year">Año</label>
-            <input name="year" ng-model="ctrl.myAccount.year" type="text" class="form-control" placeholder="Año"
-            ng-disabled="ctrl.disabled">
-            <div class="validate-error ng-cloak" ng-show="ctrl.validateError.year">{{ctrl.validateError.text}}</div>
-          </div>
-          <div class="col-xs-6">
-            <label class="label-required" for="division">División</label>
-            <input name="division" ng-model="ctrl.myAccount.division" type="text" class="form-control" placeholder="División"
-              ng-disabled="ctrl.disabled">
-            <div class="validate-error ng-cloak" ng-show="ctrl.validateError.division">{{ctrl.validateError.text}}</div>
-          </div>
+        <div class="col-xs-6">
+          <label class="label-required" translate="myAccount.general.firstName"></label>
+          <input ng-model="ctrl.myAccount.firstName" type="text" class="form-control" ng-disabled="ctrl.disabled">
+          <div class="validate-error ng-cloak" ng-show="ctrl.validateError.firstName">{{ctrl.validateError.text}}</div>
         </div>
+        <div class="col-xs-6">
+          <label class="label-required" translate="myAccount.general.lastName"></label>
+          <input name="name" ng-model="ctrl.myAccount.lastName" type="text" class="form-control" ng-disabled="ctrl.disabled">
+          <div class="validate-error ng-cloak" ng-show="ctrl.validateError.name">{{ctrl.validateError.text}}</div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="modal-footer">

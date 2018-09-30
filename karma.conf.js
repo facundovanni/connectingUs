@@ -1,5 +1,5 @@
 //jshint strict: false
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
 
     basePath: './app',
@@ -9,7 +9,12 @@ module.exports = function(config) {
       'bower_components/angular-route/angular-route.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'components/**/*.js',
-      'view*/**/*.js'
+      'view*/**/*.js',
+      'bower_components/angular-translate/angular-translate.js',
+      'bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js',
+      'bower_components/angular-translate-interpolation-messageformat/angular-translate-interpolation-messageformat.js',
+      'bower_components/angular-translate-handler-log/angular-translate-handler-log.js',
+      'bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js'
     ],
 
     autoWatch: true,

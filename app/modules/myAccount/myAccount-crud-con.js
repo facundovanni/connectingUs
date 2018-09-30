@@ -1,95 +1,95 @@
 (function MateriaGridScope(angular) {
     'use strict';
 
-    angular.module('connectingUsCenter.myAccount').controller('myAccountCRUDController', ['$scope', 'MyAccount', '$uibModalInstance', 'materiaId',
-        function ($scope, MyAccount, $uibModalInstance, materiaId) {
-            var that = this;
-            that.validateError = {
+    angular.module('connectingUsCenter.myAccount')
+    .controller('myAccountCRUDController', ['$scope', 'MyAccount','$translate',
+        function ($scope, MyAccount, $translate) {
+            var ctrl = this;
+            ctrl.validateError = {
                 text: 'Campo requerido'
             };
-            that.modalInstance = $uibModalInstance;
 
-            that.myAccount = MyAccount.getDefaultEntity();
+            ctrl.myAccount = MyAccount.getDefaultEntity();
 
-            that.myAccount._id = materiaId;
+            ctrl.myAccount._id = undefined;
 
-            that.init = function init() {
-                if (that.myAccount._id) {
-                    that.title = 'Consulta de myAccount';
-                    that.setMateria();
-                    that.setEdit(false);
+            ctrl.init = function init() {
+                if (ctrl.myAccount._id) {
+                    ctrl.title = 'My Account';
+                    ctrl.setMateria();
+                    ctrl.setEdit(false);
                 } else {
-                    that.title = 'Alta de myAccount';
-                    that.setEdit(true);
+                    ctrl.title = $translate.instant('myAccount.titleSignUp');
+                    ctrl.setEdit(true);
                 }
             };
 
-            that.setEdit = function setEdit(boolean) {
-                that.disabled = !boolean;
-                that.isEditing = boolean;
+            ctrl.setEdit = function setEdit(boolean) {
+                ctrl.disabled = !boolean;
+                ctrl.isEditing = boolean;
             };
 
-            that.setMateria = function setMateria() {
-                that.isLoading = true;
-                MyAccount.get({id: that.myAccount._id}).$promise.then(function onThen(res) {
-                    that.myAccount = res;
+            ctrl.setMateria = function setMateria() {
+                ctrl.isLoading = true;
+                MyAccount.get({id: ctrl.myAccount._id}).$promise.then(function onThen(res) {
+                    ctrl.myAccount = res;
                 }).finally(function onFinally() {
-                    that.isLoading = false;
+                    ctrl.isLoading = false;
                 });
             };
 
-            that.save = function save() {
-                if (that.validate()) {
-                    that.myAccount._id ? that.update() : that.createNew();
+            ctrl.save = function save() {
+                if (ctrl.validate()) {
+                    ctrl.myAccount._id ? ctrl.update() : ctrl.createNew();
                 }
             };
 
-            that.createNew = function createNew() {
-                that.isLoading = true;
-                MyAccount.save(that.myAccount).$promise.then(function onThen(res) {
-                    that.modalInstance.close();
+            ctrl.createNew = function createNew() {
+                ctrl.isLoading = true;
+                MyAccount.save(ctrl.myAccount).$promise.then(function onThen(res) {
+                    ctrl.modalInstance.close();
                 });
-                that.isLoading = false;
+                ctrl.isLoading = false;
             }
 
-            that.update = function update() {
-                that.isLoading = true;
-                MyAccount.update(that.myAccount).$promise.then(function onThen(res) {
-                    that.modalInstance.close();
+            ctrl.update = function update() {
+                ctrl.isLoading = true;
+                MyAccount.update(ctrl.myAccount).$promise.then(function onThen(res) {
+                    ctrl.modalInstance.close();
                 });
-                that.isLoading = false;
+                ctrl.isLoading = false;
             }
 
-            that.delete = function update() {
-                MyAccount.remove([{ _id: that.myAccount._id }]).$promise.then(function onThen(res) {
-                    that.modalInstance.close();
+            ctrl.delete = function update() {
+                MyAccount.remove([{ _id: ctrl.myAccount._id }]).$promise.then(function onThen(res) {
+                    ctrl.modalInstance.close();
                 })
             }
 
-            that.cancel = function () {
-                that.modalInstance.dismiss();
+            ctrl.cancel = function () {
+                ctrl.modalInstance.dismiss();
             };
 
-            that.validate = function validate() {
-                return that.validateCode() && that.validateName() && that.validateDivision() && that.validateYear();
+            ctrl.validate = function validate() {
+                return ctrl.validateCode() && ctrl.validateName() && ctrl.validateDivision() && ctrl.validateYear();
             };
 
-            that.validateCode = function validateCode() {
-                return !(that.validateError.abreviatura = !that.myAccount.abreviatura);
+            ctrl.validateCode = function validateCode() {
+                return !(ctrl.validateError.abreviatura = !ctrl.myAccount.abreviatura);
             };
-            that.validateName = function validateName() {
-                return !(that.validateError.name = !that.myAccount.name);
+            ctrl.validateName = function validateName() {
+                return !(ctrl.validateError.name = !ctrl.myAccount.name);
             };
 
-            that.validateYear = function validateYear() {
-                return !(that.validateError.year = !that.myAccount.year);
+            ctrl.validateYear = function validateYear() {
+                return !(ctrl.validateError.year = !ctrl.myAccount.year);
             };
-            that.validateDivision = function validateDivision() {
-                return !(that.validateError.division = !that.myAccount.division);
+            ctrl.validateDivision = function validateDivision() {
+                return !(ctrl.validateError.division = !ctrl.myAccount.division);
             };
             
 
-            that.init();
+            ctrl.init();
         }
     ]);
 })(angular);
