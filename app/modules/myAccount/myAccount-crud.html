@@ -1,48 +1,21 @@
 <div ng-form="CRUDMyAccountForm" class="crud" us-spinner spinner-on="ctrl.isLoading">
-  <div class="">
-    <div class="container-fluid">
-      <div class="row cda-row">
-        <h1 class="col-xs-12 title">{{ctrl.title}}</h3>
-      </div>
-      <div class="row cda-row">
-        <h2 class="col-xs-12 title">{{'myAccount.general.title' | translate}}</h3>
-      </div>
-      <div class="row cda-row">
-        <div class="col-xs-6">
-          <label class="label-required" translate="myAccount.general.firstName"></label>
-          <input ng-model="ctrl.myAccount.firstName" type="text" class="form-control" ng-disabled="ctrl.disabled">
-          <div class="validate-error ng-cloak" ng-show="ctrl.validateError.firstName">{{ctrl.validateError.text}}</div>
-        </div>
-        <div class="col-xs-6">
-          <label class="label-required" translate="myAccount.general.lastName"></label>
-          <input name="name" ng-model="ctrl.myAccount.lastName" type="text" class="form-control" ng-disabled="ctrl.disabled">
-          <div class="validate-error ng-cloak" ng-show="ctrl.validateError.name">{{ctrl.validateError.text}}</div>
-        </div>
-      </div>
-      <div class="row cda-row">
-        <div class="col-xs-6">
-          <label class="label-required" translate="myAccount.general.firstName"></label>
-          <input ng-model="ctrl.myAccount.firstName" type="text" class="form-control" ng-disabled="ctrl.disabled">
-          <div class="validate-error ng-cloak" ng-show="ctrl.validateError.firstName">{{ctrl.validateError.text}}</div>
-        </div>
-        <div class="col-xs-6">
-          <label class="label-required" translate="myAccount.general.lastName"></label>
-          <input name="name" ng-model="ctrl.myAccount.lastName" type="text" class="form-control" ng-disabled="ctrl.disabled">
-          <div class="validate-error ng-cloak" ng-show="ctrl.validateError.name">{{ctrl.validateError.text}}</div>
-        </div>
-      </div>
+  <div class="container-fluid">
+    <div class="row cda-row">
+      <h1 class="col-xs-12 title">{{ctrl.title}}</h3>
+    </div>
+    <div>
+      <div ng-include="'modules/myAccount/myAccount-crud-general'"></div>
+      <div ng-include="'modules/myAccount/myAccount-crud-account'"></div>
     </div>
   </div>
-  <div class="modal-footer">
-    <div class="container-fluid">
-      <div class="row cda-row">
-        <div class="col-xs-12">
-          <button ng-if="ctrl.myAccount._id && !ctrl.isEditing" class="btn btn-primary" type="button" ng-click="ctrl.setEdit(true)">Editar</button>
-          <button ng-if="ctrl.isEditing" class="btn btn-primary" type="button" ng-click="ctrl.save()">Guardar</button>
-          <button ng-if="ctrl.myAccount._id" class="btn btn-primary" type="button" ng-click="ctrl.delete()">Eliminar</button>
-          <button ng-if="ctrl.isEditing" class="btn btn-warning" type="button" ng-click="ctrl.cancel()">Cancelar</button>
-          <button ng-if="!ctrl.isEditing" class="btn btn-warning" type="button" ng-click="ctrl.cancel()">Salir</button>
-        </div>
+  <div class="modal-footer container-fluid">
+    <div class="row cda-row">
+      <div class="col-xs-12 pull-right">
+        <button ng-if="ctrl.myAccount._id && !ctrl.isEditing" class="btn btn-primary" type="button" ng-click="ctrl.setEdit(true)">Editar</button>
+        <button ng-if="ctrl.isEditing" class="btn btn-primary" type="button" ng-click="ctrl.save()">
+          {{'global.button.save'|translate}}</button>
+        <button ng-if="ctrl.isEditing" class="btn btn-warning" type="button" ng-click="ctrl.cancel()">
+          {{'global.button.cancel'|translate}}</button>
       </div>
     </div>
   </div>

@@ -5,7 +5,6 @@ angular.module('connectingUsCenter', [
     'connectingUsCenter.services',
     'connectingUsCenter.login',
     'connectingUsCenter.myAccount',
-    'connectingUsCenter.directives',
     'pascalprecht.translate'
 ])
     .config(['$stateProvider', '$locationProvider', '$routeProvider', '$translateProvider',
@@ -13,6 +12,17 @@ angular.module('connectingUsCenter', [
             angular.lowercase = angular.$$lowercase;
             //Translations
             var translationsEN = {
+                "global":{
+                    "button":{
+                        "save":"Save",
+                        "cancel":"Cancel"
+                    },
+                    "gender":{
+                        "male":"Male",
+                        "female":"Female",
+                        "other":"Other"
+                    }
+                },
                 "myAccount":{
                     "titleSignUp":"Registration",
                     "general":{
@@ -56,7 +66,7 @@ angular.module('connectingUsCenter', [
                 templateUrl: 'modules/myAccount/myAccount-crud.html'
             });
 
-            $locationProvider.hashPrefix('/');
+            $locationProvider.hashPrefix('');
 
             $routeProvider.otherwise({ redirectTo: '/login' });
 
