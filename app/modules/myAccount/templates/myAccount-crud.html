@@ -1,0 +1,21 @@
+<div ng-form="CRUDMyAccountForm" class="crud" us-spinner spinner-on="ctrl.isLoading">
+  <div class="container-fluid">
+    <div class="row cda-row">
+      <h1 class="col-xs-12 title">{{ctrl.title}}</h3>
+    </div>
+    <div>
+      <div ng-include="'modules/myAccount/templates/myAccount-crud-general'"></div>
+      <div ng-include="'modules/myAccount/templates/myAccount-crud-account'"></div>
+    </div>
+  </div>
+  <div class="modal-footer container-fluid">
+    <div class="row cda-row">
+      <div class="col-xs-12">
+        <button class="btn btn-primary" type="button" ng-click="ctrl.save()">
+          {{'global.button.save'|translate}}</button>
+        <button class="btn btn-warning" type="button" ng-click="ctrl.cancel()">
+          {{'global.button.cancel'|translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>

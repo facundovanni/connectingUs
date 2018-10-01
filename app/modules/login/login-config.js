@@ -4,7 +4,7 @@
     angular.module('connectingUsCenter.login', ['ngResource', 'ui.router'])
         .config(['$routeProvider', function ($routeProvider) {
             $routeProvider.when('/login', {
-                templateUrl: 'modules/login/login.html'
+                templateUrl: 'modules/login/templates/login.html'
             });
         }]);
 })(angular);

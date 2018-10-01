@@ -4,19 +4,19 @@
 <div class="row cda-row">
   <div class="col-xs-6">
     <label class="label-crud label-required" translate="myAccount.general.firstName"></label>
-    <input ng-model="ctrl.myAccount.firstName" type="text" class="form-control" ng-disabled="ctrl.disabled">
+    <input ng-model="ctrl.myAccount.firstName" type="text" class="form-control">
     <div class="validate-error ng-cloak" ng-show="ctrl.validateError.firstName">{{ctrl.validateError.text}}</div>
   </div>
   <div class="col-xs-6">
     <label class="label-crud label-required" translate="myAccount.general.lastName"></label>
-    <input name="name" ng-model="ctrl.myAccount.lastName" type="text" class="form-control" ng-disabled="ctrl.disabled">
+    <input name="name" ng-model="ctrl.myAccount.lastName" type="text" class="form-control">
     <div class="validate-error ng-cloak" ng-show="ctrl.validateError.name">{{ctrl.validateError.text}}</div>
   </div>
 </div>
 <div class="row cda-row">
   <div class="col-xs-4">
     <label class="label-crud label-required" translate="myAccount.general.nickName"></label>
-    <input ng-model="ctrl.myAccount.nickName" type="text" class="form-control" ng-disabled="ctrl.disabled">
+    <input ng-model="ctrl.myAccount.nickName" type="text" class="form-control" ng-disabled="ctrl.myAccount.id">
     <div class="valideate-error ng-cloak" ng-show="ctrl.validateError.nickName">{{ctrl.validateError.text}}</div>
   </div>
   <div class="col-xs-4">
@@ -34,21 +34,21 @@
   </div>
   <div class="col-xs-4">
     <label class="label-crud label-required" translate="myAccount.general.gender"></label>
-    <select class="btn btn-default col-xs-12" ng-model="ctrl.selectedGender" ng-disabled="ctrl.disabled" ng-options="option for option in ctrl.genders"></select>
+    <select class="btn btn-default col-xs-12" ng-model="ctrl.myAccount.gender" ng-options="option for option in ctrl.genders"></select>
   </div>
 </div>
 <div class="row cda-row">
   <div class="col-xs-4">
     <label class="label-crud label-required" translate="myAccount.general.nationality"></label>
-    <select class="btn btn-default col-xs-12" ng-model="ctrl.selectedNationality" ng-disabled="ctrl.disabled" ng-options="x.description for x in ctrl.nationalities"></select>
+    <select class="btn btn-default col-xs-12" ng-model="ctrl.myAccount.nationality" ng-options="x.description for x in ctrl.nationalities"></select>
   </div>
   <div class="col-xs-4">
     <label class="label-crud label-required" translate="myAccount.general.country"></label>
-    <select class="btn btn-default col-xs-12" ng-model="ctrl.selectedNationality" ng-disabled="ctrl.disabled" ng-options="x.description for x in ctrl.countries"></select>
+    <select class="btn btn-default col-xs-12" ng-model="ctrl.myAccount.country" ng-options="x.description for x in ctrl.countries"></select>
   </div>
   <div class="col-xs-4">
     <label class="label-crud label-required" translate="myAccount.general.city"></label>
-    <input ng-model="ctrl.myAccount.city" type="text" class="form-control" ng-disabled="ctrl.disabled">
+    <input ng-model="ctrl.myAccount.city" type="text" class="form-control">
     <div class="valideate-error ng-cloak" ng-show="ctrl.validateError.city">{{ctrl.validateError.text}}</div>
   </div>
 </div>
