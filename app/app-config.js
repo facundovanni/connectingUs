@@ -25,7 +25,7 @@
                             "other": "Other"
                         },
                         "error":{
-                            "textRequired": "The field is required"
+                            "textRequired": "This field is required"
                         }
                     },
                     "myAccount": {

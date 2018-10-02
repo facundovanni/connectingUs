@@ -12,6 +12,21 @@
                     passwordConfirm: $translate.instant('myAccount.error.passwordConfirm')
                 };
 
+                ctrl.dateSelected = {
+                    value: new Date(),
+                    opened: false
+                };
+
+                ctrl.dateOptions = {
+                    formatYear: 'yyyy',
+                    maxDate: new Date(),
+                    startingDay: 0
+                };
+
+                ctrl.openDate = function openDate() {
+                    ctrl.dateSelected.opened = true;
+                };
+
                 ctrl.fillArrays = function fillArrays() {
                     ctrl.genders = [$translate.instant('global.gender.male'), $translate.instant('global.gender.female'), $translate.instant('global.gender.other')];
                 };
@@ -25,25 +40,35 @@
 
                 ctrl.setView = function setView() {
                     ctrl.title = ctrl.myAccount.id ? $translate.instant('myAccount.title') : $translate.instant('myAccount.titleSignUp');
+                    ctrl.isLoading = false;
                 };
 
                 ctrl.setEdit = function setEdit(boolean) {
                     ctrl.disabled = !boolean;
                 };
 
+                ctrl.setAccount = function setAccount(result) {
+                    ctrl.myAccount = result;
+                    ctrl.dateSelected.value = ctrl.myAccount.dayOfBirth;
+                };
+                ctrl.onCatchAccount = function onCatchAccount() { };
+
                 ctrl.getAccount = function getAccount() {
                     ctrl.isLoading = true;
-                    MyAccount.get().$promise.then(function onThen(result) {
-                        ctrl.myAccount = result;
-                    }).catch(function onCatch(){
+                    MyAccount.get().$promise
+                        .then(ctrl.setAccount)
+                        .catch(ctrl.onCatchAccount)
+                        .finally(ctrl.setView);
+                };
 
-                    }).finally(function onFinally() {
-                        ctrl.setView();
-                        ctrl.isLoading = false;
-                    });
+                ctrl.setDateJSON = function setDateJSON() {
+                    var auxDate = ctrl.dateSelected.value.toJSON().split('T');
+                    auxDate[1] = '00:00:00';
+                    ctrl.dateJSON = auxDate.join('T');
                 };
 
                 ctrl.save = function save() {
+                    ctrl.setDateJSON();
                     if (ctrl.validate()) {
                         ctrl.myAccount.id ? ctrl.update() : ctrl.createNew();
                     }
@@ -52,14 +77,14 @@
                 ctrl.createNew = function createNew() {
                     ctrl.isLoading = true;
                     MyAccount.save(ctrl.myAccount).$promise.then(function onThen(res) {
-                        ctrl.isLoading = false;    
+                        ctrl.isLoading = false;
                     });
                 };
 
                 ctrl.update = function update() {
                     ctrl.isLoading = true;
                     MyAccount.update(ctrl.myAccount).$promise.then(function onThen(res) {
-                        ctrl.isLoading = false;   
+                        ctrl.isLoading = false;
                     });
                 };
 
@@ -125,7 +150,7 @@
                     } else {
                         return false;
                     }
-                    
+
                 };
 
                 ctrl.valPassword = function valPassword() {
@@ -142,9 +167,9 @@
                     } else {
                         return false;
                     }
-                    
+
                 };
-                
+
                 ctrl.init();
             }
         ]);

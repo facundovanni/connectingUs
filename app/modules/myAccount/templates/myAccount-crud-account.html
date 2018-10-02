@@ -4,24 +4,24 @@
 <div class="row cda-row">
   <div ng-class="ctrl.myAccount.id ? 'col-xs-12' : 'col-xs-6'">
     <label class="label-crud label-required" translate="myAccount.account.email"></label>
-    <input ng-model="ctrl.myAccount.email" type="text" class="form-control" ng-disabled="ctrl.myAccount.id">
+    <input ng-model="ctrl.myAccount.email" type="email" class="form-control" ng-disabled="ctrl.myAccount.id">
     <div class="validate-error ng-cloak" ng-show="ctrl.validateError.email">{{ctrl.validateError.text}}</div>
   </div>
   <div class="col-xs-6" ng-if="!ctrl.myAccount.id">
     <label class="label-crud label-required" translate="myAccount.account.emailConfirm"></label>
-    <input name="name" ng-model="ctrl.emailConfirm" type="text" class="form-control">
+    <input ng-model="ctrl.emailConfirm" type="email" class="form-control">
     <div class="validate-error ng-cloak" ng-show="ctrl.showEmailConfirmError">{{ctrl.validateError.emailConfirm}}</div>
   </div>
 </div>
 <div class="row cda-row">
   <div class="col-xs-6">
     <label class="label-crud label-required" translate="myAccount.account.password"></label>
-    <input ng-model="ctrl.myAccount.password" type="text" class="form-control">
+    <input ng-model="ctrl.myAccount.password" type="password" class="form-control">
     <div class="validate-error ng-cloak" ng-show="ctrl.validateError.password">{{ctrl.validateError.text}}</div>
   </div>
   <div class="col-xs-6">
     <label class="label-crud label-required" translate="myAccount.account.passwordConfirm"></label>
-    <input name="name" ng-model="ctrl.myAccount.passwordConfirm" type="text" class="form-control">
+    <input ng-model="ctrl.myAccount.passwordConfirm" type="password" class="form-control">
     <div class="validate-error ng-cloak" ng-show="ctrl.showPasswordConfirmError">{{ctrl.validateError.passwordConfirmText}}</div>
   </div>
 </div>
