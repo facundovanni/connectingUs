@@ -9,9 +9,9 @@
                 ctrl.validateError = {
                     text: $translate.instant('global.error.textRequired'),
                     emailConfirm: $translate.instant('myAccount.error.emailConfirm'),
-                    passwordConfirm: $translate.instant('myAccount.error.password'),
+                    passwordConfirm: $translate.instant('myAccount.error.passwordConfirm'),
                     email: $translate.instant('myAccount.error.email'),
-                    passwordConfirm: $translate.instant('myAccount.error.password'),
+                    password: $translate.instant('myAccount.error.password'),
                 };
 
                 ctrl.dateSelected = {
@@ -101,20 +101,29 @@
 
                 ctrl.createNew = function createNew() {
                     ctrl.isLoading = true;
-                    MyAccount.save(ctrl.myAccount).$promise.then(function onThen(res) {
+                    MyAccount.save(ctrl.myAccount).$promise
+                    .then(ctrl.onThenNew)
+                    .finally(function onFinally(){
                         ctrl.isLoading = false;
                     });
                 };
 
+                ctrl.onThenNew = function onThenNew(res) {
+                    scope.go('users-offers');
+                };
+
                 ctrl.update = function update() {
                     ctrl.isLoading = true;
-                    MyAccount.update(ctrl.myAccount).$promise.then(function onThen(res) {
+                    MyAccount.update(ctrl.myAccount).$promise
+                    .then(function onThen(res) {
+                    })
+                    .finally(function onFinally(){
                         ctrl.isLoading = false;
                     });
                 };
 
                 ctrl.cancel = function () {
-                    $state.go('users-offers');
+                    $state.go('login');
                 };
 
                 ctrl.valGeneral = function valGeneral() {
@@ -126,19 +135,19 @@
                 };
 
                 ctrl.validate = function validate() {
-                    return ctrl.valAccount();
-                }
+                    return ctrl.valGeneral() && ctrl.valAccount();
+                };
 
                 ctrl.valFirstName = function valFirstName() {
-                    return !(ctrl.validateError.firstName = !ctrl.myAccount.firstName);
+                    return !(ctrl.validateError.firstName = !ctrl.myAccount.firstname);
                 };
 
                 ctrl.valLastName = function valLastName() {
-                    return !(ctrl.validateError.lastName = !ctrl.myAccount.lastName);
+                    return !(ctrl.validateError.lastName = !ctrl.myAccount.lastname);
                 };
 
                 ctrl.valNickName = function valNickName() {
-                    return !(ctrl.validateError.nickName = !ctrl.myAccount.nickName);
+                    return !(ctrl.validateError.nickName = !ctrl.myAccount.account.nickname);
                 };
 
                 ctrl.valDayOfBirth = function valDayOfBirth() {
@@ -154,7 +163,7 @@
                 };
 
                 ctrl.valCountry = function valCountry() {
-                    return !(ctrl.validateError.countryOfResidence = !ctrol.myAccount.countryOfResidence);
+                    return !(ctrl.validateError.countryOfResidence = !ctrl.myAccount.countryofresidence);
                 };
 
                 ctrl.valCity = function valCity() {
@@ -162,37 +171,36 @@
                 };
 
                 ctrl.valEmail = function valEmail() {
-                    return !(ctrl.validateError.email = !ctrl.myAccount.email);
+                    return !(ctrl.validateError.showEmail = !ctrl.myAccount.account.mail);
                 };
 
                 ctrl.valEmailConfirm = function valEmailConfirm() {
                     if (ctrl.emailConfirm) {
-                        if (ctrl.myAccount.email !== ctrl.myAccount.emailConfirm) {
-                            ctrl.showEmailConfirmError = true;
-                            return false;
+                        if (ctrl.myAccount.account.mail !== ctrl.mailConfirm) {
+                            ctrl.validateError.showEmailConfirm = true;
                         }
-                        return true;
+                        ctrl.validateError.showEmailConfirm = false;
                     } else {
-                        return false;
+                        ctrl.validateError.showEmailConfirm = true;
                     }
+                    return !ctrl.validateError.showEmailConfirm;
 
                 };
 
                 ctrl.valPassword = function valPassword() {
-                    return !(ctrl.validateError.password = !ctrl.myAccount.password);
+                    return !(ctrl.validateError.showPassword = !ctrl.myAccount.account.password);
                 };
 
                 ctrl.valPasswordConfirm = function valPasswordConfirm() {
                     if (ctrl.passwordConfirm) {
-                        if (ctrl.myAccount.password !== ctrl.myAccount.passwordConfirm) {
-                            ctrl.showPasswordConfirmError = true;
-                            return false;
+                        if (ctrl.myAccount.account.password !== ctrl.passwordConfirm) {
+                            ctrl.validateError.showPasswordConfirm = true;
                         }
-                        return true;
+                        ctrl.validateError.showPasswordConfirm = false;
                     } else {
-                        return false;
+                        ctrl.validateError.showPasswordConfirm = true;
                     }
-
+                    return !ctrl.validateError.showPasswordConfirm;
                 };
 
                 ctrl.isLoadingOptions = function isLoadingOptions() {

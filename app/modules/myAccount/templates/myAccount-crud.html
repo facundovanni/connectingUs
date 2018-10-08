@@ -7,15 +7,14 @@
       <div ng-include="'modules/myAccount/templates/myAccount-crud-general'"></div>
       <div ng-include="'modules/myAccount/templates/myAccount-crud-account'"></div>
     </div>
-  </div>
-  <div class="modal-footer container-fluid">
     <div class="row cda-row">
-      <div class="col-xs-12">
-        <button class="btn btn-primary" type="button" ng-click="ctrl.save()">
-          {{'global.button.save'|translate}}</button>
-        <button class="btn btn-warning" type="button" ng-click="ctrl.cancel()">
-          {{'global.button.cancel'|translate}}</button>
+      <div class="modal-footer">
+        <div class="col-xs-12">
+          <button class="btn btn-lg btn-success" type="button" ng-click="ctrl.save()">
+            {{'global.button.save'|translate}}</button>
+          <button class="btn btn-lg btn-default" type="button" ng-click="ctrl.cancel()">
+            {{'global.button.cancel'|translate}}</button>
+        </div>
       </div>
     </div>
   </div>
-</div>

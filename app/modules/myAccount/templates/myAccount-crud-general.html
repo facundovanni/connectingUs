@@ -4,19 +4,19 @@
 <div class="row cda-row">
   <div class="col-xs-6">
     <label class="label-crud label-required" translate="myAccount.general.firstName"></label>
-    <input ng-model="ctrl.myAccount.firstName" type="text" class="form-control">
+    <input ng-model="ctrl.myAccount.firstname" type="text" class="form-control">
     <div class="validate-error ng-cloak" ng-show="ctrl.validateError.firstName">{{ctrl.validateError.text}}</div>
   </div>
   <div class="col-xs-6">
     <label class="label-crud label-required" translate="myAccount.general.lastName"></label>
-    <input name="name" ng-model="ctrl.myAccount.lastName" type="text" class="form-control">
+    <input name="name" ng-model="ctrl.myAccount.lastname" type="text" class="form-control">
     <div class="validate-error ng-cloak" ng-show="ctrl.validateError.lastName">{{ctrl.validateError.text}}</div>
   </div>
 </div>
 <div class="row cda-row">
   <div class="col-xs-4">
     <label class="label-crud label-required" translate="myAccount.general.nickName"></label>
-    <input ng-model="ctrl.myAccount.nickName" type="text" class="form-control" ng-disabled="ctrl.myAccount.id">
+    <input ng-model="ctrl.myAccount.account.nickname" type="text" class="form-control" ng-disabled="ctrl.myAccount.id">
     <div class="validate-error ng-cloak" ng-show="ctrl.validateError.nickName">{{ctrl.validateError.text}}</div>
   </div>
   <div class="col-xs-4">
@@ -46,7 +46,7 @@
   </div>
   <div class="col-xs-4">
     <label class="label-crud label-required" translate="myAccount.general.country"></label>
-    <select class="btn btn-default col-xs-12" ng-model="ctrl.myAccount.countryOfResidence.description" ng-options="x.description for x in ctrl.countries"></select>
+    <select class="btn btn-default col-xs-12" ng-model="ctrl.myAccount.countryofresidence" ng-options="x.description for x in ctrl.countries"></select>
     <div class="validate-error ng-cloak" ng-show="ctrl.validateError.countryOfResidence">{{ctrl.validateError.text}}</div>
   </div>
   <div class="col-xs-4">
