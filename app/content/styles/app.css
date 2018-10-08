@@ -1,17 +1,17 @@
 /* The sidenav */
 
 body {
-  font-family: 'Segoe UI', 'Roboto', "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: 'Scada', sans-serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
   color: #21252A;
   text-align: left;
-  background-color: rgb(245, 228, 228)190, 157, 157)
+  background-color:#F6F6F6;
 }
 
 .title {
-  font-family: 'Segoe UI', 'Roboto', "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: 'Scada';
   font-weight: 500;
 }
 

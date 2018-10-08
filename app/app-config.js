@@ -1,12 +1,14 @@
-(function rootConfigScope(angular) {
+    (function rootConfigScope(angular) {
     'use strict';
     angular.module('connectingUsCenter', [
             'ngRoute','ngAnimate', 'ngSanitize',
             'ngTouch', 'ui.router',
             'ui.bootstrap', 'angularSpinner',
             'connectingUsCenter.services',
+            'connectingUsCenter.directives',
             'connectingUsCenter.login',
             'connectingUsCenter.myAccount',
+            'connectingUsCenter.usersOffers',
             'pascalprecht.translate'
         ])
         .config(['$stateProvider', '$locationProvider', '$routeProvider', '$translateProvider',
@@ -27,6 +29,9 @@
                         "error":{
                             "textRequired": "This field is required"
                         }
+                    },
+                    "login":{
+
                     },
                     "myAccount": {
                         "titleSignUp": "Registration",
@@ -53,7 +58,9 @@
                         },
                         "error":{
                             "emailConfirm": "The emails must be equals",
-                            "passwordConfirm": "The passwords are not equals"
+                            "passwordConfirm": "The passwords are not equals",
+                            "email": "Set an valid email",
+                            "password": "The password must have at least eight characters."
                         }
 
 
@@ -73,6 +80,10 @@
                 $stateProvider.state('myAccount', {
                     url: '/myAccount',
                     templateUrl: 'modules/myAccount/templates/myAccount-crud.html'
+                });
+                $stateProvider.state('users-offers', {
+                    url: '/offers',
+                    templateUrl: 'modules/users-offers/templates/users-offers.html'
                 });
 
                 $locationProvider.hashPrefix('');

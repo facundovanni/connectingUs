@@ -1,7 +1,7 @@
-(function myAccountScope(angular) {
+(function usersOffersScope(angular) {
     'use strict';
-    angular.module('connectingUsCenter.myAccount')
-        .service('MyAccount', ['ServicesModel', function (ServicesModel, WebApi) {
+    angular.module('connectingUsCenter.usersOffers')
+        .service('UsersOffers', ['ServicesModel', function (ServicesModel) {
             var that = this;
             angular.extend(this, ServicesModel.create('/api/users', null, {}));
 
@@ -18,7 +18,7 @@
                     country: undefined,
                     city: undefined,
                     email: undefined,
-                    phone: {}
+                    phone:{}
                 };
             };
         }]);

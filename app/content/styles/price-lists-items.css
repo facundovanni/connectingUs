@@ -1,0 +1,445 @@
+﻿.price-lists-filter .search {
+  padding-bottom: 10px;
+  padding-left: 5px;
+}
+.price-lists-filter .title {
+  font-family: 'KnowledgeUltraLight';
+  padding-left: 5px;
+  text-align: left;
+  font-weight: 200;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 16px;
+}
+.price-lists-filter .subtitle {
+  font-family: 'KnowledgeLight';
+  padding-left: 5px;
+  padding-right: 10px;
+  padding-top: 20px;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 16px;
+  text-wrap: normal;
+}
+.price-lists-filter .combo {
+  padding-top: 0px;
+  padding-right: 8px;
+  padding-left: 5px;
+}
+.price-lists-filter .price-filter-row * {
+  display: inline-block;
+}
+.price-lists-filter .price-input {
+  width: 50px;
+  height: 30px;
+  font-family: 'KnowledgeLight';
+  padding-left: 5px;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 16px;
+  text-wrap: normal;
+}
+.price-lists-filter .from-To {
+  padding-top: 0px;
+  width: 5px;
+  height: 30px;
+  text-align: center;
+}
+.price-lists-filter .validation-error {
+  font-family: "KnowledgeRegular";
+  color: #dc0a0a;
+  margin-left: -5px;
+  padding-right: 5px;
+}
+.price-lists-filter .button-clean {
+  margin-top: 40px;
+  text-align: center;
+  padding-left: 5px;
+}
+.price-lists-filter .button-apply {
+  margin-top: 1px;
+  padding-left: 10px;
+}
+.price-lists-filter .border-left {
+  border-left: 1px solid;
+  color: #cccccc;
+}
+.price-lists-filter .border-rigth {
+  border-right: 1px solid;
+  color: #cccccc;
+}
+.price-lists-filter .noItems {
+  height: 544px;
+  font-family: 'KnowledgeLight';
+  font-size: 16px;
+  color: #212121;
+}
+.price-lists-filter .price-div {
+  padding-left: 5px;
+  padding-right: 8px;
+}
+.price-lists-filter .btnClean {
+  width: 100%;
+}
+.price-list-items-list {
+  list-style: none;
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  width: 186px;
+}
+.price-lists-items-no-link {
+  text-decoration: none;
+  color: #212121;
+}
+.price-lists-items-container {
+  background-color: #fff0cc;
+  padding-top: 0px;
+  line-height: 15px;
+  border: solid;
+  border-width: 1px;
+  border-color: #ffffff;
+}
+.price-lists-items-container-discount {
+  background-color: #ffffff;
+  padding-top: 0px;
+  line-height: 15px;
+  border: solid;
+  border-width: 1px;
+  border-color: #ff9100;
+}
+.hoverplus {
+  width: 186px;
+  padding-left: 75px;
+  padding-right: 75px;
+  padding-top: 135px;
+  font-size: 75px;
+  z-index: 5;
+  position: absolute;
+  color: #212121;
+  font-family: 'KnowledgeUltraLight';
+  text-rendering: optimizeLegibility;
+}
+.price-list-items-body .nameGeneric {
+  font-family: 'KnowledgeMedium';
+  font-weight: 500;
+  font-style: normal;
+  font-size: 14px;
+  height: 52px;
+  width: 186px;
+  padding-left: 30px;
+  padding-top: 10px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+  font-weight: bold;
+  word-wrap: break-word;
+  text-align: left;
+  color: #212121;
+  overflow: hidden;
+}
+.price-list-items-body .nameElement {
+  font-family: 'KnowledgeMedium';
+  font-style: normal;
+  color: #5A5965;
+  line-height: 16px;
+  font-size: 12px;
+  padding-top: 10px;
+  padding-left: 30px;
+  padding-right: 20px;
+  text-align: left;
+  height: 102px;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+}
+.price-list-items-body .nameElement .attributeName {
+  font-weight: bold;
+}
+.price-list-items-body .price {
+  font-family: 'KnowledgeLight';
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 5px;
+  margin-bottom: 15px;
+  word-wrap: break-word;
+  height: 30px;
+  color: #212121;
+}
+.price-list-items-body .price .format-discount {
+  font-size: 18px;
+}
+.price-list-items-body .price .discount {
+  text-decoration: line-through;
+  color: #a00000;
+  font-size: 18px;
+}
+.price-list-items-body .discount-banner {
+  font-family: 'KnowledgeLight';
+  width: 185px;
+  font-style: normal;
+  font-size: 20px;
+  color: #ffffff;
+  background-color: #ff9100;
+  height: 22px;
+  line-height: 22px;
+  position: absolute;
+  display: block;
+  z-index: 1;
+  text-align: center;
+}
+.price-list-items-body .img {
+  width: 184px;
+  height: 184px;
+  z-index: 0;
+  display: block;
+  border: none;
+  background: #ffffff;
+}
+.price-list-items-body .img .bm-lazy-image > img {
+  max-width: 184px;
+  max-height: 184px;
+  width: auto;
+  height: auto;
+  padding: 0px;
+}
+.price-list-items-body .img .description {
+  margin-top: 10px;
+  font-family: 'KnowledgeMedium';
+  font-weight: 500;
+  font-style: normal;
+  font-size: 16px;
+  color: #404040;
+  text-align: center;
+}
+.price-list-items-body:hover {
+  color: transparent;
+  opacity: 0.2;
+  width: 186px;
+  z-index: 4;
+  display: block;
+  font-family: inherit;
+}
+.price-list-items-details .btnAddCart {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: 10px;
+  height: 35px;
+}
+.price-list-items-details .img-big {
+  line-height: 15px;
+  padding: 0px;
+  margin-right: 0px;
+  width: 322px;
+  height: 322px;
+  position: relative;
+  z-index: 0;
+  display: block;
+  border: 1px solid;
+  border-color: #cccccc;
+  margin: 0 auto;
+}
+.price-list-items-details .img-big .bm-lazy-image > img {
+  display: block;
+  max-width: 320px;
+  max-height: 320px;
+  width: 100%;
+  height: 100%;
+}
+.price-list-items-details .img-big .description {
+  margin-top: 25px;
+  font-family: 'KnowledgeMedium';
+  font-weight: 500;
+  font-style: normal;
+  font-size: 26px;
+  color: #404040;
+  text-align: center;
+}
+.price-list-items-details .comeBack {
+  font-family: 'KnowledgeRegular';
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+  padding-bottom: 20px;
+}
+.price-list-items-details .info {
+  min-height: 322px;
+  min-width: 322px;
+}
+.price-list-items-details .info .title {
+  font-family: 'KnowledgeMedium';
+  font-size: 18px;
+  font-weight: 500;
+  text-align: left;
+  padding-bottom: 20px;
+}
+.price-list-items-details .info .comments {
+  font-family: 'KnowledgeUltraLight';
+  font-size: 12px;
+  color: #9C9B9E;
+  line-height: 16px;
+  word-wrap: break-word;
+}
+.price-list-items-details .info .attributeName {
+  font-family: 'KnowledgeLight';
+  font-style: normal;
+  color: #212121;
+  font-size: 16px;
+  padding-top: 10px;
+  padding-right: 20px;
+  text-align: left;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  line-height: 24px;
+}
+.price-list-items-details .info .attributeName .nameElement {
+  font-weight: bold;
+}
+.price-list-items-details .info .attributeName .comboElement {
+  font-weight: bold;
+  font-size: 14px;
+}
+.price-list-items-details .price {
+  font-family: 'KnowledgeUltraLight';
+  font-size: 22px;
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 15px;
+  word-wrap: break-word;
+  height: 30px;
+}
+.price-list-items-details .price .discount {
+  text-decoration: line-through;
+  color: #a00000;
+  word-wrap: break-word;
+}
+.price-list-items-details .buy {
+  margin-left: 10px;
+  width: 240px;
+  min-height: 322px;
+  border: 1px solid;
+  border-color: #0072a8;
+}
+.price-list-items-details .buy .line {
+  background-color: #5A5965;
+  height: 1px;
+  width: 148px;
+}
+.price-list-items-details .buy .title {
+  font-family: 'KnowledgeUltraLight';
+  font-weight: bold;
+  font-style: normal;
+  padding-top: 15px;
+  padding-left: 50px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+  font-size: 25px;
+  line-height: 36px;
+  word-wrap: break-word;
+}
+.price-list-items-details .buy .subtitles {
+  font-family: 'KnowledgeMedium';
+  font-weight: bold;
+  padding-left: 50px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 16px;
+}
+.price-list-items-details .buy .inputQuantity {
+  font-family: 'KnowledgeRegular';
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+  text-align: center;
+  width: 148px;
+  height: 40px;
+  margin-left: 35px;
+  background: inherit;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #212121;
+  border-radius: 0px;
+  box-shadow: none;
+}
+.price-list-items-details .buy .totalamount {
+  padding-top: 20px;
+  font-family: 'KnowledgeMedium';
+  font-weight: 500;
+  font-style: normal;
+  font-size: 16px;
+  color: #5A5965;
+  text-align: center;
+  line-height: 16px;
+}
+.price-list-items-details .buy .price-lists-btn {
+  margin-top: 25px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.price-list-items-details .buy .validation-error {
+  display: block;
+  font-family: "KnowledgeRegular";
+  position: relative;
+  box-sizing: border-box;
+  color: #dc0a0a;
+  padding-top: 5px;
+  padding-left: 40px;
+  padding-right: 20px;
+}
+.price-list-items-details .related {
+  line-height: 40px;
+  border-bottom: 2px solid;
+  font-family: 'KnowledgeRegular';
+  color: #cccccc;
+  padding-top: 15px;
+  margin-bottom: 40px;
+  font-size: 18px;
+}
+.price-list-items-details .top-bar {
+  margin-left: -20px;
+  margin-top: -20px;
+  margin-bottom: 20px;
+}
+.price-list-items-details .top-bar .grey-border-panel {
+  border: 1px solid #cccccc;
+  padding: 4px;
+}
+.price-list-items-details .top-bar .smb-top-panel {
+  padding: 0;
+}
+.price-list-items-details .top-bar .smb-top-panel .pull-left {
+  height: 40px;
+  margin-right: 15px;
+  font-size: x-large;
+}
+.price-list-items-details .top-bar .smb-top-panel .pull-left .primary-text {
+  height: 40px;
+  font-family: 'KnowledgeLight';
+  font-weight: 300;
+  font-size: 14px;
+  margin-top: 10px;
+}
+.price-list-items-details .top-bar .smb-top-panel .pull-left button {
+  height: 100%;
+  border: none;
+  border-right: 1px solid #cccccc;
+  background: #e9e9e9;
+  text-align: center;
+  min-width: 110%;
+}
+.price-list-items-details .top-bar .smb-top-panel .pull-left button i {
+  font-size: x-large;
+  margin-top: 5px;
+}
+#plus {
+  display: none;
+}
+#mainPriceListItemsItem:hover > #plus {
+  display: block;
+}
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInByaWNlLWxpc3RzLWl0ZW1zLmxlc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBRUEsbUJBQ0U7RUFDRSxvQkFBQTtFQUNBLGlCQUFBOztBQUhKLG1CQU1FO0VBQ0UsYUFBYSxxQkFBYjtFQUVBLGlCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxnQkFBQTtFQUNBLGtCQUFBO0VBQ0EsZUFBQTtFQUNBLGlCQUFBOztBQWRKLG1CQWlCRTtFQUNFLGFBQWEsZ0JBQWI7RUFDQSxpQkFBQTtFQUNBLG1CQUFBO0VBQ0EsaUJBQUE7RUFDQSxrQkFBQTtFQUNBLGVBQUE7RUFDQSxpQkFBQTtFQUNBLGlCQUFBOztBQXpCSixtQkE0QkU7RUFDRSxnQkFBQTtFQUNBLGtCQUFBO0VBQ0EsaUJBQUE7O0FBL0JKLG1CQWtDRSxrQkFBa0I7RUFDaEIscUJBQUE7O0FBbkNKLG1CQXNDRTtFQUNFLFdBQUE7RUFDQSxZQUFBO0VBQ0EsYUFBYSxnQkFBYjtFQUNBLGlCQUFBO0VBQ0Esa0JBQUE7RUFDQSxlQUFBO0VBQ0EsaUJBQUE7RUFDQSxpQkFBQTs7QUE5Q0osbUJBaURFO0VBQ0UsZ0JBQUE7RUFDQSxVQUFBO0VBQ0EsWUFBQTtFQUNBLGtCQUFBOztBQXJESixtQkF3REU7RUFDRSxhQUFhLGtCQUFiO0VBQ0EsY0FBQTtFQUNBLGlCQUFBO0VBQ0Esa0JBQUE7O0FBNURKLG1CQStERTtFQUNFLGdCQUFBO0VBQ0Esa0JBQUE7RUFDQSxpQkFBQTs7QUFsRUosbUJBcUVFO0VBQ0UsZUFBQTtFQUNBLGtCQUFBOztBQXZFSixtQkEwRUU7RUFDRSxzQkFBQTtFQUNBLGNBQUE7O0FBNUVKLG1CQStFRTtFQUNFLHVCQUFBO0VBQ0EsY0FBQTs7QUFqRkosbUJBb0ZFO0VBQ0UsYUFBQTtFQUNBLGFBQWEsZ0JBQWI7RUFDQSxlQUFBO0VBQ0EsY0FBQTs7QUF4RkosbUJBMkZFO0VBQ0UsaUJBQUE7RUFDQSxrQkFBQTs7QUE3RkosbUJBZ0dFO0VBQ0UsV0FBQTs7QUFLSjtFQUNFLGdCQUFBO0VBQ0Es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 */

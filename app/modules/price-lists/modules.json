@@ -1,0 +1,30 @@
+﻿ {
+  "index": {
+    "path": "/pricelists",
+    "templateUrl": "~/templates/price-lists.html",
+    "controller": "~/price-lists-items-con.js",
+    "translates": [ "price-lists" ],
+    "dependencies": [
+      "~/services/price-lists-srv.js",
+      "~/services/price-lists-items-srv.js",
+      "~/services/price-lists-items-filters-srv.js",
+      "./../content/services/company-settings-srv.js",
+      "./../content/directives/price-lists-items/price-lists-items-item.js",
+      "./../content/directives/price-lists-items/price-lists-items-list.js",
+      "~/services/price-lists-items-sort-srv.js"
+    ]
+  },
+   ":id/details": {
+    "templateUrl": "~/templates/price-lists-items-details.html",
+    "controller": "~/price-lists-items-details-con.js",
+    "translates": [ "price-lists" ],
+    "dependencies": [
+      "./../content/directives/autofocus/autofocus.js",
+      "~/services/price-lists-srv.js",
+      "~/services/price-lists-items-srv.js",
+      "~/services/price-lists-items-related-srv.js",
+      "./../content/directives/price-lists-items/price-lists-items-item.js",
+      "./../content/directives/price-lists-items/price-lists-items-list.js"
+    ]  
+   }
+ }

@@ -1,0 +1,11 @@
+﻿<div ng-controller="OffersListController as ctrl">
+    <div class="row">
+        <ul>
+            <li class="offers-list" ng-repeat="item in ctrl.items">
+                <a ng-click="ctrl.clickItem(item)" class="offers-lists-no-link">
+                    <offers-item item="item"></offers-item>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+﻿ {
+  "index": {
+    "path": "/products",
+    "templateUrl": "~/templates/products.html",
+    "controller": "~/products-con.js",
+    "translates": [ ],
+    "dependencies": [
+      "~/services/products-srv.js",
+      "./../content/directives/products/products-item.js",
+      "./../content/directives/products/products-list.js"
+    ]
+  },
+  "details/:id": {
+    "templateUrl": "~/templates/products-details.html",
+    "controller": "~/products-details-con.js",
+    "translates": [ "products" ],
+    "dependencies": [
+      "~/services/products-srv.js",
+      "./../content/directives/products/products-item.js",
+      "./../content/directives/products/products-list.js"
+    ]
+  }
+ }

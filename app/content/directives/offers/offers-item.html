@@ -1,0 +1,28 @@
+﻿<div id="mainPriceListItemsItem" class="offers-body">
+    <div id="plus" class="hoverplus">
+        <p>+</p>
+    </div>
+    <div class="price-lists-items-container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="img">
+                    <img ng-if="item.image" src="item.image">
+                    <img ng-if="!item.image"src="'content/images/camera.png'">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 nameGeneric">{{item.title}}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 nameElement">
+                <div ng-if="item.description">
+                    <span>{{item.description}}</span>
+                </div>
+                <div ng-if="item.city">
+                    <span>{{item.city}}</span>
+                </div>
+            </div>
+        </div>        
+    </div>
+</div>

@@ -2,24 +2,26 @@
     'use strict';
 
     angular.module('connectingUsCenter.myAccount')
-        .controller('myAccountCRUDController', ['$scope', 'MyAccount', '$translate',
-            function ($scope, MyAccount, $translate) {
+        .controller('myAccountCRUDController', ['MyAccount', '$translate', '$state', 'Countries',
+            function (MyAccount, $translate, $state, Countries) {
                 var ctrl = this;
-
+                ctrl.today = new Date();
                 ctrl.validateError = {
                     text: $translate.instant('global.error.textRequired'),
                     emailConfirm: $translate.instant('myAccount.error.emailConfirm'),
-                    passwordConfirm: $translate.instant('myAccount.error.passwordConfirm')
+                    passwordConfirm: $translate.instant('myAccount.error.password'),
+                    email: $translate.instant('myAccount.error.email'),
+                    passwordConfirm: $translate.instant('myAccount.error.password'),
                 };
 
                 ctrl.dateSelected = {
-                    value: new Date(),
+                    value: ctrl.today,
                     opened: false
                 };
 
                 ctrl.dateOptions = {
                     formatYear: 'yyyy',
-                    maxDate: new Date(),
+                    maxDate: ctrl.today.setYear(ctrl.today.getFullYear() - 13),
                     startingDay: 0
                 };
 
@@ -28,8 +30,30 @@
                 };
 
                 ctrl.fillArrays = function fillArrays() {
-                    ctrl.genders = [$translate.instant('global.gender.male'), $translate.instant('global.gender.female'), $translate.instant('global.gender.other')];
+                    ctrl.genders = [
+                        {
+                            code: 'M',
+                            description: $translate.instant('global.gender.male')
+                        }, {
+                            code: 'F',
+                            description: $translate.instant('global.gender.female')
+                        }
+                    ];
+                    ctrl.isLoadingCountries = true;
+                    ctrl.isLoadingOptions();
+                    Countries.get().$promise
+                        .then(ctrl.setCountries)
+                        .catch(ctrl.onCatchAccount)
+                        .finally(ctrl.onFinallyCountries);
                 };
+
+                ctrl.setCountries = function setCountries(result) {
+                    ctrl.countries = result;
+                };
+                ctrl.onFinallyCountries = function onFinallyCountries() {
+                    ctrl.isLoadingCountries = false;
+                    ctrl.isLoadingOptions();
+                }
 
                 ctrl.myAccount = MyAccount.getDefaultEntity();
 
@@ -40,7 +64,8 @@
 
                 ctrl.setView = function setView() {
                     ctrl.title = ctrl.myAccount.id ? $translate.instant('myAccount.title') : $translate.instant('myAccount.titleSignUp');
-                    ctrl.isLoading = false;
+                    ctrl.isLoadingAccount = false;
+                    ctrl.isLoadingOptions();
                 };
 
                 ctrl.setEdit = function setEdit(boolean) {
@@ -49,7 +74,7 @@
 
                 ctrl.setAccount = function setAccount(result) {
                     ctrl.myAccount = result;
-                    ctrl.dateSelected.value = ctrl.myAccount.dayOfBirth;
+                    ctrl.dateSelected.value = ctrl.myAccount.dateOfBirth;
                 };
                 ctrl.onCatchAccount = function onCatchAccount() { };
 
@@ -64,7 +89,7 @@
                 ctrl.setDateJSON = function setDateJSON() {
                     var auxDate = ctrl.dateSelected.value.toJSON().split('T');
                     auxDate[1] = '00:00:00';
-                    ctrl.dateJSON = auxDate.join('T');
+                    ctrl.myAccount.dateOfBirth = auxDate.join('T');
                 };
 
                 ctrl.save = function save() {
@@ -89,7 +114,7 @@
                 };
 
                 ctrl.cancel = function () {
-                    $state.go();
+                    $state.go('users-offers');
                 };
 
                 ctrl.valGeneral = function valGeneral() {
@@ -101,7 +126,7 @@
                 };
 
                 ctrl.validate = function validate() {
-                    return ctrl.valGeneral() && ctrl.valAccount();
+                    return ctrl.valAccount();
                 }
 
                 ctrl.valFirstName = function valFirstName() {
@@ -117,11 +142,11 @@
                 };
 
                 ctrl.valDayOfBirth = function valDayOfBirth() {
-                    return !(ctrl.validateError.dayOfBirth = !ctrl.myAccount.dayOfBirth);
+                    return !(ctrl.validateError.dateOfBirth = !ctrl.myAccount.dateOfBirth);
                 };
 
                 ctrl.valGender = function valGender() {
-                    return !(ctrl.validateError.gender = !ctrl.myAccount.selectedGender);
+                    return !(ctrl.validateError.gender = !ctrl.myAccount.gender);
                 };
 
                 ctrl.valNationality = function valNationality() {
@@ -129,7 +154,7 @@
                 };
 
                 ctrl.valCountry = function valCountry() {
-                    return !(ctrl.validateError.country = !ctrol.myAccount.country);
+                    return !(ctrl.validateError.countryOfResidence = !ctrol.myAccount.countryOfResidence);
                 };
 
                 ctrl.valCity = function valCity() {
@@ -169,6 +194,10 @@
                     }
 
                 };
+
+                ctrl.isLoadingOptions = function isLoadingOptions() {
+                    ctrl.isLoading = ctrl.isLoadingAccount || ctrl.isLoadingCountries;
+                }
 
                 ctrl.init();
             }

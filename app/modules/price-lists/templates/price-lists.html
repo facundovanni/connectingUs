@@ -1,0 +1,146 @@
+﻿<div ng-controller="PriceListsItemsController as vm" class="price-lists-filter">
+    <div bento-busy-loader="vm.isLoading">
+        <div class="row samba-row">
+            <div class="col-xs-10 search">
+                <input bm-search-input
+                       on-clean="searchClean"
+                       ng-model="vm.searchText"
+                       ng-change="vm.search(vm.searchText)"
+                       class="form-control samba-search-box"
+                       placeholder="{{'PriceLists.list.searchItem' | translate}}"
+                       type="text"
+                       ng-model-options="{ debounce: 1000}"
+                       data-qe-id="searchInput" />
+            </div>
+            <div class="col-xs-2">
+                <span class="dropdown bento-dropdown pull-left" uib-dropdown>
+                  <button type="button" class="dropdown-toggle btn btn-link" uib-dropdown-toggle><span class="dropdown-text">{{vm.sortingSelected | translate}}</span><i class="bento-icon-caret-down"></i>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-left" uib-dropdown-menu>
+                    <li ng-repeat="choice in vm.sortingOptions">
+                      <a ng-click="vm.changeSorting(choice)">{{choice | translate}}</a>
+                    </li>
+                  </ul>
+                </span>
+            </div>
+        </div>
+        <div class="row samba-row">
+            <div class="col-xs-2">
+                <div class="row samba-row">
+                    <div class="title">
+                        {{'PriceLists.filter.filter' | translate}}
+                    </div>
+                </div>
+                <div class="row samba-row">
+                    <div class="subtitle">{{'PriceLists.filter.class' | translate}}</div>
+                </div>
+                <div class="row samba-row">
+                    <div class="col-xs-12 combo subtitle">
+                        <div bento-combobox
+                             ng-model="vm.selectedProductClasses"
+                             get-data="vm.productClasses"
+                             on-change="vm.onProductClassChange(item)"
+                             name="category"
+                             data-qe-id="invoiceProductClassComboBox"
+                             placeholder="{{'PriceLists.filter.placeholder' | translate}}"
+                             searchable="false">
+                        </div>
+                    </div>
+                </div>
+                <div class="row samba-row">
+                    <div class="subtitle">{{vm.classification1FilterName}}</div>
+                </div>
+                <div class="row samba-row">
+                    <div class="col-xs-12 combo subtitle">
+                        <div bento-combobox
+                             ng-model="vm.selectedClassification1"
+                             get-data="vm.classification1"
+                             on-change="vm.onClassification1Change(item)"
+                             name="classification1"
+                             data-qe-id="invoiceCategoryComboBox"
+                             placeholder="{{'PriceLists.filter.placeholder' | translate}}"
+                             searchable="false">
+                        </div>
+                    </div>
+                </div>
+                <div class="row samba-row">
+                    <div class="subtitle">{{vm.classification2FilterName}}</div>
+                </div>
+                <div class="row samba-row">
+                    <div class="col-xs-12 combo subtitle">
+                        <div bento-combobox
+                             ng-model="vm.selectedClassification2"
+                             get-data="vm.classification2"
+                             on-change="vm.onClassification2Change(item)"
+                             name="classification2"
+                             data-qe-id="invoiceSubcategoryComboBox"
+                             placeholder="{{'PriceLists.filter.placeholder' | translate}}"
+                             searchable="false">
+                        </div>
+                    </div>
+                </div>
+                <div class="row samba-row">
+                    <div class="col-xs-12 subtitle">
+                        {{'PriceLists.filter.price' | translate}}
+                    </div>
+                </div>
+                <div class="row samba-row price-filter-row">
+                    <div class="col-xs-12 price-div">
+                        <div ng-form="form">
+                            <input bm-number
+                                   bm-number-min="0"
+                                   bm-number-decimal-places="2"
+                                   bm-number-custom-symbol="{{vm.currencySymbol}}"
+                                   name="priceFrom"
+                                   placeholder="{{'PriceLists.filter.priceFrom' | translate }}"
+                                   ng-class="{ 'ng-invalid aa-invalid-attempt' : vm.priceFilterError }"
+                                   class="form-control price-input"
+                                   ng-model="vm.priceFrom" />
+                            <span class="from-To">-</span>
+                            <input bm-number
+                                   bm-number-min="0"
+                                   bm-number-decimal-places="2"
+                                   name="priceTo"
+                                   placeholder="{{'PriceLists.filter.priceTo' | translate }}"
+                                   ng-class="{ 'ng-invalid aa-invalid-attempt' : vm.priceFilterError }"
+                                   class="form-control price-input"
+                                   ng-model="vm.priceTo" />
+                            <button ng-click="vm.priceApply()" type="button" class="btn btn-icon btn-default button-apply"><i class="bento-icon-chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row samba-row">
+                    <div class="col-xs-12">
+                        <span class="validation-error" ng-show="vm.priceFilterError">
+                            {{ vm.priceFilterError | translate }}
+                        </span>
+                    </div>
+                </div>
+                <div class="row samba-row">
+                    <div class="col-xs-12 button-clean">
+                        <button ng-click="vm.clearAllFilters()" class="btn btn-primary btnClean" id="priceFilters.clearAll">{{'PriceLists.filter.clearAll' | translate }}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-10 border-left">
+                <price-lists-items-list open-state="'/pricelists/:id/details'" ng-if="vm.priceListItems.items" items="vm.priceListItems.items" currency-symbol="vm.currencySymbol"></price-lists-items-list>
+                <div ng-if="!vm.priceListItems.items || vm.priceListItems.items == 0" class="noItems">
+                    {{'PriceLists.noItems' | translate}}
+                </div>
+                <div bento-pagination
+                     page="vm.pagination.pageIndex"
+                     direction-links="true"
+                     boundary-links="true"
+                     total-items="vm.pagination.totalItems"
+                     items-array="vm.selectItems"
+                     items-per-page="vm.pagination.itemsPerPage"
+                     info-Text="{{'PriceLists.pagination.infoText' | translate}}"
+                     info-page-text="{{'PriceLists.pagination.infoPageText' | translate}}"
+                     go-to-text="{{'PriceLists.pagination.goToText' | translate}}"
+                     on-change="vm.onPageChange(page)"
+                     on-change-size="vm.onPageSizeChange(size)">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
