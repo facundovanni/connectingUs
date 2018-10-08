@@ -2,12 +2,14 @@
     <div id="plus" class="hoverplus">
         <p>+</p>
     </div>
-    <div class="price-lists-items-container">
-        <div class="row">
+    <div class="offers-container">
+        <div class="row cda-row">
             <div class="col-xs-12">
                 <div class="img">
-                    <img ng-if="item.image" src="item.image">
-                    <img ng-if="!item.image"src="'content/images/camera.png'">
+                    <div class="adjust-image">
+                        <img ng-if="item.image" src="item.image">
+                        <img ng-if="!item.image" src="content/images/camera.png">
+                    </div>
                 </div>
             </div>
         </div>
@@ -20,9 +22,10 @@
                     <span>{{item.description}}</span>
                 </div>
                 <div ng-if="item.city">
+                    <span class="attributeName">City:</span>
                     <span>{{item.city}}</span>
                 </div>
             </div>
-        </div>        
+        </div>
     </div>
 </div>

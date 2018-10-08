@@ -64,6 +64,16 @@
                         }
 
 
+                    },
+                    "offers":{
+                        "title":"Services Offers",
+                        "searchItem":"Search",
+                        "filter":{
+                            "title":"Filter by:",
+                            "type":"Type",
+                            "location":"Location",
+                            "clearAll": "Clear All"
+                        }
                     }
                 };
 
