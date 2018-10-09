@@ -43,7 +43,7 @@
                             "dayOfBirth": "Day of birth",
                             "gender": "Gender",
                             "nationality": "Nationality",
-                            "country": "Country",
+                            "country": "Country of residence",
                             "city": "City"
                         },
                         "account": {

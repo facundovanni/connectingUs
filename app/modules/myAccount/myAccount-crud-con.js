@@ -39,6 +39,20 @@
                             description: $translate.instant('global.gender.female')
                         }
                     ];
+                    ctrl.countries = [
+                        {
+                            id:1,
+                            code: 'AR',
+                            description: 'Argentina'
+                        }
+                    ];
+                    ctrl.nationalities = [
+                        {
+                            id:1,
+                            code: 'AR',
+                            description: 'Argentina'
+                        }
+                    ];
                     ctrl.isLoadingCountries = true;
                     ctrl.isLoadingOptions();
                     Countries.get().$promise

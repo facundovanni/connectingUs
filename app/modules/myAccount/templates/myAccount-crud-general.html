@@ -2,28 +2,30 @@
   <h2 class="col-xs-12 title">{{'myAccount.general.title' | translate}}</h2>
 </div>
 <div class="row cda-row">
-  <div class="col-xs-6">
+  <div class="col-xs-6 form-group">
     <label class="label-crud label-required" translate="myAccount.general.firstName"></label>
-    <input ng-model="ctrl.myAccount.firstname" type="text" class="form-control">
+    <input ng-model="ctrl.myAccount.firstname" type="text" class="form-control" ng-pattern="/.*[a-zA-Z]+.*/" required>
     <div class="validate-error ng-cloak" ng-show="ctrl.validateError.firstName">{{ctrl.validateError.text}}</div>
   </div>
-  <div class="col-xs-6">
+  <div class="col-xs-6 form-group">
     <label class="label-crud label-required" translate="myAccount.general.lastName"></label>
-    <input name="name" ng-model="ctrl.myAccount.lastname" type="text" class="form-control">
+    <input name="name" ng-model="ctrl.myAccount.lastname" type="text" class="form-control" ng-pattern="/.*[a-zA-Z]+.*/"
+      required>
     <div class="validate-error ng-cloak" ng-show="ctrl.validateError.lastName">{{ctrl.validateError.text}}</div>
   </div>
 </div>
 <div class="row cda-row">
   <div class="col-xs-4">
     <label class="label-crud label-required" translate="myAccount.general.nickName"></label>
-    <input ng-model="ctrl.myAccount.account.nickname" type="text" class="form-control" ng-disabled="ctrl.myAccount.id">
+    <input ng-model="ctrl.myAccount.account.nickname" type="text" class="form-control" max-length="25" ng-disabled="ctrl.myAccount.id">
     <div class="validate-error ng-cloak" ng-show="ctrl.validateError.nickName">{{ctrl.validateError.text}}</div>
   </div>
   <div class="col-xs-4">
     <label class="label-crud label-required" translate="myAccount.general.dayOfBirth"></label>
     <div class="input-group">
-      <input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="ctrl.dateSelected.value" is-open="ctrl.dateSelected.opened"
-        datepicker-options="ctrl.dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+      <input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="ctrl.dateSelected.value"
+        is-open="ctrl.dateSelected.opened" datepicker-options="ctrl.dateOptions" ng-required="true" close-text="Close"
+        alt-input-formats="altInputFormats" />
       <span class="input-group-btn">
         <button type="button" class="btn btn-default" ng-click="ctrl.openDate()">
           <i class="glyphicon glyphicon-calendar"></i>
@@ -51,7 +53,7 @@
   </div>
   <div class="col-xs-4">
     <label class="label-crud label-required" translate="myAccount.general.city"></label>
-    <input ng-model="ctrl.myAccount.city" type="text" class="form-control">
-    <div class="valideate-error ng-cloak" ng-show="ctrl.validateError.city">{{ctrl.validateError.text}}</div>
+    <input ng-model="ctrl.myAccount.city" type="text" class="form-control" required>
+    <div class="validate-error ng-cloak" ng-show="ctrl.validateError.city">{{ctrl.validateError.text}}</div>
   </div>
 </div>

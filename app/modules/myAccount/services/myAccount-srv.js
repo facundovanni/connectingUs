@@ -4,11 +4,7 @@
         .service('MyAccount', ['ServicesModel', function (ServicesModel, WebApi) {
             var that = this;
             angular.extend(this, ServicesModel.create('https://appdbtest.azurewebsites.net/api/users', null, {
-                    save: {
-                        url:'https://appdbtest.azurewebsites.net/api/users/AddUser'
-
-                    }
-                }
+            }
             ));
 
 
