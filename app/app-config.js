@@ -1,19 +1,29 @@
-    (function rootConfigScope(angular) {
+(function rootConfigScope(angular) {
     'use strict';
+    var env = {};
+
+    // Import variables if present (from env.js)
+    if (window) {
+        Object.assign(env, window.__env);
+    }
+
     angular.module('connectingUsCenter', [
-            'ngRoute','ngAnimate', 'ngSanitize',
-            'ngTouch', 'ui.router',
-            'ui.bootstrap', 'angularSpinner',
-            'connectingUsCenter.services',
-            'connectingUsCenter.directives',
-            'connectingUsCenter.login',
-            'connectingUsCenter.myAccount',
-            'connectingUsCenter.usersOffers',
-            'pascalprecht.translate'
-        ])
-        .config(['$stateProvider', '$locationProvider', '$routeProvider', '$translateProvider',
-            function config($stateProvider, $locationProvider, $routeProvider, $translateProvider) {
+        'ngRoute', 'ngAnimate', 'ngSanitize',
+        'ngTouch', 'ui.router',
+        'ui.bootstrap', 'angularSpinner',
+        'connectingUsCenter.services',
+        'connectingUsCenter.directives',
+        'connectingUsCenter.login',
+        'connectingUsCenter.myAccount',
+        'connectingUsCenter.usersOffers',
+        'pascalprecht.translate'
+    ])
+        .config(['$stateProvider', '$locationProvider', '$routeProvider', '$translateProvider','$logProvider','__env',
+            function config($stateProvider, $locationProvider, $routeProvider, $translateProvider,$logProvider,__env) {
                 angular.lowercase = angular.$$lowercase;
+                
+                $logProvider.debugEnabled(__env.enableDebug);
+                
                 //Translations
                 var translationsEN = {
                     "global": {
@@ -26,11 +36,11 @@
                             "female": "Female",
                             "other": "Other"
                         },
-                        "error":{
+                        "error": {
                             "textRequired": "This field is required"
                         }
                     },
-                    "login":{
+                    "login": {
 
                     },
                     "myAccount": {
@@ -56,7 +66,7 @@
                             "phoneNumber": "Phone Number",
                             "typeNumber": "Type"
                         },
-                        "error":{
+                        "error": {
                             "emailConfirm": "The emails must be equals",
                             "passwordConfirm": "The passwords are not equals",
                             "email": "Set an valid email",
@@ -65,13 +75,13 @@
 
 
                     },
-                    "offers":{
-                        "title":"Services Offers",
-                        "searchItem":"Search",
-                        "filter":{
-                            "title":"Filter by:",
-                            "type":"Type",
-                            "location":"Location",
+                    "offers": {
+                        "title": "Services Offers",
+                        "searchItem": "Search",
+                        "filter": {
+                            "title": "Filter by:",
+                            "type": "Type",
+                            "location": "Location",
                             "clearAll": "Clear All"
                         }
                     }
@@ -82,11 +92,6 @@
                 $translateProvider.fallbackLanguage('en');
                 $translateProvider.preferredLanguage('en');
 
-
-                $stateProvider.state('login', {
-                    url: '/login',
-                    templateUrl: 'modules/login/templates/login.html'
-                });
                 $stateProvider.state('myAccount', {
                     url: '/myAccount',
                     templateUrl: 'modules/myAccount/templates/myAccount-crud.html'
@@ -104,5 +109,6 @@
 
 
             }
-        ]);
+        ])
+        .constant('__env', env);
 })(angular);

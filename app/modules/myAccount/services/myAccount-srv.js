@@ -1,9 +1,9 @@
 (function myAccountScope(angular) {
     'use strict';
     angular.module('connectingUsCenter.myAccount')
-        .service('MyAccount', ['ServicesModel', function (ServicesModel, WebApi) {
+        .service('MyAccount', ['ServicesModel','__env', function (ServicesModel, __env) {
             var that = this;
-            angular.extend(this, ServicesModel.create('https://appdbtest.azurewebsites.net/api/users', null, {
+            angular.extend(this, ServicesModel.create(__env.apiUrl + '/api/users', null, {
             }
             ));
 
