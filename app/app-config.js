@@ -18,8 +18,8 @@
         'connectingUsCenter.usersOffers',
         'pascalprecht.translate'
     ])
-        .config(['$stateProvider', '$locationProvider', '$routeProvider', '$translateProvider','$logProvider','__env',
-            function config($stateProvider, $locationProvider, $routeProvider, $translateProvider,$logProvider,__env) {
+        .config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider','$logProvider','__env',
+            function config($stateProvider, $locationProvider, $urlRouterProvider, $translateProvider,$logProvider,__env) {
                 angular.lowercase = angular.$$lowercase;
                 
                 $logProvider.debugEnabled(__env.enableDebug);
@@ -92,19 +92,24 @@
                 $translateProvider.fallbackLanguage('en');
                 $translateProvider.preferredLanguage('en');
 
-                $stateProvider.state('myAccount', {
-                    url: '/myAccount',
+                $stateProvider.state('/login', {
+                    url: '/login',
+                    templateUrl: 'modules/login/templates/login.html'
+                });
+                $stateProvider.state('/account', {
+                    url: '/account',
                     templateUrl: 'modules/myAccount/templates/myAccount-crud.html'
                 });
-                $stateProvider.state('users-offers', {
-                    url: '/offers',
-                    templateUrl: 'modules/users-offers/templates/users-offers.html'
-                });
+                // // $stateProvider.state('users-offers', {
+                //     url: '/offers',
+                //     templateUrl: 'modules/users-offers/templates/users-offers.html'
+                // });
 
                 $locationProvider.hashPrefix('');
-
-                $routeProvider.otherwise({
-                    redirectTo: '/login'
+                
+                $urlRouterProvider.otherwise(function($injector, $location){
+                    var $state = $injector.get('$state');
+                    $state.go('/login');
                 });
 
 

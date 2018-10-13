@@ -4,7 +4,7 @@
     // tag::module[]
     angular.module('connectingUsCenter.myAccount', ['ngResource'])
         .config(['$routeProvider', function ($routeProvider) {
-            $routeProvider.when('/myAccount', {
+            $routeProvider.when('/account', {
                 templateUrl: 'modules/myAccount/templates/myAccount-crud.html',
                 controller: 'myAccountCRUDController as ctrl'
             });

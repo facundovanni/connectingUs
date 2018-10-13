@@ -4,9 +4,9 @@
     function loginController($state) {
       var ctrl = this;
       console.log('loaded');
-
+      console.log($state.get());
       ctrl.goToSignUp = function goToSignUp(){
-        $state.go('myAccount');
+        $state.go('/account');
       }
     }]);
 })(angular);
