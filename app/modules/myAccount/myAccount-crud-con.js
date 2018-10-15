@@ -140,52 +140,28 @@
                     $state.go('login');
                 };
 
-                ctrl.valGeneral = function valGeneral() {
-                    return ctrl.valFirstName() && ctrl.valLastName() && ctrl.valNickName() && ctrl.valDayOfBirth() && ctrl.valGender() && ctrl.valNationality() && ctrl.valCountry() && ctrl.valCity();
-                };
-
-                ctrl.valAccount = function valAccount() {
-                    return ctrl.valEmail() && ctrl.valEmailConfirm() && ctrl.valPassword() && ctrl.valPasswordConfirm();
-                };
-
                 ctrl.validate = function validate() {
-                    return ctrl.valGeneral() && ctrl.valAccount();
-                };
+                    var validations = true;
+                    ctrl.validateError.firstName = !ctrl.myAccount.firstname;
+                    ctrl.validateError.lastName = !ctrl.myAccount.lastname;
+                    ctrl.validateError.nickName = !ctrl.myAccount.account.nickname;
+                    ctrl.validateError.dateOfBirth = !ctrl.myAccount.dateOfBirth;
+                    ctrl.validateError.gender = !ctrl.myAccount.gender;
+                    ctrl.validateError.nationality = !ctrl.myAccount.nationality;
+                    ctrl.validateError.countryOfResidence = !ctrl.myAccount.countryofresidence;
+                    ctrl.validateError.city = !ctrl.myAccount.city;
+                    ctrl.validateError.showEmail = !ctrl.myAccount.account.mail;
+                    ctrl.validateError.showPassword = !ctrl.myAccount.account.password;
+                    ctrl.valEmailConfirm();
+                    ctrl.valPasswordConfirm();
+                    for(const prop in ctrl.validateError){
+                        if(ctrl.validateError[prop]){
+                            validations = false;
+                            break;
+                        }
+                    }
 
-                ctrl.valFirstName = function valFirstName() {
-                    return !(ctrl.validateError.firstName = !ctrl.myAccount.firstname);
-                };
-
-                ctrl.valLastName = function valLastName() {
-                    return !(ctrl.validateError.lastName = !ctrl.myAccount.lastname);
-                };
-
-                ctrl.valNickName = function valNickName() {
-                    return !(ctrl.validateError.nickName = !ctrl.myAccount.account.nickname);
-                };
-
-                ctrl.valDayOfBirth = function valDayOfBirth() {
-                    return !(ctrl.validateError.dateOfBirth = !ctrl.myAccount.dateOfBirth);
-                };
-
-                ctrl.valGender = function valGender() {
-                    return !(ctrl.validateError.gender = !ctrl.myAccount.gender);
-                };
-
-                ctrl.valNationality = function valNationality() {
-                    return !(ctrl.validateError.nationality = !ctrl.myAccount.nationality);
-                };
-
-                ctrl.valCountry = function valCountry() {
-                    return !(ctrl.validateError.countryOfResidence = !ctrl.myAccount.countryofresidence);
-                };
-
-                ctrl.valCity = function valCity() {
-                    return !(ctrl.validateError.city = !ctrl.myAccount.city);
-                };
-
-                ctrl.valEmail = function valEmail() {
-                    return !(ctrl.validateError.showEmail = !ctrl.myAccount.account.mail);
+                    return validations;
                 };
 
                 ctrl.valEmailConfirm = function valEmailConfirm() {
@@ -198,11 +174,6 @@
                         ctrl.validateError.showEmailConfirm = true;
                     }
                     return !ctrl.validateError.showEmailConfirm;
-
-                };
-
-                ctrl.valPassword = function valPassword() {
-                    return !(ctrl.validateError.showPassword = !ctrl.myAccount.account.password);
                 };
 
                 ctrl.valPasswordConfirm = function valPasswordConfirm() {

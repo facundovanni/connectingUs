@@ -5,20 +5,20 @@
   <div class="col-xs-6 form-group">
     <label class="label-crud label-required" translate="myAccount.general.firstName"></label>
     <input ng-model="ctrl.myAccount.firstname" type="text" class="form-control" ng-pattern="/.*[a-zA-Z]+.*/" required>
-    <div class="validate-error ng-cloak" ng-show="ctrl.validateError.firstName">{{ctrl.validateError.text}}</div>
+    <div class="validate-error ng-cloak" ng-if="ctrl.validateError.firstName">{{ctrl.validateError.text}}</div>
   </div>
   <div class="col-xs-6 form-group">
     <label class="label-crud label-required" translate="myAccount.general.lastName"></label>
     <input name="name" ng-model="ctrl.myAccount.lastname" type="text" class="form-control" ng-pattern="/.*[a-zA-Z]+.*/"
       required>
-    <div class="validate-error ng-cloak" ng-show="ctrl.validateError.lastName">{{ctrl.validateError.text}}</div>
+    <div class="validate-error ng-cloak" ng-if="ctrl.validateError.lastName">{{ctrl.validateError.text}}</div>
   </div>
 </div>
 <div class="row cda-row">
   <div class="col-xs-4">
     <label class="label-crud label-required" translate="myAccount.general.nickName"></label>
     <input ng-model="ctrl.myAccount.account.nickname" type="text" class="form-control" max-length="25" ng-disabled="ctrl.myAccount.id">
-    <div class="validate-error ng-cloak" ng-show="ctrl.validateError.nickName">{{ctrl.validateError.text}}</div>
+    <div class="validate-error ng-cloak" ng-if="ctrl.validateError.nickName">{{ctrl.validateError.text}}</div>
   </div>
   <div class="col-xs-4">
     <label class="label-crud label-required" translate="myAccount.general.dayOfBirth"></label>
@@ -32,28 +32,28 @@
         </button>
       </span>
     </div>
-    <div class="validate-error ng-cloak" ng-show="ctrl.validateError.dateOfBirth">{{ctrl.dateSelected.error}}</div>
+    <div class="validate-error ng-cloak" ng-if="ctrl.validateError.dateOfBirth">{{ctrl.dateSelected.error}}</div>
   </div>
   <div class="col-xs-4">
     <label class="label-crud label-required" translate="myAccount.general.gender"></label>
     <select class="btn btn-default col-xs-12" ng-model="ctrl.myAccount.gender" ng-options="x.description for x in ctrl.genders"></select>
-    <div class="validate-error ng-cloak" ng-show="ctrl.validateError.gender">{{ctrl.validateError.text}}</div>
+    <div class="validate-error ng-cloak" ng-if="ctrl.validateError.gender">{{ctrl.validateError.text}}</div>
   </div>
 </div>
 <div class="row cda-row">
   <div class="col-xs-4">
     <label class="label-crud label-required" translate="myAccount.general.nationality"></label>
     <select class="btn btn-default col-xs-12" ng-model="ctrl.myAccount.nationality" ng-options="x.description for x in ctrl.nationalities"></select>
-    <div class="validate-error ng-cloak" ng-show="ctrl.validateError.nationality">{{ctrl.validateError.text}}</div>
+    <div class="validate-error ng-cloak" ng-if="ctrl.validateError.nationality">{{ctrl.validateError.text}}</div>
   </div>
   <div class="col-xs-4">
     <label class="label-crud label-required" translate="myAccount.general.country"></label>
     <select class="btn btn-default col-xs-12" ng-model="ctrl.myAccount.countryofresidence" ng-options="x.description for x in ctrl.countries"></select>
-    <div class="validate-error ng-cloak" ng-show="ctrl.validateError.countryOfResidence">{{ctrl.validateError.text}}</div>
+    <div class="validate-error ng-cloak" ng-if="ctrl.validateError.countryOfResidence">{{ctrl.validateError.text}}</div>
   </div>
   <div class="col-xs-4">
     <label class="label-crud label-required" translate="myAccount.general.city"></label>
     <input ng-model="ctrl.myAccount.city" type="text" class="form-control" required>
-    <div class="validate-error ng-cloak" ng-show="ctrl.validateError.city">{{ctrl.validateError.text}}</div>
+    <div class="validate-error ng-cloak" ng-if="ctrl.validateError.city">{{ctrl.validateError.text}}</div>
   </div>
 </div>

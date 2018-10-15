@@ -20,7 +20,8 @@
           isArray: true
         },
         save: {
-          method: 'POST'
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         },
         remove: {
           method: 'DELETE',
