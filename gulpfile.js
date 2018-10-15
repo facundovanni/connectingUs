@@ -1,5 +1,12 @@
-var gulpNgConfig = require('gulp-ng-config'),
-    replace = require('gulp-replace');
+replace = require('gulp-replace');
+
+var gulp = require('gulp');
+
+gulp.task('default', function() {
+  // place code for your default task here
+});
+
+var gulpNgConfig = require('gulp-ng-config');
 
 gulp.task('build:config-dev', function () {
   gulp.src('constants.json')
@@ -8,7 +15,6 @@ gulp.task('build:config-dev', function () {
     createModule: false,
     pretty: true
   }))
-  .pipe(replace('{version}',options.buildNumber))
   .pipe(gulp.dest('app/'))
 });
 
