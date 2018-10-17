@@ -38,7 +38,7 @@
         "angular-spinner": "^1.0.1",
         "angular-touch": "^1.7.5",
         "angular-ui-bootstrap": "^2.5.6",
-        "bootstrap": "^4.1.1",
+        "bootstrap": "^3.3.7",
         "checklist-model": "^1.0.0",
         "ejs": "^2.5.6",
         "express": "^4.15.2",
