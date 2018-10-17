@@ -20,6 +20,10 @@
         "tape": "^4.7.0"
     },
     "scripts": {
+        "postinstall": "bower install",
+        "update-deps": "npm update",
+        "postupdate-deps": "bower update",
+        "prestart": "npm install",
         "start": "node index.js",
         "test": "node test.js"
     },
