@@ -3,7 +3,7 @@
     angular.module('connectingUsCenter.usersOffers')
         .service('UsersOffers', ['ServicesModel', function (ServicesModel) {
             var that = this;
-            angular.extend(this, ServicesModel.create('/api/users', null, {}));
+            angular.extend(this, ServicesModel.create('/api/services', null, {}));
 
 
             that.getDefaultEntity = function getDefaultEntity() {

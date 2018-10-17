@@ -100,10 +100,10 @@
                     url: '/account',
                     templateUrl: 'modules/myAccount/templates/myAccount-crud.html'
                 });
-                // // $stateProvider.state('users-offers', {
-                //     url: '/offers',
-                //     templateUrl: 'modules/users-offers/templates/users-offers.html'
-                // });
+                 $stateProvider.state('users-offers', {
+                    url: '/offers',
+                    templateUrl: 'modules/users-offers/templates/users-offers.html'
+                });
 
                 $locationProvider.hashPrefix('');
                 
