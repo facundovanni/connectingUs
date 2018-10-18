@@ -1,12 +1,30 @@
 (function usersGridScope(angular) {
   'use strict';
-  angular.module('connectingUsCenter.login').controller('LoginController', ['$state',
-    function loginController($state) {
+  angular.module('connectingUsCenter.login').controller('LoginController', ['$scope', 'Login', '$translate', '$state',
+    function loginController($scope, Login, $translate, $state) {
       var ctrl = this;
-      console.log('loaded');
-      console.log($state.get());
-      ctrl.goToSignUp = function goToSignUp(){
+      ctrl.user = {};
+
+      ctrl.goToSignUp = function goToSignUp() {
         $state.go('/account');
       }
+
+      ctrl.goToOffers = function goToOffers() {
+        $state.go('/users-offers');
+      }
+
+      ctrl.getAccount = function getAccount() {
+        ctrl.isLoading = true;
+        Login.get().$promise
+          .then(ctrl.setUser)
+          .catch(ctrl.onCatchAccount)
+          .finally(ctrl.setView);
+      };
+      ctrl.singIn = function singIn() {
+        if (ctrl.user.email && ctrl.user.password) {
+          ctrl.goToOffers();
+        }
+      };
+
     }]);
 })(angular);
