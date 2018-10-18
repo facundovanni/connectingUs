@@ -1,5 +1,8 @@
 <div ng-form="CRUDMyAccountForm" class="crud" us-spinner spinner-on="ctrl.isLoading">
   <div class="container-fluid">
+    <div ng-if="ctrl.alert.show" class="alert + {{ctrl.alert.type}}">
+      <div>{{ctrl.alert.message}}</div>
+    </div>
     <div class="row cda-row">
       <h1 class="col-xs-12 title">{{ctrl.title}}</h3>
     </div>
@@ -11,20 +14,20 @@
         <label class="label-crud label-required" translate="myAccount.general.firstName"></label>
         <input ng-model="ctrl.myAccount.firstname" type="text" class="form-control" ng-pattern="/.*[a-zA-Z]+.*/"
           required>
-        <div class="validate-error ng-cloak" ng-show="ctrl.validateError.firstName">{{ctrl.validateError.text}}</div>
+        <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.firstName">{{ctrl.validateError.message.text}}</div>
       </div>
       <div class="col-xs-6 form-group">
         <label class="label-crud label-required" translate="myAccount.general.lastName"></label>
         <input name="name" ng-model="ctrl.myAccount.lastname" type="text" class="form-control" ng-pattern="/.*[a-zA-Z]+.*/"
           required>
-        <div class="validate-error ng-cloak" ng-show="ctrl.validateError.lastName">{{ctrl.validateError.text}}</div>
+        <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.lastName">{{ctrl.validateError.message.text}}</div>
       </div>
     </div>
     <div class="row cda-row">
       <div class="col-xs-4">
         <label class="label-crud label-required" translate="myAccount.general.nickName"></label>
         <input ng-model="ctrl.myAccount.account.nickname" type="text" class="form-control" max-length="25" ng-disabled="ctrl.myAccount.id">
-        <div class="validate-error ng-cloak" ng-show="ctrl.validateError.nickName">{{ctrl.validateError.text}}</div>
+        <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.nickName">{{ctrl.validateError.message.text}}</div>
       </div>
       <div class="col-xs-4">
         <label class="label-crud label-required" translate="myAccount.general.dayOfBirth"></label>
@@ -38,29 +41,29 @@
             </button>
           </span>
         </div>
-        <div class="validate-error ng-cloak" ng-show="ctrl.validateError.dateOfBirth">{{ctrl.dateSelected.error}}</div>
+        <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.dateOfBirth">{{ctrl.dateSelected.error}}</div>
       </div>
       <div class="col-xs-4">
         <label class="label-crud label-required" translate="myAccount.general.gender"></label>
         <select class="btn btn-default col-xs-12" ng-model="ctrl.myAccount.gender" ng-options="x.description for x in ctrl.genders"></select>
-        <div class="validate-error ng-cloak" ng-show="ctrl.validateError.gender">{{ctrl.validateError.text}}</div>
+        <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.gender">{{ctrl.validateError.message.text}}</div>
       </div>
     </div>
     <div class="row cda-row">
       <div class="col-xs-4">
         <label class="label-crud label-required" translate="myAccount.general.nationality"></label>
         <select class="btn btn-default col-xs-12" ng-model="ctrl.myAccount.nationality" ng-options="x.description for x in ctrl.nationalities"></select>
-        <div class="validate-error ng-cloak" ng-show="ctrl.validateError.nationality">{{ctrl.validateError.text}}</div>
+        <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.nationality">{{ctrl.validateError.message.text}}</div>
       </div>
       <div class="col-xs-4">
         <label class="label-crud label-required" translate="myAccount.general.country"></label>
-        <select class="btn btn-default col-xs-12" ng-model="ctrl.myAccount.countryofresidence" ng-options="x.description for x in ctrl.countries"></select>
-        <div class="validate-error ng-cloak" ng-show="ctrl.validateError.countryOfResidence">{{ctrl.validateError.text}}</div>
+        <select class="btn btn-default col-xs-12" ng-model="ctrl.myAccount.countryofresidence" ng-options="x.description for x in ctrl.countries" ng-change="ctrl.onChangeCountries()"></select>
+        <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.countryOfResidence">{{ctrl.validateError.message.text}}</div>
       </div>
       <div class="col-xs-4">
         <label class="label-crud label-required" translate="myAccount.general.city"></label>
-        <input ng-model="ctrl.myAccount.city" type="text" class="form-control" required>
-        <div class="validate-error ng-cloak" ng-show="ctrl.validateError.city">{{ctrl.validateError.text}}</div>
+        <select class="btn btn-default col-xs-12" ng-model="ctrl.myAccount.city" ng-options="x.description for x in ctrl.cities"></select>
+        <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.city">{{ctrl.validateError.message.text}}</div>
       </div>
     </div>
     <div class="row cda-row">
@@ -70,24 +73,24 @@
       <div ng-class="ctrl.myAccount.id ? 'col-xs-12' : 'col-xs-6'">
         <label class="label-crud label-required" translate="myAccount.account.email"></label>
         <input ng-model="ctrl.myAccount.account.mail" type="email" class="form-control" ng-disabled="ctrl.myAccount.id">
-        <div class="validate-error ng-cloak" ng-show="ctrl.validateError.showEmail">{{ctrl.validateError.email}}</div>
+        <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.email">{{ctrl.validateError.message.email}}</div>
       </div>
       <div class="col-xs-6" ng-if="!ctrl.myAccount.id">
         <label class="label-crud label-required" translate="myAccount.account.emailConfirm"></label>
         <input ng-model="ctrl.emailConfirm" type="email" class="form-control">
-        <div class="validate-error ng-cloak" ng-show="ctrl.validateError.showEmailConfirm">{{ctrl.validateError.emailConfirm}}</div>
+        <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.emailConfirm">{{ctrl.validateError.message.emailConfirm}}</div>
       </div>
     </div>
     <div class="row cda-row">
       <div class="col-xs-6">
         <label class="label-crud label-required" translate="myAccount.account.password"></label>
         <input ng-model="ctrl.myAccount.account.password" type="password" class="form-control" minlength="8">
-        <div class="validate-error ng-cloak" ng-show="ctrl.validateError.showPassword">{{ctrl.validateError.password}}</div>
+        <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.password">{{ctrl.validateError.message.password}}</div>
       </div>
       <div class="col-xs-6">
         <label class="label-crud label-required" translate="myAccount.account.passwordConfirm"></label>
         <input ng-model="ctrl.passwordConfirm" type="password" class="form-control" minlength="8">
-        <div class="validate-error ng-cloak" ng-show="ctrl.validateError.showPasswordConfirm">{{ctrl.validateError.passwordConfirm}}</div>
+        <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.passwordConfirm">{{ctrl.validateError.message.passwordConfirm}}</div>
       </div>
     </div>
     <div class="row cda-row">

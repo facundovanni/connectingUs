@@ -12,7 +12,7 @@
                     id: undefined,
                     firstname: undefined,
                     lastname: undefined,
-                    dateofbirth: undefined,
+                    dateOfBirth: undefined,
                     gender: undefined,
                     nationality: undefined,
                     countryofresidence: undefined,

@@ -2,17 +2,26 @@
     'use strict';
 
     angular.module('connectingUsCenter.myAccount')
-        .controller('myAccountCRUDController', ['MyAccount', '$translate', '$state', 'Countries',
-            function (MyAccount, $translate, $state, Countries) {
+        .controller('myAccountCRUDController', ['MyAccount', '$translate', '$state', 'Countries', 'Cities',
+            function (MyAccount, $translate, $state, Countries, Cities) {
                 var ctrl = this;
                 ctrl.today = new Date();
                 ctrl.validateError = {
-                    text: $translate.instant('global.error.textRequired'),
-                    emailConfirm: $translate.instant('myAccount.error.emailConfirm'),
-                    passwordConfirm: $translate.instant('myAccount.error.passwordConfirm'),
-                    email: $translate.instant('myAccount.error.email'),
-                    password: $translate.instant('myAccount.error.password'),
+                    show: {},
+                    message: {
+                        text: $translate.instant('global.error.textRequired'),
+                        emailConfirm: $translate.instant('myAccount.error.emailConfirm'),
+                        passwordConfirm: $translate.instant('myAccount.error.passwordConfirm'),
+                        email: $translate.instant('myAccount.error.email'),
+                        password: $translate.instant('myAccount.error.password'),
+                    }
                 };
+
+                ctrl.alert = {
+                    show: false,
+                    message: undefined,
+                    type: undefined
+                }
 
                 ctrl.dateSelected = {
                     value: ctrl.today,
@@ -41,14 +50,14 @@
                     ];
                     ctrl.countries = [
                         {
-                            id:1,
+                            id: 1,
                             code: 'AR',
                             description: 'Argentina'
                         }
                     ];
                     ctrl.nationalities = [
                         {
-                            id:1,
+                            id: 1,
                             code: 'AR',
                             description: 'Argentina'
                         }
@@ -67,7 +76,7 @@
                 ctrl.onFinallyCountries = function onFinallyCountries() {
                     ctrl.isLoadingCountries = false;
                     ctrl.isLoadingOptions();
-                }
+                };
 
                 ctrl.myAccount = MyAccount.getDefaultEntity();
 
@@ -75,6 +84,33 @@
                     ctrl.fillArrays();
                     ctrl.getAccount();
                 };
+
+                ctrl.onChangeCountries = function onChangeCountries() {
+                    if (ctrl.myAccount.countryofresidence.id) {
+                        ctrl.isLoadingCities = true;
+                        ctrl.isLoadingOptions();
+                        Cities.get({ idCountry: ctrl.myAccount.countryofresidence.id }).$promise
+                            .then(ctrl.setCities)
+                            .finally(ctrl.onFinallyCities);
+                    }
+                };
+
+                ctrl.setCities = function setCities(result) {
+                    ctrl.cities = result;
+
+                };
+                ctrl.onFinallyCities = function onFinallyCountries() {
+                    ctrl.cities = [
+                        {
+                            id: 1,
+                            code: 'BS',
+                            description: 'Buenos Aires'
+                        }
+                    ];
+                    ctrl.isLoadingCities = false;
+                    ctrl.isLoadingOptions();
+                };
+
 
                 ctrl.setView = function setView() {
                     ctrl.title = ctrl.myAccount.id ? $translate.instant('myAccount.title') : $translate.instant('myAccount.titleSignUp');
@@ -116,46 +152,50 @@
                 ctrl.createNew = function createNew() {
                     ctrl.isLoading = true;
                     MyAccount.save(ctrl.myAccount).$promise
-                    .then(ctrl.onThenNew)
-                    .finally(function onFinally(){
-                        ctrl.isLoading = false;
-                    });
+                        .then(ctrl.onThenNew)
+                        .finally(ctrl.onFinallySave);
                 };
 
+                ctrl.onFinallySave = function onFinally(result) {
+                    ctrl.isLoading = false;
+                    ctrl.alert.show = true;
+                    ctrl.alert.message = $translate.instant(result ? 'global.message.saveSuccess' : 'global.message.saveError');
+                    ctrl.alert.type = result ? 'alert-success' : 'alert-danger';
+                }
+
                 ctrl.onThenNew = function onThenNew(res) {
-                    scope.go('users-offers');
+                    scope.go('/users-offers');
                 };
 
                 ctrl.update = function update() {
                     ctrl.isLoading = true;
                     MyAccount.update(ctrl.myAccount).$promise
-                    .then(function onThen(res) {
-                    })
-                    .finally(function onFinally(){
-                        ctrl.isLoading = false;
-                    });
+                        .then(function onThen(res) {
+                        })
+                        .finally(ctrl.onFinallySave);
                 };
 
                 ctrl.cancel = function () {
-                    $state.go('login');
+
+                    $state.go(ctrl.myAccount.id ? '/users-offers' : '/login');
                 };
 
                 ctrl.validate = function validate() {
                     var validations = true;
-                    ctrl.validateError.firstName = !ctrl.myAccount.firstname;
-                    ctrl.validateError.lastName = !ctrl.myAccount.lastname;
-                    ctrl.validateError.nickName = !ctrl.myAccount.account.nickname;
-                    ctrl.validateError.dateOfBirth = !ctrl.myAccount.dateOfBirth;
-                    ctrl.validateError.gender = !ctrl.myAccount.gender;
-                    ctrl.validateError.nationality = !ctrl.myAccount.nationality;
-                    ctrl.validateError.countryOfResidence = !ctrl.myAccount.countryofresidence;
-                    ctrl.validateError.city = !ctrl.myAccount.city;
-                    ctrl.validateError.showEmail = !ctrl.myAccount.account.mail;
-                    ctrl.validateError.showPassword = !ctrl.myAccount.account.password;
-                    ctrl.valEmailConfirm();
-                    ctrl.valPasswordConfirm();
-                    for(const prop in ctrl.validateError){
-                        if(ctrl.validateError[prop]){
+                    ctrl.validateError.show.firstName = !ctrl.myAccount.firstname;
+                    ctrl.validateError.show.lastName = !ctrl.myAccount.lastname;
+                    ctrl.validateError.show.nickName = !ctrl.myAccount.account.nickname;
+                    ctrl.validateError.show.dateOfBirth = !ctrl.myAccount.dateOfBirth;
+                    ctrl.validateError.show.gender = !ctrl.myAccount.gender;
+                    ctrl.validateError.show.nationality = !ctrl.myAccount.nationality;
+                    ctrl.validateError.show.countryOfResidence = !ctrl.myAccount.countryofresidence;
+                    ctrl.validateError.show.city = !ctrl.myAccount.city;
+                    ctrl.validateError.show.email = !ctrl.myAccount.account.mail;
+                    ctrl.validateError.show.password = !ctrl.myAccount.account.password;
+                    ctrl.validateError.show.emailConfirm = !ctrl.emailConfirm || ctrl.myAccount.account.mail !== ctrl.emailConfirm;
+                    ctrl.validateError.show.passwordConfirm = !ctrl.passwordConfirm || ctrl.myAccount.account.password !== ctrl.passwordConfirm;
+                    for (const prop in ctrl.validateError.show) {
+                        if (ctrl.validateError.show[prop]) {
                             validations = false;
                             break;
                         }
@@ -164,32 +204,8 @@
                     return validations;
                 };
 
-                ctrl.valEmailConfirm = function valEmailConfirm() {
-                    if (ctrl.emailConfirm) {
-                        if (ctrl.myAccount.account.mail !== ctrl.mailConfirm) {
-                            ctrl.validateError.showEmailConfirm = true;
-                        }
-                        ctrl.validateError.showEmailConfirm = false;
-                    } else {
-                        ctrl.validateError.showEmailConfirm = true;
-                    }
-                    return !ctrl.validateError.showEmailConfirm;
-                };
-
-                ctrl.valPasswordConfirm = function valPasswordConfirm() {
-                    if (ctrl.passwordConfirm) {
-                        if (ctrl.myAccount.account.password !== ctrl.passwordConfirm) {
-                            ctrl.validateError.showPasswordConfirm = true;
-                        }
-                        ctrl.validateError.showPasswordConfirm = false;
-                    } else {
-                        ctrl.validateError.showPasswordConfirm = true;
-                    }
-                    return !ctrl.validateError.showPasswordConfirm;
-                };
-
                 ctrl.isLoadingOptions = function isLoadingOptions() {
-                    ctrl.isLoading = ctrl.isLoadingAccount || ctrl.isLoadingCountries;
+                    ctrl.isLoading = ctrl.isLoadingAccount || ctrl.isLoadingCountries || ctrl.isLoadingCities;
                 }
 
                 ctrl.init();

@@ -31,6 +31,10 @@
                             "save": "Save",
                             "cancel": "Cancel"
                         },
+                        "message":{
+                            "saveSuccess":"The data has been saved successfully",
+                            "saveError": "An error has ocurred"
+                        },
                         "gender": {
                             "male": "Male",
                             "female": "Female",
@@ -100,7 +104,7 @@
                     url: '/account',
                     templateUrl: 'modules/myAccount/templates/myAccount-crud.html'
                 });
-                 $stateProvider.state('users-offers', {
+                 $stateProvider.state('/users-offers', {
                     url: '/offers',
                     templateUrl: 'modules/users-offers/templates/users-offers.html'
                 });

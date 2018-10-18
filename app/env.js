@@ -2,7 +2,7 @@
     window.__env = window.__env || {};
   
     // API url
-    window.__env.apiUrl = 'https://appdbtest.azurewebsites.net';
+    window.__env.apiUrl = 'https://connectingba.azurewebsites.net';
   
     // Base url
     window.__env.baseUrl = '/';
