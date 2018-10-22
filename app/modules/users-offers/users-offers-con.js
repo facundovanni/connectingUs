@@ -2,14 +2,15 @@
     'use strict';
 
     angular.module('connectingUsCenter.usersOffers')
-        .controller('UsersOffersController', ['$scope', 'UsersOffers', '$translate', '$state',
-            function ($scope, UsersOffers, $translate, $state) {
+        .controller('UsersOffersController', ['$scope', 'UsersOffers', '$translate', '$state', 'Countries','Cities',
+            function ($scope, UsersOffers, $translate, $state,Countries,Cities) {
                 var ctrl = this;
 
                 ctrl.offers = [];
                 ctrl.categories = [];
-                ctrl.categoriesSelected = [];
                 ctrl.filters = {};
+                ctrl.countries = [];
+                ctrl.cities = [];
 
                 ctrl.offers.push({
                     title: 'Título',
@@ -21,6 +22,7 @@
                 ctrl.init = function init() {
                     //get the Offers
                     ctrl.getCategories();
+                    ctrl.getCountries();
                     //ctrl.updateOffers();
                 };
 
@@ -37,8 +39,8 @@
                     ctrl.isFullyLoaded();
 
                     ctrl.setFilters();
-                    
-                    UsersOffers.get(ctrl.filters).$promise.then(function onThen(offers) {
+
+                    UsersOffers.get({filters: ctrl.filters}).$promise.then(function onThen(offers) {
                         ctrl.offers = offers;
 
                     }).finally(function onFinally() {
@@ -47,17 +49,87 @@
                     });
                 };
 
-                ctrl.setFilters = function setFilters(){
-                    if(ctrl.categoriesSelected.length){
+                ctrl.setFilters = function setFilters() {
+                    if (ctrl.categoriesSelected.length) {
                         ctrl.filters.categories = ctrl.categoriesSelected;
                     }
                 };
 
                 ctrl.isFullyLoaded = function isFullyLoaded() {
-                    ctrl.isLoading = ctrl.isLoadingCategories || ctrl.isLoadingOffers;
+                    ctrl.isLoading = ctrl.isLoadingCategories || ctrl.isLoadingCountries || ctrl.isLoadingOffers || ctrl.isLoadingCities;
                 };
+
+                ctrl.getCountries = function getCountries() {
+                    ctrl.isLoadingCountries;
+                    ctrl.isFullyLoaded();
+                    Countries.get().$promise
+                        .then(ctrl.setCountries)
+                        .catch(ctrl.onCatchAccount)
+                        .finally(ctrl.onFinallyCountries);
+                };
+
+                ctrl.setCountries = function setCountries(result) {
+                    ctrl.countries = result;
+                };
+
+                ctrl.onFinallyCountries = function onFinallyCountries() {
+                    ctrl.isLoadingCountries = false;
+                    ctrl.isFullyLoaded();
+
+                    ctrl.countries.push({id:1, description:"Argentina", code:"AR"});
+                };
+
+                ctrl.getCities = function getCities() {
+                    ctrl.isLoadingCities = true;
+                    ctrl.isFullyLoaded();
+                    Cities.get({countryId: ctrl.filterCountry.id}).$promise
+                        .then(ctrl.setCities)
+                        .catch(ctrl.onCatchAccount)
+                        .finally(ctrl.onFinallyCities);
+                };
+
+                ctrl.setCities = function setCities(result) {
+                    ctrl.cities = result;
+                };
+
+                ctrl.onFinallyCities = function onFinallyCities() {
+                    ctrl.isLoadingCities = false;
+                    ctrl.isFullyLoaded();
+                    ctrl.cities.push({id:1, description:"Buenos Aires", code:"BSAS"});
+                };
+
+                ctrl.onSelectCountry = function onSelectCountry(){
+                    ctrl.getCities();
+                };
+
+                ctrl.onChangeFilters= function onChangeFilter(){
+
+                    ctrl.filters.categories = ctrl.categories.filter(function fil(category){
+                        return category.selected;
+                    });
+                    ctrl.filters.country = ctrl.filterCountry.id;
+                    ctrl.filters.city = ctrl.filterCity.id;
+
+                    //ctrl.updateOffers();
+                };
+
+                ctrl.clearAllFilters = function clearAllFilters(){
+                    ctrl.filter = {};
+                    ctrl.sel;
+
+                    {
+                        categories: [
+                            {id: 1, description:'blabla', selected:'true' },
+                            {id: 2, description:'blabla', selected:'true' }
+                        ],
+                        country: '1',
+
+                        ?filter: 
+                    }
+                }
 
                 ctrl.init();
             }
+            
         ]);
 })(angular);

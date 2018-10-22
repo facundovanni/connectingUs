@@ -59,7 +59,7 @@
                         {
                             id: 1,
                             code: 'AR',
-                            description: 'Argentina'
+                        description: 'Argentina'
                         }
                     ];
                     ctrl.isLoadingCountries = true;
