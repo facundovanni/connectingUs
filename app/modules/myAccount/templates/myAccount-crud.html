@@ -52,12 +52,12 @@
     <div class="row cda-row">
       <div class="col-xs-4">
         <label class="label-crud label-required" translate="myAccount.general.nationality"></label>
-        <select class="btn btn-default col-xs-12" ng-model="ctrl.myAccount.nationality" ng-options="x.description for x in ctrl.nationalities"></select>
+        <select class="btn btn-default col-xs-12" ng-model="ctrl.myAccount.countryofbirth" ng-options="x.Name for x in ctrl.nationalities"></select>
         <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.nationality">{{ctrl.validateError.message.text}}</div>
       </div>
       <div class="col-xs-4">
         <label class="label-crud label-required" translate="myAccount.general.country"></label>
-        <select class="btn btn-default col-xs-12" ng-model="ctrl.myAccount.countryofresidence" ng-options="x.description for x in ctrl.countries" ng-change="ctrl.onChangeCountries()"></select>
+        <select class="btn btn-default col-xs-12" ng-model="ctrl.myAccount.countryofresidence" ng-options="x.Name for x in ctrl.countries" ng-change="ctrl.onChangeCountries()"></select>
         <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.countryOfResidence">{{ctrl.validateError.message.text}}</div>
       </div>
       <div class="col-xs-4">
@@ -96,7 +96,7 @@
     <div class="row cda-row">
       <div class="col-xs-4">
         <label class="label-crud" translate="myAccount.account.codeArea"></label>
-        <input ng-model="ctrl.myAccount.codeArea" type="text" class="form-control">
+        <input ng-model="ctrl.myAccount.areacode" type="text" class="form-control">
       </div>
       <div class="col-xs-4">
         <label class="label-crud" translate="myAccount.account.phoneNumber"></label>

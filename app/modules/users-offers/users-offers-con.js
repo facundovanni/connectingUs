@@ -115,17 +115,11 @@
 
                 ctrl.clearAllFilters = function clearAllFilters(){
                     ctrl.filter = {};
-                    ctrl.sel;
-
-                    {
-                        categories: [
-                            {id: 1, description:'blabla', selected:'true' },
-                            {id: 2, description:'blabla', selected:'true' }
-                        ],
-                        country: '1',
-
-                        ?filter: 
-                    }
+                    ctrl.categories.forEach(function each(cat){
+                        cat.selected = false;
+                    });
+                    ctrl.filterCountry = undefined;
+                    ctrl.filterCity = undefined;
                 }
 
                 ctrl.init();

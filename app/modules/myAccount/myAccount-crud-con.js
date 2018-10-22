@@ -39,32 +39,16 @@
                 };
 
                 ctrl.fillArrays = function fillArrays() {
-                    ctrl.genders = [
-                        {
-                            code: 'M',
-                            description: $translate.instant('global.gender.male')
-                        }, {
-                            code: 'F',
-                            description: $translate.instant('global.gender.female')
-                        }
-                    ];
-                    ctrl.countries = [
-                        {
-                            id: 1,
-                            code: 'AR',
-                            description: 'Argentina'
-                        }
-                    ];
-                    ctrl.nationalities = [
-                        {
-                            id: 1,
-                            code: 'AR',
-                        description: 'Argentina'
-                        }
-                    ];
+                    ctrl.genders = [{
+                        code: 'M',
+                        description: $translate.instant('global.gender.male')
+                    }, {
+                        code: 'F',
+                        description: $translate.instant('global.gender.female')
+                    }];
                     ctrl.isLoadingCountries = true;
                     ctrl.isLoadingOptions();
-                    Countries.get().$promise
+                    Countries.getAll().$promise
                         .then(ctrl.setCountries)
                         .catch(ctrl.onCatchAccount)
                         .finally(ctrl.onFinallyCountries);
@@ -72,6 +56,7 @@
 
                 ctrl.setCountries = function setCountries(result) {
                     ctrl.countries = result;
+                    ctrl.nationalities = result;
                 };
                 ctrl.onFinallyCountries = function onFinallyCountries() {
                     ctrl.isLoadingCountries = false;
@@ -86,10 +71,10 @@
                 };
 
                 ctrl.onChangeCountries = function onChangeCountries() {
-                    if (ctrl.myAccount.countryofresidence.id) {
+                    if (ctrl.myAccount.countryofresidence.Id) {
                         ctrl.isLoadingCities = true;
                         ctrl.isLoadingOptions();
-                        Cities.get({ idCountry: ctrl.myAccount.countryofresidence.id }).$promise
+                        Cities.get({idCountry: "idCountry=" + ctrl.myAccount.countryofresidence.Id}).$promise
                             .then(ctrl.setCities)
                             .finally(ctrl.onFinallyCities);
                     }
@@ -100,13 +85,6 @@
 
                 };
                 ctrl.onFinallyCities = function onFinallyCountries() {
-                    ctrl.cities = [
-                        {
-                            id: 1,
-                            code: 'BS',
-                            description: 'Buenos Aires'
-                        }
-                    ];
                     ctrl.isLoadingCities = false;
                     ctrl.isLoadingOptions();
                 };
@@ -126,7 +104,7 @@
                     ctrl.myAccount = result;
                     ctrl.dateSelected.value = ctrl.myAccount.dateOfBirth;
                 };
-                ctrl.onCatchAccount = function onCatchAccount() { };
+                ctrl.onCatchAccount = function onCatchAccount() {};
 
                 ctrl.getAccount = function getAccount() {
                     ctrl.isLoading = true;
@@ -145,6 +123,7 @@
                 ctrl.save = function save() {
                     ctrl.setDateJSON();
                     if (ctrl.validate()) {
+                        ctrl.myAccount.gender = ctrl.myAccount.gender.code;
                         ctrl.myAccount.id ? ctrl.update() : ctrl.createNew();
                     }
                 };
@@ -170,8 +149,7 @@
                 ctrl.update = function update() {
                     ctrl.isLoading = true;
                     MyAccount.update(ctrl.myAccount).$promise
-                        .then(function onThen(res) {
-                        })
+                        .then(function onThen(res) {})
                         .finally(ctrl.onFinallySave);
                 };
 
@@ -187,7 +165,7 @@
                     ctrl.validateError.show.nickName = !ctrl.myAccount.account.nickname;
                     ctrl.validateError.show.dateOfBirth = !ctrl.myAccount.dateOfBirth;
                     ctrl.validateError.show.gender = !ctrl.myAccount.gender;
-                    ctrl.validateError.show.nationality = !ctrl.myAccount.nationality;
+                    ctrl.validateError.show.nationality = !ctrl.myAccount.countryofbirth;
                     ctrl.validateError.show.countryOfResidence = !ctrl.myAccount.countryofresidence;
                     ctrl.validateError.show.city = !ctrl.myAccount.city;
                     ctrl.validateError.show.email = !ctrl.myAccount.account.mail;

@@ -3,9 +3,9 @@
     angular.module('connectingUsCenter.services')
         .service('Cities', ['ServicesModel', '__env', function (ServicesModel, __env) {
             angular.extend(this, ServicesModel.create(__env.apiUrl + '/api/cities/:idCountry', null, {
-                get: {
+                getAll: {
                     method: 'GET',
-                    url: __env.apiUrl + '/api/cities/:idCountry',
+                    isArray: true,
                     param: {
                         idCountry: '@idCountry'
                     }

@@ -14,7 +14,7 @@
                     lastname: undefined,
                     dateOfBirth: undefined,
                     gender: undefined,
-                    nationality: undefined,
+                    countryofbirth: undefined,
                     countryofresidence: undefined,
                     city: undefined,
                     account: {
