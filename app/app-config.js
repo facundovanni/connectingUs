@@ -42,6 +42,11 @@
                         },
                         "error": {
                             "textRequired": "This field is required"
+                        },
+                        "phoneType":{
+                            "mobile":"Mobile",
+                            "home": "Home",
+                            "other": "Other"
                         }
                     },
                     "login": {

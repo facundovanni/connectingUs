@@ -45,7 +45,15 @@
                     }, {
                         code: 'F',
                         description: $translate.instant('global.gender.female')
+                    }, {
+                        code: 'O',
+                        description: $translate.instant('global.gender.other')
                     }];
+                    ctrl.phoneTypes =[
+                        { code:'M', description: 'global.phoneType.mobile'},
+                        { code:'H', description: 'global.phoneType.home'},
+                        { code:'O', description: 'global.phoneType.other'}
+                    ]
                     ctrl.isLoadingCountries = true;
                     ctrl.isLoadingOptions();
                     Countries.getAll().$promise
@@ -74,7 +82,7 @@
                     if (ctrl.myAccount.countryofresidence.Id) {
                         ctrl.isLoadingCities = true;
                         ctrl.isLoadingOptions();
-                        Cities.get({idCountry: "idCountry=" + ctrl.myAccount.countryofresidence.Id}).$promise
+                        Cities.getAll({idCountry: ctrl.myAccount.countryofresidence.Id}).$promise
                             .then(ctrl.setCities)
                             .finally(ctrl.onFinallyCities);
                     }
@@ -102,6 +110,14 @@
 
                 ctrl.setAccount = function setAccount(result) {
                     ctrl.myAccount = result;
+                    ctrl.myAccount.gender = ctrl.genders.find(function find(obj){
+                        return obj.code === ctrl.myAccount.gender;
+                    });
+                    if(ctrl.myAccount.phonetype){
+                        ctrl.myAccount.phonetype = ctrl.phoneTypes.find(function find(obj){
+                            return obj.code === ctrl.myAccount.phonetype;
+                        });
+                    };
                     ctrl.dateSelected.value = ctrl.myAccount.dateOfBirth;
                 };
                 ctrl.onCatchAccount = function onCatchAccount() {};
@@ -124,6 +140,7 @@
                     ctrl.setDateJSON();
                     if (ctrl.validate()) {
                         ctrl.myAccount.gender = ctrl.myAccount.gender.code;
+                        ctrl.myAccount.phonetype = ctrl.myAccount.phonetype.code;
                         ctrl.myAccount.id ? ctrl.update() : ctrl.createNew();
                     }
                 };
@@ -167,7 +184,7 @@
                     ctrl.validateError.show.gender = !ctrl.myAccount.gender;
                     ctrl.validateError.show.nationality = !ctrl.myAccount.countryofbirth;
                     ctrl.validateError.show.countryOfResidence = !ctrl.myAccount.countryofresidence;
-                    ctrl.validateError.show.city = !ctrl.myAccount.city;
+                    ctrl.validateError.show.city = !ctrl.myAccount.cityofresidence;
                     ctrl.validateError.show.email = !ctrl.myAccount.account.mail;
                     ctrl.validateError.show.password = !ctrl.myAccount.account.password;
                     ctrl.validateError.show.emailConfirm = !ctrl.emailConfirm || ctrl.myAccount.account.mail !== ctrl.emailConfirm;

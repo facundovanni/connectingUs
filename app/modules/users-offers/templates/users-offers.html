@@ -23,12 +23,12 @@
               <div uib-accordion-group class="panel-default" heading="{{'offers.filter.location' | translate}}" is-open="status.isFirstOpen">
                 <div class="row cda-row">
                   <div class="col-xs-12">
-                    <select class="btn btn-default col-xs-12" ng-model="ctrl.filterCountry" ng-options="x.name for x in ctrl.countries" ng-change="ctrl.onSelectCountry()"></select>
+                    <select class="btn btn-default col-xs-12" ng-model="ctrl.filterCountry" ng-options="x.Name for x in ctrl.countries" ng-change="ctrl.onSelectCountry()"></select>
                   </div>
                 </div>
                 <div class="row cda-row" ng-if="ctrl.filterCountry">
                     <div class="col-xs-12">
-                      <select class="btn btn-default col-xs-12" ng-model="ctrl.filterCity" ng-options="x.name for x in ctrl.cities"></select>
+                      <select class="btn btn-default col-xs-12" ng-model="ctrl.filterCity" ng-options="x.Name for x in ctrl.cities"></select>
                     </div>
                   </div>
               </div>
