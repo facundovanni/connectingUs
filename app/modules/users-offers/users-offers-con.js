@@ -80,7 +80,7 @@
                 ctrl.getCities = function getCities() {
                     ctrl.isLoadingCities = true;
                     ctrl.isFullyLoaded();
-                    Cities.getAll({ countryId: ctrl.filterCountry.id }).$promise
+                    Cities.getAll({ countryId: ctrl.filterCountry.Id }).$promise
                         .then(ctrl.setCities)
                         .catch(ctrl.onCatchAccount)
                         .finally(ctrl.onFinallyCities);
