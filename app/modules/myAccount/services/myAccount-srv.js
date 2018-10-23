@@ -10,7 +10,7 @@
             that.getDefaultEntity = function getDefaultEntity() {
                 return {
                     id: undefined,
-                    firstname: undefined,
+                    FirstName: undefined,
                     lastname: undefined,
                     dateOfBirth: undefined,
                     gender: undefined,

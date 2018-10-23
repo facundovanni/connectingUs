@@ -75,7 +75,7 @@
                             "emailConfirm": "Confirm email",
                             "password": "Password",
                             "passwordConfirm": "Confirm Password",
-                            "codeArea": "Code of Area",
+                            "codeArea": "Area code",
                             "phoneNumber": "Phone Number",
                             "typeNumber": "Type"
                         },
