@@ -26,7 +26,7 @@
     <div class="row cda-row">
       <div class="col-xs-4">
         <label class="label-crud label-required" translate="myAccount.general.nickName"></label>
-        <input ng-model="ctrl.myAccount.account.NickName" type="text" class="form-control" max-length="25" ng-disabled="ctrl.myAccount.Id">
+        <input ng-model="ctrl.myAccount.Account.NickName" type="text" class="form-control" max-length="25" ng-disabled="ctrl.myAccount.Id">
         <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.nickName">{{ctrl.validateError.message.text}}</div>
       </div>
       <div class="col-xs-4">
@@ -72,7 +72,7 @@
     <div class="row cda-row">
       <div ng-class="ctrl.myAccount.Id ? 'col-xs-12' : 'col-xs-6'">
         <label class="label-crud label-required" translate="myAccount.account.email"></label>
-        <input ng-model="ctrl.myAccount.account.Mail" type="email" class="form-control" ng-disabled="ctrl.myAccount.Id">
+        <input ng-model="ctrl.myAccount.Account.Mail" type="email" class="form-control" ng-disabled="ctrl.myAccount.Id">
         <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.email">{{ctrl.validateError.message.email}}</div>
       </div>
       <div class="col-xs-6" ng-if="!ctrl.myAccount.Id">
@@ -84,7 +84,7 @@
     <div class="row cda-row">
       <div class="col-xs-6">
         <label class="label-crud label-required" translate="myAccount.account.password"></label>
-        <input ng-model="ctrl.myAccount.account.Password" type="password" class="form-control" minlength="8">
+        <input ng-model="ctrl.myAccount.Account.Password" type="password" class="form-control" minlength="8">
         <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.password">{{ctrl.validateError.message.password}}</div>
       </div>
       <div class="col-xs-6">
@@ -100,7 +100,7 @@
       </div>
       <div class="col-xs-4">
         <label class="label-crud" translate="myAccount.account.phoneNumber"></label>
-        <input name="number" ng-model="ctrl.myAccount.PhoneNumber" type="text" class="form-control" ng-pattern="^\d{3}-\d{3}-\d{4}$">
+        <input name="number" ng-model="ctrl.myAccount.PhoneNumber" type="text" class="form-control">
       </div>
       <div class="col-xs-4">
         <label class="label-crud" translate="myAccount.account.typeNumber"></label>

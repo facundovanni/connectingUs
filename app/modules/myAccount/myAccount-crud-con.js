@@ -177,18 +177,18 @@
 
                 ctrl.validate = function validate() {
                     var validations = true;
-                    ctrl.validateError.show.FirstName = !ctrl.myAccount.FirstName;
+                    ctrl.validateError.show.firstName = !ctrl.myAccount.FirstName;
                     ctrl.validateError.show.lastName = !ctrl.myAccount.LastName;
-                    ctrl.validateError.show.nickName = !ctrl.myAccount.account.NickName;
+                    ctrl.validateError.show.nickName = !ctrl.myAccount.Account.NickName;
                     ctrl.validateError.show.dateOfBirth = !ctrl.myAccount.DateOfBirth;
                     ctrl.validateError.show.gender = !ctrl.myAccount.Gender;
                     ctrl.validateError.show.nationality = !ctrl.myAccount.CountryOfBirth;
                     ctrl.validateError.show.countryOfResidence = !ctrl.myAccount.CountryOfResidence;
                     ctrl.validateError.show.city = !ctrl.myAccount.CityOfResidence;
-                    ctrl.validateError.show.email = !ctrl.myAccount.account.Mail;
-                    ctrl.validateError.show.password = !ctrl.myAccount.account.Password;
-                    ctrl.validateError.show.emailConfirm = !ctrl.emailConfirm || ctrl.myAccount.account.Mail !== ctrl.emailConfirm;
-                    ctrl.validateError.show.passwordConfirm = !ctrl.passwordConfirm || ctrl.myAccount.account.Password !== ctrl.passwordConfirm;
+                    ctrl.validateError.show.email = !ctrl.myAccount.Account.Mail;
+                    ctrl.validateError.show.password = !ctrl.myAccount.Account.Password;
+                    ctrl.validateError.show.emailConfirm = !ctrl.emailConfirm || ctrl.myAccount.Account.Mail !== ctrl.emailConfirm;
+                    ctrl.validateError.show.passwordConfirm = !ctrl.passwordConfirm || ctrl.myAccount.Account.Password !== ctrl.passwordConfirm;
                     for (const prop in ctrl.validateError.show) {
                         if (ctrl.validateError.show[prop]) {
                             validations = false;
