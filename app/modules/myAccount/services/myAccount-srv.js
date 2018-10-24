@@ -23,7 +23,8 @@
                         nickname: undefined
                     },
                     phonenumber: undefined,
-                    phonetype: undefined
+                    phonetype: undefined,
+                    areacode: undefined
                 };
             };
         }]);
