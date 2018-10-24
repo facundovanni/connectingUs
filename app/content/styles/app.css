@@ -119,3 +119,15 @@ body {
   line-height: 2.5;
   color: #fff;
 }
+
+/* login */
+.login-input{
+  margin-bottom: 15px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.login-shadow{
+  box-shadow: 0px 2px 10px grey;
+}
+
