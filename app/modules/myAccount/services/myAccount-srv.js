@@ -9,21 +9,22 @@
 
             that.getDefaultEntity = function getDefaultEntity() {
                 return {
-                    id: undefined,
-                    firstname: undefined,
-                    lastname: undefined,
-                    dateOfBirth: undefined,
-                    gender: undefined,
-                    countryofbirth: undefined,
-                    countryofresidence: undefined,
-                    city: undefined,
-                    account: {
-                        mail: undefined,
-                        password: undefined,
-                        nickname: undefined
+                    Id: undefined,
+                    FirstName: undefined,
+                    LastName: undefined,
+                    DateOfBirth: undefined,
+                    Gender: undefined,
+                    CountryOfBirth: undefined,
+                    CountryOfResidence: undefined,
+                    CityOfResidence: undefined,
+                    Account: {
+                        Mail: undefined,
+                        Password: undefined,
+                        Nickname: undefined
                     },
-                    phonenumber: undefined,
-                    phonetype: undefined
+                    Phonenumber: undefined,
+                    Phonetype: undefined,
+                    AreaCode:undefined
                 };
             };
         }]);

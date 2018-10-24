@@ -79,10 +79,10 @@
                 };
 
                 ctrl.onChangeCountries = function onChangeCountries() {
-                    if (ctrl.myAccount.countryofresidence.Id) {
+                    if (ctrl.myAccount.CountryOfResidence.Id) {
                         ctrl.isLoadingCities = true;
                         ctrl.isLoadingOptions();
-                        Cities.getAll({idCountry: ctrl.myAccount.countryofresidence.Id}).$promise
+                        Cities.getAll({idCountry: ctrl.myAccount.CountryOfResidence.Id}).$promise
                             .then(ctrl.setCities)
                             .finally(ctrl.onFinallyCities);
                     }
@@ -99,7 +99,7 @@
 
 
                 ctrl.setView = function setView() {
-                    ctrl.title = ctrl.myAccount.id ? $translate.instant('myAccount.title') : $translate.instant('myAccount.titleSignUp');
+                    ctrl.title = ctrl.myAccount.Id ? $translate.instant('myAccount.title') : $translate.instant('myAccount.titleSignUp');
                     ctrl.isLoadingAccount = false;
                     ctrl.isLoadingOptions();
                 };
@@ -110,15 +110,15 @@
 
                 ctrl.setAccount = function setAccount(result) {
                     ctrl.myAccount = result;
-                    ctrl.myAccount.gender = ctrl.genders.find(function find(obj){
-                        return obj.code === ctrl.myAccount.gender;
+                    ctrl.myAccount.Gender = ctrl.genders.find(function find(obj){
+                        return obj.code === ctrl.myAccount.Gender;
                     });
-                    if(ctrl.myAccount.phonetype){
-                        ctrl.myAccount.phonetype = ctrl.phoneTypes.find(function find(obj){
-                            return obj.code === ctrl.myAccount.phonetype;
+                    if(ctrl.myAccount.PhoneType){
+                        ctrl.myAccount.PhoneType = ctrl.phoneTypes.find(function find(obj){
+                            return obj.code === ctrl.myAccount.PhoneType;
                         });
                     };
-                    ctrl.dateSelected.value = ctrl.myAccount.dateOfBirth;
+                    ctrl.dateSelected.value = ctrl.myAccount.DateOfBirth;
                 };
                 ctrl.onCatchAccount = function onCatchAccount() {};
 
@@ -133,15 +133,15 @@
                 ctrl.setDateJSON = function setDateJSON() {
                     var auxDate = ctrl.dateSelected.value.toJSON().split('T');
                     auxDate[1] = '00:00:00';
-                    ctrl.myAccount.dateOfBirth = auxDate.join('T');
+                    ctrl.myAccount.DateOfBirth = auxDate.join('T');
                 };
 
                 ctrl.save = function save() {
                     ctrl.setDateJSON();
                     if (ctrl.validate()) {
-                        ctrl.myAccount.gender = ctrl.myAccount.gender.code;
-                        ctrl.myAccount.phonetype = ctrl.myAccount.phonetype.code;
-                        ctrl.myAccount.id ? ctrl.update() : ctrl.createNew();
+                        ctrl.myAccount.Gender = ctrl.myAccount.Gender.code;
+                        ctrl.myAccount.PhoneType = ctrl.myAccount.PhoneType ? ctrl.myAccount.PhoneType.code : undefined;
+                        ctrl.myAccount.Id ? ctrl.update() : ctrl.createNew();
                     }
                 };
 
@@ -172,23 +172,23 @@
 
                 ctrl.cancel = function () {
 
-                    $state.go(ctrl.myAccount.id ? '/users-offers' : '/login');
+                    $state.go(ctrl.myAccount.Id ? '/users-offers' : '/login');
                 };
 
                 ctrl.validate = function validate() {
                     var validations = true;
-                    ctrl.validateError.show.firstName = !ctrl.myAccount.firstname;
-                    ctrl.validateError.show.lastName = !ctrl.myAccount.lastname;
-                    ctrl.validateError.show.nickName = !ctrl.myAccount.account.nickname;
-                    ctrl.validateError.show.dateOfBirth = !ctrl.myAccount.dateOfBirth;
-                    ctrl.validateError.show.gender = !ctrl.myAccount.gender;
-                    ctrl.validateError.show.nationality = !ctrl.myAccount.countryofbirth;
-                    ctrl.validateError.show.countryOfResidence = !ctrl.myAccount.countryofresidence;
-                    ctrl.validateError.show.city = !ctrl.myAccount.cityofresidence;
-                    ctrl.validateError.show.email = !ctrl.myAccount.account.mail;
-                    ctrl.validateError.show.password = !ctrl.myAccount.account.password;
-                    ctrl.validateError.show.emailConfirm = !ctrl.emailConfirm || ctrl.myAccount.account.mail !== ctrl.emailConfirm;
-                    ctrl.validateError.show.passwordConfirm = !ctrl.passwordConfirm || ctrl.myAccount.account.password !== ctrl.passwordConfirm;
+                    ctrl.validateError.show.firstName = !ctrl.myAccount.FirstName;
+                    ctrl.validateError.show.lastName = !ctrl.myAccount.LastName;
+                    ctrl.validateError.show.nickName = !ctrl.myAccount.Account.NickName;
+                    ctrl.validateError.show.dateOfBirth = !ctrl.myAccount.DateOfBirth;
+                    ctrl.validateError.show.gender = !ctrl.myAccount.Gender;
+                    ctrl.validateError.show.nationality = !ctrl.myAccount.CountryOfBirth;
+                    ctrl.validateError.show.countryOfResidence = !ctrl.myAccount.CountryOfResidence;
+                    ctrl.validateError.show.city = !ctrl.myAccount.CityOfResidence;
+                    ctrl.validateError.show.email = !ctrl.myAccount.Account.Mail;
+                    ctrl.validateError.show.password = !ctrl.myAccount.Account.Password;
+                    ctrl.validateError.show.emailConfirm = !ctrl.emailConfirm || ctrl.myAccount.Account.Mail !== ctrl.emailConfirm;
+                    ctrl.validateError.show.passwordConfirm = !ctrl.passwordConfirm || ctrl.myAccount.Account.Password !== ctrl.passwordConfirm;
                     for (const prop in ctrl.validateError.show) {
                         if (ctrl.validateError.show[prop]) {
                             validations = false;
