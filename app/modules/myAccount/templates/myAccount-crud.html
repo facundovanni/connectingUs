@@ -1,5 +1,4 @@
-<div ng-form="CRUDMyAccountForm" class="crud" us-spinner spinner-on="ctrl.isLoading">
-  <form>
+<form name="CRUDMyAccountForm" class="crud" us-spinner spinner-on="ctrl.isLoading">
     <div class="container-fluid">
       <div ng-if="ctrl.alert.show" class="alert + {{ctrl.alert.type}}">
         <div>{{ctrl.alert.message}}</div>
@@ -13,13 +12,15 @@
       <div class="row cda-row">
         <div class="col-xs-6 form-group">
           <label class="label-crud label-required" translate="myAccount.general.firstName"></label>
-          <input ng-model="ctrl.myAccount.FirstName" type="text" class="form-control" ng-pattern="/.*[a-zA-Z]+.*/"
+          <input name="FirstName" ng-model="ctrl.myAccount.FirstName" type="text" class="form-control"
             required autofocus>
+            <span class="error" ng-show="CRUDMyAccountForm.FirstName.$error.pattern">The characters are wrong.</span>  
         </div>
         <div class="col-xs-6 form-group">
           <label class="label-crud label-required" translate="myAccount.general.lastName"></label>
           <input name="name" ng-model="ctrl.myAccount.LastName" type="text" class="form-control" ng-pattern="/.*[a-zA-Z]+.*/"
             required>
+            <span class="error" ng-show="myForm.phone.$error.pattern">The characters are wrong.</span>  
         </div>
       </div>
       <div class="row cda-row">
@@ -72,6 +73,7 @@
           <label class="label-crud label-required" translate="myAccount.account.email"></label>
           <input class="form-control" ng-model="ctrl.myAccount.Account.Mail" type="email" placeholder="mail@example.com"
             required autofocus />
+            <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.email">{{ctrl.validateError.message.email}}</div>
         </div>
         <div class="col-xs-6" ng-if="!ctrl.myAccount.Id">
           <label class="label-crud label-required" translate="myAccount.account.emailConfirm"></label>
@@ -94,12 +96,14 @@
       </div>
       <div class="row cda-row">
         <div class="col-xs-2">
-          <label class="label-crud" translate="myAccount.account.codeArea"></label>
+          <label class="label-crud" translate="myAccount.account.codeArea" ng-pattern="/^[7-9][0-9]{9}$/"></label>
           <input ng-model="ctrl.myAccount.AreaCode" type="text" class="form-control">
+          <span class="error" ng-show="myForm.phone.$error.pattern">The characters are wrong. Set a valid number</span>
         </div>
         <div class="col-xs-8">
           <label class="label-crud" translate="myAccount.account.phoneNumber"></label>
-          <input name="number" ng-model="ctrl.myAccount.PhoneNumber" type="text" class="form-control">
+          <input name="phone" ng-model="ctrl.myAccount.PhoneNumber" type="text" class="form-control" ng-pattern="/^[0-9]/"/>
+          <span class="validate-error ng-cloak" ng-show="CRUDMyAccountForm.phone.$error.pattern">The characters are wrong. Set a valid number</span>
         </div>
         <div class="col-xs-2">
           <label class="label-crud" translate="myAccount.account.typeNumber"></label>
@@ -117,5 +121,4 @@
         </div>
       </div>
     </div>
-  </form>
 </div>

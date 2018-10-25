@@ -31,7 +31,7 @@
         ctrl.goToOffers(); //MOCK
       }
       ctrl.singIn = function singIn() {
-        if (ctrl.user.email && ctrl.user.password) {
+        if (ctrl.user.Mail && ctrl.user.Password) {
           ctrl.check();
         }
       };

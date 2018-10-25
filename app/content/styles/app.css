@@ -1,4 +1,5 @@
 /* The sidenav */
+
 body {
   font-family: var(--main-font);
   font-size: 1rem;
@@ -61,8 +62,7 @@ body {
   color: #007bff;
 }
 
-.sidebar .nav-link:hover .feather,
-.sidebar .nav-link.active .feather {
+.sidebar .nav-link:hover .feather, .sidebar .nav-link.active .feather {
   color: inherit;
 }
 
@@ -75,6 +75,14 @@ body {
   font-weight: 300;
   text-transform: uppercase;
   font-size: 26px;
+  line-height: 1.6;
+  color: #fff;
+}
+
+.header-account-name {
+  margin-top: 8px;
+  font-weight: 300;
+  font-size: 16px;
   line-height: 1.6;
   color: #fff;
 }
@@ -121,13 +129,14 @@ body {
 }
 
 /* login */
-.login-input{
+
+.login-input {
   margin-bottom: 15px;
   margin-right: 10px;
   margin-left: 10px;
 }
 
-.login-shadow{
+.login-shadow {
   box-shadow: 0px 2px 10px grey;
 }
 
@@ -136,7 +145,10 @@ body {
 }
 
 /* header */
-.header-logo{
+
+.header-logo {
   float: left;
   margin-right: 10px;
+  height: 40px;
+  width: 40px;
 }

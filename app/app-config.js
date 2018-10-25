@@ -54,6 +54,7 @@
                         "email": "email",
                         "password":"password",
                         "signIn": "Sign In",
+                        "signOut": "Log Out",
                         "signUp": "Not registered yet? Sign Up!"
                     },
                     "myAccount": {
@@ -82,11 +83,9 @@
                         "error": {
                             "emailConfirm": "The emails must be equals",
                             "passwordConfirm": "The passwords are not equals",
-                            "email": "Set an valid email",
+                            "email": "Set an valid email. The email must have a '@' and a '.'",
                             "password": "The password must have at least eight characters."
                         }
-
-
                     },
                     "offers": {
                         "title": "Services Offers",

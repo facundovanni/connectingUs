@@ -22,12 +22,25 @@
   <link rel="icon" href="content/images/connectingUsLogo.png">
 </head>
 
-<body>
+<body ng-cloak>
   <div class="viewport " ui-view="viewport" ng-controller="AppController as ctrl">
-    <div class="headerMenu">
+    <div class="row cda-row headerMenu">
       <div class="col-xs-8">
-        <img class="header-logo" title="Connecting Us" height="40" width="40" src="content/images/connectingUsLogo.png">
+        <img class="header-logo" title="Connecting Us" src="content/images/connectingUsLogo.png">
         <div class="headerTitle">Connecting Us</div>
+      </div>
+      <div class="col-xs-4 pull-right">
+        <div class="btn-group" uib-dropdown dropdown-append-to-body>
+          <div class="header-account-name pull-right" uib-dropdown-toggle>
+            Logged <span class="caret"></span>
+          </div>
+          <ul class="dropdown-menu pull" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-to-body">
+            <li role="menuitem"><a href="#">My Account</a></li>
+            <li role="menuitem"><a href="#">My Offers</a></li>
+            <li class="divider"></li>
+            <li class="col-xs-12"><button class="btn btn-block btn-primary" type="submit" ng-click="ctrl.singIn()" translate="login.signOut"></button></li> 
+          </ul>
+        </div>
       </div>
     </div>
     <div class="main" ng-view></div>

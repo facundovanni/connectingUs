@@ -2,10 +2,10 @@
     'use strict';
     angular.module('connectingUsCenter.services')
         .service('Countries', ['ServicesModel', '__env', function (ServicesModel, __env) {
-            angular.extend(this, ServicesModel.create(__env.apiUrl+ '/api/countries', null, {
-                getAll:{
-                    method:'GET',
-                    isArray:true
+            angular.extend(this, ServicesModel.create(__env.apiUrl + '/api/countries', null, {
+                getAll: {
+                    method: 'GET',
+                    isArray: true
                 }
             }));
         }]);
