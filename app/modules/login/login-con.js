@@ -12,6 +12,7 @@
       ctrl.goToOffers = function goToOffers() {
         ctrl.isLoading = false;
         $state.go('/users-offers');
+        // $state.go('/myOffer');
       }
 
       ctrl.check = function check() {
@@ -31,7 +32,7 @@
         ctrl.goToOffers(); //MOCK
       }
       ctrl.singIn = function singIn() {
-        if (ctrl.user.email && ctrl.user.password) {
+        if (ctrl.user.email && ctrl.user.password && ctrl.user.password.length > 7) {
           ctrl.check();
         }
       };

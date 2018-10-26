@@ -98,6 +98,9 @@
                             "clearAll": "Clear All",
                             "applyFilter": "Apply Filter"
                         }
+                    },
+                    "myOffer": {
+                        "title": "My Offer"
                     }
                 };
 
@@ -117,6 +120,10 @@
                 $stateProvider.state('/users-offers', {
                     url: '/offers',
                     templateUrl: 'modules/users-offers/templates/users-offers.html'
+                });
+                $stateProvider.state('/myOffer', {
+                    url: '/myOffer',
+                    templateUrl: 'modules/myOffer/templates/myOffer.html'
                 });
 
                 $locationProvider.hashPrefix('');
