@@ -1,9 +1,9 @@
-(function UsersOffersCRUDScope(angular) {
+(function MyOffersCRUDScope(angular) {
     'use strict';
 
-    angular.module('connectingUsCenter.usersOffers')
-        .controller('UsersOffersController', ['$scope', 'UsersOffers', '$translate', '$state', 'Countries', 'Cities',
-            function ($scope, UsersOffers, $translate, $state, Countries, Cities) {
+    angular.module('connectingUsCenter.myOffers')
+        .controller('MyOffersController', ['$scope', 'MyOffers', '$translate', '$state', 'Countries', 'Cities',
+            function ($scope, MyOffers, $translate, $state, Countries, Cities) {
                 var ctrl = this;
 
                 ctrl.offers = [];
@@ -11,7 +11,7 @@
                 ctrl.filters = {};
                 ctrl.countries = [];
                 ctrl.cities = [];
-
+                ctrl.itemNew = true;
                 ctrl.offers.push({
                     Title: 'Título',
                     Description: 'Esto es una descripción',
@@ -42,7 +42,7 @@
 
                     ctrl.setFilters();
 
-                    UsersOffers.get({ filters: ctrl.filters }).$promise.then(function onThen(offers) {
+                    MyOffers.get({ filters: ctrl.filters }).$promise.then(function onThen(offers) {
                         ctrl.offers = offers;
 
                     }).finally(function onFinally() {

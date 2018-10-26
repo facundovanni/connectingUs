@@ -16,6 +16,7 @@
         'connectingUsCenter.login',
         'connectingUsCenter.myAccount',
         'connectingUsCenter.usersOffers',
+        'connectingUsCenter.myOffers',
         'pascalprecht.translate'
     ])
         .config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', '$logProvider', '__env',
@@ -43,8 +44,8 @@
                         "error": {
                             "textRequired": "This field is required"
                         },
-                        "phoneType":{
-                            "mobile":"Mobile",
+                        "phoneType": {
+                            "mobile": "Mobile",
                             "home": "Home",
                             "other": "Other"
                         }
@@ -52,12 +53,13 @@
                     "login": {
                         "welcome": "Welcome to Connecting Us",
                         "email": "email",
-                        "password":"password",
+                        "password": "password",
                         "signIn": "Sign In",
                         "signOut": "Log Out",
                         "signUp": "Not registered yet? Sign Up!"
                     },
                     "myAccount": {
+                        "title": "My Account",
                         "titleSignUp": "Registration",
                         "general": {
                             "title": "General",
@@ -88,7 +90,11 @@
                         }
                     },
                     "offers": {
-                        "title": "Services Offers",
+                        "title": {
+                            "users": "Services Offers",
+                            "my": "My Services Offers"
+                        },
+                        "addNew":"Add new",
                         "searchItem": "Search",
                         "filter": {
                             "title": "Filter by:",
@@ -96,7 +102,10 @@
                             "location": "Location",
                             "clearAll": "Clear All",
                             "applyFilter": "Apply Filter"
-                        }
+                        },
+                        "city": "City",
+                        "country": "Country",
+                        "category": "Category"
                     }
                 };
 
@@ -111,11 +120,16 @@
                 });
                 $stateProvider.state('/account', {
                     url: '/account',
+                    params: { Id: null },
                     templateUrl: 'modules/myAccount/templates/myAccount-crud.html'
                 });
                 $stateProvider.state('/users-offers', {
                     url: '/offers',
                     templateUrl: 'modules/users-offers/templates/users-offers.html'
+                });
+                $stateProvider.state('/my-offers', {
+                    url: '/my-offers',
+                    templateUrl: 'modules/my-offers/templates/my-offers.html'
                 });
 
                 $locationProvider.hashPrefix('');

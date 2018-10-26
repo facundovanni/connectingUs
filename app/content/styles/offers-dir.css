@@ -412,3 +412,21 @@
 #mainPriceListItemsItem:hover > #plus {
   display: block;
 }
+
+.offers-body .newItem {
+  font-family: var(--main-font);
+  font-weight: 500;
+  font-style: normal;
+  font-size: 14px;
+  height: 384px;
+  width: 186px;
+  padding-left: 60px;
+  padding-top: 160px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+  font-weight: bold;
+  word-wrap: break-word;
+  text-align: left;
+  color: #212121;
+  overflow: hidden;
+}

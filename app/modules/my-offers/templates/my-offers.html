@@ -1,8 +1,8 @@
-<div ng-controller="UsersOffersController as ctrl" class="offers-filter">
+<div ng-controller="MyOffersController as ctrl" class="offers-filter">
   <div us-spinner spinner-on="ctrl.isLoading">
     <div class="row cda-row">
       <div class="row cda-row">
-        <h1 class="col-xs-12 title-initial">{{'offers.title.users'| translate}}</h1>
+        <h1 class="col-xs-12 title-initial">{{'offers.title.my'| translate}}</h1>
       </div>
     </div>
     <div class="row cda-row">
@@ -58,7 +58,7 @@
               </span>
             </div>
         </div>
-        <offers-list open-state="'/users-offers/:id/details'" ng-if="ctrl.offers" items="ctrl.offers"></offers-list>
+        <offers-list item-new="ctrl.itemNew" open-state="'/my-offers/:id/details'" items="ctrl.offers"></offers-list>
         <div ng-if="!ctrl.offers || ctrl.offers == 0" class="noItems">
           {{'offers.noItems' | translate}}
         </div>

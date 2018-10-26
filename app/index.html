@@ -27,16 +27,16 @@
     <div class="row cda-row headerMenu">
       <div class="col-xs-8">
         <img class="header-logo" title="Connecting Us" src="content/images/connectingUsLogo.png">
-        <div class="headerTitle">Connecting Us</div>
+        <a ui-sref="/users-offers" class="headerTitle">Connecting Us</a>
       </div>
-      <div class="col-xs-4 pull-right">
-        <div class="btn-group" uib-dropdown dropdown-append-to-body>
-          <div class="header-account-name pull-right" uib-dropdown-toggle>
+      <div class="col-xs-4">
+        <div class="btn-group pull-right" uib-dropdown dropdown-append-to-body>
+          <div class="header-account-name" uib-dropdown-toggle>
             Logged <span class="caret"></span>
           </div>
-          <ul class="dropdown-menu pull" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-to-body">
-            <li role="menuitem"><a href="#">My Account</a></li>
-            <li role="menuitem"><a href="#">My Offers</a></li>
+          <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-to-body">
+            <li role="menuitem"><a href="" ng-click="ctrl.goToMyAccount()">My Account</a></li>
+            <li role="menuitem"><a href="" ng-click="ctrl.goToMyOffers()">My Offers</a></li>
             <li class="divider"></li>
             <li class="col-xs-12"><button class="btn btn-block btn-primary" type="submit" ng-click="ctrl.singIn()" translate="login.signOut"></button></li> 
           </ul>
@@ -75,6 +75,10 @@
   <script type="text/javascript" src="modules/users-offers/users-offers-config.js"></script>
   <script type="text/javascript" src="modules/users-offers/services/users-offers-srv.js"></script>
   <script type="text/javascript" src="modules/users-offers/users-offers-con.js"></script>
+
+  <script type="text/javascript" src="modules/my-offers/my-offers-config.js"></script>
+  <script type="text/javascript" src="modules/my-offers/services/my-offers-srv.js"></script>
+  <script type="text/javascript" src="modules/my-offers/my-offers-con.js"></script>
 
   <script type="text/javascript" src="modules/login/login-config.js"></script>
   <script type="text/javascript" src="modules/login/services/login-srv.js"></script>
