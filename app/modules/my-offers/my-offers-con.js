@@ -1,9 +1,9 @@
-(function UsersOffersCRUDScope(angular) {
+(function MyOffersCRUDScope(angular) {
     'use strict';
 
-    angular.module('connectingUsCenter.usersOffers')
-        .controller('UsersOffersController', ['$scope', 'UsersOffers', '$translate', '$state', 'Countries', 'Cities',
-            function ($scope, UsersOffers, $translate, $state, Countries, Cities) {
+    angular.module('connectingUsCenter.myOffers')
+        .controller('MyOffersController', ['$scope', 'MyOffers', '$translate', '$state', 'Countries', 'Cities',
+            function ($scope, MyOffers, $translate, $state, Countries, Cities) {
                 var ctrl = this;
 
                 ctrl.offers = [];
@@ -11,21 +11,21 @@
                 ctrl.filters = {};
                 ctrl.countries = [];
                 ctrl.cities = [];
-                ctrl.categoriesSelected = [];
-                // ctrl.offers.push({
-                //     Title: 'Título',
-                //     Description: 'Esto es una descripción',
-                //     Category: { Name: 'Category' },
-                //     CountryOfResidence: { Name: 'Country' },
-                //     CityOfResidence: { Name: 'City' }
-                // });
+                ctrl.itemNew = true;
+                ctrl.offers.push({
+                    Title: 'Título',
+                    Description: 'Esto es una descripción',
+                    Category: { Name: 'Category' },
+                    CountryOfResidence: { Name: 'Country' },
+                    CityOfResidence: { Name: 'City' }
+                });
 
                 //init function --> Get All the Offers || Get the currencySymbol of the PriceList || Fill the filters
                 ctrl.init = function init() {
                     //get the Offers
                     ctrl.getCategories();
                     ctrl.getCountries();
-                    ctrl.updateOffers();
+                    //ctrl.updateOffers();
                 };
 
                 ctrl.getCategories = function getCategories() {
@@ -42,8 +42,8 @@
 
                     ctrl.setFilters();
 
-                    UsersOffers.get().$promise.then(function onThen(result) {
-                        ctrl.offers.splice.apply(ctrl.offers, [0, ctrl.offers.length].concat(result));
+                    MyOffers.get({ filters: ctrl.filters }).$promise.then(function onThen(offers) {
+                        ctrl.offers = offers;
 
                     }).finally(function onFinally() {
                         ctrl.isLoadingOffers = false;

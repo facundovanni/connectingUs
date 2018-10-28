@@ -17,6 +17,7 @@
         'connectingUsCenter.myAccount',
         'connectingUsCenter.usersOffers',
         'connectingUsCenter.myOffer',
+        'connectingUsCenter.myOffers',
         'pascalprecht.translate'
     ])
         .config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', '$logProvider', '__env',
@@ -44,8 +45,8 @@
                         "error": {
                             "textRequired": "This field is required"
                         },
-                        "phoneType":{
-                            "mobile":"Mobile",
+                        "phoneType": {
+                            "mobile": "Mobile",
                             "home": "Home",
                             "other": "Other"
                         }
@@ -53,11 +54,13 @@
                     "login": {
                         "welcome": "Welcome to Connecting Us",
                         "email": "email",
-                        "password":"password",
+                        "password": "password",
                         "signIn": "Sign In",
+                        "signOut": "Log Out",
                         "signUp": "Not registered yet? Sign Up!"
                     },
                     "myAccount": {
+                        "title": "My Account",
                         "titleSignUp": "Registration",
                         "general": {
                             "title": "General",
@@ -83,14 +86,16 @@
                         "error": {
                             "emailConfirm": "The emails must be equals",
                             "passwordConfirm": "The passwords are not equals",
-                            "email": "Set an valid email",
+                            "email": "Set an valid email. The email must have a '@' and a '.'",
                             "password": "The password must have at least eight characters."
                         }
-
-
                     },
                     "offers": {
-                        "title": "Services Offers",
+                        "title": {
+                            "users": "Services Offers",
+                            "my": "My Services Offers"
+                        },
+                        "addNew":"Add new",
                         "searchItem": "Search",
                         "filter": {
                             "title": "Filter by:",
@@ -98,7 +103,10 @@
                             "location": "Location",
                             "clearAll": "Clear All",
                             "applyFilter": "Apply Filter"
-                        }
+                        },
+                        "city": "City",
+                        "country": "Country",
+                        "category": "Category"
                     },
                     "myOffer": {
                         "title": "Offer Details"
@@ -116,6 +124,7 @@
                 });
                 $stateProvider.state('/account', {
                     url: '/account',
+                    params: { Id: null },
                     templateUrl: 'modules/myAccount/templates/myAccount-crud.html'
                 });
                 $stateProvider.state('/users-offers', {
@@ -125,6 +134,11 @@
                 $stateProvider.state('/myOffer', {
                     url: '/myOffer',
                     templateUrl: 'modules/myOffer/templates/myOffer.html'
+                });
+                
+                $stateProvider.state('/my-offers', {
+                    url: '/my-offers',
+                    templateUrl: 'modules/my-offers/templates/my-offers.html'
                 });
 
                 $locationProvider.hashPrefix('');

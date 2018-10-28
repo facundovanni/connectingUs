@@ -2,9 +2,10 @@
     'use strict';
 
     angular.module('connectingUsCenter.myAccount')
-        .controller('myAccountCRUDController', ['MyAccount', '$translate', '$state', 'Countries', 'Cities',
-            function (MyAccount, $translate, $state, Countries, Cities) {
+        .controller('myAccountCRUDController', ['MyAccount', '$translate', '$state', 'Countries', 'Cities', '$stateParams',
+            function (MyAccount, $translate, $state, Countries, Cities, $stateParams) {
                 var ctrl = this;
+                ctrl.userId = $stateParams.Id;
                 ctrl.today = new Date();
                 ctrl.validateError = {
                     show: {},
@@ -49,10 +50,10 @@
                         code: 'O',
                         description: $translate.instant('global.gender.other')
                     }];
-                    ctrl.phoneTypes =[
-                        { code:'M', description: 'global.phoneType.mobile'},
-                        { code:'H', description: 'global.phoneType.home'},
-                        { code:'O', description: 'global.phoneType.other'}
+                    ctrl.phoneTypes = [
+                        { code: 'M', description: $translate.instant('global.phoneType.mobile') },
+                        { code: 'H', description: $translate.instant('global.phoneType.home') },
+                        { code: 'O', description: $translate.instant('global.phoneType.other') }
                     ]
                     ctrl.isLoadingCountries = true;
                     ctrl.isLoadingOptions();
@@ -82,7 +83,7 @@
                     if (ctrl.myAccount.CountryOfResidence.Id) {
                         ctrl.isLoadingCities = true;
                         ctrl.isLoadingOptions();
-                        Cities.getAll({idCountry: ctrl.myAccount.CountryOfResidence.Id}).$promise
+                        Cities.getAll({ idCountry: ctrl.myAccount.CountryOfResidence.Id }).$promise
                             .then(ctrl.setCities)
                             .finally(ctrl.onFinallyCities);
                     }
@@ -110,24 +111,31 @@
 
                 ctrl.setAccount = function setAccount(result) {
                     ctrl.myAccount = result;
-                    ctrl.myAccount.Gender = ctrl.genders.find(function find(obj){
+                    ctrl.myAccount.Gender = ctrl.genders.find(function find(obj) {
                         return obj.code === ctrl.myAccount.Gender;
                     });
-                    if(ctrl.myAccount.PhoneType){
-                        ctrl.myAccount.PhoneType = ctrl.phoneTypes.find(function find(obj){
+                    if (ctrl.myAccount.PhoneType) {
+                        ctrl.myAccount.PhoneType = ctrl.phoneTypes.find(function find(obj) {
                             return obj.code === ctrl.myAccount.PhoneType;
                         });
                     };
                     ctrl.dateSelected.value = ctrl.myAccount.DateOfBirth;
                 };
-                ctrl.onCatchAccount = function onCatchAccount() {};
+                ctrl.onCatchAccount = function onCatchAccount(res) {
+                    console.log(res);
+                };
 
                 ctrl.getAccount = function getAccount() {
                     ctrl.isLoading = true;
-                    MyAccount.get().$promise
-                        .then(ctrl.setAccount)
-                        .catch(ctrl.onCatchAccount)
-                        .finally(ctrl.setView);
+                    ctrl.myAccount.Id = ctrl.userId;
+                    if (ctrl.myAccount.Id) {
+                        MyAccount.get({ Id: ctrl.myAccount.Id }).$promise
+                            .then(ctrl.setAccount)
+                            .catch(ctrl.onCatchAccount)
+                            .finally(ctrl.setView);
+                    }else{
+                        ctrl.setView();
+                    }
                 };
 
                 ctrl.setDateJSON = function setDateJSON() {
@@ -166,27 +174,17 @@
                 ctrl.update = function update() {
                     ctrl.isLoading = true;
                     MyAccount.update(ctrl.myAccount).$promise
-                        .then(function onThen(res) {})
+                        .then(function onThen(res) { })
                         .finally(ctrl.onFinallySave);
                 };
 
                 ctrl.cancel = function () {
-
                     $state.go(ctrl.myAccount.Id ? '/users-offers' : '/login');
                 };
 
                 ctrl.validate = function validate() {
                     var validations = true;
-                    ctrl.validateError.show.firstName = !ctrl.myAccount.FirstName;
-                    ctrl.validateError.show.lastName = !ctrl.myAccount.LastName;
-                    ctrl.validateError.show.nickName = !ctrl.myAccount.Account.NickName;
-                    ctrl.validateError.show.dateOfBirth = !ctrl.myAccount.DateOfBirth;
-                    ctrl.validateError.show.gender = !ctrl.myAccount.Gender;
-                    ctrl.validateError.show.nationality = !ctrl.myAccount.CountryOfBirth;
-                    ctrl.validateError.show.countryOfResidence = !ctrl.myAccount.CountryOfResidence;
-                    ctrl.validateError.show.city = !ctrl.myAccount.CityOfResidence;
-                    ctrl.validateError.show.email = !ctrl.myAccount.Account.Mail;
-                    ctrl.validateError.show.password = !ctrl.myAccount.Account.Password;
+                    ctrl.validateError.show.email = !ctrl.myAccount.Account.Mail || ctrl.myAccount.Account.Mail.indexOf('.') === -1;
                     ctrl.validateError.show.emailConfirm = !ctrl.emailConfirm || ctrl.myAccount.Account.Mail !== ctrl.emailConfirm;
                     ctrl.validateError.show.passwordConfirm = !ctrl.passwordConfirm || ctrl.myAccount.Account.Password !== ctrl.passwordConfirm;
                     for (const prop in ctrl.validateError.show) {
@@ -195,7 +193,6 @@
                             break;
                         }
                     }
-
                     return validations;
                 };
 

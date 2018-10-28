@@ -32,7 +32,7 @@
         ctrl.goToOffers(); //MOCK
       }
       ctrl.singIn = function singIn() {
-        if (ctrl.user.email && ctrl.user.password && ctrl.user.password.length > 7) {
+        if (ctrl.user.Mail && ctrl.user.Password && ctrl.user.Password.length > 7) {
           ctrl.check();
         }
       };

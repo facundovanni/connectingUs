@@ -6,6 +6,7 @@
         restrict: 'E',
         scope: {
           items: '=',
+          itemNew:'=',
           openState: '='
         },
         templateUrl: 'content/directives/offers/offers-list.html',
@@ -19,6 +20,7 @@
       function PriceListsItemListController($scope, $state) {
         var ctrl = this;
         ctrl.items = $scope.items;
+        ctrl.itemNew = $scope.itemNew;
 
         ctrl.clickItem = function clickItem(item) {
           $state.go($scope.openState, item);
