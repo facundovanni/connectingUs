@@ -109,7 +109,15 @@
                         "category": "Category"
                     },
                     "myOffer": {
-                        "title": "Offer Details"
+                        "titleView": "Offer Details",
+                        "title": "Title",
+                        "category": "Category",
+                        "country": "Country",
+                        "city": "City",
+                        "description": "Description",
+                        "save": "Save"
+
+
                     }
                 };
 

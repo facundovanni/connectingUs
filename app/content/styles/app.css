@@ -160,13 +160,42 @@ body {
 }
 
 .offer-label{
+  margin-left: 10px;
   font-size: 20px;
+  padding: 2px;
 }
 
 .offer-text{
+  margin-left: 10px;
   font-size: 15px;
   font-weight: 100;
+  width: 500px;
+  height: 150px;
+  border-radius: 10px;
+  border: 1px solid #d2d2d2;
+  padding: 2px;
 }
+
+.offer-select{
+  width: 200px;
+  height: 28px;
+  margin-left: 20px;
+  margin-top: 3px;
+}
+
+.offer-accordeon-title{
+  float: left;
+}
+
+.offer-accordeon-city{
+  float: left;
+  margin-left: -75px;
+}
+
+.btn-save-myOffer{
+  margin-left: 10px;
+}
+
 a{
   text-decoration:none;
 }
