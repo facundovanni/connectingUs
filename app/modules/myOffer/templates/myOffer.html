@@ -1,75 +1,30 @@
-<div ng-controller="myOfferController as ctrl" class="">
-  <div us-spinner spinner-on="">
+<div ng-controller="MyOfferController as ctrl" class="offers-filter">
+  <!-- <div us-spinner spinner-on=""> -->
+  <div class="row cda-row">
     <div class="row cda-row">
-      <div class="row cda-row">
-        <h1 class="col-xs-12 title-initial">FLOR</h1>
-      </div>
+      <h1 class="col-xs-12 title-initial">{{'myOffer.title'| translate}}</h1>
     </div>
-    <div class="row cda-row">
-      <div class="col-xs-2">
-        <div class="row cda-row">
-          <div class="title">
-            {{'offers.filter.title' | translate}}
-          </div>
-        </div>
-        <div class="row cda-row">
-          <div class="col-xs-12 combo subtitle">
-            <uib-accordion close-others="true">
-              <div uib-accordion-group class="panel-default" heading="{{'offers.filter.type' | translate}}" is-open="status.isFirstOpen">
-                <ul ng-repeat="category in ctrl.categories" class="offers-list">
-                  <li><input type="checkbox" ng-model="category.selected">{{category.description}}</li>
-                </ul>
-              </div>
-              <div uib-accordion-group class="panel-default" heading="{{'offers.filter.location' | translate}}" is-open="status.isFirstOpen">
-                <div class="row cda-row">
-                  <div class="col-xs-12">
-                    <select class="btn btn-default col-xs-12" ng-model="ctrl.filterCountry" ng-options="x.Name for x in ctrl.countries" ng-change="ctrl.onSelectCountry()"></select>
-                  </div>
-                </div>
-                <div class="row cda-row" ng-if="ctrl.filterCountry">
-                    <div class="col-xs-12">
-                      <select class="btn btn-default col-xs-12" ng-model="ctrl.filterCity" ng-options="x.Name for x in ctrl.cities"></select>
-                    </div>
-                  </div>
-              </div>
-            </uib-accordion>
-          </div>
-        </div>
-        <div class="row cda-row">
-          <div class="col-xs-12 button-clean">
-            <button ng-click="ctrl.onChangeFilters()" class="btn btn-primary btnClean">{{'offers.filter.applyFilter'
-              | translate }}</button>
-          </div>
-          <div class="col-xs-12 button-clean">
-            <button ng-click="ctrl.clearAllFilters()" class="btn btn-primary btnClean">{{'offers.filter.clearAll'
-              | translate }}</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-10 border-left">
-        <div class="row cda-row">
-          <div class="col-xs-10 search">
+  </div>
+  <div class="row cda-row">
 
-            <div class="input-group">
-              <input ng-model="ctrl.searchText" ng-change="ctrl.search(ctrl.searchText)" class="form-control"
-                placeholder="{{'offers.searchItem' | translate}}" type="text" ng-model-options="{ debounce: 1000}" />
-              <span class="input-group-btn">
-                <button class="btn btn-primary" type="submit">
-                  <span class="glyphicon glyphicon-search"></span>
-                </button>
-              </span>
-            </div>
-          </div>
-        </div>
-        <offers-list open-state="'/users-offers/:id/details'" ng-if="ctrl.offers" items="ctrl.offers"></offers-list>
-        <div ng-if="!ctrl.offers || ctrl.offers == 0" class="noItems">
-          {{'offers.noItems' | translate}}
-        </div>
-        <div bento-pagination page="ctrl.pagination.pageIndex" direction-links="true" boundary-links="true" total-items="ctrl.pagination.totalItems"
-          items-array="ctrl.selectItems" items-per-page="ctrl.pagination.itemsPerPage" info-Text="{{'offers.pagination.infoText' | translate}}"
-          info-page-text="{{'offers.pagination.infoPageText' | translate}}" go-to-text="{{'offers.pagination.goToText' | translate}}"
-          on-change="ctrl.onPageChange(page)" on-change-size="ctrl.onPageSizeChange(size)">
-        </div>
+    <div class="row">
+      <div class="col-xs-6 col-sm-3">
+        <img src="content/images/connectingUsLogo.png" class="offer-image">
+      </div>
+      <div class="col-xs-6">
+        <h2 class="offer-name">Offer Title</h1>
+        <label class="offer-label" translate="">Type/Category</label> <br>
+        <label class="offer-label" translate="">Country</label> <br><br>
+        <label class="offer-label" translate="">Description</label> <br> 
+        <label class="offer-text" translate="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+          sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
+          exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit 
+          in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat 
+          non proident, sunt in culpa qui officia deserunt mollit anim id est </label> <br> 
+          <!-- <div class="input-group">
+            <input ng-model="" ng-change="" class="form-control" placeholder="Offer" type="text" ng-model-options="{ debounce: 1000}" />
+          </div> -->
+      </div>
     </div>
   </div>
 </div>

@@ -140,3 +140,18 @@ body {
   float: left;
   margin-right: 10px;
 }
+
+/* myOffers */
+.offer-image{
+  height: 300px;
+  width: 300px;
+}
+
+.offer-label{
+  font-size: 20px;
+}
+
+.offer-text{
+  font-size: 15px;
+  font-weight: 100;
+}

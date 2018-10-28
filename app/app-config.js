@@ -16,6 +16,7 @@
         'connectingUsCenter.login',
         'connectingUsCenter.myAccount',
         'connectingUsCenter.usersOffers',
+        'connectingUsCenter.myOffer',
         'pascalprecht.translate'
     ])
         .config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', '$logProvider', '__env',
@@ -100,7 +101,7 @@
                         }
                     },
                     "myOffer": {
-                        "title": "My Offer"
+                        "title": "Offer Details"
                     }
                 };
 
