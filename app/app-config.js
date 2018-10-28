@@ -115,7 +115,7 @@
                         "country": "Country",
                         "city": "City",
                         "description": "Description",
-                        "save": "Save"
+                        "updateService": "Save Service"
 
 
                     }

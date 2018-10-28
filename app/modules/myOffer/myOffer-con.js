@@ -7,10 +7,15 @@
       ctrl.isLoadingCountries = false;
       ctrl.isLoadingCities = false;
       ctrl.isLoadingCategories = false;
-      ctrl.selectedCategory = {};
       ctrl.countries = [];
       ctrl.cities = [];
       ctrl.categories = [];
+      
+      ctrl.alert = {
+        show: false,
+        message: undefined,
+        type: undefined
+      }
 
       ctrl.offer = {};
 
@@ -28,7 +33,6 @@
 
       ctrl.onFinallyService = function onFinallyService() {
         ctrl.isLoading = false;
-        ctrl.selectedCategory = ctrl.offer.Category;
         ctrl.getCategories();
         ctrl.getCountries();
         ctrl.getCities();
@@ -61,7 +65,6 @@
         ctrl.isFullyLoaded();
         Countries.getAll().$promise
           .then(ctrl.setCountries)
-          // .catch(ctrl.onCatchAccount)
           .finally(ctrl.onFinallyCountries);
       };
 
@@ -79,7 +82,6 @@
         ctrl.isFullyLoaded();
         Cities.getAll({ idCountry: ctrl.offer.Country.Id }).$promise
           .then(ctrl.setCities)
-          // .catch(ctrl.onCatchAccount)
           .finally(ctrl.onFinallyCities);
       };
 
@@ -96,11 +98,21 @@
         ctrl.getCities();
       };
 
-      ctrl.saveService = function saveService() {
-        MyOffer.save(ctrl.offer).$promise
+      ctrl.updateService = function udpateService() {
+        ctrl.isLoading = true;
+        MyOffer.update(ctrl.offer).$promise
         .then(ctrl.onThenNew)
-        .finally(ctrl.onFinallySave);
+        .finally(ctrl.onFinallyUpdate);
       }
+
+      ctrl.onFinallyUpdate = function onFinally(result) {
+        ctrl.isLoading = false;
+      }
+
+      ctrl.onThenNew = function onThenNew(res) {
+        alert("Service updated");
+      };
+
 
       ctrl.init = function init() {
         //The service id is hardcoded for now.
