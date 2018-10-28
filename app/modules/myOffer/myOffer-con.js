@@ -19,7 +19,6 @@
         ctrl.offer = result[0];
       };
 
-
       ctrl.onFinallyService = function onFinallyService() {
         ctrl.isLoading = false;
       };

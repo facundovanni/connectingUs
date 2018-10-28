@@ -12,7 +12,6 @@
       ctrl.goToOffers = function goToOffers() {
         ctrl.isLoading = false;
         $state.go('/users-offers');
-        // $state.go('/myOffer');
       }
 
       ctrl.check = function check() {
