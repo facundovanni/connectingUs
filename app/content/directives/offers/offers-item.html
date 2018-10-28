@@ -28,17 +28,17 @@
                     <div ng-if="item.Description">
                         <span>{{item.Description}}</span>
                     </div>
-                    <div ng-if="item.Category.Name">
+                    <div ng-if="item.Category.Description">
                         <span class="attributeName">{{'offers.category' | translate}}</span>
-                        <span>{{item.Category.Name}}</span>
+                        <span>{{item.Category.Description}}</span>
                     </div>
-                    <div ng-if="item.CountryOfResidence">
+                    <div ng-if="item.Country">
                         <span class="attributeName">{{'offers.country' | translate}}</span>
-                        <span>{{item.CountryOfResidence.Name}}</span>
+                        <span>{{item.Country.Name}}</span>
                     </div>
-                    <div ng-if="item.CityOfResidence">
+                    <div ng-if="item.City">
                         <span class="attributeName">{{'offers.city' | translate}}</span>
-                        <span>{{item.CityOfResidence.Name}}</span>
+                        <span>{{item.City.Name}}</span>
                     </div>
                 </div>
             </div>

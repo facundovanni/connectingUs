@@ -58,8 +58,10 @@
               </span>
             </div>
         </div>
-        <offers-list open-state="'/users-offers/:id/details'" ng-if="ctrl.offers" items="ctrl.offers"></offers-list>
-        <div ng-if="!ctrl.offers || ctrl.offers == 0" class="noItems">
+        <div  ng-if="ctrl.offers">
+          <offers-list open-state="'/users-offers/:id/details'" items="ctrl.offers"></offers-list>
+        </div>
+        <div ng-if="!ctrl.offers || ctrl.offers.lenght == 0" class="noItems">
           {{'offers.noItems' | translate}}
         </div>
       </div>

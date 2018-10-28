@@ -1,14 +1,12 @@
 (function usersOffersScope(angular) {
     'use strict';
     angular.module('connectingUsCenter.usersOffers')
-        .service('UsersOffers', ['ServicesModel', function (ServicesModel) {
+        .service('UsersOffers', ['ServicesModel', '__env', function (ServicesModel, __env) {
             var that = this;
-            angular.extend(this, ServicesModel.create('/api/services/search/:filters', null, {
-                get:{
-                    method:'GET',
-                    params:{
-                        filters: '@filters'
-                    }
+            angular.extend(this, ServicesModel.create(__env.apiUrl + '/api/services', null, {
+                get: {
+                    method: 'GET',
+                    isArray: true
                 }
             }));
 

@@ -11,21 +11,21 @@
                 ctrl.filters = {};
                 ctrl.countries = [];
                 ctrl.cities = [];
-
-                ctrl.offers.push({
-                    Title: 'Título',
-                    Description: 'Esto es una descripción',
-                    Category: { Name: 'Category' },
-                    CountryOfResidence: { Name: 'Country' },
-                    CityOfResidence: { Name: 'City' }
-                });
+                ctrl.categoriesSelected = [];
+                // ctrl.offers.push({
+                //     Title: 'Título',
+                //     Description: 'Esto es una descripción',
+                //     Category: { Name: 'Category' },
+                //     CountryOfResidence: { Name: 'Country' },
+                //     CityOfResidence: { Name: 'City' }
+                // });
 
                 //init function --> Get All the Offers || Get the currencySymbol of the PriceList || Fill the filters
                 ctrl.init = function init() {
                     //get the Offers
                     ctrl.getCategories();
                     ctrl.getCountries();
-                    //ctrl.updateOffers();
+                    ctrl.updateOffers();
                 };
 
                 ctrl.getCategories = function getCategories() {
@@ -42,8 +42,8 @@
 
                     ctrl.setFilters();
 
-                    UsersOffers.get({ filters: ctrl.filters }).$promise.then(function onThen(offers) {
-                        ctrl.offers = offers;
+                    UsersOffers.get().$promise.then(function onThen(result) {
+                        ctrl.offers.splice.apply(ctrl.offers, [0, ctrl.offers.length].concat(result));
 
                     }).finally(function onFinally() {
                         ctrl.isLoadingOffers = false;
