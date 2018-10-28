@@ -1,29 +1,21 @@
 <div ng-controller="MyOfferController as ctrl" class="offers-filter">
-  <!-- <div us-spinner spinner-on=""> -->
+  <div us-spinner spinner-on="ctrl.isLoading">
   <div class="row cda-row">
     <div class="row cda-row">
       <h1 class="col-xs-12 title-initial">{{'myOffer.title'| translate}}</h1>
     </div>
   </div>
   <div class="row cda-row">
-
     <div class="row">
       <div class="col-xs-6 col-sm-3">
-        <img src="content/images/connectingUsLogo.png" class="offer-image">
+        <img src="content/images/camera.png" class="offer-image">
       </div>
       <div class="col-xs-6">
-        <h2 class="offer-name">Offer Title</h1>
-        <label class="offer-label" translate="">Type/Category</label> <br>
-        <label class="offer-label" translate="">Country</label> <br><br>
+        <h2 class="offer-name">{{ctrl.offer.Title}}</h1>
+        <label class="offer-label" translate="">Category: {{ctrl.offer.Category.Description}}</label> <br>
+        <label class="offer-label" translate="">Countrty: {{ctrl.offer.Country.Name}}</label> <br><br>
         <label class="offer-label" translate="">Description</label> <br> 
-        <label class="offer-text" translate="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-          sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-          exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit 
-          in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat 
-          non proident, sunt in culpa qui officia deserunt mollit anim id est </label> <br> 
-          <!-- <div class="input-group">
-            <input ng-model="" ng-change="" class="form-control" placeholder="Offer" type="text" ng-model-options="{ debounce: 1000}" />
-          </div> -->
+        <label class="offer-text" translate="">{{ctrl.offer.Description}}</label> <br> 
       </div>
     </div>
   </div>
