@@ -168,7 +168,7 @@
                 }
 
                 ctrl.onThenNew = function onThenNew(res) {
-                    scope.go('/users-offers');
+                    scope.go('/offers');
                 };
 
                 ctrl.update = function update() {
@@ -179,7 +179,7 @@
                 };
 
                 ctrl.cancel = function () {
-                    $state.go(ctrl.myAccount.Id ? '/users-offers' : '/login');
+                    $state.go(ctrl.myAccount.Id ? '/offers' : '/login');
                 };
 
                 ctrl.validate = function validate() {

@@ -33,7 +33,7 @@
                     },
                     Phonenumber: undefined,
                     Phonetype: undefined,
-                    AreaCode: undefined
+                    PhoneAreaCode: undefined
                 };
             };
         }]);

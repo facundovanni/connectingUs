@@ -9,16 +9,14 @@
         $state.go('/account');
       }
 
-      ctrl.goToOffers = function goToOffers() {
-        ctrl.isLoading = false;
-        $state.go('/users-offers');
+      ctrl.goToOffers = function goToOffers(result) {
+        $state.go('/offers');
       }
 
       ctrl.check = function check() {
         ctrl.isLoading = true;
-        Login.save().$promise
+        Login.getSession(ctrl.user).$promise
           .then(ctrl.goToOffers)
-          .catch(ctrl.onCatchLogin)
           .finally(ctrl.finallyLogin);
       };
 
@@ -28,7 +26,7 @@
 
       ctrl.finallyLogin = function finallyLogin(){
         ctrl.isLoading = false;
-        ctrl.goToOffers(); //MOCK
+        //ctrl.goToOffers(); //MOCK
       }
       ctrl.singIn = function singIn() {
         if (ctrl.user.Mail && ctrl.user.Password) {

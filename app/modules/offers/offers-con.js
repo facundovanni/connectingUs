@@ -1,9 +1,9 @@
-(function MyOffersCRUDScope(angular) {
+(function OffersCRUDScope(angular) {
     'use strict';
 
-    angular.module('connectingUsCenter.myOffers')
-        .controller('MyOffersController', ['$scope', 'MyOffers', '$translate', '$state', 'Countries', 'Cities',
-            function ($scope, MyOffers, $translate, $state, Countries, Cities) {
+    angular.module('connectingUsCenter.offers')
+        .controller('OffersController', ['$scope', 'Offers', '$translate', '$state', 'Countries', 'Cities', 'Categories', 'isMyOwn',
+            function ($scope, Offers, $translate, $state, Countries, Cities, Categories, isMyOwn) {
                 var ctrl = this;
 
                 ctrl.offers = [];
@@ -11,39 +11,40 @@
                 ctrl.filters = {};
                 ctrl.countries = [];
                 ctrl.cities = [];
-                ctrl.itemNew = true;
-                ctrl.offers.push({
-                    Title: 'Título',
-                    Description: 'Esto es una descripción',
-                    Category: { Name: 'Category' },
-                    CountryOfResidence: { Name: 'Country' },
-                    CityOfResidence: { Name: 'City' }
-                });
+                ctrl.categoriesSelected = [];
+                ctrl.myOffers = isMyOwn;
 
-                //init function --> Get All the Offers || Get the currencySymbol of the PriceList || Fill the filters
                 ctrl.init = function init() {
                     //get the Offers
                     ctrl.getCategories();
                     ctrl.getCountries();
-                    //ctrl.updateOffers();
+                    ctrl.updateOffers();
                 };
 
                 ctrl.getCategories = function getCategories() {
                     ctrl.isLoadingCategories = true;
-                    ctrl.categories.push({ id: 1, description: 'Lodging' });
-                    ctrl.categories.push({ id: 1, description: 'Tour Guide' });
-                    ctrl.categories.push({ id: 1, description: 'Advices' });
+                    ctrl.isFullyLoaded();
+                    Categories.getAll().$promise
+                        .then(ctrl.setCategories)
+                        .catch(ctrl.onCatchAccount)
+                        .finally(ctrl.onFinallyCategories);
+                };
+
+                ctrl.setCategories = function setCategories(result) {
+                    ctrl.categories = result;
+                };
+
+                ctrl.onFinallyCategories = function onFinallyCategories() {
                     ctrl.isLoadingCategories = false;
+                    ctrl.isFullyLoaded();
                 };
 
                 ctrl.updateOffers = function updateOffers() {
                     ctrl.isLoadingOffers = true;
                     ctrl.isFullyLoaded();
-
                     ctrl.setFilters();
-
-                    MyOffers.get({ filters: ctrl.filters }).$promise.then(function onThen(offers) {
-                        ctrl.offers = offers;
+                    Offers.getAll(ctrl.filters).$promise.then(function onThen(result) {
+                        ctrl.offers.splice.apply(ctrl.offers, [0, ctrl.offers.length].concat(result));
 
                     }).finally(function onFinally() {
                         ctrl.isLoadingOffers = false;
@@ -52,9 +53,13 @@
                 };
 
                 ctrl.setFilters = function setFilters() {
-                    if (ctrl.categoriesSelected.length) {
-                        ctrl.filters.categories = ctrl.categoriesSelected;
-                    }
+                    ctrl.filters.categories = ctrl.categories.length ? ctrl.categories.filter(function fil(category) {
+                        return category.selected;
+                    }) : undefined;
+                    ctrl.filters.country = ctrl.filterCountry ? ctrl.filterCountry.id : undefined;
+                    ctrl.filters.city = ctrl.filterCity ? ctrl.filterCity.id : undefined;
+                    ctrl.filters.active = (ctrl.myOffers && !ctrl.chkInactives) ? undefined : true 
+                    ctrl.filters.idUser = ctrl.myOffers ? 2 : undefined
                 };
 
                 ctrl.isFullyLoaded = function isFullyLoaded() {
@@ -82,7 +87,7 @@
                 ctrl.getCities = function getCities() {
                     ctrl.isLoadingCities = true;
                     ctrl.isFullyLoaded();
-                    Cities.getAll({ countryId: ctrl.filterCountry.Id }).$promise
+                    Cities.getAll({ idCountry: ctrl.filterCountry.Id }).$promise
                         .then(ctrl.setCities)
                         .catch(ctrl.onCatchAccount)
                         .finally(ctrl.onFinallyCities);
@@ -100,17 +105,6 @@
 
                 ctrl.onSelectCountry = function onSelectCountry() {
                     ctrl.getCities();
-                };
-
-                ctrl.onChangeFilters = function onChangeFilter() {
-
-                    ctrl.filters.categories = ctrl.categories.filter(function fil(category) {
-                        return category.selected;
-                    });
-                    ctrl.filters.country = ctrl.filterCountry.id;
-                    ctrl.filters.city = ctrl.filterCity.id;
-
-                    //ctrl.updateOffers();
                 };
 
                 ctrl.clearAllFilters = function clearAllFilters() {

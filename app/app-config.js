@@ -15,12 +15,12 @@
         'connectingUsCenter.directives',
         'connectingUsCenter.login',
         'connectingUsCenter.myAccount',
-        'connectingUsCenter.usersOffers',
-        'connectingUsCenter.myOffers',
-        'pascalprecht.translate'
+        'connectingUsCenter.offers',
+        'pascalprecht.translate',
+        'ngResource'
     ])
-        .config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', '$logProvider', '__env',
-            function config($stateProvider, $locationProvider, $urlRouterProvider, $translateProvider, $logProvider, __env) {
+        .config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', '$logProvider', '__env', '$routeProvider',
+            function config($stateProvider, $locationProvider, $urlRouterProvider, $translateProvider, $logProvider, __env, $routeProvider) {
                 angular.lowercase = angular.$$lowercase;
 
                 $logProvider.debugEnabled(__env.enableDebug);
@@ -94,12 +94,14 @@
                             "users": "Services Offers",
                             "my": "My Services Offers"
                         },
-                        "addNew":"Add new",
+                        "addNew": "Add new",
                         "searchItem": "Search",
                         "filter": {
                             "title": "Filter by:",
                             "type": "Type",
                             "location": "Location",
+                            "inactives": "Inactives",
+                            "inactivesOptions":"Show Inactives",
                             "clearAll": "Clear All",
                             "applyFilter": "Apply Filter"
                         },
@@ -115,21 +117,18 @@
                 $translateProvider.preferredLanguage('en');
 
                 $stateProvider.state('/login', {
-                    url: '/login',
-                    templateUrl: 'modules/login/templates/login.html'
+                    url: '/login'
                 });
                 $stateProvider.state('/account', {
                     url: '/account',
-                    params: { Id: null },
-                    templateUrl: 'modules/myAccount/templates/myAccount-crud.html'
+                    params: { Id: null }
                 });
-                $stateProvider.state('/users-offers', {
-                    url: '/offers',
-                    templateUrl: 'modules/users-offers/templates/users-offers.html'
+
+                $stateProvider.state('/offers', {
+                    url: '/offers'
                 });
                 $stateProvider.state('/my-offers', {
-                    url: '/my-offers',
-                    templateUrl: 'modules/my-offers/templates/my-offers.html'
+                    url: '/my-offers'
                 });
 
                 $locationProvider.hashPrefix('');

@@ -19,11 +19,8 @@
           method: 'GET',
           isArray: true
         },
-        save: {
-          method: 'POST', 
-          headers: {
-            'Content-Type': 'application/json'
-          },
+        saveNew: {
+          method: 'POST'
         },
         remove: {
           method: 'DELETE',
@@ -42,6 +39,10 @@
         return resource.get({
           id: id
         });
+      };
+
+      resource.save = function save(obj) {
+        return obj.Id ? resource.update(obj) : resource.saveNew(obj);
       };
 
       return resource;
