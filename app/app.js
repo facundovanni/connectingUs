@@ -9,8 +9,11 @@
     };
 
     ctrl.goToMyOffers = function goToOffers() {
-      ctrl.isLoading = false;
       $state.go('/my-offers');
-    }
+    };
+
+    ctrl.logout = function logout() {
+      $state.go('/login');
+    };
   }]);
 })(angular);
