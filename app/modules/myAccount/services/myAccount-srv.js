@@ -7,9 +7,9 @@
 
                 get: {
                     method: 'GET',
-                    url: '/api/users/:id',
-                    params: {
-                        id: '@id'
+                    url: '/api/users/:Id',
+                    param:{
+                        Id:'@Id'
                     }
                 }
             }

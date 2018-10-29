@@ -59,7 +59,7 @@
                     ctrl.filters.country = ctrl.filterCountry ? ctrl.filterCountry.id : undefined;
                     ctrl.filters.city = ctrl.filterCity ? ctrl.filterCity.id : undefined;
                     ctrl.filters.active = (ctrl.myOffers && !ctrl.chkInactives) ? undefined : true 
-                    ctrl.filters.idUser = ctrl.myOffers ? 2 : undefined
+                    ctrl.filters.idUser = ctrl.myOffers ? 1 : undefined;
                 };
 
                 ctrl.isFullyLoaded = function isFullyLoaded() {

@@ -5,7 +5,7 @@
     var ctrl = this;
 
     ctrl.goToMyAccount= function goToMyAccount(){
-      $state.go('/account', {Id: '1'});
+      $state.go('/account', {Id: 1});
     };
 
     ctrl.goToMyOffers = function goToOffers() {

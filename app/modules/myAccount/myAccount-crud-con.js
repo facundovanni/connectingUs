@@ -129,7 +129,7 @@
                     ctrl.isLoading = true;
                     ctrl.myAccount.Id = ctrl.userId;
                     if (ctrl.myAccount.Id) {
-                        MyAccount.get({ Id: ctrl.myAccount.Id }).$promise
+                        MyAccount.get(ctrl.myAccount.Id).$promise
                             .then(ctrl.setAccount)
                             .catch(ctrl.onCatchAccount)
                             .finally(ctrl.setView);
