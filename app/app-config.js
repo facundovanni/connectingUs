@@ -19,8 +19,8 @@
         'pascalprecht.translate',
         'ngResource'
     ])
-        .config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', '$logProvider', '__env', '$routeProvider',
-            function config($stateProvider, $locationProvider, $urlRouterProvider, $translateProvider, $logProvider, __env, $routeProvider) {
+        .config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', '$logProvider', '__env',
+            function config($stateProvider, $locationProvider, $urlRouterProvider, $translateProvider, $logProvider, __env) {
                 angular.lowercase = angular.$$lowercase;
 
                 $logProvider.debugEnabled(__env.enableDebug);
@@ -108,6 +108,17 @@
                         "city": "City",
                         "country": "Country",
                         "category": "Category"
+                    },
+                    "myOffer": {
+                        "titleView": "Offer Details",
+                        "title": "Title",
+                        "category": "Category",
+                        "country": "Country",
+                        "city": "City",
+                        "description": "Description",
+                        "updateService": "Save Service"
+
+
                     }
                 };
 
@@ -127,8 +138,20 @@
                 $stateProvider.state('/offers', {
                     url: '/offers'
                 });
+                $stateProvider.state('/myOffer', {
+                    url: '/myOffer',
+                    templateUrl: 'modules/myOffer/templates/myOffer.html'
+                });
+                
                 $stateProvider.state('/my-offers', {
                     url: '/my-offers'
+                });
+
+                $stateProvider.state('/offers/:Id', {
+                    url: '/offers/:Id'
+                });
+                $stateProvider.state('/my-offers/:Id', {
+                    url: '/my-offers/:Id'
                 });
 
                 $locationProvider.hashPrefix('');

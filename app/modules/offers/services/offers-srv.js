@@ -1,13 +1,21 @@
 (function offersScope(angular) {
     'use strict';
     angular.module('connectingUsCenter.offers')
-        .service('Offers', ['ServicesModel', '__env', function (ServicesModel, __env) {
+        .service('Offers', ['ServicesModel', function (ServicesModel) {
             var that = this;
-            angular.extend(this, ServicesModel.create(__env.apiUrl + '/api/services', null, {
+            angular.extend(this, ServicesModel.create('/api/services', null, {
                 getAll: {
-                    url:__env.apiUrl + '/api/services/search',
                     method: 'POST',
+                    url:'/api/services/search',
                     isArray: true
+                },
+                getService: {
+                    method: 'GET',
+                    url:'/api/services/?idService=:idService',
+                    isArray: true,
+                    param: {
+                        idService: '@idService'
+                    }
                 }
             }));
 

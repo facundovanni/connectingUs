@@ -1,0 +1,39 @@
+<div us-spinner spinner-on="ctrl.isLoading" class="offers-filter">
+  <div class="row cda-row">
+    <div class="row cda-row">
+      <h1 class="col-xs-12 title-initial">{{'myOffer.titleView'| translate}}</h1>
+    </div>
+  </div>
+  <div class="row cda-row">
+    <div class="row">
+      <div class="col-xs-6 col-sm-3">
+        <img src="content/images/camera.png" class="offer-image">
+      </div>
+      <div class="col-xs-6">
+        <label class="offer-label">{{'myOffer.title'| translate}}: </label>
+        <input class="offer-label" ng-model="ctrl.offer.Title"><br>
+        <uib-accordion close-others="true">
+          <div>
+            <label class="offer-label offer-accordeon-title">{{'myOffer.category'| translate}}: </label>
+            <select class="btn btn-default offer-select" ng-model="ctrl.offer.Category" ng-options="x.Description for x in ctrl.categories"></select>
+          </div> <br>
+          <div>
+            <label class="offer-label offer-accordeon-title">{{'myOffer.country'| translate}}: </label>
+            <select class="btn btn-default offer-select" ng-model="ctrl.offer.Country" ng-options="x.Name for x in ctrl.countries"
+              ng-change="ctrl.onSelectCountry()"></select>
+          </div>
+          <br>
+          <div> <label class="offer-label offer-accordeon-title">{{'myOffer.city'| translate}}: </label>
+            <div ng-if="ctrl.offer.Country">
+              <select class="btn btn-default offer-select" ng-model="ctrl.offer.City" ng-options="x.Name for x in ctrl.cities"></select>
+            </div>
+          </div>
+        </uib-accordion>
+        <label class="offer-label">{{'myOffer.description'| translate}}</label> <br>
+        <textarea class="offer-text" ng-model="ctrl.offer.Description"></textarea> <br> <br> <br>
+        <button type="button" class="btn btn-primary btn-save-myOffer" type="submit" ng-click="ctrl.updateService()">{{'myOffer.updateService'|
+          translate}}</button>
+        <!-- <label class="offer-label">{{'myOffer.updateSuccess'| translate}}</label> <br>  -->
+      </div>
+    </div>
+  </div>

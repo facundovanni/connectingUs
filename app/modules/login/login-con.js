@@ -26,10 +26,9 @@
 
       ctrl.finallyLogin = function finallyLogin(){
         ctrl.isLoading = false;
-        //ctrl.goToOffers(); //MOCK
       }
       ctrl.singIn = function singIn() {
-        if (ctrl.user.Mail && ctrl.user.Password) {
+        if (ctrl.user.Mail && ctrl.user.Password && ctrl.user.Password.length > 7) {
           ctrl.check();
         }
       };

@@ -23,6 +23,11 @@
         ctrl.itemNew = $scope.itemNew;
 
         ctrl.clickItem = function clickItem(item) {
+          if(!item){
+            item = {
+              Id:0
+            };
+          }
           $state.go($scope.openState, item);
         };
       }]);

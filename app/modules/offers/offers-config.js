@@ -23,6 +23,24 @@
                     }
                 }
             });
+            $routeProvider.when('/my-offers/:id', {
+                templateUrl: 'modules/offers/templates/offers-crud.html',
+                controller: 'OffersCRUDController as ctrl',
+                resolve: {
+                    isMyOwn: function isMyOwn() {
+                        return true;
+                    }
+                }
+            });
+            $routeProvider.when('/offers/:id', {
+                templateUrl: 'modules/offers/templates/offers-crud.html',
+                controller: 'OffersCRUDController as ctrl',
+                resolve: {
+                    isMyOwn: function isMyOwn() {
+                        return true;
+                    }
+                }
+            });
         }]);
         
 })(angular);

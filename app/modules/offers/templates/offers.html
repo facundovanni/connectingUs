@@ -69,7 +69,7 @@
         </div>
       </div>
       <div ng-if="ctrl.offers">
-        <offers-list item-new="ctrl.myOffers" open-state="'/offers/:id/details'" items="ctrl.offers"></offers-list>
+        <offers-list item-new="ctrl.myOffers" open-state="ctrl.myOffers ? '/my-offers/:Id' : '/offers/:Id' " items="ctrl.offers"></offers-list>
       </div>
       <div ng-if="!ctrl.offers || ctrl.offers.lenght == 0" class="noItems">
         {{'offers.noItems' | translate}}
