@@ -127,9 +127,9 @@
 
                 ctrl.getAccount = function getAccount() {
                     ctrl.isLoading = true;
-                    ctrl.myAccount.Id = ctrl.userId;
+                    ctrl.myAccount.Id = ctrl.userId ? ctrl.userId : undefined;
                     if (ctrl.myAccount.Id) {
-                        MyAccount.get(ctrl.myAccount.Id).$promise
+                        MyAccount.get({Id: ctrl.myAccount.Id}).$promise
                             .then(ctrl.setAccount)
                             .catch(ctrl.onCatchAccount)
                             .finally(ctrl.setView);
@@ -149,11 +149,12 @@
                     if (ctrl.validate()) {
                         ctrl.myAccount.Gender = ctrl.myAccount.Gender.code;
                         ctrl.myAccount.PhoneType = ctrl.myAccount.PhoneType ? ctrl.myAccount.PhoneType.code : undefined;
-                        ctrl.myAccount.Id ? ctrl.update() : ctrl.createNew();
+                        ctrl.myAccount.Id = ctrl.myAccount.Id ?  ctrl.myAccount.Id : undefined;
+                        ctrl.saveData();
                     }
                 };
 
-                ctrl.createNew = function createNew() {
+                ctrl.saveData = function saveData() {
                     ctrl.isLoading = true;
                     MyAccount.save(ctrl.myAccount).$promise
                         .then(ctrl.onThenNew)
@@ -162,20 +163,13 @@
 
                 ctrl.onFinallySave = function onFinally(result) {
                     ctrl.isLoading = false;
-                    ctrl.alert.show = true;
-                    ctrl.alert.message = $translate.instant(result ? 'global.message.saveSuccess' : 'global.message.saveError');
-                    ctrl.alert.type = result ? 'alert-success' : 'alert-danger';
                 }
 
                 ctrl.onThenNew = function onThenNew(res) {
-                    scope.go('/offers');
-                };
-
-                ctrl.update = function update() {
-                    ctrl.isLoading = true;
-                    MyAccount.update(ctrl.myAccount).$promise
-                        .then(function onThen(res) { })
-                        .finally(ctrl.onFinallySave);
+                    ctrl.alert.show = true;
+                    ctrl.alert.message = $translate.instant(result ? 'global.message.saveSuccess' : 'global.message.saveError');
+                    ctrl.alert.type = result ? 'alert-success' : 'alert-danger';
+                    $state.go('/offers');
                 };
 
                 ctrl.cancel = function () {
