@@ -12,6 +12,7 @@
       ctrl.categories = [];
       ctrl.offer = {};
       ctrl.offer.Id = $stateParams.Id;
+      ctrl.myOffer = isMyOwn;
       ctrl.alert = {
         show: false,
         message: undefined,

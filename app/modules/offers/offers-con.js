@@ -53,14 +53,21 @@
                 };
 
                 ctrl.setFilters = function setFilters() {
-                    ctrl.filters.categories = ctrl.categories.length ? ctrl.categories.filter(function fil(category) {
+                    var filterSelectedCategories = [];
+                    filterSelectedCategories = ctrl.categories.filter(function fil(category) {
                         return category.selected;
-                    }) : undefined;
-                    ctrl.filters.country = ctrl.filterCountry ? ctrl.filterCountry.id : undefined;
-                    ctrl.filters.city = ctrl.filterCity ? ctrl.filterCity.id : undefined;
-                    ctrl.filters.active = (ctrl.myOffers && !ctrl.chkInactives) ? undefined : true 
-                    ctrl.filters.idUser = ctrl.myOffers ? 1 : undefined;
+                    })
+                    ctrl.filters.Categories = filterSelectedCategories.length ? filterSelectedCategories : undefined;
+                    ctrl.filters.IdCountry = ctrl.filterCountry ? ctrl.filterCountry.Id : undefined;
+                    ctrl.filters.IdCity = ctrl.filterCity ? ctrl.filterCity.Id : undefined;
+                    ctrl.filters.Active = (ctrl.myOffers && !ctrl.chkInactives) ? undefined : true
+                    ctrl.filters.IdUser = ctrl.myOffers ? 1 : undefined;
+                    ctrl.filters.Text = ctrl.searchText ? ctrl.searchText : undefined;
                 };
+
+                ctrl.search = function search() {
+                    ctrl.updateOffers();
+                }
 
                 ctrl.isFullyLoaded = function isFullyLoaded() {
                     ctrl.isLoading = ctrl.isLoadingCategories || ctrl.isLoadingCountries || ctrl.isLoadingOffers || ctrl.isLoadingCities;

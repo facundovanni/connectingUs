@@ -37,7 +37,7 @@
                 controller: 'OffersCRUDController as ctrl',
                 resolve: {
                     isMyOwn: function isMyOwn() {
-                        return true;
+                        return false;
                     }
                 }
             });
