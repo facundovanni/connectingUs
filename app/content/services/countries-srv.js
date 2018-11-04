@@ -7,6 +7,12 @@
                     method: 'GET',
                     isArray: true
                 }
-            }));
+            })),
+            angular.extend(this, ServicesModel.create('/api/countries/map', null, {
+                getCountriesOfServices: {
+                    method: 'GET',
+                    isArray: true
+                }
+            }));;
         }]);
 })(window.angular);

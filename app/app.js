@@ -15,5 +15,10 @@
     ctrl.logout = function logout() {
       $state.go('/login');
     };
+
+    ctrl.goToAbout = function goToAbout() {
+      $state.go('/about');
+    }
+  
   }]);
 })(angular);

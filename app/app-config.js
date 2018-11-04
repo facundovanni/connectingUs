@@ -14,6 +14,7 @@
         'connectingUsCenter.services',
         'connectingUsCenter.directives',
         'connectingUsCenter.login',
+        'connectingUsCenter.about',
         'connectingUsCenter.myAccount',
         'connectingUsCenter.offers',
         'pascalprecht.translate',
@@ -30,7 +31,8 @@
                     "global": {
                         "button": {
                             "save": "Save",
-                            "cancel": "Cancel"
+                            "cancel": "Cancel",
+                            "termsAndConditions": "I read and accept the terms and Conditions"
                         },
                         "message": {
                             "saveSuccess": "The data has been saved successfully",
@@ -57,6 +59,10 @@
                         "signIn": "Sign In",
                         "signOut": "Log Out",
                         "signUp": "Not registered yet? Sign Up!"
+                    },
+                    "about": {
+                        "title": "About us",
+                        "whereAreWe": "Where do we have services right now?"
                     },
                     "myAccount": {
                         "title": "My Account",
@@ -86,7 +92,8 @@
                             "emailConfirm": "The emails must be equals",
                             "passwordConfirm": "The passwords are not equals",
                             "email": "Set an valid email. The email must have a '@' and a '.'",
-                            "password": "The password must have at least eight characters."
+                            "password": "The password must have at least eight characters.",
+                            "termsAndConditions": "You must accept terms and conditions"
                         }
                     },
                     "offers": {
@@ -130,6 +137,9 @@
                 $stateProvider.state('/login', {
                     url: '/login'
                 });
+                $stateProvider.state('/about', {
+                    url: '/about'
+                });
                 $stateProvider.state('/account', {
                     url: '/account',
                     params: { Id: null }
@@ -153,6 +163,8 @@
                 $stateProvider.state('/my-offers/:Id', {
                     url: '/my-offers/:Id'
                 });
+
+              
 
                 $locationProvider.hashPrefix('');
 

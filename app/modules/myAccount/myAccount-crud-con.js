@@ -7,6 +7,8 @@
                 var ctrl = this;
                 ctrl.userId = $stateParams.Id;
                 ctrl.today = new Date();
+                ctrl.modalVisible = false;
+                ctrl.termsAndConditionsChecked = false;
                 ctrl.validateError = {
                     show: {},
                     message: {
@@ -15,6 +17,7 @@
                         passwordConfirm: $translate.instant('myAccount.error.passwordConfirm'),
                         email: $translate.instant('myAccount.error.email'),
                         password: $translate.instant('myAccount.error.password'),
+                        termsAndConditions: $translate.instant('myAccount.error.termsAndConditions'),
                     }
                 };
 
@@ -34,6 +37,10 @@
                     maxDate: ctrl.today.setYear(ctrl.today.getFullYear() - 13),
                     startingDay: 0
                 };
+
+                ctrl.showModal = function showModal(state){
+                    ctrl.modalVisible = state;
+                }
 
                 ctrl.openDate = function openDate() {
                     ctrl.dateSelected.opened = true;
@@ -181,6 +188,7 @@
                     ctrl.validateError.show.email = !ctrl.myAccount.Account.Mail || ctrl.myAccount.Account.Mail.indexOf('.') === -1;
                     ctrl.validateError.show.emailConfirm = !ctrl.emailConfirm || ctrl.myAccount.Account.Mail !== ctrl.emailConfirm;
                     ctrl.validateError.show.passwordConfirm = !ctrl.passwordConfirm || ctrl.myAccount.Account.Password !== ctrl.passwordConfirm;
+                    ctrl.validateError.show.termsAndConditions = !ctrl.termsAndConditionsChecked;
                     for (const prop in ctrl.validateError.show) {
                         if (ctrl.validateError.show[prop]) {
                             validations = false;
