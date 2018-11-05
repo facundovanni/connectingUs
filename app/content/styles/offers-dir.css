@@ -115,7 +115,7 @@
   padding-left: 75px;
   padding-right: 75px;
   padding-top: 135px;
-  font-size: 75px;
+  font-size: 30px;
   z-index: 5;
   position: absolute;
   color: #212121;
@@ -195,7 +195,7 @@
 }
 .offers-body:hover {
   color: transparent;
-  opacity: 0.2;
+  opacity: 0.6;
   width: 186px;
   z-index: 4;
   display: block;

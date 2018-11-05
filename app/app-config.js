@@ -54,8 +54,8 @@
                     },
                     "login": {
                         "welcome": "Welcome to Connecting Us",
-                        "email": "email",
-                        "password": "password",
+                        "email": "Email",
+                        "password": "Password",
                         "signIn": "Sign In",
                         "signOut": "Log Out",
                         "signUp": "Not registered yet? Sign Up!"

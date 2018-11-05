@@ -37,8 +37,8 @@
             <textarea ng-if="ctrl.myOffer" class="offer-text form-control" ng-model="ctrl.offer.Description"></textarea>
             <label ng-if="!ctrl.myOffer" class="offer-text" ng-model="ctrl.offer.Description">{{ctrl.offer.Description}}</label>
           </div>
-          <div class="col-md-12">
-            <label class="label-crud" ng-class="ctrl.myOffer ? 'label-required' : ''"><input type="checkbox" ng-model="ctrl.offer.Active">{{'myOffer.active'
+          <div class="col-md-12" ng-if="ctrl.myOffer">
+            <label class="label-crud label-required"><input type="checkbox" ng-model="ctrl.offer.Active">{{'myOffer.active'
               | translate}}</label>
           </div>
         </div>

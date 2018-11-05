@@ -62,7 +62,7 @@
                         { code: 'M', description: $translate.instant('global.phoneType.mobile') },
                         { code: 'H', description: $translate.instant('global.phoneType.home') },
                         { code: 'O', description: $translate.instant('global.phoneType.other') }
-                    ]
+                    ];
                     ctrl.isLoadingCountries = true;
                     ctrl.isLoadingOptions();
                     Countries.getAll().$promise
@@ -171,17 +171,24 @@
                     ctrl.isLoading = true;
                     MyAccount.save(ctrl.myAccount).$promise
                         .then(ctrl.onThenNew)
+                        .catch(ctrl.onCatchSave)
                         .finally(ctrl.onFinallySave);
                 };
 
                 ctrl.onFinallySave = function onFinally(result) {
                     ctrl.isLoading = false;
-                }
+                };
+                
+                ctrl.onCatchSave = function onFinally(result) {
+                    ctrl.alert.show = true;
+                    ctrl.alert.message = $translate.instant('global.message.saveError');
+                    ctrl.alert.type = 'alert-danger';
+                };
 
                 ctrl.onThenNew = function onThenNew(res) {
                     ctrl.alert.show = true;
-                    ctrl.alert.message = $translate.instant(result ? 'global.message.saveSuccess' : 'global.message.saveError');
-                    ctrl.alert.type = result ? 'alert-success' : 'alert-danger';
+                    ctrl.alert.message = $translate.instant(res ? 'global.message.saveSuccess' : 'global.message.saveError');
+                    ctrl.alert.type = res ? 'alert-success' : 'alert-danger';
                     $state.go('/offers');
                 };
 
