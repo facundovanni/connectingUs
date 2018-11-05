@@ -37,7 +37,7 @@
  
        ctrl.onFinallyCountriesOfService = function onFinallyCountries() {
          ctrl.isLoadingCountries = false;
-         ctrl.loadMap();
+         //ctrl.loadMap();
        };
  
        ctrl.init = function init() {

@@ -191,7 +191,7 @@
     <div class="row cda-row">
       <div class="modal-footer">
         <div class="col-md-12">
-          <div class="terms-and-conditions-accept" ng-if="!ctrl.myAccount.Id">
+          <div ng-if="ctrl.termsOk" class="terms-and-conditions-accept" ng-if="!ctrl.myAccount.Id">
             <input class="terms-and-conditions-checkbox" type="checkbox" ng-model="ctrl.termsAndConditionsChecked"
               aria-label="">
             <a class="terms-and-conditions-text" type="" ng-click="ctrl.showModal(true)">{{'global.button.termsAndConditions'|translate}}</a>

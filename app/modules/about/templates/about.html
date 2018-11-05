@@ -1,21 +1,25 @@
-<div ng-controller="AboutController as ctrl"  us-spinner spinner-on="ctrl.isLoadingCountries || ctrl.isLoadingMap">
-  <div class="row cda-row">
-    <h1 class="col-xs-12 title-initial">
-      <span>{{'about.title'| translate}}</span>
-    </h1>
+<div ng-controller="AboutController as ctrl" us-spinner spinner-on="ctrl.isLoadingCountries || ctrl.isLoadingMap">
+  <div class="container">
+    <div class="row cda-row">
+      <h1 class="col-xs-12 title-initial">
+        <span>{{'about.title'| translate}}</span>
+      </h1>
+    </div>
+    <div ng-if="crl.mapok">
+      <div class="row cda-row">
+        <div class="about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+          irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+          laborum.</div>
+      </div><br><br>
+      <div class="row map">
+        <h3 class="col-xs-12 title-initial subtitle">
+          <span>{{'about.whereAreWe'| translate}}</span>
+        </h3>
+        <div id="mapDiv" style="width: 800px; height: 700px"></div>
+      </div>
+    </div>
   </div>
-  <div class="row cda-row">
-    <div class="about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute 
-      irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-  </div><br><br>
-  <div class="row map" >
-    <h3 class="col-xs-12 title-initial subtitle">
-      <span>{{'about.whereAreWe'| translate}}</span>
-    </h3>
-    <div id="mapDiv" style="width: 800px; height: 700px"></div>
-  </div>
-  
 </div>
