@@ -124,7 +124,8 @@
                         "country": "Country",
                         "city": "City",
                         "description": "Description",
-                        "updateService": "Save Service"
+                        "updateService": "Save Service",
+                        "active": "Disable service"
 
 
                     }

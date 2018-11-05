@@ -18,16 +18,16 @@ body {
 .headerTitle {
   font-weight: 300;
   text-transform: uppercase;
-  font-size: 26px;
-  line-height: 1.6;
+  font-size: 26px;  
   color: #fff;
   text-decoration: none;
 }
 
 .header-account-name {
+  padding-top: 12px;
   font-weight: 300;
   font-size: 16px;
-  line-height: 1.6;
+
   color: #fff;
 }
 
@@ -35,6 +35,7 @@ body {
   background-image: url('../images/banner.jpg');
   z-index: 1;
   text-decoration: none;
+  margin-top: -10px;
 }
 /* Page content */
 
@@ -78,20 +79,19 @@ body {
 
 /* myOffers */
 .offer-image{
-  width: 300px;
+  width: 400px;
 }
 
 .offer-label{
-  margin-left: 10px;
-  font-size: 20px;
-  padding: 2px;
+    font-weight: 800;
+    font-family: 'Scada', sans-serif;
+    font-size: 20px;
 }
 
 .offer-text{
-  margin-left: 10px;
   font-size: 15px;
   font-weight: 100;
-  width: 500px;
+  width: 100%;
   height: 150px;
   border-radius: 10px;
   border: 1px solid #d2d2d2;

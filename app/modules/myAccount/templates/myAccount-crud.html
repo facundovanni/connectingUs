@@ -1,20 +1,19 @@
 <form name="CRUDMyAccountForm" class="crud needs-validation" us-spinner spinner-on="ctrl.isLoading">
   <div class="container">
-
     <!--Alert-->
     <div ng-if="ctrl.alert.show" class="alert + {{ctrl.alert.type}}">
       <div>{{ctrl.alert.message}}</div>
     </div>
     <!--Title-->
-    <div class="row">
+    <div class="row cda-row">
       <h1 class="col-md-12 title">{{ctrl.title}}</h1>
     </div>
     <!--SubTitle-->
-    <div class="row">
+    <div class="row cda-row">
       <h2 class="col-md-12 title">{{'myAccount.general.title' | translate}}</h2>
     </div>
     <!--Names-->
-    <div class="row">
+    <div class="row cda-row">
       <div class="col-md-6">
         <label for="firstName" class="label-crud label-required" translate="myAccount.general.firstName"></label>
         <input type="text" class="form-control" id="firstName" placeholder="" ng-model="ctrl.myAccount.FirstName"
@@ -27,7 +26,7 @@
       </div>
     </div>
     <!--Nick & Birth-->
-    <div class="row">
+    <div class="row cda-row">
       <div class="col-md-6">
         <label class="label-crud label-required" for="nickName" translate="myAccount.general.nickName"></label>
         <input ng-model="ctrl.myAccount.Account.Nickname" type="text" class="form-control" placeholder="" max-length="25"
@@ -46,7 +45,7 @@
       </div>
     </div>
     <!--Gender & Nationality-->
-    <div class="row">
+    <div class="row cda-row">
       <div class="col-md-6">
         <label class="label-crud label-required" for="gender" translate="myAccount.general.gender"></label>
         <select class="custom-select d-block w-100 form-control" id="gender" ng-model="ctrl.myAccount.gender"
@@ -61,7 +60,7 @@
       </div>
     </div>
     <!--Residence-->
-    <div class="row">
+    <div class="row cda-row">
       <div class="col-md-6">
         <label class="label-crud label-required" for="country" translate="myAccount.general.country"></label>
         <select class="custom-select d-block w-100  form-control" id="country" ng-model="ctrl.myAccount.CountryOfResidence"
@@ -76,11 +75,11 @@
       </div>
     </div>
     <!--SubTitle-->
-    <div class="row">
+    <div class="row cda-row">
       <h2 class="col-md-12 title">{{'myAccount.account.title' | translate}}</h2>
     </div>
     <!--Email-->
-    <div class="row">
+    <div class="row cda-row">
       <div ng-class="ctrl.myAccount.Id ? 'col-md-12' : 'col-md-6'">
         <label for="email" class="label-crud label-required" translate="myAccount.account.email"></label>
         <input type="email" class="form-control" id="email" ng-model="ctrl.myAccount.Account.Mail" placeholder="mail@example.com"
@@ -95,7 +94,7 @@
       </div>
     </div>
     <!--Password-->
-    <div class="row">
+    <div class="row cda-row">
       <div class="col-md-6">
         <label for="password" class="label-crud label-required" translate="myAccount.account.password"></label>
         <input type="password" class="form-control" id="password" ng-model="ctrl.myAccount.Account.Password"
@@ -109,7 +108,7 @@
       </div>
     </div>
     <!--Phone-->
-    <div class="row">
+    <div class="row cda-row">
       <div class="col-md-2">
         <label for="codeArea" class="label-crud" translate="myAccount.account.codeArea"></label>
         <input type="text" class="form-control" id="codeArea" ng-model="ctrl.myAccount.PhoneAreaCode">
@@ -189,7 +188,7 @@
     </div>
     <!-- Submit -->
     <br>
-    <div class="row">
+    <div class="row cda-row">
       <div class="modal-footer">
         <div class="col-md-12">
           <div class="terms-and-conditions-accept" ng-if="!ctrl.myAccount.Id">
