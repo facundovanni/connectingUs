@@ -1,184 +1,207 @@
-<form name="CRUDMyAccountForm" class="crud" us-spinner spinner-on="ctrl.isLoading">
-  <div class="container-fluid">
+<form name="CRUDMyAccountForm" class="crud needs-validation" us-spinner spinner-on="ctrl.isLoading">
+  <div class="container">
+
+    <!--Alert-->
     <div ng-if="ctrl.alert.show" class="alert + {{ctrl.alert.type}}">
       <div>{{ctrl.alert.message}}</div>
     </div>
-    <div class="row cda-row">
-      <h1 class="col-xs-12 title">{{ctrl.title}}</h3>
+    <!--Title-->
+    <div class="row">
+      <h1 class="col-md-12 title">{{ctrl.title}}</h1>
     </div>
-    <div class="row cda-row">
-      <h2 class="col-xs-12 title">{{'myAccount.general.title' | translate}}</h2>
+    <!--SubTitle-->
+    <div class="row">
+      <h2 class="col-md-12 title">{{'myAccount.general.title' | translate}}</h2>
     </div>
-    <div class="row cda-row">
-      <div class="col-xs-6 form-group">
-        <label class="label-crud label-required" translate="myAccount.general.firstName"></label>
-        <input name="FirstName" ng-model="ctrl.myAccount.FirstName" type="text" class="form-control" required autofocus>
-        <span class="error" ng-show="CRUDMyAccountForm.FirstName.$error.pattern">The characters are wrong.</span>
-      </div>
-      <div class="col-xs-6 form-group">
-        <label class="label-crud label-required" translate="myAccount.general.lastName"></label>
-        <input name="name" ng-model="ctrl.myAccount.LastName" type="text" class="form-control" ng-pattern="/.*[a-zA-Z]+.*/"
+    <!--Names-->
+    <div class="row">
+      <div class="col-md-6">
+        <label for="firstName" class="label-crud label-required" translate="myAccount.general.firstName"></label>
+        <input type="text" class="form-control" id="firstName" placeholder="" ng-model="ctrl.myAccount.FirstName"
           required>
-        <span class="error" ng-show="myForm.phone.$error.pattern">The characters are wrong.</span>
+      </div>
+      <div class="col-md-6">
+        <label for="lastName" class="label-crud label-required" translate="myAccount.general.lastName"></label>
+        <input type="text" id="name" name="name" ng-model="ctrl.myAccount.LastName" placeholder="" class="form-control"
+          required>
       </div>
     </div>
-    <div class="row cda-row">
-      <div class="col-xs-4">
-        <label class="label-crud label-required" translate="myAccount.general.nickName"></label>
-        <input ng-model="ctrl.myAccount.Account.NickName" type="text" class="form-control" max-length="25" ng-disabled="ctrl.myAccount.Id"
-          required autofocus>
+    <!--Nick & Birth-->
+    <div class="row">
+      <div class="col-md-6">
+        <label class="label-crud label-required" for="nickName" translate="myAccount.general.nickName"></label>
+        <input ng-model="ctrl.myAccount.Account.Nickname" type="text" class="form-control" placeholder="" max-length="25"
+          ng-disabled="ctrl.myAccount.Id" required>
       </div>
-      <div class="col-xs-4">
-        <label class="label-crud label-required" translate="myAccount.general.dayOfBirth"></label>
+      <div class="col-md-6">
+        <label class="label-crud label-required" for="birth" translate="myAccount.general.dayOfBirth"></label>
         <div class="input-group">
           <input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="ctrl.dateSelected.value"
             is-open="ctrl.dateSelected.opened" datepicker-options="ctrl.dateOptions" ng-required="true" close-text="Close"
-            alt-input-formats="altInputFormats" required autofocus />
+            alt-input-formats="altInputFormats" required />
           <span class="input-group-btn">
             <button type="button" class="btn btn-default" ng-click="ctrl.openDate()">
               <i class="glyphicon glyphicon-calendar"></i>
-            </button>
-          </span>
         </div>
       </div>
-      <div class="col-xs-4">
-        <label class="label-crud label-required" translate="myAccount.general.gender"></label>
-        <select class="btn btn-default col-xs-12" ng-model="ctrl.myAccount.Gender" ng-options="x.description for x in ctrl.genders"
-          required autofocus></select>
+    </div>
+    <!--Gender & Nationality-->
+    <div class="row">
+      <div class="col-md-6">
+        <label class="label-crud label-required" for="gender" translate="myAccount.general.gender"></label>
+        <select class="custom-select d-block w-100 form-control" id="gender" ng-model="ctrl.myAccount.gender"
+          ng-options="x.description for x in ctrl.genders track by x.Id" required></select>
+        <div class="validate-error ng-cloak" ng-show="ctrl.hasValidated && !ctrl.myAccount.gender">{{ctrl.validateError.message.text}}</div>
+      </div>
+      <div class="col-md-6">
+        <label class="label-crud label-required" for="nationality" translate="myAccount.general.nationality"></label>
+        <select class="custom-select d-block w-100  form-control" id="nationality" ng-model="ctrl.myAccount.CountryOfBirth"
+          ng-options="x.Name for x in ctrl.nationalities track by x.Id" required></select>
+        <div class="validate-error ng-cloak" ng-show="ctrl.hasValidated && !ctrl.myAccount.CountryOfBirth">{{ctrl.validateError.message.text}}</div>
       </div>
     </div>
-    <div class="row cda-row">
-      <div class="col-xs-4">
-        <label class="label-crud label-required" translate="myAccount.general.nationality"></label>
-        <select class="btn btn-default col-xs-12" ng-model="ctrl.myAccount.CountryOfBirth" ng-options="x.Name for x in ctrl.nationalities track by x.Id"
-          required autofocus></select>
+    <!--Residence-->
+    <div class="row">
+      <div class="col-md-6">
+        <label class="label-crud label-required" for="country" translate="myAccount.general.country"></label>
+        <select class="custom-select d-block w-100  form-control" id="country" ng-model="ctrl.myAccount.CountryOfResidence"
+          ng-options="x.Name for x in ctrl.countries track by x.Id" ng-change="ctrl.onChangeCountries()" required></select>
+        <div class="validate-error ng-cloak" ng-show="ctrl.hasValidated && !ctrl.myAccount.CountryOfResidence">{{ctrl.validateError.message.text}}</div>
       </div>
-      <div class="col-xs-4">
-        <label class="label-crud label-required" translate="myAccount.general.country"></label>
-        <select class="btn btn-default col-xs-12" ng-model="ctrl.myAccount.CountryOfResidence" ng-options="x.Name for x in ctrl.countries track by x.Id"
-          ng-change="ctrl.onChangeCountries()" required autofocus></select>
-      </div>
-      <div class="col-xs-4">
-        <label class="label-crud label-required" translate="myAccount.general.city"></label>
-        <select class="btn btn-default col-xs-12" ng-model="ctrl.myAccount.CityOfResidence" ng-options="x.Name for x in ctrl.cities track by x.Id"
-          required autofocus></select>
+      <div class="col-md-6">
+        <label class="label-crud label-required" for="city" translate="myAccount.general.city"></label>
+        <select class="custom-select form-control" id="city" ng-model="ctrl.myAccount.CityOfResidence" ng-options="x.Name for x in ctrl.cities track by x.Id"
+          required></select>
+        <div class="validate-error ng-cloak" ng-show="ctrl.hasValidated && !ctrl.myAccount.CityOfResidence">{{ctrl.validateError.message.text}}</div>
       </div>
     </div>
-    <div class="row cda-row">
-      <h2 class="col-xs-12 title">{{'myAccount.account.title' | translate}}</h2>
+    <!--SubTitle-->
+    <div class="row">
+      <h2 class="col-md-12 title">{{'myAccount.account.title' | translate}}</h2>
     </div>
-    <div class="row cda-row" ng-disabled="ctrl.myAccount.id">
-      <div ng-class="ctrl.myAccount.Id ? 'col-xs-12' : 'col-xs-6'">
-        <label class="label-crud label-required" translate="myAccount.account.email"></label>
-        <input class="form-control" ng-model="ctrl.myAccount.Account.Mail" type="email" placeholder="mail@example.com"
-          required autofocus />
+    <!--Email-->
+    <div class="row">
+      <div ng-class="ctrl.myAccount.Id ? 'col-md-12' : 'col-md-6'">
+        <label for="email" class="label-crud label-required" translate="myAccount.account.email"></label>
+        <input type="email" class="form-control" id="email" ng-model="ctrl.myAccount.Account.Mail" placeholder="mail@example.com"
+          required ng-disabled="ctrl.myAccount.Id">
         <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.email">{{ctrl.validateError.message.email}}</div>
       </div>
-      <div class="col-xs-6" ng-if="!ctrl.myAccount.Id">
-        <label class="label-crud label-required" translate="myAccount.account.emailConfirm"></label>
-        <input ng-model="ctrl.emailConfirm" type="email" class="form-control" required autofocus>
+      <div class="col-md-6" ng-if="!ctrl.myAccount.Id">
+        <label for="emailConfirm" class="label-crud label-required" translate="myAccount.account.emailConfirm"></label>
+        <input type="email" id="emailConfirm" ng-model="ctrl.emailConfirm" placeholder="mail@example.com" class="form-control"
+          required>
         <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.emailConfirm">{{ctrl.validateError.message.emailConfirm}}</div>
       </div>
     </div>
-    <div class="row cda-row">
-      <div class="col-xs-6">
-        <label class="label-crud label-required" translate="myAccount.account.password"></label>
-        <input class="form-control" ng-model="ctrl.myAccount.Account.Password" type="password" minlength="8"
-          placeholder="••••••••" required autofocus />
+    <!--Password-->
+    <div class="row">
+      <div class="col-md-6">
+        <label for="password" class="label-crud label-required" translate="myAccount.account.password"></label>
+        <input type="password" class="form-control" id="password" ng-model="ctrl.myAccount.Account.Password"
+          placeholder="••••••••" minlength="8" required>
       </div>
-      <div class="col-xs-6">
-        <label class="label-crud label-required" translate="myAccount.account.passwordConfirm"></label>
-        <input class="form-control" ng-model="ctrl.passwordConfirm" type="password" minlength="8" placeholder="••••••••"
-          required autofocus />
+      <div class="col-md-6">
+        <label for="passwordConfirm" class="label-crud label-required" translate="myAccount.account.passwordConfirm"></label>
+        <input type="password" id="passwordConfirm" ng-model="ctrl.passwordConfirm" placeholder="••••••••" class="form-control"
+          required>
         <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.passwordConfirm">{{ctrl.validateError.message.passwordConfirm}}</div>
       </div>
     </div>
-    <div class="row cda-row">
-      <div class="col-xs-2">
-        <label class="label-crud" translate="myAccount.account.codeArea" ng-pattern="/^[7-9][0-9]{9}$/"></label>
-        <input ng-model="ctrl.myAccount.PhoneAreaCode" type="text" class="form-control">
-        <span class="error" ng-show="myForm.phone.$error.pattern">The characters are wrong. Set a valid number</span>
+    <!--Phone-->
+    <div class="row">
+      <div class="col-md-2">
+        <label for="codeArea" class="label-crud" translate="myAccount.account.codeArea"></label>
+        <input type="text" class="form-control" id="codeArea" ng-model="ctrl.myAccount.PhoneAreaCode">
       </div>
-      <div class="col-xs-8">
+      <div class="col-md-2">
+        <label class="label-crud" translate="myAccount.account.typeNumber"></label>
+        <select class="custom-select d-block w-100 form-control" id="typeNumber" ng-model="ctrl.myAccount.PhoneType"
+          ng-options="x.description for x in ctrl.phoneTypes"></select>
+      </div>
+      <div class="col-md-8">
         <label class="label-crud" translate="myAccount.account.phoneNumber"></label>
         <input name="phone" ng-model="ctrl.myAccount.PhoneNumber" type="text" class="form-control" ng-pattern="/^[0-9]/" />
-        <span class="validate-error ng-cloak" ng-show="CRUDMyAccountForm.phone.$error.pattern">The characters are
-          wrong. Set a valid number</span>
-      </div>
-      <div class="col-xs-2">
-        <label class="label-crud" translate="myAccount.account.typeNumber"></label>
-        <select class="btn btn-default col-xs-12" ng-model="ctrl.myAccount.PhoneType" ng-options="x.description for x in ctrl.phoneTypes track by x.Id"></select>
+        <span class="validate-error ng-cloak" ng-show="CRUDMyAccountForm.phone.$error.pattern">{{ctrl.validateError.message.phoneNumber}}</span>
       </div>
     </div>
-    <div class="row cda-row">
-      <div class="modal-footer">
-        <div class="col-xs-12">
-          <div class="terms-and-conditions-accept">
-            <input class="terms-and-conditions-checkbox" type="checkbox" ng-model="ctrl.termsAndConditionsChecked" aria-label="">
-            <a class="terms-and-conditions-text" type="" ng-click="ctrl.showModal(true)">{{'global.button.termsAndConditions'|translate}}</a>
-            <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.termsAndConditions">{{ctrl.validateError.message.termsAndConditions}}</div>
-          </div>
-          <button class="btn btn-lg btn-success" type="submit" ng-click="ctrl.save()" ng-disabled="ctrl.isLoading">
-            {{'global.button.save'|translate}}</button>
-          <button class="btn btn-lg btn-default" type="button" ng-click="ctrl.cancel()">
-            {{'global.button.cancel'|translate}}</button>
-      
+    <!-- Terms -->
+    <div class="col-md-12">
+      <div id="myModal" class="modal" ng-show="ctrl.modalVisible">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close" ng-click="ctrl.showModal(false)">&times;</span>
+          <p class="terms-and-conditions-text">Los siguientes términos y condiciones (los "Términos y Condiciones")
+            rigen
+            el
+            uso que
+            usted le dé a este sitio web y a cualquiera de los c
+            ontenidos disponibles por o a través de este sitio web, incluyendo cualquier contenido derivado del mismo
+            (el "Sitio Web"). Time Inc. ("Time Inc." o "nosotros") ha puesto a su disposición el Sitio Web. Podemos
+            cambiar los Términos y Condiciones de vez en cuando, en cualquier momento sin ninguna notificación,
+            sólo publicando los cambios en el Sitio Web. AL USAR EL SITIO WEB, USTED ACEPTA Y ESTÉ DE ACUERDO
+            CON ESTOS TÉRMINOS Y CONDICIONES EN LO QUE SE REFIERE A SU USO DEL SITIO WEB. Si usted no está de
+            acuerdo con estos Términos y Condiciones, no puede tener acceso al mismo ni usar el Sitio Web de ninguna
+            otra
+            manera.
+          </p>
+          <p class="terms-and-conditions-text">
+            1. Derechos de Propiedad. Entre usted y Time Inc., Time Inc. es dueño único y exclusivo, de todos los
+            derechos,
+            título e
+            intereses en y del Sitio Web, de todo el contenido (incluyendo, por ejemplo, audio, fotografías,
+            ilustraciones,
+            gráficos,
+            otros medios visuales, videos, copias, textos, software, títulos, archivos de Onda de choque, etc.),
+            códigos,
+            datos
+            y materiales
+            del mismo, el aspecto y el ambiente, el diseño y la organización del Sitio Web y la compilación de los
+            contenidos,
+            códigos, datos
+            y los materiales en el Sitio Web, incluyendo pero no limitado a, cualesquiera derechos de autor, derechos
+            de
+            marca,
+            derechos de patente,
+            derechos de base de datos, derechos morales, derechos sui generis y otras propiedades intelectuales y
+            derechos
+            patrimoniales del
+            mismo. Su uso del Sitio Web no le otorga propiedad de ninguno de los contenidos, códigos, datos o
+            materiales
+            a los
+            que pueda acceder
+            en o a través del Sitio Web.
+          </p>
+          <p class="terms-and-conditions-text">
+            2. Licencia Limitada. Usted puede acceder y ver el contenido del Sitio Web desde su computadora o desde
+            cualquier
+            otro aparato y,
+            a menos de que se indique de otra manera en estos Términos y Condiciones o en el Sitio Web, sacar copias o
+            impresiones individuales
+            del contenido del Sitio Web para su uso personal, interno únicamente. El uso del Sitio Web y de los
+            servicios
+            que
+            se ofrecen en o a
+            través del Sitio Web, son sólo para su uso personal, no comercial.
+          </p>
         </div>
       </div>
     </div>
-
-    <!-- The Modal -->
-    <div id="myModal" class="modal" ng-show="ctrl.modalVisible">
-
-      <!-- Modal content -->
-      <div class="modal-content">
-        <span class="close" ng-click="ctrl.showModal(false)">&times;</span>
-        <p class="terms-and-conditions-text">Los siguientes términos y condiciones (los "Términos y Condiciones") rigen el
-          uso que
-          usted le dé a este sitio web y a cualquiera de los c
-          ontenidos disponibles por o a través de este sitio web, incluyendo cualquier contenido derivado del mismo
-          (el "Sitio Web"). Time Inc. ("Time Inc." o "nosotros") ha puesto a su disposición el Sitio Web. Podemos
-          cambiar los Términos y Condiciones de vez en cuando, en cualquier momento sin ninguna notificación,
-          sólo publicando los cambios en el Sitio Web. AL USAR EL SITIO WEB, USTED ACEPTA Y ESTÉ DE ACUERDO
-          CON ESTOS TÉRMINOS Y CONDICIONES EN LO QUE SE REFIERE A SU USO DEL SITIO WEB. Si usted no está de
-          acuerdo con estos Términos y Condiciones, no puede tener acceso al mismo ni usar el Sitio Web de ninguna otra
-          manera.
-        </p>
-        <p class="terms-and-conditions-text">
-          1. Derechos de Propiedad. Entre usted y Time Inc., Time Inc. es dueño único y exclusivo, de todos los
-          derechos,
-          título e
-          intereses en y del Sitio Web, de todo el contenido (incluyendo, por ejemplo, audio, fotografías,
-          ilustraciones,
-          gráficos,
-          otros medios visuales, videos, copias, textos, software, títulos, archivos de Onda de choque, etc.), códigos,
-          datos
-          y materiales
-          del mismo, el aspecto y el ambiente, el diseño y la organización del Sitio Web y la compilación de los
-          contenidos,
-          códigos, datos
-          y los materiales en el Sitio Web, incluyendo pero no limitado a, cualesquiera derechos de autor, derechos de
-          marca,
-          derechos de patente,
-          derechos de base de datos, derechos morales, derechos sui generis y otras propiedades intelectuales y
-          derechos
-          patrimoniales del
-          mismo. Su uso del Sitio Web no le otorga propiedad de ninguno de los contenidos, códigos, datos o materiales
-          a los
-          que pueda acceder
-          en o a través del Sitio Web.
-        </p>
-        <p class="terms-and-conditions-text">
-          2. Licencia Limitada. Usted puede acceder y ver el contenido del Sitio Web desde su computadora o desde
-          cualquier
-          otro aparato y,
-          a menos de que se indique de otra manera en estos Términos y Condiciones o en el Sitio Web, sacar copias o
-          impresiones individuales
-          del contenido del Sitio Web para su uso personal, interno únicamente. El uso del Sitio Web y de los servicios
-          que
-          se ofrecen en o a
-          través del Sitio Web, son sólo para su uso personal, no comercial.
-        </p>
+    <!-- Submit -->
+    <br>
+    <div class="row">
+      <div class="modal-footer">
+        <div class="col-md-12">
+          <div class="terms-and-conditions-accept" ng-if="!ctrl.myAccount.Id">
+            <input class="terms-and-conditions-checkbox" type="checkbox" ng-model="ctrl.termsAndConditionsChecked"
+              aria-label="">
+            <a class="terms-and-conditions-text" type="" ng-click="ctrl.showModal(true)">{{'global.button.termsAndConditions'|translate}}</a>
+            <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.termsAndConditions">{{ctrl.validateError.message.termsAndConditions}}</div>
+          </div>
+          <button class="btn btn-lg btn-success" type="submit" ng-disabled="ctrl.isLoading" ng-click="ctrl.save()">{{'global.button.save'|translate}}</button>
+          <button class="btn btn-lg btn-default" type="button" ng-click="ctrl.cancel()">{{'global.button.cancel'|translate}}</button>
+        </div>
       </div>
     </div>
   </div>
+</form>

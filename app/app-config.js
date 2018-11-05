@@ -93,7 +93,8 @@
                             "passwordConfirm": "The passwords are not equals",
                             "email": "Set an valid email. The email must have a '@' and a '.'",
                             "password": "The password must have at least eight characters.",
-                            "termsAndConditions": "You must accept terms and conditions"
+                            "termsAndConditions": "You must accept terms and conditions",
+                            "phoneNumber": "Set a valid number. Only numbers and -"
                         }
                     },
                     "offers": {
@@ -163,8 +164,6 @@
                 $stateProvider.state('/my-offers/:Id', {
                     url: '/my-offers/:Id'
                 });
-
-              
 
                 $locationProvider.hashPrefix('');
 

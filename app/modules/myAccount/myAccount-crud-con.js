@@ -12,6 +12,7 @@
                 ctrl.validateError = {
                     show: {},
                     message: {
+                        phoneNumber: $translate.instant('myAccount.error.phoneNumber'),
                         text: $translate.instant('global.error.textRequired'),
                         emailConfirm: $translate.instant('myAccount.error.emailConfirm'),
                         passwordConfirm: $translate.instant('myAccount.error.passwordConfirm'),
@@ -86,15 +87,19 @@
                     ctrl.getAccount();
                 };
 
-                ctrl.onChangeCountries = function onChangeCountries() {
+                ctrl.onChangeCountries = function onChangeCountries(item) {
                     if (ctrl.myAccount.CountryOfResidence.Id) {
-                        ctrl.isLoadingCities = true;
-                        ctrl.isLoadingOptions();
-                        Cities.getAll({ idCountry: ctrl.myAccount.CountryOfResidence.Id }).$promise
-                            .then(ctrl.setCities)
-                            .finally(ctrl.onFinallyCities);
+                        ctrl.getCities();
                     }
                 };
+
+                ctrl.getCities = function getCities(){
+                    ctrl.isLoadingCities = true;
+                    ctrl.isLoadingOptions();
+                    Cities.getAll({ idCountry: ctrl.myAccount.CountryOfResidence.Id }).$promise
+                        .then(ctrl.setCities)
+                        .finally(ctrl.onFinallyCities);
+                }
 
                 ctrl.setCities = function setCities(result) {
                     ctrl.cities = result;
@@ -126,7 +131,8 @@
                             return obj.code === ctrl.myAccount.PhoneType;
                         });
                     };
-                    ctrl.dateSelected.value = ctrl.myAccount.DateOfBirth;
+                    ctrl.getCities();
+                    ctrl.dateSelected.value = new Date(ctrl.myAccount.DateOfBirth);
                 };
                 ctrl.onCatchAccount = function onCatchAccount(res) {
                     console.log(res);
@@ -184,6 +190,7 @@
                 };
 
                 ctrl.validate = function validate() {
+                    ctrl.hasValidated = false;
                     var validations = true;
                     ctrl.validateError.show.email = !ctrl.myAccount.Account.Mail || ctrl.myAccount.Account.Mail.indexOf('.') === -1;
                     ctrl.validateError.show.emailConfirm = !ctrl.emailConfirm || ctrl.myAccount.Account.Mail !== ctrl.emailConfirm;
@@ -195,6 +202,7 @@
                             break;
                         }
                     }
+                    ctrl.hasValidated = true;
                     return validations;
                 };
 
