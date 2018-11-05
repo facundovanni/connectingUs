@@ -4,6 +4,7 @@
     function loginController($scope, Login, $translate, $state) {
       var ctrl = this;
       ctrl.user = {};
+      ctrl.error = false;
 
       ctrl.goToSignUp = function goToSignUp() {
         $state.go('/account');
@@ -17,11 +18,12 @@
         ctrl.isLoading = true;
         Login.getSession(ctrl.user).$promise
           .then(ctrl.goToOffers)
-          .finally(ctrl.finallyLogin);
+          .finally(ctrl.finallyLogin)
+          .catch(ctrl.onCatchLogin);
       };
 
       ctrl.onCatchLogin = function onCatchLogin() {
-
+        ctrl.error = true;
       };
 
       ctrl.finallyLogin = function finallyLogin(){

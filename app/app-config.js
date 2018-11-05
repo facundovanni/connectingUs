@@ -58,7 +58,8 @@
                         "password": "Password",
                         "signIn": "Sign In",
                         "signOut": "Log Out",
-                        "signUp": "Not registered yet? Sign Up!"
+                        "signUp": "Not registered yet? Sign Up!",
+                        "error": "The email or password are wrong"
                     },
                     "about": {
                         "title": "About us",
