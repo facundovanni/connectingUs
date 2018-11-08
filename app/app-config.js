@@ -126,6 +126,7 @@
                         "city": "City",
                         "description": "Description",
                         "updateService": "Save Service",
+                        "cancelUpdate": "Cancel",
                         "active": "Disable service"
 
 
