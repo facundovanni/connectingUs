@@ -12,6 +12,7 @@
                 ctrl.validateError = {
                     show: {},
                     message: {
+                        phoneNumber: $translate.instant('myAccount.error.phoneNumber'),
                         text: $translate.instant('global.error.textRequired'),
                         emailConfirm: $translate.instant('myAccount.error.emailConfirm'),
                         passwordConfirm: $translate.instant('myAccount.error.passwordConfirm'),
@@ -61,7 +62,7 @@
                         { code: 'M', description: $translate.instant('global.phoneType.mobile') },
                         { code: 'H', description: $translate.instant('global.phoneType.home') },
                         { code: 'O', description: $translate.instant('global.phoneType.other') }
-                    ]
+                    ];
                     ctrl.isLoadingCountries = true;
                     ctrl.isLoadingOptions();
                     Countries.getAll().$promise
@@ -86,15 +87,19 @@
                     ctrl.getAccount();
                 };
 
-                ctrl.onChangeCountries = function onChangeCountries() {
+                ctrl.onChangeCountries = function onChangeCountries(item) {
                     if (ctrl.myAccount.CountryOfResidence.Id) {
-                        ctrl.isLoadingCities = true;
-                        ctrl.isLoadingOptions();
-                        Cities.getAll({ idCountry: ctrl.myAccount.CountryOfResidence.Id }).$promise
-                            .then(ctrl.setCities)
-                            .finally(ctrl.onFinallyCities);
+                        ctrl.getCities();
                     }
                 };
+
+                ctrl.getCities = function getCities(){
+                    ctrl.isLoadingCities = true;
+                    ctrl.isLoadingOptions();
+                    Cities.getAll({ idCountry: ctrl.myAccount.CountryOfResidence.Id }).$promise
+                        .then(ctrl.setCities)
+                        .finally(ctrl.onFinallyCities);
+                }
 
                 ctrl.setCities = function setCities(result) {
                     ctrl.cities = result;
@@ -126,7 +131,8 @@
                             return obj.code === ctrl.myAccount.PhoneType;
                         });
                     };
-                    ctrl.dateSelected.value = ctrl.myAccount.DateOfBirth;
+                    ctrl.getCities();
+                    ctrl.dateSelected.value = new Date(ctrl.myAccount.DateOfBirth);
                 };
                 ctrl.onCatchAccount = function onCatchAccount(res) {
                     console.log(res);
@@ -165,17 +171,24 @@
                     ctrl.isLoading = true;
                     MyAccount.save(ctrl.myAccount).$promise
                         .then(ctrl.onThenNew)
+                        .catch(ctrl.onCatchSave)
                         .finally(ctrl.onFinallySave);
                 };
 
                 ctrl.onFinallySave = function onFinally(result) {
                     ctrl.isLoading = false;
-                }
+                };
+                
+                ctrl.onCatchSave = function onFinally(result) {
+                    ctrl.alert.show = true;
+                    ctrl.alert.message = $translate.instant('global.message.saveError');
+                    ctrl.alert.type = 'alert-danger';
+                };
 
                 ctrl.onThenNew = function onThenNew(res) {
                     ctrl.alert.show = true;
-                    ctrl.alert.message = $translate.instant(result ? 'global.message.saveSuccess' : 'global.message.saveError');
-                    ctrl.alert.type = result ? 'alert-success' : 'alert-danger';
+                    ctrl.alert.message = $translate.instant(res ? 'global.message.saveSuccess' : 'global.message.saveError');
+                    ctrl.alert.type = res ? 'alert-success' : 'alert-danger';
                     $state.go('/offers');
                 };
 
@@ -184,17 +197,19 @@
                 };
 
                 ctrl.validate = function validate() {
+                    ctrl.hasValidated = false;
                     var validations = true;
                     ctrl.validateError.show.email = !ctrl.myAccount.Account.Mail || ctrl.myAccount.Account.Mail.indexOf('.') === -1;
                     ctrl.validateError.show.emailConfirm = !ctrl.emailConfirm || ctrl.myAccount.Account.Mail !== ctrl.emailConfirm;
                     ctrl.validateError.show.passwordConfirm = !ctrl.passwordConfirm || ctrl.myAccount.Account.Password !== ctrl.passwordConfirm;
-                    ctrl.validateError.show.termsAndConditions = !ctrl.termsAndConditionsChecked;
+                    //ctrl.validateError.show.termsAndConditions = !ctrl.termsAndConditionsChecked;
                     for (const prop in ctrl.validateError.show) {
                         if (ctrl.validateError.show[prop]) {
                             validations = false;
                             break;
                         }
                     }
+                    ctrl.hasValidated = true;
                     return validations;
                 };
 

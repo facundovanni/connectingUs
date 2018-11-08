@@ -1,7 +1,7 @@
 (function usersGridScope(angular) {
   'use strict';
-  angular.module('connectingUsCenter.about').controller('AboutController', ['$scope', 'About', 'Countries', '$translate', '$state',
-    function aboutController($scope, About, Countries, $translate, $state) {
+  angular.module('connectingUsCenter.about').controller('AboutController', ['$scope', 'Countries', '$translate', '$state',
+    function aboutController($scope, Countries, $translate, $state) {
       var ctrl = this;
       ctrl.isLoadingCountries = false;
       ctrl.isLoadingMap = false;
@@ -37,7 +37,7 @@
  
        ctrl.onFinallyCountriesOfService = function onFinallyCountries() {
          ctrl.isLoadingCountries = false;
-         ctrl.loadMap();
+         //ctrl.loadMap();
        };
  
        ctrl.init = function init() {

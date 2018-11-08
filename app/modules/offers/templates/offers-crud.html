@@ -1,39 +1,54 @@
-<div us-spinner spinner-on="ctrl.isLoading" class="offers-filter">
-  <div class="row cda-row">
+<form name="CRUDMOfferForm" class="crud needs-validation offers-filter" us-spinner spinner-on="ctrl.isLoading">
+  <div class="container">
     <div class="row cda-row">
-      <h1 class="col-xs-12 title-initial">{{'myOffer.titleView'| translate}}</h1>
+      <h1 ng-if="!ctrl.myOffer" class="col-md-12 title-initial">{{ctrl.offer.Title}}</h1>
+      <h1 ng-if="ctrl.myOffer" class="col-md-12 title-initial">{{'myOffer.titleView' | translate}}</h1>
     </div>
-  </div>
-  <div class="row cda-row">
-    <div class="row">
-      <div class="col-xs-6 col-sm-3">
-        <img src="content/images/camera.png" class="offer-image">
+    <div class="row cda-row">
+      <div class="row cda-row">
+        <div class="col-md-6 text-center">
+          <img src="content/images/bg2.jpg" class="offer-image">
+        </div>
+        <div class="col-md-6 well">
+          <div class="col-md-12" ng-if="ctrl.myOffer">
+            <label class="label-crud" ng-class="ctrl.myOffer ? 'label-required' : ''" translate="myOffer.title">>:</label>
+            <input type="text" class="form-control" id="firstName" placeholder="" ng-model="ctrl.offer.Title" required>
+          </div>
+          <div class="col-md-12">
+            <label class="label-crud" ng-class="ctrl.myOffer ? 'label-required' : ''" translate="myOffer.category">>:</label>
+            <br><label ng-if="!ctrl.myOffer" class="offer-label">{{ctrl.offer.Category.Description}}</label>
+            <select ng-if="ctrl.myOffer" class="custom-select d-block w-100  form-control" id="category" ng-model="ctrl.offer.Category"
+              ng-options="x.Description for x in ctrl.categories track by x.Id" required></select>
+          </div>
+          <div class="col-md-12">
+            <label class="label-crud" ng-class="ctrl.myOffer ? 'label-required' : ''" translate="myOffer.country">:</label>
+            <br><label ng-if="!ctrl.myOffer" class="offer-label">{{ctrl.offer.Country.Name}}</label>
+            <select ng-if="ctrl.myOffer" class="custom-select d-block w-100  form-control" id="category" ng-model="ctrl.offer.Country"
+              ng-options="x.Name for x in ctrl.countries track by x.Id" ng-change="ctrl.onSelectCountry()" required></select>
+          </div>
+          <div class="col-md-12">
+            <label class="label-crud" ng-class="ctrl.myOffer ? 'label-required' : ''" translate="myOffer.city">:</label>
+            <br><label ng-if="!ctrl.myOffer" class="offer-label">{{ctrl.offer.City.Name}}</label>
+            <select ng-if="ctrl.myOffer" class="custom-select d-block w-100  form-control" id="city" ng-model="ctrl.offer.City"
+              ng-options="x.Name for x in ctrl.cities track by x.Id" required></select>
+          </div>
+          <div class="col-md-12">
+            <label class="label-crud" ng-class="ctrl.myOffer ? 'label-required' : ''" translate="myOffer.description">:</label>
+            <textarea ng-if="ctrl.myOffer" class="offer-text form-control" ng-model="ctrl.offer.Description"></textarea>
+            <label ng-if="!ctrl.myOffer" class="offer-text" ng-model="ctrl.offer.Description">{{ctrl.offer.Description}}</label>
+          </div>
+          <div class="col-md-12" ng-if="ctrl.myOffer">
+            <label class="label-crud label-required"><input type="checkbox" ng-model="ctrl.offer.Active">{{'myOffer.active'
+              | translate}}</label>
+          </div>
+        </div>
       </div>
-      <div class="col-xs-6">
-        <label class="offer-label">{{'myOffer.title'| translate}}: </label>
-        <input ng-readonly="!ctrl.myOffer" class="offer-label" ng-model="ctrl.offer.Title"><br>
-        <uib-accordion close-others="true">
-          <div>
-            <label class="offer-label offer-accordeon-title">{{'myOffer.category'| translate}}: </label>
-            <select ng-disabled="!ctrl.myOffer" class="btn btn-default offer-select" ng-model="ctrl.offer.Category" ng-options="x.Description for x in ctrl.categories track by x.Id"></select>
-          </div> <br>
-          <div>
-            <label class="offer-label offer-accordeon-title">{{'myOffer.country'| translate}}: </label>
-            <select ng-disabled="!ctrl.myOffer" class="btn btn-default offer-select" ng-options="x.Name for x in ctrl.countries track by x.Id"
-              ng-model="ctrl.offer.Country" ng-change="ctrl.onSelectCountry()"></select>
-          </div>
-          <br>
-          <div> <label class="offer-label offer-accordeon-title">{{'myOffer.city'| translate}}: </label>
-            <div ng-if="ctrl.offer.Country">
-              <select  ng-disabled="!ctrl.myOffer" class="btn btn-default offer-select" ng-model="ctrl.offer.City" ng-options="x.Name for x in ctrl.cities track by x.Id" aria-placeholder="Select"></select>
-            </div>
-          </div>
-        </uib-accordion>
-        <label class="offer-label">{{'myOffer.description'| translate}}</label> <br>
-        <textarea  ng-readonly="!ctrl.myOffer" class="offer-text" ng-model="ctrl.offer.Description"></textarea> <br> <br> <br>
+    </div>
+    <div class="row cda-row" ng-if="ctrl.myOffer">
+      <div class="col-md-12">
         <button ng-if=ctrl.myOffer type="button" class="btn btn-primary btn-save-myOffer" type="submit" ng-click="ctrl.updateService()">{{'myOffer.updateService'|
           translate}}</button>
-        <!-- <label class="offer-label">{{'myOffer.updateSuccess'| translate}}</label> <br>  -->
       </div>
     </div>
   </div>
+</form>

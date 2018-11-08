@@ -1,78 +1,83 @@
 <div us-spinner spinner-on="ctrl.isLoading" class="offers-filter">
-  <div class="row cda-row">
+  <div class="container">
+    <!--Title-->
     <div class="row cda-row">
-      <h1 class="col-xs-12 title-initial">
+      <h1 class="col-md-12 title-initial">
         <span ng-if="!ctrl.myOffers">{{'offers.title.users'| translate}}</span>
         <span ng-if="ctrl.myOffers">{{'offers.title.my'| translate}}</span>
       </h1>
     </div>
-  </div>
-  <div class="row cda-row">
-    <div class="col-xs-2">
-      <div class="row cda-row">
-        <div class="title">
-          {{'offers.filter.title' | translate}}
+    <!--Filters-->
+    <div class="row cda-row">
+      <div class="col-md-2">
+        <!--Filters title-->
+        <div class="row cda-row">
+          <div class="title">
+            {{'offers.filter.title' | translate}}
+          </div>
         </div>
-      </div>
-      <div class="row cda-row">
-        <div class="col-xs-12 combo subtitle">
-          <uib-accordion close-others="true">
-            <div uib-accordion-group class="panel-default" heading="{{'offers.filter.type' | translate}}" is-open="status.isFirstOpen">
-              <ul ng-repeat="category in ctrl.categories" class="offers-list">
-                <li><input type="checkbox" ng-model="category.selected">{{category.Description}}</li>
-              </ul>
-            </div>
-            <div uib-accordion-group class="panel-default" heading="{{'offers.filter.location' | translate}}" is-open="status.isFirstOpen">
-              <div class="row cda-row">
-                <div class="col-xs-12">
-                  <select class="btn btn-default col-xs-12" ng-model="ctrl.filterCountry" ng-options="x.Name for x in ctrl.countries track by x.Id"
-                    ng-change="ctrl.onSelectCountry()"></select>
+        <div class="row cda-row">
+          <div class="col-md-12 combo subtitle">
+            <uib-accordion close-others="true">
+              <div uib-accordion-group class="panel-default" heading="{{'offers.filter.type' | translate}}" is-open="status.isFirstOpen">
+                <ul ng-repeat="category in ctrl.categories" class="offers-list">
+                  <li><input type="checkbox" ng-model="category.selected">{{category.Description}}</li>
+                </ul>
+              </div>
+              <div uib-accordion-group class="panel-default" heading="{{'offers.filter.location' | translate}}" is-open="status.isFirstOpen">
+                <div class="row cda-row">
+                  <div class="col-md-12">
+                    <select class="btn btn-default col-md-12" ng-model="ctrl.filterCountry" ng-options="x.Name for x in ctrl.countries track by x.Id"
+                      ng-change="ctrl.onSelectCountry()"></select>
+                  </div>
+                </div>
+                <div class="row cda-row" ng-if="ctrl.filterCountry">
+                  <div class="col-md-12">
+                    <select class="btn btn-default col-md-12" ng-model="ctrl.filterCity" ng-options="x.Name for x in ctrl.cities track by x.Id"></select>
+                  </div>
                 </div>
               </div>
-              <div class="row cda-row" ng-if="ctrl.filterCountry">
-                <div class="col-xs-12">
-                  <select class="btn btn-default col-xs-12" ng-model="ctrl.filterCity" ng-options="x.Name for x in ctrl.cities track by x.Id"></select>
+              <div ng-if="ctrl.myOffers" uib-accordion-group class="panel-default" heading="{{'offers.filter.inactives' | translate}}"
+                is-open="status.isFirstOpen">
+                <div class="row cda-row">
+                  <div class="col-md-12">
+                    <input type="checkbox" ng-checked="ctrl.showInactives">{{'offers.filter.inactivesOptions' |
+                    translate}}</select>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div uib-accordion-group class="panel-default" heading="{{'offers.filter.inactives' | translate}}" is-open="status.isFirstOpen">
-              <div class="row cda-row">
-                <div class="col-xs-12">
-                  <input type="checkbox" ng-checked="ctrl.showInactives">{{'offers.filter.inactivesOptions' | translate}}</select>
-                </div>
-              </div>
-            </div>
-          </uib-accordion>
+            </uib-accordion>
+          </div>
+        </div>
+        <div class="row cda-row">
+          <div class="col-md-12 button-clean">
+            <button ng-click="ctrl.updateOffers()" class="btn btn-primary btnClean">{{'offers.filter.applyFilter'
+              | translate }}</button>
+          </div>
+          <div class="col-md-12 button-clean">
+            <button ng-click="ctrl.clearAllFilters()" class="btn btn-primary btnClean">{{'offers.filter.clearAll'
+              | translate }}</button>
+          </div>
         </div>
       </div>
-      <div class="row cda-row">
-        <div class="col-xs-12 button-clean">
-          <button ng-click="ctrl.updateOffers()" class="btn btn-primary btnClean">{{'offers.filter.applyFilter'
-            | translate }}</button>
+      <div class="col-md-10 border-left text-center">
+        <div class="row cda-row">
+          <div class="input-group col-md-10">
+            <input ng-model="ctrl.searchText" ng-change="ctrl.search()" class="form-control" placeholder="{{'offers.searchItem' | translate}}"
+              type="text" ng-model-options="{ debounce: 1000}" />
+            <span class="input-group-btn">
+              <button class="btn btn-primary" type="submit">
+                <span class="glyphicon glyphicon-search"></span>
+              </button>
+            </span>
+          </div>
         </div>
-        <div class="col-xs-12 button-clean">
-          <button ng-click="ctrl.clearAllFilters()" class="btn btn-primary btnClean">{{'offers.filter.clearAll'
-            | translate }}</button>
+        <div ng-if="ctrl.offers">
+          <offers-list item-new="ctrl.myOffers" open-state="ctrl.myOffers ? '/my-offers/:Id' : '/offers/:Id' " items="ctrl.offers"></offers-list>
         </div>
-      </div>
-    </div>
-    <div class="col-xs-10 border-left">
-      <div class="row cda-row">
-        <div class="input-group col-xs-10">
-          <input ng-model="ctrl.searchText" ng-change="ctrl.search()" class="form-control" placeholder="{{'offers.searchItem' | translate}}"
-            type="text" ng-model-options="{ debounce: 1000}" />
-          <span class="input-group-btn">
-            <button class="btn btn-primary" type="submit">
-              <span class="glyphicon glyphicon-search"></span>
-            </button>
-          </span>
+        <div ng-if="!ctrl.offers || ctrl.offers.lenght == 0" class="noItems">
+          {{'offers.noItems' | translate}}
         </div>
-      </div>
-      <div ng-if="ctrl.offers">
-        <offers-list item-new="ctrl.myOffers" open-state="ctrl.myOffers ? '/my-offers/:Id' : '/offers/:Id' " items="ctrl.offers"></offers-list>
-      </div>
-      <div ng-if="!ctrl.offers || ctrl.offers.lenght == 0" class="noItems">
-        {{'offers.noItems' | translate}}
       </div>
     </div>
   </div>

@@ -54,8 +54,8 @@
                     },
                     "login": {
                         "welcome": "Welcome to Connecting Us",
-                        "email": "email",
-                        "password": "password",
+                        "email": "Email",
+                        "password": "Password",
                         "signIn": "Sign In",
                         "signOut": "Log Out",
                         "signUp": "Not registered yet? Sign Up!",
@@ -94,7 +94,8 @@
                             "passwordConfirm": "The passwords are not equals",
                             "email": "Set an valid email. The email must have a '@' and a '.'",
                             "password": "The password must have at least eight characters.",
-                            "termsAndConditions": "You must accept terms and conditions"
+                            "termsAndConditions": "You must accept terms and conditions",
+                            "phoneNumber": "Set a valid number. Only numbers and -"
                         }
                     },
                     "offers": {
@@ -124,7 +125,8 @@
                         "country": "Country",
                         "city": "City",
                         "description": "Description",
-                        "updateService": "Save Service"
+                        "updateService": "Save Service",
+                        "active": "Disable service"
 
 
                     }
@@ -164,8 +166,6 @@
                 $stateProvider.state('/my-offers/:Id', {
                     url: '/my-offers/:Id'
                 });
-
-              
 
                 $locationProvider.hashPrefix('');
 

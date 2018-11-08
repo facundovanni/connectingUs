@@ -1,34 +1,39 @@
 <div ng-controller="LoginController as ctrl" us-spinner spinner-on="ctrl.isLoading">
-  <div class="row">
-    <img class="center-block img-responsive login-image" height="400" width="400" src="content/images/connectingUsLogo.png">
-    <div class="col-xs-12">
-      <form class="well center-block login-shadow" style="max-width: 35rem">
-        <legend class="text-center" translate="login.welcome"></legend>
-        <div class="row">
-          <div class="login-input has-float-label">
-            <label for="email" translate="login.email"></label>
-            <input class="form-control" ng-model="ctrl.user.Mail" type="email" placeholder="mail@example.com" required autofocus />
+  <div class="container">
+    <div class="row cda-row">
+      <img class="center-block img-responsive login-image" height="400" width="400" src="content/images/connectingUsLogo.png">
+    </div>
+    <div class="row cda-row">
+      <div class="col-md-12">
+        <form class="well center-block login-shadow" style="max-width: 35rem">
+          <legend class="text-center" translate="login.welcome"></legend>
+          <div class="row cda-row">
+            <div class="login-input has-float-label">
+              <label for="email" class="label-crud" translate="login.email"></label>
+              <input class="form-control" ng-model="ctrl.user.Mail" type="email" placeholder="mail@example.com"
+                required autofocus />
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="login-input has-float-label">
-            <label for="password" translate="login.password"></label>
-            <input class="form-control" ng-model="ctrl.user.Password" type="password" placeholder="••••••••" required autofocus />
+          <div class="row cda-row">
+            <div class="login-input">
+              <label for="password" class="label-crud" translate="login.password"></label>
+              <input class="form-control" ng-model="ctrl.user.Password" type="password" placeholder="••••••••" required
+                autofocus />
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-6">
-            <button class="btn btn-block btn-primary" type="submit" ng-click="ctrl.singIn()" translate="login.signIn"></button>
+          <div class="row cda-row">
+            <div class="col-md-6">
+              <button class="btn btn-block btn-primary" type="submit" ng-click="ctrl.singIn()" translate="login.signIn"></button>
+            </div>
+            <div class="col-md-6">
+              <a href="" class="label-crud" ng-click="ctrl.goToSignUp()">{{'login.signUp' | translate}}</a>
+            </div>
           </div>
-          <div class="col-xs-6">
-            <a href="" ng-click="ctrl.goToSignUp()">{{'login.signUp' | translate}}</a>
+          <div class="row cda-row">
+            <div class="col-md-6 validate-error" ng-show="ctrl.error">{{'login.error' | translate}}</div>
           </div>
-        </div>
-        <div class="row text-center">
-          <br/>
-          <span class="validate-error " ng-show="ctrl.error">{{'login.error' | translate}}</span>
-        </div>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
 </div>

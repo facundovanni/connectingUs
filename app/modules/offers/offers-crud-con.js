@@ -17,65 +17,7 @@
         show: false,
         message: undefined,
         type: undefined
-      }
-
-      // ctrl.getService = function getService(idService) {
-      //   ctrl.isLoading = true;
-      //   Offers.getService({ idService: ctrl.offer.Id }).$promise
-      //     .then(ctrl.setOffers)
-      //     .catch(ctrl.onCatchAccount)
-      //     .finally(ctrl.onFinallyService);
-      // };
-
-      // ctrl.setOffers = function setOffers(result) {
-      //   ctrl.offer = result[0];
-      // };
-
-      // ctrl.onFinallyService = function onFinallyService() {
-      //   ctrl.isLoading = false;
-      //   ctrl.getCategories();
-      //   ctrl.getCountries();
-      //   ctrl.getCities();
-      // };
-
-      // ctrl.isFullyLoaded = function isFullyLoaded() {
-      //   ctrl.isLoading = ctrl.isLoadingCountries || ctrl.isLoadingOfferss || ctrl.isLoadingCities || ctrl.isLoadingCategories;
-      // };
-
-      // ctrl.getCategories = function getCountries() {
-      //   ctrl.isLoadingCategories = true;
-      //   ctrl.isFullyLoaded();
-      //   Categories.getAll().$promise
-      //     .then(ctrl.setCategories)
-      //     // .catch(ctrl.onCatchAccount)
-      //     .finally(ctrl.onFinallyCategories);
-      // };
-
-      // ctrl.setCategories = function setCategories(result) {
-      //   ctrl.categories = result;
-      // };
-
-      // ctrl.onFinallyCategories = function onFinallyCategories() {
-      //   ctrl.isLoadingCategories = false;
-      //   ctrl.isFullyLoaded();
-      // };
-
-      // ctrl.getCountries = function getCountries() {
-      //   ctrl.isLoadingCountries;
-      //   ctrl.isFullyLoaded();
-      //   Countries.getAll().$promise
-      //     .then(ctrl.setCountries)
-      //     .finally(ctrl.onFinallyCountries);
-      // };
-
-      // ctrl.setCountries = function setCountries(result) {
-      //   ctrl.countries = result;
-      // };
-
-      // ctrl.onFinallyCountries = function onFinallyCountries() {
-      //   ctrl.isLoadingCountries = false;
-      //   ctrl.isFullyLoaded();
-      // };
+      };
 
       ctrl.getCities = function getCities() {
         ctrl.isLoading = true;
@@ -107,7 +49,7 @@
 
       ctrl.onFinallyUpdate = function onFinally(result) {
         ctrl.isLoading = false;
-      }
+      };
 
       ctrl.onThenNew = function onThenNew(res) {
         alert("Service updated");
