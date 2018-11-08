@@ -1,44 +1,39 @@
-﻿<div id="mainPriceListItemsItem" class="offers-body">
-    <div id="plus" class="hoverplus">
-        <p>Ver más</p>
-    </div>
-    <div class="offers-container">
-
-        <div ng-if="!item" class="newItem">
-            <div class="row cda-row">
-                <div class="col-xs-12">{{'offers.addNew' | translate}}</div>
-            </div>
+﻿<a class="list-group-item offers-body">
+    <div class="row cda-row">
+        <div class="media col-md-3">
+            <figure class="pull-left">
+                <img ng-if="item.image" class="media-object img-rounded img-responsive" src="item.Image">
+                <img ng-if="!item.image" class="media-object img-rounded img-responsive" src="content/images/bg2.jpg">
+            </figure>
         </div>
-        <div ng-if="item">
+        <div class="col-md-9">
             <div class="row cda-row">
-                <div class="col-xs-12">
-                    <div class="img">
-                        <div class="adjust-image">
-                            <img ng-if="item.image" src="item.Image">
-                            <img ng-if="!item.image" src="content/images/bg2.jpg">
-                        </div>
-                    </div>
-                </div>
+                <div class="col-md-12 nameGeneric">{{item.Title}}</div>
             </div>
             <div class="row cda-row">
-                <div class="col-xs-12 nameGeneric">{{item.Title}}</div>
-            </div>
-            <div class="row cda-row">
-                <div class="col-xs-12 nameElement">
+                <div class="col-md-12 nameElement">
                     <div ng-if="item.Category.Description">
-                        <span class="attributeName">{{'offers.category' | translate}}</span>
-                        <span>{{item.Category.Description}}</span>
+                        <span>{{'offers.category' | translate}}</span>
+                        <span class="attributeName">{{item.Category.Description}}</span>
                     </div>
+                </div>
+            </div>
+            <div class="row cda-row">
+                <div class="col-md-12 nameElement">
                     <div ng-if="item.Country">
-                        <span class="attributeName">{{'offers.country' | translate}}</span>
-                        <span>{{item.Country.Name}}</span>
+                        <span>{{'offers.country' | translate}}</span>
+                        <span class="attributeName">{{item.Country.Name}}</span>
                     </div>
+                </div>
+            </div>
+            <div class="row cda-row">
+                <div class="col-md-12 nameElement">
                     <div ng-if="item.City">
-                        <span class="attributeName">{{'offers.city' | translate}}</span>
-                        <span>{{item.City.Name}}</span>
+                        <span>{{'offers.city' | translate}}</span>
+                        <span class="attributeName">{{item.City.Name}}</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</a>

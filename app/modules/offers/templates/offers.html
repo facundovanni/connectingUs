@@ -60,7 +60,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-10 border-left text-center">
+      <div class="col-md-10">
         <div class="row cda-row">
           <div class="input-group col-md-10">
             <input ng-model="ctrl.searchText" ng-change="ctrl.search()" class="form-control" placeholder="{{'offers.searchItem' | translate}}"
@@ -72,7 +72,7 @@
             </span>
           </div>
         </div>
-        <div ng-if="ctrl.offers">
+        <div class="row cda-row" ng-if="ctrl.offers">
           <offers-list item-new="ctrl.myOffers" open-state="ctrl.myOffers ? '/my-offers/:Id' : '/offers/:Id' " items="ctrl.offers"></offers-list>
         </div>
         <div ng-if="!ctrl.offers || ctrl.offers.lenght == 0" class="noItems">
