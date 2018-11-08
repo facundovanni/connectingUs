@@ -127,7 +127,8 @@
                         "description": "Description",
                         "updateService": "Save Service",
                         "cancelUpdate": "Cancel",
-                        "active": "Disable service"
+                        "active": "Disable service",
+                        "startConversation": "Start conversation"
 
 
                     }
