@@ -174,3 +174,7 @@ a.list-group-item:hover{
 .stars {
   margin:20px auto 1px;    
 }
+
+.remove-left{
+  margin-left:-40px;
+}
