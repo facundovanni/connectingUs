@@ -1,7 +1,7 @@
 (function usersGridScope(angular) {
   'use strict';
-  angular.module('connectingUsCenter.offers').controller('OffersCRUDController', ['$scope', 'Offers', 'Countries', 'Cities', 'Categories', '$translate', '$stateParams', 'isMyOwn', '$q',
-    function OffersCRUDController($scope, Offers, Countries, Cities, Categories, $translate, $stateParams, isMyOwn, $q) {
+  angular.module('connectingUsCenter.offers').controller('OffersCRUDController', ['$scope', 'Offers', 'Countries', 'Cities', 'Categories', '$translate', '$stateParams', 'isMyOwn', '$q', '$state',
+    function OffersCRUDController($scope, Offers, Countries, Cities, Categories, $translate, $stateParams, isMyOwn, $q, $state) {
       var ctrl = this;
       ctrl.isLoading = false;
       ctrl.isLoadingCountries = false;
@@ -17,6 +17,17 @@
         show: false,
         message: undefined,
         type: undefined
+      };
+      ctrl.validateError = {
+        show: {},
+        message: {
+            title: $translate.instant('myOffer.error.title'),
+            category: $translate.instant('myOffer.error.category'),
+            country: $translate.instant('myOffer.error.country'),
+            city: $translate.instant('myOffer.error.city'),
+            description: $translate.instant('myOffer.error.description'),
+            valdiate: $translate.instant('myOffer.error.validate')
+        }
       };
 
       ctrl.getCities = function getCities() {
@@ -42,19 +53,49 @@
 
       ctrl.updateService = function udpateService() {
         ctrl.isLoading = true;
+        if(ctrl.validate()){
         Offers.save(ctrl.offer).$promise
           .then(ctrl.onThenNew)
           .finally(ctrl.onFinallyUpdate);
+        }
       }
 
       ctrl.onFinallyUpdate = function onFinally(result) {
         ctrl.isLoading = false;
+        ctrl.goToMyOffers()
       };
 
       ctrl.onThenNew = function onThenNew(res) {
         alert("Service updated");
       };
 
+      ctrl.cancelUpdate = function cancelUpdate() {
+        ctrl.goToMyOffers();
+      }
+
+      ctrl.goToMyOffers = function goToMyOffers() {
+        $state.go('/my-offers');
+      }
+
+      ctrl.validate = function validate() {
+        ctrl.hasValidated = false;
+        var validations = true;
+        ctrl.validateError.show.title = !ctrl.offer.Title;
+        ctrl.validateError.show.category = !ctrl.offer.Categorie;
+        ctrl.validateError.show.country = !ctrl.offer.Country;
+        ctrl.validateError.show.city = !ctrl.offer.City;
+        ctrl.validateError.show.description = !ctrl.offer.Description;
+        ctrl.validateError.show.validate = ctrl.offer.Validate == null;
+        for (const prop in ctrl.validateError.show) {
+          if (ctrl.validateError.show[prop]) {
+            validations = false;
+            ctrl.isLoading = false;
+            break;
+          }
+        }
+        ctrl.hasValidated = true;
+        return validations;
+      };
 
       ctrl.init = function init() {
         ctrl.isLoading = true;

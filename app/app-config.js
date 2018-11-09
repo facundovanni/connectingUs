@@ -116,7 +116,7 @@
                         },
                         "city": "City",
                         "country": "Country",
-                        "category": "Category"
+                        "category": "Category",
                     },
                     "myOffer": {
                         "titleView": "Offer Details",
@@ -126,7 +126,17 @@
                         "city": "City",
                         "description": "Description",
                         "updateService": "Save Service",
-                        "active": "Disable service"
+                        "cancelUpdate": "Cancel",
+                        "active": "Disable service",
+                        "startConversation": "Start conversation",
+                        "error": {
+                            "title": "The title is required",
+                            "category":"The category is required",
+                            "country": "The country is required",
+                            "city": "The city is required",
+                            "description":"The description is required",
+                            "status": "The status is required",
+                        }
 
 
                     }
