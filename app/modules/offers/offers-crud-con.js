@@ -85,7 +85,6 @@
         ctrl.validateError.show.country = !ctrl.offer.Country;
         ctrl.validateError.show.city = !ctrl.offer.City;
         ctrl.validateError.show.description = !ctrl.offer.Description;
-        ctrl.validateError.show.validate = ctrl.offer.Validate == null;
         for (const prop in ctrl.validateError.show) {
           if (ctrl.validateError.show[prop]) {
             validations = false;
