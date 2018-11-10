@@ -1,23 +1,23 @@
 <div ng-controller="LoginController as ctrl" us-spinner spinner-on="ctrl.isLoading">
   <div class="container">
     <div class="row cda-row">
-      <img class="center-block img-responsive login-image" height="400" width="400" src="content/images/connectingUsLogo.png">
+      <img class="center-block img-responsive login-image" src="content/images/connectingUsLogo.png">
     </div>
     <div class="row cda-row">
       <div class="col-md-12">
         <form class="well center-block login-shadow" style="max-width: 35rem">
           <legend class="text-center" translate="login.welcome"></legend>
           <div class="row cda-row">
-            <div class="login-input has-float-label">
+            <div class="login-input col-md-6">
               <label for="email" class="label-crud" translate="login.email"></label>
               <input class="form-control" ng-model="ctrl.user.Mail" type="email" placeholder="mail@example.com"
                 required autofocus />
             </div>
           </div>
           <div class="row cda-row">
-            <div class="login-input">
+            <div class="login-input col-md-6">
               <label for="password" class="label-crud" translate="login.password"></label>
-              <input class="form-control" ng-model="ctrl.user.Password" type="password" placeholder="••••••••" required
+              <input class="form-control" ng-model="ctrl.user.Password" type="password" minlength="8" placeholder="••••••••" required
                 autofocus />
             </div>
           </div>

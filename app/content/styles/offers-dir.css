@@ -1,8 +1,9 @@
 ﻿.offers-filter .search {
-  margin-top:20px;
+  margin-top: 20px;
   padding-bottom: 10px;
   padding-left: 5px;
 }
+
 .offers-filter .title-initial {
   font-family: var(--main-font);
   font-weight: 500;
@@ -12,6 +13,7 @@
   font-family: var(--main-font);
   font-weight: 300;
 }
+
 .offers-filter .title {
   font-family: var(--main-font);
   padding-left: 5px;
@@ -21,6 +23,7 @@
   font-size: 16px;
   line-height: 16px;
 }
+
 .offers-filter .subtitle {
   font-family: var(--main-font);
   padding-left: 5px;
@@ -31,14 +34,17 @@
   line-height: 16px;
   text-wrap: normal;
 }
+
 .offers-filter .combo {
   padding-top: 0px;
   padding-right: 8px;
   padding-left: 5px;
 }
+
 .offers-filter .price-filter-row * {
   display: inline-block;
 }
+
 .offers-filter .price-input {
   width: 50px;
   height: 30px;
@@ -49,54 +55,63 @@
   line-height: 16px;
   text-wrap: normal;
 }
+
 .offers-filter .from-To {
   padding-top: 0px;
   width: 5px;
   height: 30px;
   text-align: center;
 }
+
 .offers-filter .validation-error {
   font-family: var(--main-font);
   color: #dc0a0a;
   margin-left: -5px;
   padding-right: 5px;
 }
+
 .offers-filter .button-clean {
   margin-top: 40px;
   text-align: center;
   padding-left: 5px;
 }
+
 .offers-filter .button-apply {
   margin-top: 1px;
   padding-left: 10px;
 }
+
 .offers-filter .border-left {
   border-left: 1px solid;
   color: #cccccc;
 }
+
 .offers-filter .border-rigth {
   border-right: 1px solid;
   color: #cccccc;
 }
+
 .offers-filter .noItems {
   height: 544px;
   font-family: var(--main-font);
   font-size: 16px;
   color: #212121;
 }
+
 .offers-filter .price-div {
   padding-left: 5px;
   padding-right: 8px;
 }
+
 .offers-filter .btnClean {
   width: 100%;
 }
+
 .offers-list {
   list-style: none;
   display: inline-block;
-  margin-bottom: 10px;
-  width: 100%;
 }
+
 .offers-no-link {
   text-decoration: none;
   color: #212121;
@@ -108,22 +123,25 @@
   font-size: large;
   font-weight: bold;
   word-wrap: break-word;
-  margin-top:10px;
+  margin-top: 10px;
 }
+
 .offers-body .nameElement {
   font-family: var(--main-font);
   font-style: normal;
   color: #5A5965;
   line-height: 16px;
   font-size: 20px;
-  padding-bottom:10px;
+  padding-bottom: 10px;
   text-overflow: ellipsis;
   word-wrap: break-word;
   overflow: hidden;
 }
+
 .offers-body .nameElement .attributeName {
   font-weight: bold;
 }
+
 .offers-body .price {
   font-family: var(--main-font);
   font-size: 22px;
@@ -142,15 +160,17 @@
   z-index: 0;
   display: block;
   border: none;
-  background:var(--main-bg-color);
+  background: var(--main-bg-color);
 }
-.offers-body .img .adjust-image > img {
+
+.offers-body .img .adjust-image>img {
   max-width: 184px;
   max-height: 184px;
   width: auto;
   height: auto;
   padding: 0px;
 }
+
 .offers-body .img .description {
   margin-top: 10px;
   font-family: var(--main-font);
@@ -162,19 +182,22 @@
 }
 
 a.list-group-item {
-  height:auto;
-  min-height:220px;
-}
-a.list-group-item small {
-  color:#fff;
-}
-a.list-group-item:hover{
-  background-color: var(--light-blue);
-}
-.stars {
-  margin:20px auto 1px;    
+  height: auto;
+  min-height: 220px;
 }
 
-.remove-left{
-  margin-left:-40px;
+a.list-group-item small {
+  color: #fff;
+}
+
+a.list-group-item:hover {
+  background-color: var(--light-blue);
+}
+
+.stars {
+  margin: 20px auto 1px;
+}
+
+.remove-left {
+  margin-left: -40px;
 }

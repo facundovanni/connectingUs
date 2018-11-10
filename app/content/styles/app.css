@@ -18,7 +18,7 @@ body {
 .headerTitle {
   font-weight: 300;
   text-transform: uppercase;
-  font-size: 26px;  
+  font-size: 26px;
   color: #fff;
   text-decoration: none;
 }
@@ -27,7 +27,6 @@ body {
   padding-top: 12px;
   font-weight: 300;
   font-size: 16px;
-
   color: #fff;
 }
 
@@ -35,13 +34,13 @@ body {
   background-image: url('../images/bg2.jpg');
 }
 
-
 .headerMenu {
   background-image: url('../images/banner.jpg');
   z-index: 1;
   text-decoration: none;
   margin-top: 0;
 }
+
 /* Page content */
 
 .cda-row {
@@ -60,9 +59,10 @@ body {
 }
 
 /* login */
-.login-background{
+
+.login-background {
   width: 100%;
-  height:40px;
+  height: 40px;
 }
 
 .login-shadow {
@@ -71,6 +71,8 @@ body {
 
 .login-image {
   align-content: center;
+  height: 300px;
+  width: 300px;
 }
 
 /* header */
@@ -83,17 +85,18 @@ body {
 }
 
 /* myOffers */
-.offer-image{
+
+.offer-image {
   width: 400px;
 }
 
-.offer-label{
-    font-weight: 800;
-    font-family: 'Scada', sans-serif;
-    font-size: 20px;
+.offer-label {
+  font-weight: 800;
+  font-family: 'Scada', sans-serif;
+  font-size: 20px;
 }
 
-.offer-text{
+.offer-text {
   font-size: 15px;
   font-weight: 100;
   width: 100%;
@@ -103,42 +106,42 @@ body {
   padding: 2px;
 }
 
-.offer-select{
+.offer-select {
   width: 200px;
   height: 28px;
   margin-left: 20px;
   margin-top: 3px;
 }
 
-.offer-accordeon-title{
+.offer-accordeon-title {
   float: left;
 }
 
-.offer-accordeon-city{
+.offer-accordeon-city {
   float: left;
   margin-left: -75px;
 }
 
-.btn-save-myOffer{
+.btn-save-myOffer {
   margin-left: 10px;
 }
 
-a{
-  text-decoration:none;
+a {
+  text-decoration: none;
 }
 
-.about-button{
+.about-button {
   float: right;
   margin-left: 20px;
 }
 
-.about-text{
+.about-text {
   font-size: 20px;
   margin-left: 15px;
   margin-right: 15px;
 }
 
-.map{
+.map {
   width: 50%;
   margin: 0 auto;
 }
@@ -148,21 +151,32 @@ a{
 }
 
 /* The Modal (background) */
+
 .modal {
-  display: block; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 999; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
+  display: block;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 999;
+  /* Sit on top */
+  padding-top: 100px;
+  /* Location of the box */
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
 }
 
 /* Modal Content */
+
 .modal-content {
   background-color: #fefefe;
   margin: auto;
@@ -172,6 +186,7 @@ a{
 }
 
 /* The Close Button */
+
 .close {
   color: #aaaaaa;
   float: right;
@@ -179,27 +194,26 @@ a{
   font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+.close:hover, .close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
 }
 
-.terms-and-conditions-text{
+.terms-and-conditions-text {
   font-family: var(--main-font);
   font-size: 16px;
-margin-left: 10px;
+  margin-left: 10px;
 }
 
-.terms-and-conditions-checkbox{
+.terms-and-conditions-checkbox {
   font-size: 40px;
 }
 
-.terms-and-conditions-accept{
+.terms-and-conditions-accept {
   text-align: left;
 }
 
-.float-right{
+.float-right {
   float: right;
 }

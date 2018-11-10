@@ -81,7 +81,7 @@
         ctrl.hasValidated = false;
         var validations = true;
         ctrl.validateError.show.title = !ctrl.offer.Title;
-        ctrl.validateError.show.category = !ctrl.offer.Categorie;
+        ctrl.validateError.show.category = !ctrl.offer.Category;
         ctrl.validateError.show.country = !ctrl.offer.Country;
         ctrl.validateError.show.city = !ctrl.offer.City;
         ctrl.validateError.show.description = !ctrl.offer.Description;

@@ -121,7 +121,11 @@
                     });
                     ctrl.filterCountry = undefined;
                     ctrl.filterCity = undefined;
-                }
+                    ctrl.chkInactives = undefined;
+                    ctrl.searchText = undefined;
+
+                    ctrl.updateOffers();
+                };
 
                 ctrl.init();
             }
