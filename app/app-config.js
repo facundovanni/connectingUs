@@ -8,9 +8,9 @@
     }
 
     angular.module('connectingUsCenter', [
-        'ngRoute', 'ngAnimate', 'ngSanitize',
+        'ngRoute', 'ngAnimate', 'toastr', 'ngSanitize',
         'ngTouch', 'ui.router',
-        'ui.bootstrap', 'angularSpinner','toastr',
+        'ui.bootstrap', 'angularSpinner',
         'connectingUsCenter.services',
         'connectingUsCenter.directives',
         'connectingUsCenter.login',
