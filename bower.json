@@ -19,7 +19,8 @@
     "angular-translate": "~2.13.1",
     "angular-translate-handler-log": "~2.13.1",
     "angular-translate-interpolation-messageformat": "~2.13.1",
-    "angular-translate-loader-partial": "~2.13.1"
+    "angular-translate-loader-partial": "~2.13.1",
+    "toastr":"2.1.4"
   },
   "resolutions": {
     "angular": "1.7.2",
