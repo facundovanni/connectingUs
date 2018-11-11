@@ -1,7 +1,7 @@
 (function usersGridScope(angular) {
   'use strict';
-  angular.module('connectingUsCenter.offers').controller('OffersCRUDController', ['$scope', 'Offers', 'Countries', 'Cities', 'Categories', '$translate', '$stateParams', 'isMyOwn', '$q', '$state',
-    function OffersCRUDController($scope, Offers, Countries, Cities, Categories, $translate, $stateParams, isMyOwn, $q, $state) {
+  angular.module('connectingUsCenter.offers').controller('OffersCRUDController', ['$scope', 'Offers', 'Countries', 'Cities', 'Categories', '$translate', '$stateParams', 'isMyOwn', '$q', '$state','toastr',
+    function OffersCRUDController($scope, Offers, Countries, Cities, Categories, $translate, $stateParams, isMyOwn, $q, $state, toastr) {
       var ctrl = this;
       ctrl.isLoading = false;
       ctrl.isLoadingCountries = false;
@@ -13,28 +13,24 @@
       ctrl.offer = {};
       ctrl.offer.Id = $stateParams.Id;
       ctrl.myOffer = isMyOwn;
-      ctrl.alert = {
-        show: false,
-        message: undefined,
-        type: undefined
-      };
+      
       ctrl.validateError = {
         show: {},
         message: {
-            title: $translate.instant('myOffer.error.title'),
-            category: $translate.instant('myOffer.error.category'),
-            country: $translate.instant('myOffer.error.country'),
-            city: $translate.instant('myOffer.error.city'),
-            description: $translate.instant('myOffer.error.description'),
-            valdiate: $translate.instant('myOffer.error.validate')
+          title: $translate.instant('myOffer.error.title'),
+          category: $translate.instant('myOffer.error.category'),
+          country: $translate.instant('myOffer.error.country'),
+          city: $translate.instant('myOffer.error.city'),
+          description: $translate.instant('myOffer.error.description'),
+          valdiate: $translate.instant('myOffer.error.validate')
         }
       };
 
       ctrl.getCities = function getCities() {
         ctrl.isLoading = true;
         Cities.getAll({
-            idCountry: ctrl.offer.Country.Id
-          }).$promise
+          idCountry: ctrl.offer.Country.Id
+        }).$promise
           .then(ctrl.setCities)
           .finally(ctrl.onFinallyCities);
       };
@@ -53,20 +49,23 @@
 
       ctrl.updateService = function udpateService() {
         ctrl.isLoading = true;
-        if(ctrl.validate()){
-        Offers.save(ctrl.offer).$promise
-          .then(ctrl.onThenNew)
-          .finally(ctrl.onFinallyUpdate);
+        if (ctrl.validate()) {
+          ctrl.offer.Active = !ctrl.offer.Active;
+          Offers.save(ctrl.offer).$promise
+            .then(ctrl.onThenNew)
+            .catch(ctrl.onCatchSave);
         }
       }
 
-      ctrl.onFinallyUpdate = function onFinally(result) {
+      ctrl.onCatchSave = function onFinally() {
+        toastr.error($translate.instant('global.message.saveError'));
         ctrl.isLoading = false;
-        ctrl.goToMyOffers()
       };
 
-      ctrl.onThenNew = function onThenNew(res) {
-        alert("Service updated");
+      ctrl.onThenNew = function onThenNew() {
+        ctrl.isLoading = false;
+        toastr.success($translate.instant('global.message.saveSuccess'));
+        ctrl.goToMyOffers();
       };
 
       ctrl.cancelUpdate = function cancelUpdate() {
@@ -115,10 +114,11 @@
           if (result[2][0]) {
             ctrl.offer = result[2][0];
             ctrl.getCities();
-          } else{
+          } else {
             ctrl.offer = {};
           }
           ctrl.offer.userId = 1;
+          ctrl.offer.Active = !ctrl.offer.Active;
         }).finally(function onFinally() {
           ctrl.isLoading = false;
         });

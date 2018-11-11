@@ -20,21 +20,21 @@
             <br><label ng-if="!ctrl.myOffer" class="offer-label">{{ctrl.offer.Category.Description}}</label>
             <select ng-if="ctrl.myOffer" class="custom-select d-block w-100  form-control" id="category" ng-model="ctrl.offer.Category"
               ng-options="x.Description for x in ctrl.categories track by x.Id" required></select>
-              <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.category">{{ctrl.validateError.message.category}}</div>
+            <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.category">{{ctrl.validateError.message.category}}</div>
           </div>
           <div class="col-md-12">
             <label class="label-crud" ng-class="ctrl.myOffer ? 'label-required' : ''" translate="myOffer.country">:</label>
             <br><label ng-if="!ctrl.myOffer" class="offer-label">{{ctrl.offer.Country.Name}}</label>
             <select ng-if="ctrl.myOffer" class="custom-select d-block w-100  form-control" id="category" ng-model="ctrl.offer.Country"
               ng-options="x.Name for x in ctrl.countries track by x.Id" ng-change="ctrl.onSelectCountry()" required></select>
-              <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.country">{{ctrl.validateError.message.country}}</div>
+            <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.country">{{ctrl.validateError.message.country}}</div>
           </div>
           <div class="col-md-12">
             <label class="label-crud" ng-class="ctrl.myOffer ? 'label-required' : ''" translate="myOffer.city">:</label>
             <br><label ng-if="!ctrl.myOffer" class="offer-label">{{ctrl.offer.City.Name}}</label>
             <select ng-if="ctrl.myOffer" class="custom-select d-block w-100  form-control" id="city" ng-model="ctrl.offer.City"
               ng-options="x.Name for x in ctrl.cities track by x.Id" required></select>
-              <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.city">{{ctrl.validateError.message.city}}</div>
+            <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.city">{{ctrl.validateError.message.city}}</div>
           </div>
           <div class="col-md-12">
             <label class="label-crud" ng-class="ctrl.myOffer ? 'label-required' : ''" translate="myOffer.description">:</label>
@@ -42,8 +42,8 @@
             <label ng-if="!ctrl.myOffer" class="offer-text" ng-model="ctrl.offer.Description">{{ctrl.offer.Description}}</label>
             <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.description">{{ctrl.validateError.message.description}}</div>
           </div>
-          <div class="col-md-12" ng-if="ctrl.myOffer">
-            <label class="label-crud label-required"><input type="checkbox" ng-model="ctrl.offer.Active">{{'myOffer.active'
+          <div class="col-md-12" ng-if="ctrl.myOffer && ctrl.offer.Id">
+            <label class="label-crud label-required"><input type="checkbox" ng-model="ctrl.offer.Active" value="ctrl.offer.Active">{{'myOffer.active'
               | translate}}</label>
           </div>
         </div>
@@ -54,11 +54,12 @@
       </div>
     </div>
     <div class="row cda-row" ng-if="ctrl.myOffer">
-      <div class="col-md-12">
-        <button ng-if=ctrl.myOffer type="button" class="btn btn-primary btn-save-myOffer float-right" type="submit" ng-click="ctrl.updateService()">{{'myOffer.updateService'|
-          translate}}</button>
-        <button ng-if=ctrl.myOffer type="button" class="btn btn-danger btn-save-myOffer float-right" type="submit" ng-click="ctrl.cancelUpdate()">{{'myOffer.cancelUpdate'|
-          translate}}</button>
+      <div class="modal-footer">
+        <div class="col-md-12">
+          <button ng-if="ctrl.myOffer" class="btn btn-lg btn-success" type="submit" ng-disabled="ctrl.isLoading"
+            ng-click="ctrl.updateService()">{{'global.button.save'|translate}}</button>
+          <button ng-if="ctrl.myOffer" class="btn btn-lg btn-default" type="button" ng-click="ctrl.cancelUpdate()">{{'global.button.cancel'|translate}}</button>
+        </div>
       </div>
     </div>
   </div>
