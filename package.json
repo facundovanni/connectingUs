@@ -50,7 +50,8 @@
         "npm": "^6.1.0",
         "open-iconic": "^1.1.1",
         "resource": "^0.8.1",
-        "server": "^1.0.18"
+        "server": "^1.0.18",
+        "toastr": "^2.1.4"
     },
     "engines": {
         "node": "8.9.1"

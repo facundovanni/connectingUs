@@ -10,7 +10,7 @@
     angular.module('connectingUsCenter', [
         'ngRoute', 'ngAnimate', 'ngSanitize',
         'ngTouch', 'ui.router',
-        'ui.bootstrap', 'angularSpinner','angular-toastr',
+        'ui.bootstrap', 'angularSpinner','toastr',
         'connectingUsCenter.services',
         'connectingUsCenter.directives',
         'connectingUsCenter.login',
