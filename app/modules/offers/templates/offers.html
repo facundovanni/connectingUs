@@ -41,8 +41,9 @@
                 </div>
                 <div class="row cda-row" ng-if="ctrl.myOffers">
                   <div class="col-md-12">
-                    <input type="checkbox" ng-checked="ctrl.showInactives">{{'offers.filter.inactivesOptions' |
-                    translate}}</select>
+                      <input type="checkbox" ng-model="ctrl.showInactives" value="ctrlshowInactives">
+                    {{'offers.filter.inactivesOptions' |
+                    translate}}
                   </div>
                 </div>
                 <div class="row cda-row">

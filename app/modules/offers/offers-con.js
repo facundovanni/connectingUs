@@ -60,7 +60,7 @@
                     ctrl.filters.Categories = filterSelectedCategories.length ? filterSelectedCategories : undefined;
                     ctrl.filters.IdCountry = ctrl.filterCountry ? ctrl.filterCountry.Id : undefined;
                     ctrl.filters.IdCity = ctrl.filterCity ? ctrl.filterCity.Id : undefined;
-                    ctrl.filters.Active = (ctrl.myOffers && !ctrl.chkInactives) ? undefined : true
+                    ctrl.filters.Active = (ctrl.myOffers && !ctrl.showInactives) ? undefined : true
                     ctrl.filters.IdUser = 1;
                     ctrl.filters.Text = ctrl.searchText ? ctrl.searchText : undefined;
                 };
@@ -121,7 +121,7 @@
                     });
                     ctrl.filterCountry = undefined;
                     ctrl.filterCity = undefined;
-                    ctrl.chkInactives = undefined;
+                    ctrl.showInactives = ctrl.myOffers ? false : false;
                     ctrl.searchText = undefined;
 
                     ctrl.updateOffers();
