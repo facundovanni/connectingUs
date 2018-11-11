@@ -60,7 +60,7 @@
                     ctrl.filters.Categories = filterSelectedCategories.length ? filterSelectedCategories : undefined;
                     ctrl.filters.IdCountry = ctrl.filterCountry ? ctrl.filterCountry.Id : undefined;
                     ctrl.filters.IdCity = ctrl.filterCity ? ctrl.filterCity.Id : undefined;
-                    ctrl.filters.Active = (ctrl.myOffers && !ctrl.showInactives) ? undefined : true
+                    ctrl.filters.Active = !ctrl.myOffers ? undefined : !ctrl.showInactives;
                     ctrl.filters.IdUser = 1;
                     ctrl.filters.Text = ctrl.searchText ? ctrl.searchText : undefined;
                 };
