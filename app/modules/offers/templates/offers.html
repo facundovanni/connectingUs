@@ -33,11 +33,13 @@
                   <div class="col-md-6">
                     <label class="label-crud text-center" for="city" translate="offers.city"></label>
                     <br>
-                    <select class="btn btn-default" ng-model="ctrl.filterCity" ng-options="x.Name for x in ctrl.cities"
-                      ng-disabled="!ctrl.filterCountry"></select>
+                    <select class="btn btn-default" ng-model="ctrl.filterCity" ng-options="a.Name for a  in ctrl.cities"
+                      ng-disabled="!ctrl.filterCountry">
+                      <option value="" ng-if="ctrl.filterCity">&nbsp;</option>
+                    </select>
                   </div>
                 </div>
-                <div class="row cda-row">
+                <div class="row cda-row" ng-if="ctrl.myOffers">
                   <div class="col-md-12">
                     <input type="checkbox" ng-checked="ctrl.showInactives">{{'offers.filter.inactivesOptions' |
                     translate}}</select>

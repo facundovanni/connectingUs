@@ -61,7 +61,7 @@
                     ctrl.filters.IdCountry = ctrl.filterCountry ? ctrl.filterCountry.Id : undefined;
                     ctrl.filters.IdCity = ctrl.filterCity ? ctrl.filterCity.Id : undefined;
                     ctrl.filters.Active = (ctrl.myOffers && !ctrl.chkInactives) ? undefined : true
-                    ctrl.filters.IdUser = ctrl.myOffers ? 1 : undefined;
+                    ctrl.filters.IdUser = 1;
                     ctrl.filters.Text = ctrl.searchText ? ctrl.searchText : undefined;
                 };
 

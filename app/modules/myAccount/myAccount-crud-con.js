@@ -2,8 +2,8 @@
     'use strict';
 
     angular.module('connectingUsCenter.myAccount')
-        .controller('myAccountCRUDController', ['MyAccount', '$translate', '$state', 'Countries', 'Cities', '$stateParams',
-            function (MyAccount, $translate, $state, Countries, Cities, $stateParams) {
+        .controller('myAccountCRUDController', ['MyAccount', '$translate', '$state', 'Countries', 'Cities', '$stateParams','toastr',
+            function (MyAccount, $translate, $state, Countries, Cities, $stateParams,toastr) {
                 var ctrl = this;
                 ctrl.userId = $stateParams.Id;
                 ctrl.today = new Date();
