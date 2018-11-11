@@ -18,7 +18,8 @@
         'connectingUsCenter.myAccount',
         'connectingUsCenter.offers',
         'pascalprecht.translate',
-        'ngResource'
+        'ngResource',
+        'ngFileUpload'
     ])
         .config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', '$logProvider', '__env',
             function config($stateProvider, $locationProvider, $urlRouterProvider, $translateProvider, $logProvider, __env) {

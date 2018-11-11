@@ -1,7 +1,7 @@
 (function usersGridScope(angular) {
   'use strict';
-  angular.module('connectingUsCenter.offers').controller('OffersCRUDController', ['$scope', 'Offers', 'Countries', 'Cities', 'Categories', '$translate', '$stateParams', 'isMyOwn', '$q', '$state',
-    function OffersCRUDController($scope, Offers, Countries, Cities, Categories, $translate, $stateParams, isMyOwn, $q, $state) {
+  angular.module('connectingUsCenter.offers').controller('OffersCRUDController', ['$scope', 'Offers', 'Countries', 'Cities', 'Categories', '$translate', '$stateParams', 'isMyOwn', '$q', '$state', 'Upload',
+    function OffersCRUDController($scope, Offers, Countries, Cities, Categories, $translate, $stateParams, isMyOwn, $q, $state, Upload) {
       var ctrl = this;
       ctrl.isLoading = false;
       ctrl.isLoadingCountries = false;
@@ -29,6 +29,76 @@
             valdiate: $translate.instant('myOffer.error.validate')
         }
       };
+
+
+      ctrl.uploadPic = function (file) {
+        file.upload = Upload.upload({
+          url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+          data: { username: $scope.username, file: file },
+        });
+
+        file.upload.then(function (response) {
+          $timeout(function () {
+            file.result = response.data;
+          });
+        }, function (response) {
+          if (response.status > 0)
+            $scope.errorMsg = response.status + ': ' + response.data;
+        }, function (evt) {
+          // Math.min is to fix IE which reports 200% sometimes
+          file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+        });
+      }
+
+      // ctrl.uploadFiles = function (file, errFiles) {
+      //   $scope.f = file;
+      //   $scope.errFile = errFiles && errFiles[0];
+      //   if (file) {
+      //     file.upload = Upload.upload({
+      //       url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+      //       data: { file: file }
+      //     });
+
+      //     file.upload.then(function (response) {
+      //       $timeout(function () {
+      //         file.result = response.data;
+      //       });
+      //     }, function (response) {
+      //       if (response.status > 0)
+      //         $scope.errorMsg = response.status + ': ' + response.data;
+      //     }, function (evt) {
+      //       file.progress = Math.min(100, parseInt(100.0 *
+      //         evt.loaded / evt.total));
+      //     });
+      //   }
+      // }
+
+
+      // ctrl.submit = function() {
+      //   if ($scope.form.file.$valid && $scope.file) {
+      //     $scope.upload($scope.file);
+      //   }
+      // };
+  
+      // // upload on file select or drop
+      // ctrl.upload = function (file) {
+      //     Upload.upload({
+      //         url: 'upload/url',
+      //         data: {file: file, 'username': $scope.username}
+      //     }).then(function (resp) {
+      //         console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+      //     }, function (resp) {
+      //         console.log('Error status: ' + resp.status);
+      //     }, function (evt) {
+      //         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+      //         console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+      //     });
+      // };
+
+
+
+
+
 
       ctrl.getCities = function getCities() {
         ctrl.isLoading = true;

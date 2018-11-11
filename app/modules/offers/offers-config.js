@@ -2,7 +2,7 @@
     'use strict';
 
     // tag::module[]
-    angular.module('connectingUsCenter.offers', ['ngResource'])
+    angular.module('connectingUsCenter.offers', ['ngResource', 'ngFileUpload'])
         .config(['$routeProvider', function ($routeProvider) {
             $routeProvider.when('/offers', {
                 url:'/offers',
