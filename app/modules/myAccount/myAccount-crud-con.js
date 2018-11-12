@@ -114,8 +114,9 @@
                 };
 
                 ctrl.setAccount = function setAccount(result) {
+                    result.Account.Password = undefined;
                     ctrl.myAccount = result;
-                    ctrl.myAccount.Gender = ctrl.genders.find(function find(obj) {
+                    ctrl.selectedGender = ctrl.genders.find(function find(obj) {
                         return obj.code === ctrl.myAccount.Gender;
                     });
                     if (ctrl.myAccount.PhoneType) {
@@ -186,9 +187,9 @@
                     ctrl.hasValidated = false;
                     var validations = true;
                     ctrl.validateError.show.email = !ctrl.myAccount.Account.Mail || ctrl.myAccount.Account.Mail.indexOf('.') === -1;
-                    ctrl.validateError.show.emailConfirm = !ctrl.emailConfirm || ctrl.myAccount.Account.Mail !== ctrl.emailConfirm;
+                    ctrl.validateError.show.emailConfirm = ctrl.myAccount.Id ? false : !ctrl.emailConfirm || ctrl.myAccount.Account.Mail !== ctrl.emailConfirm;
                     ctrl.validateError.show.passwordConfirm = !ctrl.passwordConfirm || ctrl.myAccount.Account.Password !== ctrl.passwordConfirm;
-                    ctrl.validateError.show.termsAndConditions = !ctrl.termsAndConditionsChecked;
+                    ctrl.validateError.show.termsAndConditions = ctrl.myAccount.Id ? false : !ctrl.termsAndConditionsChecked;
                     for (const prop in ctrl.validateError.show) {
                         if (ctrl.validateError.show[prop]) {
                             validations = false;
