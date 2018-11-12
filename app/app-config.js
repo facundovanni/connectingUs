@@ -7,19 +7,25 @@
         Object.assign(env, window.__env);
     }
 
+    function assignServicesToRootScope($rootScope, auth, session) {
+        $rootScope.auth = auth;
+        $rootScope.session = session;
+    }
+    assignServicesToRootScope.$inject = ['$rootScope', 'auth', 'session'];
+
     angular.module('connectingUsCenter', [
-        'ngRoute', 'ngAnimate', 'toastr', 'ngSanitize',
-        'ngTouch', 'ui.router',
-        'ui.bootstrap', 'angularSpinner',
-        'connectingUsCenter.services',
-        'connectingUsCenter.directives',
-        'connectingUsCenter.login',
-        'connectingUsCenter.about',
-        'connectingUsCenter.myAccount',
-        'connectingUsCenter.offers',
-        'pascalprecht.translate',
-        'ngResource'
-    ])
+            'ngRoute', 'ngAnimate', 'toastr', 'ngSanitize',
+            'ngTouch', 'ui.router',
+            'ui.bootstrap', 'angularSpinner',
+            'connectingUsCenter.services',
+            'connectingUsCenter.directives',
+            'connectingUsCenter.login',
+            'connectingUsCenter.about',
+            'connectingUsCenter.myAccount',
+            'connectingUsCenter.offers',
+            'pascalprecht.translate',
+            'ngResource'
+        ])
         .config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', '$logProvider', '__env',
             function config($stateProvider, $locationProvider, $urlRouterProvider, $translateProvider, $logProvider, __env) {
                 angular.lowercase = angular.$$lowercase;
@@ -110,7 +116,7 @@
                             "type": "Type",
                             "location": "Location",
                             "inactives": "Inactives",
-                            "inactivesOptions":"Show Inactives",
+                            "inactivesOptions": "Show Inactives",
                             "clearAll": "Clear All",
                             "applyFilter": "Apply Filter"
                         },
@@ -131,10 +137,10 @@
                         "startConversation": "Start conversation",
                         "error": {
                             "title": "The title is required",
-                            "category":"The category is required",
+                            "category": "The category is required",
                             "country": "The country is required",
                             "city": "The city is required",
-                            "description":"The description is required",
+                            "description": "The description is required",
                             "status": "The status is required",
                         }
 
@@ -155,7 +161,9 @@
                 });
                 $stateProvider.state('/account', {
                     url: '/account',
-                    params: { Id: null }
+                    params: {
+                        Id: null
+                    }
                 });
 
                 $stateProvider.state('/offers', {
@@ -165,7 +173,7 @@
                     url: '/myOffer',
                     templateUrl: 'modules/myOffer/templates/myOffer.html'
                 });
-                
+
                 $stateProvider.state('/my-offers', {
                     url: '/my-offers'
                 });
@@ -187,5 +195,6 @@
 
             }
         ])
-        .constant('__env', env);
+        .constant('__env', env)
+        .run(assignServicesToRootScope);
 })(angular);

@@ -1,7 +1,7 @@
 (function usersGridScope(angular) {
   'use strict';
-  angular.module('connectingUsCenter.login').controller('LoginController', ['$scope', 'Login', '$translate', '$state',
-    function loginController($scope, Login, $translate, $state) {
+  angular.module('connectingUsCenter.login').controller('LoginController', ['$scope', 'Login', '$translate', '$state','auth',
+    function loginController($scope, Login, $translate, $state,auth) {
       var ctrl = this;
       ctrl.user = {};
       ctrl.error = false;
@@ -11,15 +11,14 @@
       }
 
       ctrl.goToOffers = function goToOffers(result) {
+        console.log(result);
         $state.go('/offers');
       }
 
       ctrl.check = function check() {
         ctrl.isLoading = true;
-        Login.getSession(ctrl.user).$promise
-          .then(ctrl.goToOffers)
-          .finally(ctrl.finallyLogin)
-          .catch(ctrl.onCatchLogin);
+        auth.logIn(ctrl.user)
+          .then(ctrl.goToOffers);
       };
 
       ctrl.onCatchLogin = function onCatchLogin() {

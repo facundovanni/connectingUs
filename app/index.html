@@ -29,8 +29,8 @@
             <span class="glyphicon glyphicon-question-sign" ng-click="ctrl.goToAbout()"></span>
             <a class="header-account-name about-button" ng-click="ctrl.goToAbout()">About</a>
             <div class="btn-group" uib-dropdown dropdown-append-to-body>
-              <div uib-dropdown-toggle>
-                Logged <span class="caret"></span>
+              <div uib-dropdown-toggle ng-if="auth.isLoggedIn()">
+                {{session.getUser().FirstName}} <span class="caret"></span>
               </div>
               <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-to-body">
                 <li role="menuitem"><a href="" ng-click="ctrl.goToMyAccount()">My Account</a></li>
@@ -65,6 +65,9 @@
   <script type="text/javascript" src="env.js"></script>
 
   <script type="text/javascript" src="content/services/services-model.js"></script>
+  <script type="text/javascript" src="content/services/auth-srv.js"></script>
+  <script type="text/javascript" src="content/services/session-srv.js"></script>
+  <script type="text/javascript" src="content/services/local-storage-srv.js"></script>
   <script type="text/javascript" src="content/services/categories-srv.js"></script>
   <script type="text/javascript" src="content/services/countries-srv.js"></script>
   <script type="text/javascript" src="content/services/cities-srv.js"></script>

@@ -1,7 +1,7 @@
 (function rootScope(angular) {
   'use strict';
   // Declare app level module which depends on views, and components
-  angular.module('connectingUsCenter').controller('AppController', ['$state', function AppController($state) {
+  angular.module('connectingUsCenter').controller('AppController', ['$state','auth', function AppController($state,auth) {
     var ctrl = this;
 
     ctrl.goToMyAccount= function goToMyAccount(){
@@ -13,6 +13,7 @@
     };
 
     ctrl.logout = function logout() {
+      auth.logOut();
       $state.go('/login');
     };
 
