@@ -42,7 +42,7 @@
             <label ng-if="!ctrl.myOffer" class="offer-text" ng-model="ctrl.offer.Description">{{ctrl.offer.Description}}</label>
             <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.description">{{ctrl.validateError.message.description}}</div>
           </div>
-          <div class="col-md-12" ng-if="ctrl.myOffer && ctrl.offer.Id">
+          <div class="col-md-12" ng-if="ctrl.myOffer && ctrl.offer.Id && !ctrl.isLoading">
             <label class="label-crud label-required"><input type="checkbox" ng-model="ctrl.offer.Active" value="ctrl.offer.Active">{{'myOffer.active'
               | translate}}</label>
           </div>
