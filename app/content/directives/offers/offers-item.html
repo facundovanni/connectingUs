@@ -2,8 +2,8 @@
     <div class="row cda-row">
         <div class="media col-md-3">
             <figure class="pull-left">
-                <img ng-if="item.image" class="media-object img-rounded img-responsive" src="item.Image">
-                <img ng-if="!item.image" class="media-object img-rounded img-responsive" src="content/images/bg2.jpg">
+                <img ng-if="item.Images[0].ImageString" class="media-object img-rounded img-responsive" data-ng-src="data:image/png;base64,{{item.Images[0].ImageString}}">
+                <img ng-if="!item.Images.length" class="media-object img-rounded img-responsive" src="content/images/bg2.jpg">
             </figure>
         </div>
         <div class="col-md-9">
