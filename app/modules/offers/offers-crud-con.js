@@ -1,7 +1,8 @@
 (function usersGridScope(angular) {
   'use strict';
-  angular.module('connectingUsCenter.offers').controller('OffersCRUDController', ['$scope', 'Offers', 'Countries', 'Cities', 'Categories', '$translate', '$stateParams', 'isMyOwn', '$q', '$state', 'Upload',
-    function OffersCRUDController($scope, Offers, Countries, Cities, Categories, $translate, $stateParams, isMyOwn, $q, $state, Upload) {
+  angular.module('connectingUsCenter.offers').controller('OffersCRUDController', ['$scope', 'Offers', 'Countries', 'Cities', 'Categories', '$translate',
+   '$stateParams', 'isMyOwn', '$q', '$state', 'Upload', '$base64',
+    function OffersCRUDController($scope, Offers, Countries, Cities, Categories, $translate, $stateParams, isMyOwn, $q, $state, Upload, $base64) {
       var ctrl = this;
       ctrl.isLoading = false;
       ctrl.isLoadingCountries = false;
@@ -29,6 +30,7 @@
             valdiate: $translate.instant('myOffer.error.validate')
         }
       };
+      ctrl.imageFile = {}
 
 
       ctrl.uploadPic = function (file) {
@@ -39,15 +41,22 @@
 
         file.upload.then(function (response) {
           // $timeout(function () {
-            file.result = response.data;
+            // file.result = response.data.result[0];
+            Upload.base64DataUrl(file).then(function (base64File) {
+              ctrl.imageFile= base64File;
+            });
           // });
         }, function (response) {
           if (response.status > 0)
             $scope.errorMsg = response.status + ': ' + response.data;
         }, function (evt) {
-          // Math.min is to fix IE which reports 200% sometimes
+
           file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
         });
+      }
+
+      ctrl.convertToBase64 = function convertToBase64(file){
+        ctrl.imageFile = $base64.encode(file);
       }
 
       // ctrl.uploadFiles = function (file, errFiles) {
@@ -96,7 +105,7 @@
       // };
 
 
-
+      
 
 
 

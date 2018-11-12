@@ -19,7 +19,8 @@
         'connectingUsCenter.offers',
         'pascalprecht.translate',
         'ngResource',
-        'ngFileUpload'
+        'ngFileUpload',
+        'base64'
     ])
         .config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', '$logProvider', '__env',
             function config($stateProvider, $locationProvider, $urlRouterProvider, $translateProvider, $logProvider, __env) {
