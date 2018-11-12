@@ -153,8 +153,8 @@
                 ctrl.save = function save() {
                     ctrl.setDateJSON();
                     if (ctrl.validate()) {
-                        ctrl.myAccount.Gender = ctrl.myAccount.Gender.code;
-                        ctrl.myAccount.PhoneType = ctrl.myAccount.PhoneType ? ctrl.myAccount.PhoneType.code : undefined;
+                        ctrl.myAccount.Gender = ctrl.selectedGender ?  ctrl.selectedGender.code : undefined;
+                        ctrl.myAccount.PhoneType = ctrl.selectedPhoneType ? ctrl.selectedPhoneType.code : undefined;
                         ctrl.myAccount.Id = ctrl.myAccount.Id ? ctrl.myAccount.Id : undefined;
                         ctrl.saveData();
                     }
