@@ -38,7 +38,8 @@
                         "button": {
                             "save": "Save",
                             "cancel": "Cancel",
-                            "termsAndConditions": "I read and accept the terms and Conditions"
+                            "termsAndConditions": "I read and accept the terms and Conditions",
+                            "comeBack": "Come Back"
                         },
                         "message": {
                             "saveSuccess": "The data has been saved successfully",
@@ -69,7 +70,9 @@
                     },
                     "about": {
                         "title": "About us",
-                        "whereAreWe": "Where do we have services right now?"
+                        "whereAreWe": "Where do we have services right now?",
+                        "text":"We are a group of young people whose goal is to unite two or more people, in a relationship involving tourists and individuals who can provide a service. Our idea is to create the connecting link between both parties and that they can decide which service they will exchange by uploading it to the page. They can vary from advice as to where you can go for dinner at a good price or good quality or even provide a hosting service. This page does not have payment services and we consider that the best remuneration is a cultural exchange, although this decision is in the hands of those who decide to use this page. We want to revolutionize the way we travel today. Join this change. This project was born within the international training program Diller Teen Fellows as a final project to encompass everything learned in it and we appreciate the tools that made it possible to carry out our ideal.",
+                        "contact":"Contact Us"
                     },
                     "myAccount": {
                         "title": "My Account",

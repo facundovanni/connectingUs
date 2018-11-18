@@ -12,6 +12,10 @@
             that.getUser = function () {
                 return that._user;
             };
+            
+            that.getUserId = function getUserId() {
+                return that._user.Id;
+            };
 
             that.setUser = function (user) {
                 that._user = user;

@@ -30,7 +30,7 @@
             <a class="header-account-name about-button" ng-click="ctrl.goToAbout()">About</a>
             <div class="btn-group" uib-dropdown dropdown-append-to-body>
               <div uib-dropdown-toggle ng-if="auth.isLoggedIn()">
-                {{session.getUser().FirstName}} <span class="caret"></span>
+                {{session.getUser().Account.Nickname}} <span class="caret"></span>
               </div>
               <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-to-body">
                 <li role="menuitem"><a href="" ng-click="ctrl.goToMyAccount()">My Account</a></li>

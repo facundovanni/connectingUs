@@ -24,7 +24,6 @@
                     .post(__env.apiUrl+'/api/login', credentials)
                     .then(function (response) {
                         session.setUser(response.data);
-                        session.setAccessToken(1);
                     });
             };
 

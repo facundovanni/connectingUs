@@ -1,7 +1,7 @@
 (function usersGridScope(angular) {
   'use strict';
-  angular.module('connectingUsCenter.offers').controller('OffersCRUDController', ['$scope', 'Offers', 'Countries', 'Cities', 'Categories', '$translate', '$stateParams', 'isMyOwn', '$q', '$state','toastr',
-    function OffersCRUDController($scope, Offers, Countries, Cities, Categories, $translate, $stateParams, isMyOwn, $q, $state, toastr) {
+  angular.module('connectingUsCenter.offers').controller('OffersCRUDController', ['$scope', 'Offers', 'Countries', 'Cities', 'Categories', '$translate', '$stateParams', 'isMyOwn', '$q', '$state', 'toastr','$rootScope',
+    function OffersCRUDController($scope, Offers, Countries, Cities, Categories, $translate, $stateParams, isMyOwn, $q, $state, toastr,$rootScope) {
       var ctrl = this;
       ctrl.isLoading = false;
       ctrl.isLoadingCountries = false;
@@ -13,7 +13,7 @@
       ctrl.offer = {};
       ctrl.offer.Id = $stateParams.Id;
       ctrl.myOffer = isMyOwn;
-      
+
       ctrl.validateError = {
         show: {},
         message: {
@@ -96,6 +96,7 @@
       };
 
       ctrl.init = function init() {
+        ctrl.checkLog();
         ctrl.isLoading = true;
         var promises = [];
 
@@ -123,6 +124,12 @@
           ctrl.isLoading = false;
         });
 
+      };
+
+      ctrl.checkLog = function checkLog() {
+        if (!$rootScope.auth.isLoggedIn()) {
+          $state.go('/login');
+        }
       };
 
       ctrl.init();

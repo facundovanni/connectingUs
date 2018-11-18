@@ -2,8 +2,8 @@
     'use strict';
 
     angular.module('connectingUsCenter.offers')
-        .controller('OffersController', ['$scope', 'Offers', '$translate', '$state', 'Countries', 'Cities', 'Categories', 'isMyOwn',
-            function ($scope, Offers, $translate, $state, Countries, Cities, Categories, isMyOwn) {
+        .controller('OffersController', ['Offers', '$rootScope', '$state', 'Countries', 'Cities', 'Categories', 'isMyOwn',
+            function (Offers, $rootScope, $state, Countries, Cities, Categories, isMyOwn) {
                 var ctrl = this;
 
                 ctrl.offers = [];
@@ -16,9 +16,16 @@
 
                 ctrl.init = function init() {
                     //get the Offers
+                    ctrl.checkLog();
                     ctrl.getCategories();
                     ctrl.getCountries();
                     ctrl.updateOffers();
+                };
+
+                ctrl.checkLog = function checkLog(){
+                    if (!$rootScope.auth.isLoggedIn()){
+                        $state.go('/login');
+                    }
                 };
 
                 ctrl.getCategories = function getCategories() {
@@ -61,7 +68,7 @@
                     ctrl.filters.IdCountry = ctrl.filterCountry ? ctrl.filterCountry.Id : undefined;
                     ctrl.filters.IdCity = ctrl.filterCity ? ctrl.filterCity.Id : undefined;
                     ctrl.filters.Active = !ctrl.myOffers ? undefined : !ctrl.showInactives;
-                    ctrl.filters.IdUser = 1;
+                    ctrl.filters.IdUser = $rootScope.session.getUserId();
                     ctrl.filters.Text = ctrl.searchText ? ctrl.searchText : undefined;
                 };
 
@@ -107,7 +114,6 @@
                 ctrl.onFinallyCities = function onFinallyCities() {
                     ctrl.isLoadingCities = false;
                     ctrl.isFullyLoaded();
-                    ctrl.cities.push({ id: 1, description: "Buenos Aires", code: "BSAS" });
                 };
 
                 ctrl.onSelectCountry = function onSelectCountry() {
