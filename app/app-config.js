@@ -14,7 +14,7 @@
     assignServicesToRootScope.$inject = ['$rootScope', 'auth', 'session'];
 
     angular.module('connectingUsCenter', [
-            'ngRoute', 'ngAnimate', 'toastr', 'ngSanitize',
+            'ngRoute', 'ngAnimate', 'toastr','angularMoment','angular-simple-chat', 'ngSanitize',
             'ngTouch', 'ui.router',
             'ui.bootstrap', 'angularSpinner',
             'connectingUsCenter.services',

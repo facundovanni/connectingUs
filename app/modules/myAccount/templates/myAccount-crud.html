@@ -31,7 +31,7 @@
       <div class="col-md-6">
         <label class="label-crud label-required" for="birth" translate="myAccount.general.dayOfBirth"></label>
         <div class="input-group">
-          <input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="ctrl.dateSelected.value"
+          <input type="text" class="form-control" uib-datepicker-popup="MM/dd/yyyy" ng-model="ctrl.dateSelected.value"
             is-open="ctrl.dateSelected.opened" datepicker-options="ctrl.dateOptions" ng-required="true" close-text="Close"
             alt-input-formats="altInputFormats" required />
           <span class="input-group-btn">
@@ -168,7 +168,7 @@
             <input class="terms-and-conditions-checkbox" type="checkbox" ng-model="ctrl.termsAndConditionsChecked"
               aria-label="">
             <a class="terms-and-conditions-text" type="" ng-click="ctrl.showModal(true)">{{'global.button.termsAndConditions'|translate}}</a>
-            <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.ç">{{ctrl.validateError.message.termsAndConditions}}</div>
+            <div class="validate-error ng-cloak" ng-if="ctrl.validateError.show">{{ctrl.validateError.message.termsAndConditions}}</div>
           </div>
           <button class="btn btn-lg btn-success" type="submit" ng-disabled="ctrl.isLoading" ng-click="ctrl.save()">{{'global.button.save'|translate}}</button>
           <button class="btn btn-lg btn-default" type="button" ng-click="ctrl.cancel()">{{'global.button.cancel'|translate}}</button>

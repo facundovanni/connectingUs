@@ -2,8 +2,8 @@
     'use strict';
 
     angular.module('connectingUsCenter.myAccount')
-        .controller('myAccountCRUDController', ['MyAccount', '$translate', '$state', 'Countries', 'Cities', '$stateParams','toastr',
-            function (MyAccount, $translate, $state, Countries, Cities, $stateParams,toastr) {
+        .controller('myAccountCRUDController', ['MyAccount', '$translate', '$state', 'Countries', 'Cities', '$stateParams', 'toastr', '$rootScope',
+            function (MyAccount, $translate, $state, Countries, Cities, $stateParams, toastr, $rootScope) {
                 var ctrl = this;
                 ctrl.userId = $stateParams.Id;
                 ctrl.today = new Date();
@@ -76,6 +76,7 @@
                 };
 
                 ctrl.init = function init() {
+                    ctrl.checkLog();
                     ctrl.fillArrays();
                     ctrl.getAccount();
                 };
@@ -129,7 +130,8 @@
                 };
 
                 ctrl.onCatchAccount = function onCatchAccount(res) {
-                    console.log(res);
+                    toastr.error($translate.instant('global.message.saveError'));
+                    ctrl.isLoading = false;
                 };
 
                 ctrl.getAccount = function getAccount() {
@@ -154,7 +156,7 @@
                 ctrl.save = function save() {
                     ctrl.setDateJSON();
                     if (ctrl.validate()) {
-                        ctrl.myAccount.Gender = ctrl.selectedGender ?  ctrl.selectedGender.code : undefined;
+                        ctrl.myAccount.Gender = ctrl.selectedGender ? ctrl.selectedGender.code : undefined;
                         ctrl.myAccount.PhoneType = ctrl.selectedPhoneType ? ctrl.selectedPhoneType.code : undefined;
                         ctrl.myAccount.Id = ctrl.myAccount.Id ? ctrl.myAccount.Id : undefined;
                         ctrl.saveData();
@@ -175,8 +177,26 @@
 
                 ctrl.onThenNew = function onThenNew(res) {
                     ctrl.isLoading = false;
+                    ctrl.myAccount.Id = res.Id;
                     toastr.success($translate.instant('global.message.saveSuccess'));
+                    ctrl.loginUser();
+                };
+
+                ctrl.goToOffers = function goToOffers() {
                     $state.go('/offers');
+                }
+
+                ctrl.onCatchLogin = function onCatchLogin(result) {
+                    toastr.error($translate.instant('global.message.saveError'))
+                    ctrl.error = true;
+                    ctrl.isLoading = false;
+                };
+
+                ctrl.loginUser = function loginUser() {
+                    ctrl.isLoading = true;
+                    $rootScope.auth.logIn({Mail: ctrl.myAccount.Account.Mail, Password: ctrl.myAccount.Account.Password })
+                        .then(ctrl.goToOffers)
+                        .catch(ctrl.onCatchLogin);
                 };
 
                 ctrl.cancel = function () {
@@ -202,7 +222,13 @@
 
                 ctrl.isLoadingOptions = function isLoadingOptions() {
                     ctrl.isLoading = ctrl.isLoadingAccount || ctrl.isLoadingCountries || ctrl.isLoadingCities;
-                }
+                };
+
+                ctrl.checkLog = function checkLog() {
+                    if ($rootScope.auth.isLoggedIn() && !ctrl.userId) {
+                        ctrl.userId = $rootScope.session.getUserId();
+                    }
+                };
 
                 ctrl.init();
             }
