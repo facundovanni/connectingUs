@@ -1,7 +1,7 @@
 (function usersGridScope(angular) {
   'use strict';
-  angular.module('connectingUsCenter.offers').controller('OffersCRUDController', ['$scope', 'Offers', 'Countries', 'Cities', 'Categories', '$translate', '$stateParams', 'isMyOwn', '$q', '$state', 'toastr', '$rootScope',
-    function OffersCRUDController($scope, Offers, Countries, Cities, Categories, $translate, $stateParams, isMyOwn, $q, $state, toastr, $rootScope) {
+  angular.module('connectingUsCenter.offers').controller('OffersCRUDController', ['$scope', 'Offers', 'Countries', 'Cities', 'Categories', '$translate', '$stateParams', 'isMyOwn', '$q', '$state', 'toastr', '$rootScope', '$uibModal',
+    function OffersCRUDController($scope, Offers, Countries, Cities, Categories, $translate, $stateParams, isMyOwn, $q, $state, toastr, $rootScope, $uibModal) {
       var ctrl = this;
       ctrl.isLoading = false;
       ctrl.isLoadingCountries = false;
@@ -130,6 +130,23 @@
         if (!$rootScope.auth.isLoggedIn()) {
           $state.go('/login');
         }
+      };
+
+      ctrl.modalInstance = {
+        templateUrl: 'modules/chats/templates/chats-crud.html',
+        controller: 'ChatsCRUDController as ctrl',
+        size: 'md'
+      };
+
+      ctrl.openChat = function openChat(chat) {
+        ctrl.modalInstance.resolve = {
+          idChat: undefined,
+          idAnotherUser: ctrl.offer.UserId,
+          idService: ctrl.offer.Id,
+          type: 0
+        };
+
+        $uibModal.open(ctrl.modalInstance);
       };
 
       ctrl.init();

@@ -14,20 +14,21 @@
     assignServicesToRootScope.$inject = ['$rootScope', 'auth', 'session'];
 
     angular.module('connectingUsCenter', [
-            'ngRoute', 'ngAnimate', 'toastr','angularMoment','angular-simple-chat', 'ngSanitize',
-            'ngTouch', 'ui.router',
-            'ui.bootstrap', 'angularSpinner',
-            'connectingUsCenter.services',
-            'connectingUsCenter.directives',
-            'connectingUsCenter.login',
-            'connectingUsCenter.about',
-            'connectingUsCenter.myAccount',
-            'connectingUsCenter.offers',
-            'pascalprecht.translate',
-            'ngResource'
-        ])
-        .config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', '$logProvider', '__env',
-            function config($stateProvider, $locationProvider, $urlRouterProvider, $translateProvider, $logProvider, __env) {
+        'ngRoute', 'ngAnimate', 'toastr', 'angularMoment', 'angular-simple-chat', 'ngSanitize',
+        'ngTouch', 'ui.router',
+        'ui.bootstrap', 'ui.router.stateHelper', 'angularSpinner',
+        'connectingUsCenter.services',
+        'connectingUsCenter.directives',
+        'connectingUsCenter.login',
+        'connectingUsCenter.about',
+        'connectingUsCenter.myAccount',
+        'connectingUsCenter.offers',
+        'connectingUsCenter.chats',
+        'pascalprecht.translate',
+        'ngResource'
+    ])
+        .config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', '$logProvider', '__env', 'stateHelperProvider',
+            function config($stateProvider, $locationProvider, $urlRouterProvider, $translateProvider, $logProvider, __env, stateHelperProvider) {
                 angular.lowercase = angular.$$lowercase;
 
                 $logProvider.debugEnabled(__env.enableDebug);
@@ -71,8 +72,8 @@
                     "about": {
                         "title": "About us",
                         "whereAreWe": "Where do we have services right now?",
-                        "text":"We are a group of young people whose goal is to unite two or more people, in a relationship involving tourists and individuals who can provide a service. Our idea is to create the connecting link between both parties and that they can decide which service they will exchange by uploading it to the page. They can vary from advice as to where you can go for dinner at a good price or good quality or even provide a hosting service. This page does not have payment services and we consider that the best remuneration is a cultural exchange, although this decision is in the hands of those who decide to use this page. We want to revolutionize the way we travel today. Join this change. This project was born within the international training program Diller Teen Fellows as a final project to encompass everything learned in it and we appreciate the tools that made it possible to carry out our ideal.",
-                        "contact":"Contact Us"
+                        "text": "We are a group of young people whose goal is to unite two or more people, in a relationship involving tourists and individuals who can provide a service. Our idea is to create the connecting link between both parties and that they can decide which service they will exchange by uploading it to the page. They can vary from advice as to where you can go for dinner at a good price or good quality or even provide a hosting service. This page does not have payment services and we consider that the best remuneration is a cultural exchange, although this decision is in the hands of those who decide to use this page. We want to revolutionize the way we travel today. Join this change. This project was born within the international training program Diller Teen Fellows as a final project to encompass everything learned in it and we appreciate the tools that made it possible to carry out our ideal.",
+                        "contact": "Contact Us"
                     },
                     "myAccount": {
                         "title": "My Account",
@@ -148,6 +149,16 @@
                         }
 
 
+                    },
+                    "chats": {
+                        "title": "Chats",
+                        "others": "About offers",
+                        "my": "About my offers",
+                        "last": "Last message: ",
+                        "message": {
+                            "sendOk": "Message sended!",
+                            "sendError": "An Error has ocurred"
+                        }
                     }
                 };
 
@@ -172,10 +183,6 @@
                 $stateProvider.state('/offers', {
                     url: '/offers'
                 });
-                $stateProvider.state('/myOffer', {
-                    url: '/myOffer',
-                    templateUrl: 'modules/myOffer/templates/myOffer.html'
-                });
 
                 $stateProvider.state('/my-offers', {
                     url: '/my-offers'
@@ -186,6 +193,10 @@
                 });
                 $stateProvider.state('/my-offers/:Id', {
                     url: '/my-offers/:Id'
+                });
+
+                $stateProvider.state('/chats', {
+                    url: '/chats',
                 });
 
                 $locationProvider.hashPrefix('');

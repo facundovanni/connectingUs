@@ -1,0 +1,41 @@
+.chat-list {
+    list-style: none;
+}
+
+li.chat-list:visited {
+    text-decoration: none;
+    background-color: var(--light-blue);
+}
+
+li.chat-list:hover {
+    text-decoration: none;
+    background-color: var(--light-blue);
+}
+
+.chat-item {
+    color: var(--black);
+    text-decoration: none;
+}
+
+a.chat-item:visited {
+    text-decoration: none;
+    color:  var(--black);
+    background-color: var(--light-blue);
+}
+
+a.chat-item:hover {
+    text-decoration: none;
+    color:  var(--black);
+    background-color: var(--light-blue);
+}
+
+
+.chat-user-r {
+    font-weight: bolder;
+}
+
+.chat-container {
+    width: 100%;
+    height: 300px;
+    float: left;
+}

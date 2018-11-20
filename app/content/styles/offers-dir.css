@@ -13,7 +13,7 @@
   height: 544px;
   font-family: var(--main-font);
   font-size: 16px;
-  color: #212121;
+  color: var(--black);
 }
 
 .offers-filter .btnClean {
@@ -27,7 +27,7 @@
 
 .offers-no-link {
   text-decoration: none;
-  color: #212121;
+  color:var(--black);
 }
 
 .offers-body .nameGeneric {
@@ -81,7 +81,13 @@ a.list-group-item small {
   color: #fff;
 }
 
+a.list-group-item:visited {
+  text-decoration: none;
+  color: var(--black);
+}
 a.list-group-item:hover {
+  text-decoration: none;
+  color: var(--black);
   background-color: var(--light-blue);
 }
 

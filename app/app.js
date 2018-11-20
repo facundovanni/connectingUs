@@ -20,7 +20,11 @@
 
     ctrl.goToAbout = function goToAbout() {
       $state.go('/about');
-    }
+    };
+
+    ctrl.goToMyChats = function goToMyChats() {
+      $state.go('/chats');
+    };
   
   }]);
 })(angular);

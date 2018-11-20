@@ -58,30 +58,27 @@
                 </div>
               </div>
             </uib-accordion>
-            <div class="row cda-row">
-              <div class="col-md-12">
-                <div class="input-group">
-                  <input ng-model="ctrl.searchText" ng-change="ctrl.search()" class="form-control" placeholder="{{'offers.searchItem' | translate}}"
-                    type="text" ng-model-options="{ debounce: 1000}" />
-                  <span class="input-group-btn">
-                    <button class="btn btn-primary" type="submit">
-                      <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                  </span>
-                </div>
-              </div>
+          </div>
+          <div class="col-md-12">
+            <div class="input-group">
+              <input ng-model="ctrl.searchText" ng-change="ctrl.search()" class="form-control" placeholder="{{'offers.searchItem' | translate}}"
+                type="text" ng-model-options="{ debounce: 1000}" />
+              <span class="input-group-btn">
+                <button class="btn btn-primary" type="submit">
+                  <span class="glyphicon glyphicon-search"></span>
+                </button>
+              </span>
             </div>
-            <div class="row cda-row" ng-if="ctrl.offers">
-              <div class="col-md-12">
-                <offers-list item-new="ctrl.myOffers" open-state="ctrl.myOffers ? '/my-offers/:Id' : '/offers/:Id' "
-                  items="ctrl.offers"></offers-list>
-              </div>
-            </div>
-            <div ng-if="!ctrl.offers || ctrl.offers.lenght == 0" class="noItems">
-              <div class="col-md-12">
-                {{'offers.noItems' | translate}}
-              </div>
-            </div>
+          </div>
+        </div>
+        <div class="row cda-row" ng-if="ctrl.offers">
+          <div class="col-md-12">
+            <offers-list item-new="ctrl.myOffers" open-state="ctrl.myOffers ? '/my-offers/:Id' : '/offers/:Id' " items="ctrl.offers"></offers-list>
+          </div>
+        </div>
+        <div ng-if="!ctrl.offers || ctrl.offers.lenght == 0" class="noItems">
+          <div class="col-md-12">
+            {{'offers.noItems' | translate}}
           </div>
         </div>
       </div>
