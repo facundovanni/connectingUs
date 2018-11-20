@@ -16,7 +16,7 @@
     angular.module('connectingUsCenter', [
         'ngRoute', 'ngAnimate', 'toastr', 'angularMoment', 'angular-simple-chat', 'ngSanitize',
         'ngTouch', 'ui.router',
-        'ui.bootstrap', 'ui.router.stateHelper', 'angularSpinner',
+        'ui.bootstrap', 'angularSpinner',
         'connectingUsCenter.services',
         'connectingUsCenter.directives',
         'connectingUsCenter.login',
@@ -27,8 +27,8 @@
         'pascalprecht.translate',
         'ngResource'
     ])
-        .config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', '$logProvider', '__env', 'stateHelperProvider',
-            function config($stateProvider, $locationProvider, $urlRouterProvider, $translateProvider, $logProvider, __env, stateHelperProvider) {
+        .config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', '$logProvider', '__env',
+            function config($stateProvider, $locationProvider, $urlRouterProvider, $translateProvider, $logProvider, __env) {
                 angular.lowercase = angular.$$lowercase;
 
                 $logProvider.debugEnabled(__env.enableDebug);
