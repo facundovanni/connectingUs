@@ -1,7 +1,7 @@
 (function usersGridScope(angular) {
   'use strict';
-  angular.module('connectingUsCenter.offers').controller('OffersCRUDController', ['$scope', 'Offers', 'Countries', 'Cities', 'Categories', '$translate', '$stateParams', 'isMyOwn', '$q', '$state', 'toastr', '$rootScope', '$uibModal',
-    function OffersCRUDController($scope, Offers, Countries, Cities, Categories, $translate, $stateParams, isMyOwn, $q, $state, toastr, $rootScope, $uibModal) {
+  angular.module('connectingUsCenter.offers').controller('OffersCRUDController', ['$scope', 'Offers', 'Countries', 'Cities', 'Categories', '$translate', '$stateParams', 'isMyOwn', '$q', '$state', 'toastr', '$rootScope', '$uibModal', 'Upload',
+    function OffersCRUDController($scope, Offers, Countries, Cities, Categories, $translate, $stateParams, isMyOwn, $q, $state, toastr, $rootScope, $uibModal, Upload) {
       var ctrl = this;
       ctrl.isLoading = false;
       ctrl.isLoadingCountries = false;
@@ -62,7 +62,7 @@
         ctrl.isLoading = false;
       };
 
-      ctrl.onThenNew = function onThenNew() {
+      ctrl.onThenNew = function onThenNew(res) {
         ctrl.isLoading = false;
         toastr.success($translate.instant('global.message.saveSuccess'));
         ctrl.goToMyOffers();
@@ -147,6 +147,15 @@
         };
 
         $uibModal.open(ctrl.modalInstance);
+      };
+
+      ctrl.setImg = function setImg() {
+        ctrl.img = ctrl.img && (ctrl.img.filetype === 'image/jpeg' || ctrl.img.filetype === 'image/png') ? ctrl.img : undefined;
+        if (ctrl.img && ctrl.img.base64) {
+          ctrl.offer.Image = ctrl.img.base64;
+        } else {
+          toastr.error($translate.instant('myOffer.error.image.general'));
+        }
       };
 
       ctrl.init();

@@ -13,6 +13,10 @@
       $state.go('/my-offers');
     };
 
+    ctrl.goToOffers = function goToOffers() {
+      $state.go('/offers');
+    };
+
     ctrl.logout = function logout() {
       auth.logOut();
       $state.go('/login');

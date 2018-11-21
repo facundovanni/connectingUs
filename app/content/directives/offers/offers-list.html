@@ -1,13 +1,16 @@
 ﻿<div ng-controller="OffersListController as ctrl">
-    <ul class="remove-left">
-        <li ng-if="ctrl.itemNew" class="list-group offers-list">
-            <button type="button" class="btn btn-primary btn-save-myOffer" type="submit" ng-click="ctrl.clickItem(item)">{{'offers.addNew'|
+    <div class="row cda-row">
+        <div ng-if="ctrl.itemNew">
+            <button type="button" class="btn btn-lg btn-info btn-save-myOffer" type="submit" ng-click="ctrl.clickItem(item)">{{'offers.addNew'|
                 translate}}</button>
-        </li>
+        </div>
+    </div>
+    <ul class="remove-left">
         <li class="list-group offers-list" ng-repeat="item in ctrl.items">
             <a ng-click="ctrl.clickItem(item)" class="offers-no-link">
                 <offers-item item="item"></offers-item>
             </a>
         </li>
+
     </ul>
 </div>

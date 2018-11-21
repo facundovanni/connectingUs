@@ -11,7 +11,7 @@
                 ctrl.me = { userId: $rootScope.session.getUserId(), userName: $rootScope.session.getUser().Account.Nickname };
 
                 ctrl.cancel = function () {
-                    $uibModalInstance.dismiss('cancel');
+                    $uibModalInstance.close();
                 };
 
                 ctrl.init = function init() {

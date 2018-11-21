@@ -1,12 +1,12 @@
 ﻿<a class="list-group-item offers-body">
     <div class="row cda-row">
-        <div class="media col-md-3">
-            <figure class="pull-left">
-                <img ng-if="item.Images[0].ImageString" class="media-object img-rounded img-responsive" data-ng-src="data:image/png;base64,{{item.Images[0].ImageString}}">
-                <img ng-if="!item.Images.length" class="media-object img-rounded img-responsive" src="content/images/bg2.jpg">
+        <div class="col-md-6 text-center">
+            <figure>
+                <img ng-if="item.Image" data-ng-src="data:image/png;base64,{{item.Image}}">
+                <img ng-if="!item.Image" src="content/images/no-photo.jpg">
             </figure>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-6 text-center">
             <div class="row cda-row">
                 <div class="col-md-12 nameGeneric">{{item.Title}}</div>
             </div>

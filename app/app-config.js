@@ -25,7 +25,7 @@
         'connectingUsCenter.offers',
         'connectingUsCenter.chats',
         'pascalprecht.translate',
-        'ngResource'
+        'ngResource', 'ngFileUpload', 'naif.base64'
     ])
         .config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', '$logProvider', '__env',
             function config($stateProvider, $locationProvider, $urlRouterProvider, $translateProvider, $logProvider, __env) {
@@ -58,6 +58,12 @@
                             "mobile": "Mobile",
                             "home": "Home",
                             "other": "Other"
+                        },
+                        "menu": {
+                            "myAccount": "My Account",
+                            "myOffers": "My Offers",
+                            "myChats": "My Chats",
+                            "offers": "Users Offers"
                         }
                     },
                     "login": {
@@ -72,7 +78,10 @@
                     "about": {
                         "title": "About us",
                         "whereAreWe": "Where do we have services right now?",
-                        "text": "We are a group of young people whose goal is to unite two or more people, in a relationship involving tourists and individuals who can provide a service. Our idea is to create the connecting link between both parties and that they can decide which service they will exchange by uploading it to the page. They can vary from advice as to where you can go for dinner at a good price or good quality or even provide a hosting service. This page does not have payment services and we consider that the best remuneration is a cultural exchange, although this decision is in the hands of those who decide to use this page. We want to revolutionize the way we travel today. Join this change. This project was born within the international training program Diller Teen Fellows as a final project to encompass everything learned in it and we appreciate the tools that made it possible to carry out our ideal.",
+                        "text.p1": "We are a group of young people with the aim of connecting tourists or groups of of tourist with locals from different countries who can offer a service. Our idea is to create the link between them so they can decide what type of of service they can offer and publish the offer in a webpage. The offers can be varied: from advise  to eating in quality places with good prices to providing accomodation.",
+                        "text.p2": "This page doesn't ask for payments and we consider that the best retribution is the cultural exchange, although the details are up to the users of the web page.",
+                        "text.p3": "We want to change the way we travel and we want you to join us.",
+                        "text.p4": "This project was born In the frame of the Diller Teen Fellows international training program as a way to put into action all the tools and abilities we have learnt.",
                         "contact": "Contact Us"
                     },
                     "myAccount": {
@@ -146,15 +155,20 @@
                             "city": "The city is required",
                             "description": "The description is required",
                             "status": "The status is required",
-                        }
-
-
+                            "image": {
+                                "accept": "The file must be '.jpeg', .jpg' or '.png'",
+                                "size": "The file must be smaller than 1MB",
+                                "general": "The file must be '.jpeg', .jpg' or '.png' and smaller than 1MB"
+                            }
+                        },
+                        "selectImg": "Select Image (Max. 1MB)"
                     },
                     "chats": {
                         "title": "Chats",
                         "others": "About offers",
                         "my": "About my offers",
                         "last": "Last message: ",
+                        "byServices": "About service",
                         "message": {
                             "sendOk": "Message sended!",
                             "sendError": "An Error has ocurred"

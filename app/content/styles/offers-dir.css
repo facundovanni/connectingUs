@@ -23,6 +23,8 @@
 .offers-list {
   list-style: none;
   display: inline-block;
+  width: 100%;
+  
 }
 
 .offers-no-link {
@@ -33,6 +35,7 @@
 .offers-body .nameGeneric {
   font-size: 14px;
   height: 52px;
+  width:100%;
   font-size: large;
   font-weight: bold;
   word-wrap: break-word;
@@ -97,4 +100,8 @@ a.list-group-item:hover {
 
 .remove-left {
   margin-left: -40px;
+}
+
+input[type=file] {
+  display: inline;
 }

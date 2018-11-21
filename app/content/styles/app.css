@@ -39,7 +39,7 @@ body {
 }
 
 .back {
-  background-image: url('../images/bg2.jpg');
+  background-image: url('../images/no-photo.jpg');
 }
 
 .headerMenu {
@@ -95,7 +95,7 @@ body {
 /* myOffers */
 
 .offer-image {
-  width: 400px;
+  width: 100%;
 }
 
 .offer-label {

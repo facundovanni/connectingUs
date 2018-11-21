@@ -25,9 +25,6 @@
                     ctrl.isLoading = true;
                     var promises = [];
                     Chats.getAllAsRequester({ idUser: $rootScope.session.getUserId() }).$promise
-                        //promises.push(Chats.getAllAsOffertor({ idUser: $rootScope.session.getUserId() }).$promise);
-
-
                         .then(ctrl.setChatsRequester)
                         .catch(ctrl.catchChats)
                         .finally(ctrl.getOffertors);

@@ -19,19 +19,38 @@ li.chat-list:hover {
 
 a.chat-item:visited {
     text-decoration: none;
-    color:  var(--black);
+    color: var(--black);
     background-color: var(--light-blue);
 }
 
 a.chat-item:hover {
     text-decoration: none;
-    color:  var(--black);
+    color: var(--black);
     background-color: var(--light-blue);
 }
 
-
 .chat-user-r {
-    font-weight: bolder;
+    color: var(--blue);
+}
+
+.chat-info {
+    font-size: 1.1rem;
+    color: var(--grey-dark);
+}
+
+.chat-lastMsg {
+    font-size: 1.6rem;
+}
+
+.chat-italic {
+    font-size:1.3rem;
+    font-style: italic;
+    color: var(--grey-dark);
+}
+.chat-title-srv {
+    font-size:1.3rem;
+    font-style: italic;
+    color: var(--blue);
 }
 
 .chat-container {

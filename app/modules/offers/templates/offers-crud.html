@@ -1,4 +1,5 @@
-<form name="CRUDMOfferForm" class="crud needs-validation offers-filter" us-spinner spinner-on="ctrl.isLoading">
+<form name="CRUDOfferForm" class="crud needs-validation offers-filter" us-spinner spinner-on="ctrl.isLoading"
+  novalidate>
   <div class="container">
     <div class="row cda-row">
       <h1 ng-if="!ctrl.myOffer" class="col-md-12 title-initial">{{ctrl.offer.Title}}</h1>
@@ -6,10 +7,24 @@
     </div>
     <div class="row cda-row">
       <div class="row cda-row">
-        <div class="col-md-6 text-center">
-          <img ng-if="ctrl.offer.Images.length" data-ng-src="data:image/png;base64,{{ctrl.offer.Images[0].ImageString}}"
-            class="offer-image">
-          <img ng-if="!ctrl.offer.Images.length" src="content/images/bg2.jpg" class="offer-image">
+        <div class="col-md-6 well text-center">
+          <div class="row cda-row">
+            <div class="col-md-12">
+              <img ng-if="ctrl.offer.Image" data-ng-src="data:imagoffer-imagee/png;base64,{{ctrl.offer.Image}}"
+                class="offer-image">
+              <img ng-if="!ctrl.offer.Image" src="content/images/no-photo.jpg" class="offer-image">
+            </div>
+          </div>
+          <div class="row cda-row" ng-if="ctrl.myOffer">
+            <div class="col-md-12 ">
+              <span>{{'myOffer.selectImg'| translate}}</span><br>
+              <span class="file-upload"><input type="file" class="btn btn-md btn-info" on-after-validate="ctrl.setImg()" ng-model="ctrl.img"
+                name="files" accept="image/*" maxsize="1000" required base-sixty-four-input
+                do-not-parse-if-oversize></span><br>
+                <span class="validate-error" ng-show="CRUDOfferForm.files.$error.accept">{{ myOffer.error.image.accept | translate }}</span>
+              <span class="validate-error" ng-show="CRUDOfferForm.files.$error.maxsize">{{ myOffer.error.image.size | translate }}</span>
+            </div>
+          </div>
         </div>
         <div class="col-md-6 well">
           <div class="col-md-12" ng-if="ctrl.myOffer">

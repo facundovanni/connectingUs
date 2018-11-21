@@ -28,19 +28,17 @@
         <div class="col-md-12">
           <img class="header-logo" title="Connecting Us" src="content/images/connectingUsLogo.png">
           <a class="navbar-brand headerTitle" ui-sref="/offers">Connecting Us</a>
-          <span class="pull-right  header-account-name">
+          <span class="pull-right header-account-name">
             <span class="glyphicon glyphicon-question-sign" ng-click="ctrl.goToAbout()"></span>
-            <a class="header-account-name about-button" ng-click="ctrl.goToAbout()">
-
-            </a>
             <div class="btn-group" uib-dropdown dropdown-append-to-body>
               <div uib-dropdown-toggle ng-if="auth.isLoggedIn()">
                 {{session.getUser().Account.Nickname}} <span class="glyphicon glyphicon-menu-hamburger"></span>
               </div>
               <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-to-body">
-                <li role="menuitem"><a href="" ng-click="ctrl.goToMyAccount()">My Account</a></li>
-                <li role="menuitem"><a href="" ng-click="ctrl.goToMyOffers()">My Offers</a></li>
-                <li role="menuitem"><a href="" ng-click="ctrl.goToMyChats()">My Chats</a></li>
+                <li role="menuitem"><a ng-click="ctrl.goToMyAccount()">{{'global.menu.myAccount' | translate}}</a></li>
+                <li role="menuitem"><a ng-click="ctrl.goToMyOffers()">{{'global.menu.myOffers' | translate}}</a></li>
+                <li role="menuitem"><a ng-click="ctrl.goToMyChats()">{{'global.menu.myChats' | translate}}</a></li>
+                <li role="menuitem"><a ng-click="ctrl.goToOffers()">{{'global.menu.offers' | translate}}</a></li>
                 <li class="divider"></li>
                 <li class="col-xs-12"><button class="btn btn-block btn-primary" type="submit" ng-click="ctrl.logout()"
                     translate="login.signOut"></button></li>
@@ -57,9 +55,9 @@
   <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.js "></script>
   <script type="text/javascript" src="bower_components/angular-touch/angular-touch.js "></script>
   <script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
-  <script type="text/javascript" src="bower_components/moment/moment.js"></script>  
+  <script type="text/javascript" src="bower_components/moment/moment.js"></script>
   <script type="text/javascript" src="bower_components/angular-moment/angular-moment.js"></script>
-  <script type="text/javascript"  src="bower_components/angular-simple-chat/dist/angular-simple-chat.js"></script>
+  <script type="text/javascript" src="bower_components/angular-simple-chat/dist/angular-simple-chat.js"></script>
   <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
   <script type="text/javascript" src="bower_components/angular-ui-router.stateHelper/statehelper.js"></script>
   <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.js "></script>
@@ -70,8 +68,9 @@
   <script type="text/javascript" src="bower_components/angular-translate-interpolation-messageformat/angular-translate-interpolation-messageformat.js"></script>
   <script type="text/javascript" src="bower_components/angular-translate-handler-log/angular-translate-handler-log.js"></script>
   <script type="text/javascript" src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
-  
-  
+  <script type="text/javascript" src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+  <script type="text/javascript" src="bower_components/angular-base64-upload/dist/angular-base64-upload.js"></script>
+
   <script type="text/javascript" src="env.js"></script>
 
   <script type="text/javascript" src="content/services/services-model.js"></script>

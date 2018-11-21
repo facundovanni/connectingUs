@@ -16,10 +16,13 @@
                   <li class="chat-list">
                     <a href="" ng-click="ctrl.openChat(chat, 0)" class="chat-item">
                       <span class="chat-user-r">{{chat.UserOffertorNickname}}</span>
-                      <span> {{'chats.last' | translate}} {{chat.LastMessageDate | date:'short'}}</span>
+                      <span class="chat-info"> {{'chats.last' | translate}} {{chat.LastMessageDate | date:'short'}}</span>
                       <br>
-                      <span>{{chat.Service.Title}}</span>
+                      <span class="chat-lastMsg">{{chat.Messages[0].Text}}</span>
+                      <br>
+                      <span class="chat-italic">{{'chats.byServices' | translate}}</span> <span class="chat-title-srv">{{chat.Service.Title}}</span>
                     </a>
+                    <hr>
                   </li>
                 </ul>
               </div>
@@ -31,11 +34,14 @@
                 <ul class="remove-left" ng-repeat="chat in ctrl.chatsMy track by chat.Id">
                   <li class="chat-list">
                     <a href="" ng-click="ctrl.openChat(chat, 1)" class="chat-item">
-                      <span class="chat-user-r">{{chat.UserRequesterNickname}}</span>
-                      <span> {{'chats.last' | translate}} {{chat.LastMessageDate | date:'short'}}</span>
-                      <br>
-                      <span>{{chat.Service.Title}}</span>
+                        <span class="chat-user-r">{{chat.UserRequesterNickname}}</span>
+                        <span class="chat-info"> {{'chats.last' | translate}} {{chat.LastMessageDate | date:'short'}}</span>
+                        <br>
+                        <span class="chat-lastMsg">{{chat.Messages[0].Text}}</span>
+                        <br>
+                        <span class="chat-italic">{{'chats.byServices' | translate}}</span> <span class="chat-title-srv">{{chat.Service.Title}}</span>
                     </a>
+                    <hr>
                   </li>
                 </ul>
               </div>
