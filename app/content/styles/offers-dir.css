@@ -92,4 +92,5 @@ input[type=file] {
 
 .offer-item-image{
   max-height: 220px;
+  max-width:100%;
 }
