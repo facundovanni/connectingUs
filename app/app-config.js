@@ -174,7 +174,7 @@
                         "others": "About offers",
                         "my": "About my offers",
                         "last": "Last message: ",
-                        "byServices": "About service",
+                        "byServices": "Service",
                         "message": {
                             "sendOk": "Message sended!",
                             "sendError": "An Error has ocurred"

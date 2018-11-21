@@ -33,7 +33,7 @@
 }
 
 .offers-body .nameGeneric {
-  font-size: 14px;
+  font-size: 2rem;
   height: 52px;
   width:100%;
   font-size: large;
@@ -47,7 +47,7 @@
   font-style: normal;
   color: #5A5965;
   line-height: 16px;
-  font-size: 20px;
+  font-size: 1.5rem;
   padding-bottom: 10px;
   text-overflow: ellipsis;
   word-wrap: break-word;
@@ -58,22 +58,6 @@
   font-weight: bold;
 }
 
-.offers-body .img {
-  width: 184px;
-  height: 184px;
-  z-index: 0;
-  display: block;
-  border: none;
-  background: var(--main-bg-color);
-}
-
-.offers-body .img .adjust-image>img {
-  max-width: 184px;
-  max-height: 184px;
-  width: auto;
-  height: auto;
-  padding: 0px;
-}
 
 a.list-group-item {
   height: auto;
