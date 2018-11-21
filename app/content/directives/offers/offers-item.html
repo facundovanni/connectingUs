@@ -2,10 +2,12 @@
     <div class="row cda-row">
         <div class="col-md-6 text-center">
             <figure>
-                <img ng-if="item.Image" data-ng-src="data:image/png;base64,{{item.Image}}">
-                <img ng-if="!item.Image" src="content/images/no-photo.jpg">
+                <img ng-if="item.Image" class="offer-item-image" data-ng-src="data:image/png;base64,{{item.Image}}">
+                <img ng-if="!item.Image" class="offer-item-image" src="content/images/no-photo.jpg">
             </figure>
+            <hr>
         </div>
+
         <div class="col-md-6 text-center">
             <div class="row cda-row">
                 <div class="col-md-12 nameGeneric">{{item.Title}}</div>

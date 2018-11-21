@@ -212,6 +212,7 @@ a {
   font-family: var(--main-font);
   font-size: 16px;
   margin-left: 10px;
+  text-align: justify;
 }
 
 .terms-and-conditions-checkbox {

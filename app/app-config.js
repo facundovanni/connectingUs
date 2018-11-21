@@ -108,6 +108,12 @@
                             "phoneNumber": "Phone Number",
                             "typeNumber": "Type"
                         },
+                        "termsAndConditions": {
+                            "title": "Terms And Conditions",
+                            "text.p1": "The following terms and conditions (the 'Terms and Conditions') govern your use of this website and any of the contents available through or through this website, including any content derived from it (the 'Website'). Time Inc. ('Time Inc.' or 'we') has made the Website available to you. We may change the Terms and Conditions from time to time, at any time without notice, only posting changes to the Website. BY USING THE WEB SITE, YOU ACCEPT AND AGREE TO THESE TERMS AND CONDITIONS REGARDING YOUR USE OF THE WEBSITE. If you do not agree with these Terms and Conditions, you can not access it or use the Website in any other way.",
+                            "text.p2": "1. Property Rights. Between you and Time Inc., Time Inc. is the sole and exclusive owner of all rights, title and interests in and of the Website, of all content (including, for example, audio, photographs, illustrations, graphics, other media). visuals, videos, copies, texts, software, titles, shock wave files, etc.), codes, data and materials thereof, the appearance and environment, the design and organization of the Website and the compilation of the contents, codes, data and materials on the Website, including but not limited to, any copyrights, trademark rights, patent rights, database rights, moral rights, sui generis rights and other intellectual properties and economic rights of the same. Your use of the Website does not give you ownership of any of the content, codes, data or materials that you may access on or through the Website.",
+                            "text.p3": "2. Limited License. You may access and view the content of the Website from your computer or from any other device and, unless otherwise stated in these Terms and Conditions or on the Website, make individual copies or impressions of the Website content. for your personal, internal use only. The use of the Website and the services offered on or through the Website are only for your personal, non-commercial use.",
+                        },
                         "error": {
                             "emailConfirm": "The emails must be equals",
                             "passwordConfirm": "The passwords are not equals",
