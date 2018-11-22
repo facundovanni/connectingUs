@@ -36,7 +36,7 @@
                     method:'POST',
                     url:'/api/chats/chat',
                     transformResponse: function response(data){
-                        return {Id: data};
+                        return {Id: data === 'null' ? undefined : data};
                     }
                 }
             }));

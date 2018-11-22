@@ -16,7 +16,7 @@ ul.rating {
     font-size:20px;
 }
 .rating .filled {
-    color: orangered;
+    color: var(--orange);
 }
 .clear{
   margin-top:20px;

@@ -142,6 +142,7 @@
                         "city": "City",
                         "country": "Country",
                         "category": "Category",
+                        "disabled": "The offer has been disabled"
                     },
                     "myOffer": {
                         "titleView": "Offer Details",
@@ -178,7 +179,14 @@
                         "message": {
                             "sendOk": "Message sended!",
                             "sendError": "An Error has ocurred"
-                        }
+                        },
+                        "endChat": "End Chat",
+                        "rate": {
+                            "title": "Can you rate the user, please?",
+                            "ratedOk": "The user has been qualificated.",
+                            "ratedOkNo": "The user has not been qualificated."
+                        },
+                        "closed":"The chat is closed"
                     }
                 };
 

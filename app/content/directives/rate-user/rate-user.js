@@ -1,43 +1,44 @@
-(function OffersItem(angular) {
+(function starRating(angular) {
     'use strict';
     angular.module('connectingUsCenter.directives')
-    .directive('starRating', function starRating() {
-        return {
-            restrict: 'A',
-            template: '<ul class="rating">' +
-                '<li ng-repeat="star in stars" ng-class="star" ng-click="toggle($index)">' +
-                '\u2605' +
-                '</li>' +
-                '</ul>',
-            scope: {
-                ratingValue: '=',
-                max: '=',
-                onRatingSelected: '&'
-            },
-            link: function (scope, elem, attrs) {
+        .directive('starRating', [function starRating() {
+            var directive = {
+                restrict: 'E',
+                scope: {
+                    ratingValue: '=',
+                    max: '=',
+                    onRatingSelected: '&'
+                },
+                templateUrl: 'content/directives/rate-user/rate-user.html',
+                controller: 'StarRatingController',
+                controllerAs: 'ctrl'
+            };
+            return directive;
+        }])
 
-                var updateStars = function () {
-                    scope.stars = [];
-                    for (var i = 0; i < scope.max; i++) {
-                        scope.stars.push({
-                            filled: i < scope.ratingValue
+        .controller('StarRatingController', ['$scope',
+            function StarRatingController($scope) {
+                var ctrl = this;
+                ctrl.updateStars = function updateStars() {
+                    ctrl.stars = [];
+
+                    for (var i = 0; i < $scope.max; i++) {
+                        ctrl.stars.push({
+                            filled: i < $scope.ratingValue
                         });
                     }
                 };
-
-                scope.toggle = function (index) {
-                    scope.ratingValue = index + 1;
-                    scope.onRatingSelected({
+                ctrl.toggle = function (index) {
+                    $scope.ratingValue = index + 1;
+                    $scope.onRatingSelected({
                         rating: index + 1
                     });
                 };
 
-                scope.$watch('ratingValue', function (oldVal, newVal) {
+                $scope.$watch('ratingValue', function (oldVal, newVal) {
                     if (newVal) {
-                        updateStars();
+                        ctrl.updateStars();
                     }
                 });
-            }
-        }
-    });
-});
+            }]);
+})(angular);

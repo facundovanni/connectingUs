@@ -58,3 +58,11 @@ a.chat-item:hover {
     height: 300px;
     float: left;
 }
+
+.status-closed {
+    color: var(--red);
+}
+
+.status-open {
+    color: var(--green);
+}

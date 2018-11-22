@@ -45,8 +45,8 @@
 
                 ctrl.getOffertors = function getOffertors() {
                     Chats.getAllAsOffertor({ idUser: $rootScope.session.getUserId() }).$promise
-                    .then(ctrl.setChatsOffertors)
-                    .catch(ctrl.catchChats);
+                        .then(ctrl.setChatsOffertors)
+                        .catch(ctrl.catchChats);
                 }
 
                 ctrl.modalInstance = {
@@ -56,16 +56,23 @@
                 };
 
                 ctrl.openChat = function openChat(chat, type) {
-                    ctrl.modalInstance.resolve = {
-                        idChat: function resolve() { return chat.Id },
-                        idAnotherUser: function resolve() { return type ? chat.UserOffertorId : chat.UserRequesterId },
-                        idService: function resolve() { return chat.Service.Id },
-                        type: type
-                    };
+                    if (chat.Active) {
 
-                    $uibModal.open(ctrl.modalInstance).result.then(function success() {
-                        ctrl.getChats();
-                    });
+                        ctrl.modalInstance.resolve = {
+                            idChat: function resolve() { return chat.Id },
+                            idAnotherUser: function resolve() { return type ? chat.UserOffertorId : chat.UserRequesterId },
+                            idService: function resolve() { return chat.Service.Id },
+                            type: type
+                        };
+
+                        $uibModal.open(ctrl.modalInstance).result.then(function success() {
+                            ctrl.getChats();
+                        });
+                    } else {
+                        toastr.warning($translate.instant('chats.closed'))
+
+                    }
+
                 };
 
                 ctrl.init();

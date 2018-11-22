@@ -2,9 +2,8 @@
   <div class="modal-header">
     <div class="row cda-row">
       <span>
-        <h3 class="modal-title" id="modal-title">{{ctrl.chat.Service.Title}}</h3>
+        <h3 class="modal-title" id="modal-title">{{ctrl.chat.Service.Title}} <span class="close" ng-click="ctrl.cancel()">&times;</span></h3>
       </span>
-      <span class="close" ng-click="ctrl.cancel()">&times;</span>
     </div>
   </div>
   <div class="modal-body">
@@ -15,13 +14,11 @@
       </div>
     </div>
   </div>
-  <!--
   <div class="modal-footer">
     <div class="row cda-row">
       <div class="col-md-12">
-        <button class="btn btn-lg btn-success" type="submit" ng-disabled="ctrl.isLoading"
-            ng-click="ctrl.endChat()">{{'chats.endChat'|translate}}</button>
+        <button class="btn btn-lg btn-success" type="submit" ng-disabled="ctrl.isLoading" ng-click="ctrl.endChat()">{{'chats.endChat'|translate}}</button>
       </div>
     </div>
-  </div>-->
+  </div>
 </div>

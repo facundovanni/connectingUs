@@ -119,7 +119,16 @@
             ctrl.offer = {};
             ctrl.offer.userId = $rootScope.session.getUserId();
           }
-          ctrl.offer.Active = !ctrl.offer.Active;
+          if(!ctrl.myOffer){
+            if(!ctrl.offer.Active){
+              toastr.error($translate.instant('offers.disabled'));
+              $state.go('/offers');
+            }
+
+          }else{
+            ctrl.offer.Active = !ctrl.offer.Active;
+
+          }
         }).finally(function onFinally() {
           ctrl.isLoading = false;
         });

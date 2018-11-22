@@ -99,7 +99,7 @@
                         var modalInstance = {
                             templateUrl: 'modules/chats/templates/chats-crud-rate.html',
                             controller: 'ChatsCRUDRRateController as ctrl',
-                            size: 'sm'
+                            size: 'md'
                         };
 
                         modalInstance.resolve = {
