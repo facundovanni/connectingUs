@@ -17,8 +17,6 @@
                     <a href="" ng-click="ctrl.openChat(chat, 0)" class="chat-item">
                       <span class="chat-user-r">{{chat.UserOffertorNickname}}</span>
                       <span class="chat-italic">{{'chats.byServices' | translate}}</span> <span class="chat-title-srv">{{chat.Service.Title}}</span>
-                      <span class="status-open" ng-if="chat.Active"><span class="glyphicon glyphicon-certificate"></span></span>
-                      <span class="status-closed" ng-if="!chat.Active"><span class="glyphicon glyphicon-certificate"></span></span>
                       <span class="chat-info pull-right">{{chat.LastMessageDate | date:'short'}}</span>
                       <br>
                       <span class="chat-lastMsg">{{chat.Messages[chat.Messages.length -1].Text}}</span>
