@@ -62,8 +62,8 @@
                         "menu": {
                             "myAccount": "My Account",
                             "myOffers": "My Offers",
-                            "myChats": "My Chats",
-                            "offers": "Users Offers"
+                            "myChats": "Messages",
+                            "offers": "Services Offers"
                         }
                     },
                     "login": {
@@ -171,22 +171,22 @@
                         "selectImg": "Select Image (Max. 1MB)"
                     },
                     "chats": {
-                        "title": "Chats",
+                        "title": "Messages",
                         "others": "About offers",
                         "my": "About my offers",
-                        "last": "Last message: ",
+                        "last": "Last: ",
                         "byServices": "Service",
                         "message": {
                             "sendOk": "Message sended!",
                             "sendError": "An Error has ocurred"
                         },
-                        "endChat": "End Chat",
+                        "endChat": "End Conversation",
                         "rate": {
                             "title": "Can you rate the user, please?",
                             "ratedOk": "The user has been qualificated.",
                             "ratedOkNo": "The user has not been qualificated."
                         },
-                        "closed":"The chat is closed"
+                        "closed":"The conversation is closed"
                     }
                 };
 
