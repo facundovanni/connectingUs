@@ -31,6 +31,13 @@
                 sendMessage: {
                     method: 'POST',
                     url: '/api/chats/messages'
+                },
+                isChatOpened:{
+                    method:'POST',
+                    url:'/api/chats/chat',
+                    transformResponse: function response(data){
+                        return {Id: data};
+                    }
                 }
             }));
 

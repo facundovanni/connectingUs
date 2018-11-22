@@ -1,7 +1,7 @@
 (function usersGridScope(angular) {
   'use strict';
-  angular.module('connectingUsCenter.offers').controller('OffersCRUDController', ['$scope', 'Offers', 'Countries', 'Cities', 'Categories', '$translate', '$stateParams', 'isMyOwn', '$q', '$state', 'toastr', '$rootScope', '$uibModal', 'Upload',
-    function OffersCRUDController($scope, Offers, Countries, Cities, Categories, $translate, $stateParams, isMyOwn, $q, $state, toastr, $rootScope, $uibModal, Upload) {
+  angular.module('connectingUsCenter.offers').controller('OffersCRUDController', ['$scope', 'Offers', 'Countries', 'Cities', 'Categories', '$translate', '$stateParams', 'isMyOwn', '$q', '$state', 'toastr', '$rootScope', '$uibModal',
+    function OffersCRUDController($scope, Offers, Countries, Cities, Categories, $translate, $stateParams, isMyOwn, $q, $state, toastr, $rootScope, $uibModal) {
       var ctrl = this;
       ctrl.isLoading = false;
       ctrl.isLoadingCountries = false;

@@ -1,10 +1,10 @@
 (function ChatsCRUDScope(angular) {
     'use strict';
     angular.module('connectingUsCenter.chats').controller('ChatsCRUDController',
-        ['$uibModalInstance', '$rootScope', 'Chats', 'idChat', 'idAnotherUser', 'idService', 'toastr', '$translate', 'type',
-            function ($uibModalInstance, $rootScope, Chats, idChat, idAnotherUser, idService, toastr, $translate, type) {
+        ['$uibModalInstance', '$rootScope', 'Chats', 'idChat', 'idAnotherUser', 'idService', 'toastr', '$translate', 'type', '$uibModal',
+            function ($uibModalInstance, $rootScope, Chats, idChat, idAnotherUser, idService, toastr, $translate, type, $uibModal) {
                 var ctrl = this;
-                ctrl.type = type;
+                ctrl.isMyOffer = type;
                 ctrl.idService = idService;
                 ctrl.idChat = idChat;
                 ctrl.idAnotherUser = idAnotherUser;
@@ -17,7 +17,7 @@
                 ctrl.init = function init() {
                     //get the Chats
                     if (!ctrl.idChat) {
-                        ctrl.createChat();
+                        ctrl.openChat();
                     } else {
                         ctrl.getChat();
                     }
@@ -38,18 +38,29 @@
                     ctrl.isLoading = false;
                 };
 
-                ctrl.createChat = function createChat() {
-                    var chat = {
-                        Service: {
-                            Id: ctrl.idService
-                        },
-                        UserRequesterId: ctrl.type ? ctrl.idAnotherUser : $rootScope.session.getUserId(),
-                        UserOffertorId: ctrl.type ? $rootScope.session.getUserId() : ctrl.idAnotherUser,
-                        LastMessageDate: new Date()
-                    };
-                    Chats.save(chat).$promise
-                        .then(ctrl.callChat)
-                        .catch(ctrl.sendError);
+                ctrl.openChat = function openChat() {
+                    Chats.isChatOpened({ IdUser: $rootScope.session.getUserId(), IdService: ctrl.idService }).$promise
+                        .then(ctrl.configureChat);
+                };
+
+                ctrl.configureChat = function configureChat(res) {
+                    if (res.Id) {
+                        ctrl.callChat(res);
+                    } else {
+                        var chat = {
+                            Service: {
+                                Id: ctrl.idService
+                            },
+                            UserRequesterId: ctrl.isMyOffer ? ctrl.idAnotherUser : $rootScope.session.getUserId(),
+                            UserOffertorId: ctrl.isMyOffer ? $rootScope.session.getUserId() : ctrl.idAnotherUser,
+                            LastMessageDate: new Date()
+                        };
+                        Chats.save(chat).$promise
+                            .then(ctrl.callChat)
+                            .catch(ctrl.sendError);
+                    }
+
+
                 };
 
                 ctrl.callChat = function callChat(result) {
@@ -79,6 +90,29 @@
 
                 ctrl.sendError = function sendError() {
                     toastr.error($translate.instant('chats.message.sendError'));
+                };
+
+                ctrl.endChat = function endChat() {
+
+                    if (!ctrl.isMyOffer) {
+
+                        var modalInstance = {
+                            templateUrl: 'modules/chats/templates/chats-crud-rate.html',
+                            controller: 'ChatsCRUDRRateController as ctrl',
+                            size: 'sm'
+                        };
+
+                        modalInstance.resolve = {
+                            idChat: function resolve() { return ctrl.chat.Id },
+                            idUserRated: function resolve() { return ctrl.idAnotherUser },
+                            idService: function resolve() { return ctrl.idService }
+                        };
+
+                        $uibModal.open(modalInstance).result.then(function success() {
+                            ctrl.cancel();
+                        });
+                    }
+
                 };
 
                 ctrl.init();
