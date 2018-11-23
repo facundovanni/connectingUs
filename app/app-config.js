@@ -188,6 +188,7 @@
                         "endChat": "End Conversation",
                         "rate": {
                             "title": "Can you rate the user, please?",
+                            "doNotRate":"Don't rate",
                             "ratedOk": "The user has been qualificated.",
                             "ratedOkNo": "The user has not been qualificated."
                         },

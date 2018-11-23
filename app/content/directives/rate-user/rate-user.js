@@ -7,7 +7,8 @@
                 scope: {
                     ratingValue: '=',
                     max: '=',
-                    onRatingSelected: '&'
+                    onRatingSelected: '&',
+                    disable:'='
                 },
                 templateUrl: 'content/directives/rate-user/rate-user.html',
                 controller: 'StarRatingController',
@@ -29,10 +30,12 @@
                     }
                 };
                 ctrl.toggle = function (index) {
-                    $scope.ratingValue = index + 1;
-                    $scope.onRatingSelected({
-                        rating: index + 1
-                    });
+                    if(!$scope.disable){
+                        $scope.ratingValue = index + 1;
+                        $scope.onRatingSelected({
+                            rating: index + 1
+                        });
+                    }                
                 };
 
                 $scope.$watch('ratingValue', function (oldVal, newVal) {
