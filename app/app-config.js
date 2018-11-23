@@ -143,7 +143,11 @@
                         "city": "City",
                         "country": "Country",
                         "category": "Category",
-                        "disabled": "The offer has been disabled"
+                        "disabled": "The offer has been disabled",
+                        "user":"User",
+                        "rate":"Rate",
+                        "votes":"votes",
+                        "votesOver":"over"
                     },
                     "myOffer": {
                         "titleView": "Offer Details",
@@ -155,7 +159,7 @@
                         "updateService": "Save Service",
                         "cancelUpdate": "Cancel",
                         "active": "Disable service",
-                        "startConversation": "Start conversation",
+                        "startConversation": "Send Message",
                         "error": {
                             "title": "The title is required",
                             "category": "The category is required",

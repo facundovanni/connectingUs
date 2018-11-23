@@ -1,7 +1,7 @@
 (function usersGridScope(angular) {
   'use strict';
-  angular.module('connectingUsCenter.offers').controller('OffersCRUDController', ['$scope', 'Offers', 'Countries', 'Cities', 'Categories', '$translate', '$stateParams', 'isMyOwn', '$q', '$state', 'toastr', '$rootScope', '$uibModal','ConfirmationBox',
-    function OffersCRUDController($scope, Offers, Countries, Cities, Categories, $translate, $stateParams, isMyOwn, $q, $state, toastr, $rootScope, $uibModal,ConfirmationBox) {
+  angular.module('connectingUsCenter.offers').controller('OffersCRUDController', ['$scope', 'Offers', 'Countries', 'Cities', 'Categories', '$translate', '$stateParams', 'isMyOwn', '$q', '$state', 'toastr', '$rootScope', '$uibModal', 'ConfirmationBox', 'User',
+    function OffersCRUDController($scope, Offers, Countries, Cities, Categories, $translate, $stateParams, isMyOwn, $q, $state, toastr, $rootScope, $uibModal, ConfirmationBox, User) {
       var ctrl = this;
       ctrl.isLoading = false;
       ctrl.isLoadingCountries = false;
@@ -13,7 +13,9 @@
       ctrl.offer = {};
       ctrl.offer.Id = $stateParams.Id;
       ctrl.myOffer = isMyOwn;
-
+      ctrl.reputation = {
+        value: 1
+      };
       ctrl.validateError = {
         show: {},
         message: {
@@ -53,13 +55,13 @@
         }
       };
 
-      ctrl.save = function save(){
+      ctrl.save = function save() {
         ctrl.isLoading = true;
         ctrl.offer.Active = !ctrl.offer.Active;
-          
+
         Offers.save(ctrl.offer).$promise
-        .then(ctrl.onThenNew)
-        .catch(ctrl.onCatchSave);
+          .then(ctrl.onThenNew)
+          .catch(ctrl.onCatchSave);
       };
 
       ctrl.onCatchSave = function onFinally() {
@@ -113,31 +115,48 @@
           }).$promise);
         }
 
-        $q.all(promises).then(function onThen(result) {
+        $q.all(promises).then(ctrl.setData);
+      };
 
-          ctrl.categories = result[0];
-          ctrl.countries = result[1];
-          if (result[2][0]) {
-            ctrl.offer = result[2][0];
-            ctrl.getCities();
+      ctrl.setData = function setData(result) {
+        ctrl.categories = result[0];
+        ctrl.countries = result[1];
+        if (result[2][0]) {
+          ctrl.offer = result[2][0];
+          ctrl.getCities();
+        } else {
+          ctrl.offer = {};
+          ctrl.offer.userId = $rootScope.session.getUserId();
+        }
+        if (!ctrl.myOffer) {
+          if (!ctrl.offer.Active) {
+            toastr.error($translate.instant('offers.disabled'));
+            $state.go('/offers');
           } else {
-            ctrl.offer = {};
-            ctrl.offer.userId = $rootScope.session.getUserId();
+            ctrl.isLoading = true;
+            User.get({ id: ctrl.offer.userId }).$promise
+              .then(ctrl.getReputation)
+              .catch(ctrl.getCatchReputacion);
           }
-          if(!ctrl.myOffer){
-            if(!ctrl.offer.Active){
-              toastr.error($translate.instant('offers.disabled'));
-              $state.go('/offers');
-            }
+        } else {
+          ctrl.offer.Active = !ctrl.offer.Active;
+        }
+      };
 
-          }else{
-            ctrl.offer.Active = !ctrl.offer.Active;
+      ctrl.getReputation = function getReputation(result) {
+        ctrl.reputation.nickName = result.Account.Nickname;
+        ctrl.reputation.value = Math.round(result.Reputation.Average);
+        ctrl.reputation.votesCount = result.Reputation.Votes;
+        ctrl.isLoading = false;
+      };
 
-          }
-        }).finally(function onFinally() {
-          ctrl.isLoading = false;
-        });
+      ctrl.getCatchReputacion = function getCatchReputacion() {
+        toastr.error('No reputations');
 
+        ctrl.reputation.nickName = 'test';
+        ctrl.reputation.value = 3
+        ctrl.reputation.votesCount = 8;
+        ctrl.isLoading = false;
       };
 
       ctrl.checkLog = function checkLog() {

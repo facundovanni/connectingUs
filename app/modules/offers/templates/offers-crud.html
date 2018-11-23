@@ -10,63 +10,77 @@
         <div class="col-md-6 well text-center">
           <div class="row cda-row">
             <div class="col-md-12">
-              <img ng-if="ctrl.offer.Image" data-ng-src="data:imagoffer-imagee/png;base64,{{ctrl.offer.Image}}"
-                class="offer-image">
+              <img ng-if="ctrl.offer.Image" data-ng-src="data:imagoffer-imagee/png;base64,{{ctrl.offer.Image}}" class="offer-image">
               <img ng-if="!ctrl.offer.Image" src="content/images/no-photo.jpg" class="offer-image">
             </div>
           </div>
           <div class="row cda-row" ng-if="ctrl.myOffer">
             <div class="col-md-12 ">
               <span>{{'myOffer.selectImg'| translate}}</span><br>
-              <span class="file-upload"><input type="file" class="btn btn-md btn-info" on-after-validate="ctrl.setImg()" ng-model="ctrl.img"
-                name="files" accept="image/*" maxsize="1000" required base-sixty-four-input
-                do-not-parse-if-oversize></span><br>
-                <span class="validate-error" ng-show="CRUDOfferForm.files.$error.accept">{{ myOffer.error.image.accept | translate }}</span>
-              <span class="validate-error" ng-show="CRUDOfferForm.files.$error.maxsize">{{ myOffer.error.image.size | translate }}</span>
+              <span class="file-upload"><input type="file" class="btn btn-md btn-info" on-after-validate="ctrl.setImg()"
+                  ng-model="ctrl.img" name="files" accept="image/*" maxsize="1000" required base-sixty-four-input
+                  do-not-parse-if-oversize></span><br>
+              <span class="validate-error" ng-show="CRUDOfferForm.files.$error.accept">{{ myOffer.error.image.accept |
+                translate }}</span>
+              <span class="validate-error" ng-show="CRUDOfferForm.files.$error.maxsize">{{ myOffer.error.image.size |
+                translate }}</span>
             </div>
           </div>
         </div>
         <div class="col-md-6 well">
           <div class="col-md-12" ng-if="ctrl.myOffer">
-            <label class="label-crud" ng-class="ctrl.myOffer ? 'label-required' : ''" translate="myOffer.title">>:</label>
+            <label class="offer-label-crud" ng-class="ctrl.myOffer ? 'label-required' : ''" translate="myOffer.title">>:</label>
             <input type="text" class="form-control" id="firstName" placeholder="" ng-model="ctrl.offer.Title" required>
             <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.title">{{ctrl.validateError.message.title}}</div>
           </div>
+          <div class="col-md-12 cda-row" ng-if="!ctrl.myOffer">
+            <label class="offer-label-crud" translate="myOffer.description">:</label><br>
+            <label class="offer-description" ng-model="ctrl.offer.Description">{{ctrl.offer.Description}}</label>
+          </div>
           <div class="col-md-12">
-            <label class="label-crud" ng-class="ctrl.myOffer ? 'label-required' : ''" translate="myOffer.category">>:</label>
-            <br><label ng-if="!ctrl.myOffer" class="offer-label">{{ctrl.offer.Category.Description}}</label>
+            <label class="offer-label-crud" ng-class="ctrl.myOffer ? 'label-required' : ''" translate="myOffer.category"></label>
+            <span ng-if="!ctrl.myOffer" class="offer-value">: {{ctrl.offer.Category.Description}}</span>
             <select ng-if="ctrl.myOffer" class="custom-select d-block w-100  form-control" id="category" ng-model="ctrl.offer.Category"
               ng-options="x.Description for x in ctrl.categories track by x.Id" required></select>
             <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.category">{{ctrl.validateError.message.category}}</div>
           </div>
           <div class="col-md-12">
-            <label class="label-crud" ng-class="ctrl.myOffer ? 'label-required' : ''" translate="myOffer.country">:</label>
-            <br><label ng-if="!ctrl.myOffer" class="offer-label">{{ctrl.offer.Country.Name}}</label>
+            <label class="offer-label-crud" ng-class="ctrl.myOffer ? 'label-required' : ''" translate="myOffer.country">:</label>
+            <span ng-if="!ctrl.myOffer" class="offer-value">: {{ctrl.offer.Country.Name}}</span>
             <select ng-if="ctrl.myOffer" class="custom-select d-block w-100  form-control" id="category" ng-model="ctrl.offer.Country"
               ng-options="x.Name for x in ctrl.countries track by x.Id" ng-change="ctrl.onSelectCountry()" required></select>
             <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.country">{{ctrl.validateError.message.country}}</div>
           </div>
           <div class="col-md-12">
-            <label class="label-crud" ng-class="ctrl.myOffer ? 'label-required' : ''" translate="myOffer.city">:</label>
-            <br><label ng-if="!ctrl.myOffer" class="offer-label">{{ctrl.offer.City.Name}}</label>
+            <label class="offer-label-crud" ng-class="ctrl.myOffer ? 'label-required' : ''" translate="myOffer.city">:</label>
+            <span ng-if="!ctrl.myOffer" class="offer-value">: {{ctrl.offer.City.Name}}</span>
             <select ng-if="ctrl.myOffer" class="custom-select d-block w-100  form-control" id="city" ng-model="ctrl.offer.City"
               ng-options="x.Name for x in ctrl.cities track by x.Id" required></select>
             <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.city">{{ctrl.validateError.message.city}}</div>
           </div>
-          <div class="col-md-12">
-            <label class="label-crud" ng-class="ctrl.myOffer ? 'label-required' : ''" translate="myOffer.description">:</label>
-            <textarea ng-if="ctrl.myOffer" class="offer-text form-control" ng-model="ctrl.offer.Description"></textarea>
-            <label ng-if="!ctrl.myOffer" class="offer-text" ng-model="ctrl.offer.Description">{{ctrl.offer.Description}}</label>
+          <div class="col-md-12" ng-if="ctrl.myOffer">
+            <label class="offer-label-crud label-required" translate="myOffer.description">:</label>
+            <textarea class="offer-text form-control" ng-model="ctrl.offer.Description"></textarea>
             <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.description">{{ctrl.validateError.message.description}}</div>
           </div>
-          <div class="col-md-12" ng-if="ctrl.myOffer && ctrl.offer.Id && !ctrl.isLoading">
-            <label class="label-crud label-required"><input type="checkbox" ng-model="ctrl.offer.Active" value="ctrl.offer.Active">{{'myOffer.active'
+          <div class="col-md-12 cda-row" ng-if="ctrl.myOffer && ctrl.offer.Id && !ctrl.isLoading">
+            <label class="offer-label-crud label-required"><input type="checkbox" ng-model="ctrl.offer.Active" value="ctrl.offer.Active">{{'myOffer.active'
               | translate}}</label>
           </div>
-        </div>
-        <div class="col-md-12" ng-if="!ctrl.myOffer">
-          <button type="button" class="btn btn-primary btn-save-myOffer float-right" type="submit" ng-click="ctrl.openChat()">{{'myOffer.startConversation'|
-            translate}}</button>
+          <div class="col-md-12" ng-if="!ctrl.myOffer">
+            <hr>
+            <div ng-if="ctrl.reputation.votesCount" class="offers-votes">
+              <label for="user" class="offer-label-crud" translate="offers.user"></label>
+              <span class="offer-value">: {{ctrl.reputation.nickName}}</span>
+
+              <star-rating rating-value="ctrl.reputation.value" max="5"></star-rating>
+              <label for="user" class="offer-label-crud" translate="offers.rate"></label>
+              <span>{{'offers.votesOver' | translate}} {{ctrl.reputation.votesCount}} {{'offers.votes' | translate}}</span>
+
+              <button type="button" class="btn btn-info float-right" type="submit" ng-click="ctrl.openChat()">{{'myOffer.startConversation'|
+                translate}}</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -24,18 +24,17 @@
   list-style: none;
   display: inline-block;
   width: 100%;
-  
 }
 
 .offers-no-link {
   text-decoration: none;
-  color:var(--black);
+  color: var(--black);
 }
 
 .offers-body .nameGeneric {
   font-size: 2rem;
   height: 52px;
-  width:100%;
+  width: 100%;
   font-size: large;
   font-weight: bold;
   word-wrap: break-word;
@@ -58,7 +57,6 @@
   font-weight: bold;
 }
 
-
 a.list-group-item {
   height: auto;
   min-height: 220px;
@@ -72,6 +70,7 @@ a.list-group-item:visited {
   text-decoration: none;
   color: var(--black);
 }
+
 a.list-group-item:hover {
   text-decoration: none;
   color: var(--black);
@@ -90,7 +89,61 @@ input[type=file] {
   display: inline;
 }
 
-.offer-item-image{
+.offer-item-image {
   max-height: 220px;
-  max-width:100%;
+  max-width: 100%;
+}
+
+/* myOffers */
+
+.offer-image {
+  width: 100%;
+}
+
+.offer-label-crud {
+  font-family: 'Scada', sans-serif;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--blue);
+}
+
+.offer-value {
+  font-weight: bolder;
+  font-family: 'Scada', sans-serif;
+  font-size: 16px;
+  font-style: italic;
+}
+
+.offer-text {
+  font-size: 15px;
+  font-weight: 100;
+  width: 100%;
+  height: 150px;
+  border-radius: 10px;
+  border: 1px solid #d2d2d2;
+  padding: 2px;
+}
+
+.offer-select {
+  width: 200px;
+  height: 28px;
+  margin-left: 20px;
+  margin-top: 3px;
+}
+
+.offer-accordeon-title {
+  float: left;
+}
+
+.offer-accordeon-city {
+  float: left;
+  margin-left: -75px;
+}
+
+.btn-save-myOffer {
+  margin-left: 10px;
+}
+
+.offers-votes {
+  margin-top: 10px;
 }
