@@ -6,8 +6,8 @@
       <h1 ng-if="ctrl.myOffer" class="col-md-12 title-initial">{{'myOffer.titleView' | translate}}</h1>
     </div>
     <div class="row cda-row">
-      <div class="row cda-row">
-        <div class="col-md-6 well text-center">
+      <div class="row cda-row well">
+        <div class="col-md-6 text-center">
           <div class="row cda-row">
             <div class="col-md-12">
               <img ng-if="ctrl.offer.Image" data-ng-src="data:imagoffer-imagee/png;base64,{{ctrl.offer.Image}}" class="offer-image">
@@ -27,7 +27,8 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6 well">
+        <hr>
+        <div class="col-md-6">
           <div class="col-md-12" ng-if="ctrl.myOffer">
             <label class="offer-label-crud" ng-class="ctrl.myOffer ? 'label-required' : ''" translate="myOffer.title">>:</label>
             <input type="text" class="form-control" id="firstName" placeholder="" ng-model="ctrl.offer.Title" required>
