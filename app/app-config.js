@@ -19,13 +19,14 @@
         'ui.bootstrap', 'angularSpinner',
         'connectingUsCenter.services',
         'connectingUsCenter.directives',
+        'connectingUsCenter.components',
         'connectingUsCenter.login',
         'connectingUsCenter.about',
         'connectingUsCenter.myAccount',
         'connectingUsCenter.offers',
         'connectingUsCenter.chats',
         'pascalprecht.translate',
-        'ngResource', 'ngFileUpload', 'naif.base64'
+        'ngResource', 'ngFileUpload', 'naif.base64',
     ])
         .config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', '$logProvider', '__env',
             function config($stateProvider, $locationProvider, $urlRouterProvider, $translateProvider, $logProvider, __env) {
@@ -187,6 +188,14 @@
                             "ratedOkNo": "The user has not been qualificated."
                         },
                         "closed":"The conversation is closed"
+                    
+                    
+                    
+                    },
+                    "confirmationBox":{
+                        "title": "Do you confirm?",
+                        "yes": "Yes",
+                        "no": "No"
                     }
                 };
 

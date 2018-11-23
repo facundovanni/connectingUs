@@ -1,8 +1,8 @@
 (function ChatsCRUDScope(angular) {
     'use strict';
     angular.module('connectingUsCenter.chats').controller('ChatsCRUDController',
-        ['$uibModalInstance', '$rootScope', 'Chats', 'idChat', 'idAnotherUser', 'idService', 'toastr', '$translate', 'type', '$uibModal',
-            function ($uibModalInstance, $rootScope, Chats, idChat, idAnotherUser, idService, toastr, $translate, type, $uibModal) {
+        ['$uibModalInstance', '$rootScope', 'Chats', 'idChat', 'idAnotherUser', 'idService', 'toastr', '$translate', 'type', '$uibModal', 'ConfirmationBox',
+            function ($uibModalInstance, $rootScope, Chats, idChat, idAnotherUser, idService, toastr, $translate, type, $uibModal, ConfirmationBox) {
                 var ctrl = this;
                 ctrl.isMyOffer = type;
                 ctrl.idService = idService;
@@ -59,8 +59,6 @@
                             .then(ctrl.callChat)
                             .catch(ctrl.sendError);
                     }
-
-
                 };
 
                 ctrl.callChat = function callChat(result) {
@@ -93,27 +91,26 @@
                 };
 
                 ctrl.endChat = function endChat() {
-
-                    if (!ctrl.isMyOffer) {
-
-                        var modalInstance = {
-                            templateUrl: 'modules/chats/templates/chats-crud-rate.html',
-                            controller: 'ChatsCRUDRRateController as ctrl',
-                            size: 'md'
-                        };
-
-                        modalInstance.resolve = {
-                            idChat: function resolve() { return ctrl.chat.Id },
-                            idUserRated: function resolve() { return ctrl.idAnotherUser },
-                            idService: function resolve() { return ctrl.idService }
-                        };
-
-                        $uibModal.open(modalInstance).result.then(function success() {
-                            ctrl.cancel();
-                        });
-                    }
-
+                    ConfirmationBox.open().result.then(ctrl.goToRate);
                 };
+
+                ctrl.goToRate = function goToRate() {
+                    var modalInstance = {
+                        templateUrl: 'modules/chats/templates/chats-crud-rate.html',
+                        controller: 'ChatsCRUDRRateController as ctrl',
+                        size: 'md'
+                    };
+
+                    modalInstance.resolve = {
+                        idChat: function resolve() { return ctrl.chat.Id },
+                        idUserRated: function resolve() { return ctrl.idAnotherUser },
+                        idService: function resolve() { return ctrl.idService }
+                    };
+
+                    $uibModal.open(modalInstance).result.then(function success() {
+                        ctrl.cancel();
+                    });
+                }
 
                 ctrl.init();
 

@@ -1,7 +1,7 @@
 (function usersGridScope(angular) {
   'use strict';
-  angular.module('connectingUsCenter.offers').controller('OffersCRUDController', ['$scope', 'Offers', 'Countries', 'Cities', 'Categories', '$translate', '$stateParams', 'isMyOwn', '$q', '$state', 'toastr', '$rootScope', '$uibModal',
-    function OffersCRUDController($scope, Offers, Countries, Cities, Categories, $translate, $stateParams, isMyOwn, $q, $state, toastr, $rootScope, $uibModal) {
+  angular.module('connectingUsCenter.offers').controller('OffersCRUDController', ['$scope', 'Offers', 'Countries', 'Cities', 'Categories', '$translate', '$stateParams', 'isMyOwn', '$q', '$state', 'toastr', '$rootScope', '$uibModal','ConfirmationBox',
+    function OffersCRUDController($scope, Offers, Countries, Cities, Categories, $translate, $stateParams, isMyOwn, $q, $state, toastr, $rootScope, $uibModal,ConfirmationBox) {
       var ctrl = this;
       ctrl.isLoading = false;
       ctrl.isLoadingCountries = false;
@@ -48,14 +48,19 @@
       };
 
       ctrl.updateService = function udpateService() {
-        ctrl.isLoading = true;
         if (ctrl.validate()) {
-          ctrl.offer.Active = !ctrl.offer.Active;
-          Offers.save(ctrl.offer).$promise
-            .then(ctrl.onThenNew)
-            .catch(ctrl.onCatchSave);
+          ConfirmationBox.open().result.then(ctrl.save);
         }
-      }
+      };
+
+      ctrl.save = function save(){
+        ctrl.isLoading = true;
+        ctrl.offer.Active = !ctrl.offer.Active;
+          
+        Offers.save(ctrl.offer).$promise
+        .then(ctrl.onThenNew)
+        .catch(ctrl.onCatchSave);
+      };
 
       ctrl.onCatchSave = function onFinally() {
         toastr.error($translate.instant('global.message.saveError'));

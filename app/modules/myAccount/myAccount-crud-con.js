@@ -2,8 +2,8 @@
     'use strict';
 
     angular.module('connectingUsCenter.myAccount')
-        .controller('myAccountCRUDController', ['MyAccount', '$translate', '$state', 'Countries', 'Cities', '$stateParams', 'toastr', '$rootScope',
-            function (MyAccount, $translate, $state, Countries, Cities, $stateParams, toastr, $rootScope) {
+        .controller('myAccountCRUDController', ['MyAccount', '$translate', '$state', 'Countries', 'Cities', '$stateParams', 'toastr', '$rootScope','ConfirmationBox',
+            function (MyAccount, $translate, $state, Countries, Cities, $stateParams, toastr, $rootScope,ConfirmationBox) {
                 var ctrl = this;
                 ctrl.userId = $stateParams.Id;
                 ctrl.today = new Date();
@@ -156,12 +156,16 @@
                 ctrl.save = function save() {
                     ctrl.setDateJSON();
                     if (ctrl.validate()) {
-                        ctrl.myAccount.Gender = ctrl.selectedGender ? ctrl.selectedGender.code : undefined;
-                        ctrl.myAccount.PhoneType = ctrl.selectedPhoneType ? ctrl.selectedPhoneType.code : undefined;
-                        ctrl.myAccount.Id = ctrl.myAccount.Id ? ctrl.myAccount.Id : undefined;
-                        ctrl.saveData();
+                        ConfirmationBox.open().result.then(ctrl.setSave);
                     }
                 };
+
+                ctrl.setSave = function setSave(){
+                    ctrl.myAccount.Gender = ctrl.selectedGender ? ctrl.selectedGender.code : undefined;
+                    ctrl.myAccount.PhoneType = ctrl.selectedPhoneType ? ctrl.selectedPhoneType.code : undefined;
+                    ctrl.myAccount.Id = ctrl.myAccount.Id ? ctrl.myAccount.Id : undefined;
+                    ctrl.saveData();
+                }
 
                 ctrl.saveData = function saveData() {
                     ctrl.isLoading = true;
