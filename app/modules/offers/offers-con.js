@@ -2,8 +2,8 @@
     'use strict';
 
     angular.module('connectingUsCenter.offers')
-        .controller('OffersController', ['Offers', '$rootScope', '$state', 'Countries', 'Cities', 'Categories', 'isMyOwn',
-            function (Offers, $rootScope, $state, Countries, Cities, Categories, isMyOwn) {
+        .controller('OffersController', ['Offers', '$rootScope', '$state', 'Countries', 'Cities', 'Categories', 'isMyOwn', 'toastr',
+            function (Offers, $rootScope, $state, Countries, Cities, Categories, isMyOwn, toastr) {
                 var ctrl = this;
 
                 ctrl.offers = [];
@@ -13,7 +13,11 @@
                 ctrl.cities = [];
                 ctrl.categoriesSelected = [];
                 ctrl.myOffers = isMyOwn;
-
+                ctrl.pagination = {
+                    limits:[10, 25, 50, 100],
+                    pageIndex: 1,
+                    itemsPerPage: 10
+                };
                 ctrl.init = function init() {
                     //get the Offers
                     ctrl.checkLog();
@@ -22,8 +26,8 @@
                     ctrl.updateOffers();
                 };
 
-                ctrl.checkLog = function checkLog(){
-                    if (!$rootScope.auth.isLoggedIn()){
+                ctrl.checkLog = function checkLog() {
+                    if (!$rootScope.auth.isLoggedIn()) {
                         $state.go('/login');
                     }
                 };
@@ -51,8 +55,9 @@
                     ctrl.isFullyLoaded();
                     ctrl.setFilters();
                     Offers.getAll(ctrl.filters).$promise.then(function onThen(result) {
-                        ctrl.offers.splice.apply(ctrl.offers, [0, ctrl.offers.length].concat(result));
-
+                        ctrl.offers.splice.apply(ctrl.offers, [0, ctrl.offers.length].concat(result.Services));
+                        ctrl.totalItems = result.TotalServices ? result.TotalServices : 1;
+                        ctrl.pagination.totalPages = Math.ceil(ctrl.totalItems / ctrl.pagination.itemsPerPage);
                     }).finally(function onFinally() {
                         ctrl.isLoadingOffers = false;
                         ctrl.isFullyLoaded();
@@ -70,6 +75,8 @@
                     ctrl.filters.Active = !ctrl.myOffers ? undefined : !ctrl.showInactives;
                     ctrl.filters.IdUser = $rootScope.session.getUserId();
                     ctrl.filters.Text = ctrl.searchText ? ctrl.searchText : undefined;
+                    ctrl.filters.NumberOfPage = ctrl.pagination.NumberOfPage;
+                    ctrl.filters.NumberOfRows = ctrl.filters.NumberOfRows;
                 };
 
                 ctrl.search = function search() {
@@ -131,6 +138,32 @@
                     ctrl.searchText = undefined;
 
                     ctrl.updateOffers();
+                };
+
+                ctrl.pagePrev = function pagePrev() {
+                    if (ctrl.pagination.pageIndex > 1) {
+                        ctrl.pagination.pageIndex--;
+                        ctrl.updateOffers();
+                    }
+                };
+
+                ctrl.pageNext = function pageNext() {
+                    if (!(ctrl.pagination.pageIndex + 1 > ctrl.pagination.totalPages)) {
+                        ctrl.pagination.pageIndex++;
+                        ctrl.updateOffers();
+                    }
+                };
+
+                ctrl.pageSpecific = function pageSpecific() {
+                    var isPageInRange = !(ctrl.pagination.pageSelected > ctrl.pagination.totalPages);
+                    var isPageAvailable = (1 <= ctrl.pagination.pageSelected) && isPageInRange;
+
+                    if (isPageAvailable) {
+                        ctrl.pagination.pageIndex = ctrl.pagination.pageSelected;
+                        ctrl.updateOffers();
+                    } else {
+                        toastr.error('offers.pageSelectedError');
+                    }
                 };
 
                 ctrl.init();

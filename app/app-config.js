@@ -144,11 +144,13 @@
                         "country": "Country",
                         "category": "Category",
                         "disabled": "The offer has been disabled",
-                        "user":"User",
-                        "rate":"Rate",
-                        "votes":"votes",
-                        "votesOver":"over",
-                        "noVotes":"The user has not been rated yet"
+                        "user": "User",
+                        "rate": "Rate",
+                        "votes": "votes",
+                        "votesOver": "over",
+                        "pagesInfo": "Show page {{pageIndex}} of {{totalPages}} pages, over {{totalItems}} services",
+                        "show": "View: ",
+                        "noVotes": "The user has not been rated yet"
                     },
                     "myOffer": {
                         "titleView": "Offer Details",
@@ -189,16 +191,16 @@
                         "endChat": "End Conversation",
                         "rate": {
                             "title": "Can you rate the user, please?",
-                            "doNotRate":"Don't rate",
+                            "doNotRate": "Don't rate",
                             "ratedOk": "The user has been qualificated.",
                             "ratedOkNo": "The user has not been qualificated."
                         },
-                        "closed":"The conversation is closed"
-                    
-                    
-                    
+                        "closed": "The conversation is closed"
+
+
+
                     },
-                    "confirmationBox":{
+                    "confirmationBox": {
                         "title": "Do you confirm?",
                         "yes": "Yes",
                         "no": "No"

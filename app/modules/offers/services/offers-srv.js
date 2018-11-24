@@ -6,8 +6,7 @@
             angular.extend(this, ServicesModel.create('/api/services', null, {
                 getAll: {
                     method: 'POST',
-                    url:'/api/services/search',
-                    isArray: true
+                    url:'/api/services/search'
                 },
                 getService: {
                     method: 'GET',
