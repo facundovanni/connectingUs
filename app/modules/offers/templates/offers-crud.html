@@ -70,13 +70,14 @@
           </div>
           <div class="col-md-12" ng-if="!ctrl.myOffer">
             <hr>
-            <div ng-if="ctrl.reputation.votesCount" class="offers-votes">
+            <div class="offers-votes">
               <label for="user" class="offer-label-crud" translate="offers.user"></label>
               <span class="offer-value">: {{ctrl.reputation.nickName}}</span>
 
               <star-rating rating-value="ctrl.reputation.value" max="5" disable="true"></star-rating>
               <label for="user" class="offer-label-crud" translate="offers.rate"></label>
-              <span>{{'offers.votesOver' | translate}} {{ctrl.reputation.votesCount}} {{'offers.votes' | translate}}</span>
+              <span ng-if="!ctrl.reputation.votesCount">{{'offers.noVotes' | translate}}</span>
+              <span ng-if="ctrl.reputation.votesCount">{{'offers.votesOver' | translate}} {{ctrl.reputation.votesCount}} {{'offers.votes' | translate}}</span>
 
               <button type="button" class="btn btn-info float-right" type="submit" ng-click="ctrl.openChat()">{{'myOffer.startConversation'|
                 translate}}</button>

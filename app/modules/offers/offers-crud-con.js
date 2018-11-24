@@ -134,7 +134,7 @@
             $state.go('/offers');
           } else {
             ctrl.isLoading = true;
-            User.get({ id: ctrl.offer.userId }).$promise
+            User.get({ id: ctrl.offer.UserId }).$promise
               .then(ctrl.getReputation)
               .catch(ctrl.getCatchReputacion);
           }
@@ -149,13 +149,7 @@
         ctrl.reputation.votesCount = result.Reputation.Votes;
         ctrl.isLoading = false;
       };
-
       ctrl.getCatchReputacion = function getCatchReputacion() {
-        toastr.error('No reputations');
-
-        ctrl.reputation.nickName = 'test';
-        ctrl.reputation.value = 3
-        ctrl.reputation.votesCount = 8;
         ctrl.isLoading = false;
       };
 

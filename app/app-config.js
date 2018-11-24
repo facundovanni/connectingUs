@@ -147,7 +147,8 @@
                         "user":"User",
                         "rate":"Rate",
                         "votes":"votes",
-                        "votesOver":"over"
+                        "votesOver":"over",
+                        "noVotes":"The user has not been rated yet"
                     },
                     "myOffer": {
                         "titleView": "Offer Details",
