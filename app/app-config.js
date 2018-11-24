@@ -150,7 +150,8 @@
                         "votesOver": "over",
                         "pagesInfo": "Show page {{pageIndex}} of {{totalPages}} pages, over {{totalItems}} services",
                         "show": "View: ",
-                        "noVotes": "The user has not been rated yet"
+                        "noVotes": "The user has not been rated yet",
+                        "pageSelectedError":"The page number is bigger than the max of pages."
                     },
                     "myOffer": {
                         "titleView": "Offer Details",

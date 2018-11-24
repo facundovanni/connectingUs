@@ -2,8 +2,8 @@
     'use strict';
 
     angular.module('connectingUsCenter.offers')
-        .controller('OffersController', ['Offers', '$rootScope', '$state', 'Countries', 'Cities', 'Categories', 'isMyOwn', 'toastr',
-            function (Offers, $rootScope, $state, Countries, Cities, Categories, isMyOwn, toastr) {
+        .controller('OffersController', ['Offers', '$rootScope', '$state', 'Countries', 'Cities', 'Categories', 'isMyOwn', 'toastr','$translate',
+            function (Offers, $rootScope, $state, Countries, Cities, Categories, isMyOwn, toastr, $translate) {
                 var ctrl = this;
 
                 ctrl.offers = [];
@@ -75,8 +75,8 @@
                     ctrl.filters.Active = !ctrl.myOffers ? undefined : !ctrl.showInactives;
                     ctrl.filters.IdUser = $rootScope.session.getUserId();
                     ctrl.filters.Text = ctrl.searchText ? ctrl.searchText : undefined;
-                    ctrl.filters.NumberOfPage = ctrl.pagination.NumberOfPage;
-                    ctrl.filters.NumberOfRows = ctrl.filters.NumberOfRows;
+                    ctrl.filters.NumberOfPage = ctrl.pagination.pageIndex;
+                    ctrl.filters.NumberOfRows = ctrl.pagination.itemsPerPage;
                 };
 
                 ctrl.search = function search() {
@@ -162,7 +162,7 @@
                         ctrl.pagination.pageIndex = ctrl.pagination.pageSelected;
                         ctrl.updateOffers();
                     } else {
-                        toastr.error('offers.pageSelectedError');
+                        toastr.error($translate.instant('offers.pageSelectedError'));
                     }
                 };
 
