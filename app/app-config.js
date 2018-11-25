@@ -202,6 +202,17 @@
                         "title": "Do you confirm?",
                         "yes": "Yes",
                         "no": "No"
+                    },
+                    "notifications": {
+                        "newMessage": "New message",
+                        "noNotifications": "You don't have notifications",
+                        "from": "From",
+                        "service": "Service",
+                        "qualified": "You have been qualified",
+                        "by": "By",
+                        
+
+
                     }
                 };
 

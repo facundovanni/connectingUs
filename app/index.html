@@ -39,19 +39,19 @@
               </div>
               <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-to-body">
                 <div ng-if="ctrl.showNoNotification">
-                    <span class="no-notifications">You don't have notifications</span><br>        
+                    <span class="no-notifications">{{'notifications.noNotifications' | translate}}</span><br>        
                 </div>
                 <li class="notification" role="menuitem" ng-repeat="notif in ctrl.notifications">
-                 <div ng-if="notif.type === ctrl.types.messages">
-                  <span class="new-message">New message</span><br>
-                  <span>From: {{notif.NicknameUserSender}}</span>
-                  <p>Service: {{notif.ServiceTitle}}</span>
-                  <hr class="notification-separator">
+                <div ng-if="notif.IdType === ctrl.types.message">
+                  <span class="new-message"> {{'notifications.newMessage' | translate}}</span><br>
+                  <span>{{'notifications.from' | translate}}: {{notif.NicknameUserSender}}</span>
+                  <p>{{'notifications.service' | translate}}: {{notif.ServiceTitle}}</span>
+                    <hr class="notification-separator">
                 </div>
-                <div ng-if="notif.type === ctrl.types.qualification">
-                    <span class="new-message">You were rated</span><br>
-                    <span>By: {{notif.NicknameUserSender}}</span>
-                    <p>Service: {{notif.ServiceTitle}}</span>
+                <div ng-if="notif.IdType === ctrl.types.qualification">
+                    <span class="new-message">{{'notifications.qualified' | translate}}</span><br>
+                    <span>{{'notifications.by' | translate}}: {{notif.NicknameUserSender}}</span>
+                    <p>{{'notifications.service' | translate}}: {{notif.ServiceTitle}}</span>
                     <hr class="notification-separator">
                 </div>
                 </li>

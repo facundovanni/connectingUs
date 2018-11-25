@@ -6,8 +6,8 @@
       var ctrl = this;
       ctrl.notifications = [];
       ctrl.types = {
-        qualification: 1,
-        message: 2,
+        message: 1,
+        qualification: 2,
       }
       ctrl.notificationCount = 0;
       ctrl.showNoNotification = false;
@@ -66,13 +66,9 @@
       };
 
 
-      // setInterval(function(){
-      //   $scope.getNotifications();
-      // }, 60000)
-
       setInterval(function(){
         ctrl.getNotifications();
-      }, 10000)
+      }, 60000)
 
       ctrl.init = function init(){
         ctrl.getNotifications();
