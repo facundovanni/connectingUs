@@ -38,7 +38,6 @@
       };
 
       ctrl.getNotifications = function getNotifications() {
-
         Notifications.getNotificationsByUser({ idUser: $rootScope.session.getUser().Id }).$promise
           .then(ctrl.setNotifications)
 
@@ -67,11 +66,15 @@
 
 
       setInterval(function(){
-        ctrl.getNotifications();
+        if($rootScope.auth.isLoggedIn()){
+          ctrl.getNotifications();
+        }
       }, 60000)
 
       ctrl.init = function init(){
-        ctrl.getNotifications();
+        if($rootScope.auth.isLoggedIn()){
+          ctrl.getNotifications();
+        }
       }
 
       ctrl.init();
