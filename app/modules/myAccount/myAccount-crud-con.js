@@ -217,7 +217,7 @@
                     ctrl.hasValidated = false;
                     var validations = true;
 
-                    ctrl.validateError.show.FirstName = !ctrl.myAccount.Firstname;
+                    ctrl.validateError.show.FirstName = !ctrl.myAccount.FirstName;
                     ctrl.validateError.show.LastName = !ctrl.myAccount.LastName;
                     ctrl.validateError.show.email = !ctrl.myAccount.Account.Mail || ctrl.myAccount.Account.Mail.split('@')[1].indexOf('.') === -1;
                     ctrl.validateError.show.emailConfirm = ctrl.myAccount.Id ? false : !ctrl.emailConfirm || ctrl.myAccount.Account.Mail !== ctrl.emailConfirm;

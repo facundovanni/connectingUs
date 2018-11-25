@@ -60,12 +60,12 @@
                     size: 'lg'
                 };
 
-                ctrl.openChat = function openChat(chat, type) {
+                ctrl.openChat = function openChat(chat) {
                     ctrl.modalInstance.resolve = {
                         idChat: function resolve() { return chat.Id },
-                        idAnotherUser: function resolve() { return type ? chat.UserRequesterId : chat.UserOffertorId},
+                        idAnotherUser: function resolve() { return ctrl.tabActive ? chat.UserRequesterId : chat.UserOffertorId},
                         idService: function resolve() { return chat.Service.Id },
-                        type: type
+                        type: ctrl.tabActive
                     };
 
                     $uibModal.open(ctrl.modalInstance).result.then(function success() {
