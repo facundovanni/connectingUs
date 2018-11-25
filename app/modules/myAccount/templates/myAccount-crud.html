@@ -12,13 +12,15 @@
     <div class="row cda-row">
       <div class="col-md-6">
         <label for="firstName" class="label-crud label-required" translate="myAccount.general.firstName"></label>
-        <input type="text" class="form-control" id="firstName" placeholder="" ng-model="ctrl.myAccount.FirstName"
-          required>
+        <input type="text" ng-pattern="/^[a-zA-Zá-úÁ-Ú'\s]*$/" name="firstname" class="form-control" id="firstName"
+          placeholder="" ng-model="ctrl.myAccount.FirstName" required>
+        <div class="validate-error ng-cloak" ng-show="CRUDMyAccountForm.firstname.$error.pattern">{{'global.error.invalidFormat'|translate}}</div>
       </div>
       <div class="col-md-6">
         <label for="lastName" class="label-crud label-required" translate="myAccount.general.lastName"></label>
-        <input type="text" id="name" name="name" ng-model="ctrl.myAccount.LastName" placeholder="" class="form-control"
-          required>
+        <input type="text" id="name" ng-pattern="/^[a-zA-Zá-úÁ-Ú'\s]*$/" name="lastname" ng-model="ctrl.myAccount.LastName"
+          placeholder="" class="form-control" required>
+        <div class="validate-error ng-cloak" ng-show="CRUDMyAccountForm.lastname.$error.pattern">{{'global.error.invalidFormat'|translate}}</div>
       </div>
     </div>
     <!--Nick & Birth-->
@@ -27,6 +29,7 @@
         <label class="label-crud label-required" for="nickName" translate="myAccount.general.nickName"></label>
         <input ng-model="ctrl.myAccount.Account.Nickname" type="text" class="form-control" placeholder="" max-length="25"
           ng-disabled="ctrl.myAccount.Id" required>
+
       </div>
       <div class="col-md-6">
         <label class="label-crud label-required" for="birth" translate="myAccount.general.dayOfBirth"></label>
@@ -78,14 +81,16 @@
     <div class="row cda-row">
       <div ng-class="ctrl.myAccount.Id ? 'col-md-12' : 'col-md-6'">
         <label for="email" class="label-crud label-required" translate="myAccount.account.email"></label>
-        <input type="email" class="form-control" id="email" ng-model="ctrl.myAccount.Account.Mail" placeholder="mail@example.com"
-          required ng-disabled="ctrl.myAccount.Id">
+        <input type="email" class="form-control" id="email" ng-pattern="/^[a-zA-Z0-9\s]*$/" name="email" ng-model="ctrl.myAccount.Account.Mail"
+          placeholder="mail@example.com" required ng-disabled="ctrl.myAccount.Id">
+        <div class="validate-error ng-cloak" ng-show="CRUDMyAccountForm.email.$error.pattern">{{ctrl.validateError.message.email}}</div>
         <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.email">{{ctrl.validateError.message.email}}</div>
       </div>
       <div class="col-md-6" ng-if="!ctrl.myAccount.Id">
         <label for="emailConfirm" class="label-crud label-required" translate="myAccount.account.emailConfirm"></label>
-        <input type="email" id="emailConfirm" ng-model="ctrl.emailConfirm" placeholder="mail@example.com" class="form-control"
-          required>
+        <input type="email" id="emailConfirm" ng-pattern="/^[a-zA-Z0-9\s]*$/" name="emailConfirm" ng-model="ctrl.emailConfirm"
+          placeholder="mail@example.com" class="form-control" required>
+        <div class="validate-error ng-cloak" ng-show="CRUDMyAccountForm.emailConfirm.$error.pattern">{{ctrl.validateError.message.emailConfirm}}</div>
         <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.emailConfirm">{{ctrl.validateError.message.emailConfirm}}</div>
       </div>
     </div>

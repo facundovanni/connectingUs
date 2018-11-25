@@ -53,7 +53,8 @@
                             "other": "Other"
                         },
                         "error": {
-                            "textRequired": "This field is required"
+                            "textRequired": "This field is required",
+                            "invalidFormat": "Invalid format"
                         },
                         "phoneType": {
                             "mobile": "Mobile",
@@ -118,7 +119,7 @@
                         "error": {
                             "emailConfirm": "The emails must be equals",
                             "passwordConfirm": "The passwords are not equals",
-                            "email": "Set an valid email. The email must have a '@' and a '.'",
+                            "email": "Set an valid email. The email must have a '@' and a '.', only letters or numbers",
                             "password": "The password must have at least eight characters.",
                             "termsAndConditions": "You must accept terms and conditions",
                             "phoneNumber": "Set a valid number. Only numbers and -"
