@@ -14,13 +14,13 @@
         <label for="firstName" class="label-crud label-required" translate="myAccount.general.firstName"></label>
         <input type="text" ng-pattern="/^[a-zA-Zá-úÁ-Ú'\s]*$/" name="firstname" class="form-control" id="firstName"
           placeholder="" ng-model="ctrl.myAccount.FirstName" required>
-        <div class="validate-error ng-cloak" ng-show="CRUDMyAccountForm.firstname.$error.pattern">{{'global.error.invalidFormat'|translate}}</div>
+        <div class="validate-error ng-cloak" ng-if="CRUDMyAccountForm.firstname.$error.pattern">{{'global.error.invalidFormat'|translate}}</div>
       </div>
       <div class="col-md-6">
         <label for="lastName" class="label-crud label-required" translate="myAccount.general.lastName"></label>
         <input type="text" id="name" ng-pattern="/^[a-zA-Zá-úÁ-Ú'\s]*$/" name="lastname" ng-model="ctrl.myAccount.LastName"
           placeholder="" class="form-control" required>
-        <div class="validate-error ng-cloak" ng-show="CRUDMyAccountForm.lastname.$error.pattern">{{'global.error.invalidFormat'|translate}}</div>
+        <div class="validate-error ng-cloak" ng-if="CRUDMyAccountForm.lastname.$error.pattern">{{'global.error.invalidFormat'|translate}}</div>
       </div>
     </div>
     <!--Nick & Birth-->
@@ -49,13 +49,13 @@
         <label class="label-crud label-required" for="gender" translate="myAccount.general.gender"></label>
         <select class="custom-select d-block w-100 form-control" id="gender" ng-model="ctrl.selectedGender" ng-options="x.description for x in ctrl.genders"
           required></select>
-        <div class="validate-error ng-cloak" ng-show="ctrl.hasValidated && !ctrl.selectedGender">{{ctrl.validateError.message.text}}</div>
+        <div class="validate-error ng-cloak" ng-if="ctrl.hasValidated && !ctrl.selectedGender">{{ctrl.validateError.message.text}}</div>
       </div>
       <div class="col-md-6">
         <label class="label-crud label-required" for="nationality" translate="myAccount.general.nationality"></label>
         <select class="custom-select d-block w-100  form-control" id="nationality" ng-model="ctrl.myAccount.CountryOfBirth"
           ng-options="x.Name for x in ctrl.nationalities track by x.Id" required></select>
-        <div class="validate-error ng-cloak" ng-show="ctrl.hasValidated && !ctrl.myAccount.CountryOfBirth">{{ctrl.validateError.message.text}}</div>
+        <div class="validate-error ng-cloak" ng-if="ctrl.hasValidated && !ctrl.myAccount.CountryOfBirth">{{ctrl.validateError.message.text}}</div>
       </div>
     </div>
     <!--Residence-->
@@ -64,13 +64,13 @@
         <label class="label-crud label-required" for="country" translate="myAccount.general.country"></label>
         <select class="custom-select d-block w-100  form-control" id="country" ng-model="ctrl.myAccount.CountryOfResidence"
           ng-options="x.Name for x in ctrl.countries track by x.Id" ng-change="ctrl.onChangeCountries()" required></select>
-        <div class="validate-error ng-cloak" ng-show="ctrl.hasValidated && !ctrl.myAccount.CountryOfResidence">{{ctrl.validateError.message.text}}</div>
+        <div class="validate-error ng-cloak" ng-if="ctrl.hasValidated && !ctrl.myAccount.CountryOfResidence">{{ctrl.validateError.message.text}}</div>
       </div>
       <div class="col-md-6">
         <label class="label-crud label-required" for="city" translate="myAccount.general.city"></label>
         <select class="custom-select form-control" id="city" ng-model="ctrl.myAccount.CityOfResidence" ng-options="x.Name for x in ctrl.cities track by x.Id"
           required></select>
-        <div class="validate-error ng-cloak" ng-show="ctrl.hasValidated && !ctrl.myAccount.CityOfResidence">{{ctrl.validateError.message.text}}</div>
+        <div class="validate-error ng-cloak" ng-if="ctrl.hasValidated && !ctrl.myAccount.CityOfResidence">{{ctrl.validateError.message.text}}</div>
       </div>
     </div>
     <!--SubTitle-->
@@ -83,15 +83,14 @@
         <label for="email" class="label-crud label-required" translate="myAccount.account.email"></label>
         <input type="email" class="form-control" id="email" ng-pattern="/^[a-zA-Z0-9_.@\s]*$/" name="email" ng-model="ctrl.myAccount.Account.Mail"
           placeholder="mail@example.com" required ng-disabled="ctrl.myAccount.Id">
-        <div class="validate-error ng-cloak" ng-show="CRUDMyAccountForm.email.$error.pattern">{{ctrl.validateError.message.email}}</div>
-        <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.email">{{ctrl.validateError.message.email}}</div>
+        <div class="validate-error ng-cloak" ng-if="CRUDMyAccountForm.email.$error.pattern">{{ctrl.validateError.message.email}}</div>
+        <div class="validate-error ng-cloak" ng-if="!CRUDMyAccountForm.email.$error.pattern && ctrl.validateError.show.email">{{ctrl.validateError.message.email}}</div>
       </div>
       <div class="col-md-6" ng-if="!ctrl.myAccount.Id">
         <label for="emailConfirm" class="label-crud label-required" translate="myAccount.account.emailConfirm"></label>
-        <input type="email" id="emailConfirm" ng-pattern="/^[a-zA-Z0-9\s]*$/" name="emailConfirm" ng-model="ctrl.emailConfirm"
+        <input type="email" id="emailConfirm" ng-model="ctrl.emailConfirm"
           placeholder="mail@example.com" class="form-control" required>
-        <div class="validate-error ng-cloak" ng-show="CRUDMyAccountForm.emailConfirm.$error.pattern">{{ctrl.validateError.message.emailConfirm}}</div>
-        <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.emailConfirm">{{ctrl.validateError.message.emailConfirm}}</div>
+        <div class="validate-error ng-cloak" ng-if="!CRUDMyAccountForm.email.$error.pattern && ctrl.validateError.show.emailConfirm">{{ctrl.validateError.message.emailConfirm}}</div>
       </div>
     </div>
     <!--Password-->
@@ -105,7 +104,7 @@
         <label for="passwordConfirm" class="label-crud label-required" translate="myAccount.account.passwordConfirm"></label>
         <input type="password" id="passwordConfirm" ng-model="ctrl.passwordConfirm" placeholder="••••••••" class="form-control"
           required>
-        <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.passwordConfirm">{{ctrl.validateError.message.passwordConfirm}}</div>
+        <div class="validate-error ng-cloak" ng-if="ctrl.validateError.show.passwordConfirm">{{ctrl.validateError.message.passwordConfirm}}</div>
       </div>
     </div>
     <!--Phone-->
@@ -122,12 +121,12 @@
       <div class="col-md-8">
         <label class="label-crud" translate="myAccount.account.phoneNumber"></label>
         <input name="phone" ng-model="ctrl.myAccount.PhoneNumber" type="text" class="form-control" ng-pattern="/^[0-9]/" />
-        <span class="validate-error ng-cloak" ng-show="CRUDMyAccountForm.phone.$error.pattern">{{ctrl.validateError.message.phoneNumber}}</span>
+        <span class="validate-error ng-cloak" ng-if="CRUDMyAccountForm.phone.$error.pattern">{{ctrl.validateError.message.phoneNumber}}</span>
       </div>
     </div>
     <!-- Terms -->
     <div class="col-md-12">
-      <div id="myModal" class="modal" ng-show="ctrl.modalVisible">
+      <div id="myModal" class="modal" ng-if="ctrl.modalVisible">
         <!-- Modal content -->
         <div class="modal-content">
           <div class="modal-header">
