@@ -121,14 +121,21 @@
       ctrl.setData = function setData(result) {
         ctrl.categories = result[0];
         ctrl.countries = result[1];
-        if (result[2][0]) {
-          ctrl.offer = result[2][0];
-          ctrl.getCities();
-        } else {
+        if (!result[2][0]) {
           ctrl.offer = {};
           ctrl.offer.userId = $rootScope.session.getUserId();
+        } else {
+          ctrl.offer = result[2][0];
         }
-        if (!ctrl.myOffer) {
+        if (ctrl.myOffer) {
+          ctrl.offer.Active = !ctrl.offer.Active;
+        }
+        ctrl.getCities();
+        ctrl.checkOffer();
+      };
+
+      ctrl.checkOffer = function checkOffer() {
+        if(!ctrl.myOffer){
           if (!ctrl.offer.Active) {
             toastr.error($translate.instant('offers.disabled'));
             $state.go('/offers');
@@ -138,8 +145,8 @@
               .then(ctrl.getReputation)
               .catch(ctrl.getCatchReputacion);
           }
-        } else {
-          ctrl.offer.Active = !ctrl.offer.Active;
+        }else{
+          
         }
       };
 
