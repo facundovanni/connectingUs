@@ -2,8 +2,8 @@
     'use strict';
 
     angular.module('connectingUsCenter.offers')
-        .controller('OffersController', ['$scope', 'Offers', '$translate', '$state', 'Countries', 'Cities', 'Categories', 'isMyOwn',
-            function ($scope, Offers, $translate, $state, Countries, Cities, Categories, isMyOwn) {
+        .controller('OffersController', ['Offers', '$rootScope', '$state', 'Countries', 'Cities', 'Categories', 'isMyOwn', 'toastr','$translate',
+            function (Offers, $rootScope, $state, Countries, Cities, Categories, isMyOwn, toastr, $translate) {
                 var ctrl = this;
 
                 ctrl.offers = [];
@@ -13,12 +13,23 @@
                 ctrl.cities = [];
                 ctrl.categoriesSelected = [];
                 ctrl.myOffers = isMyOwn;
-
+                ctrl.pagination = {
+                    limits:[10, 25, 50, 100],
+                    pageIndex: 1,
+                    itemsPerPage: 10
+                };
                 ctrl.init = function init() {
                     //get the Offers
+                    ctrl.checkLog();
                     ctrl.getCategories();
                     ctrl.getCountries();
                     ctrl.updateOffers();
+                };
+
+                ctrl.checkLog = function checkLog() {
+                    if (!$rootScope.auth.isLoggedIn()) {
+                        $state.go('/login');
+                    }
                 };
 
                 ctrl.getCategories = function getCategories() {
@@ -44,8 +55,9 @@
                     ctrl.isFullyLoaded();
                     ctrl.setFilters();
                     Offers.getAll(ctrl.filters).$promise.then(function onThen(result) {
-                        ctrl.offers.splice.apply(ctrl.offers, [0, ctrl.offers.length].concat(result));
-
+                        ctrl.offers.splice.apply(ctrl.offers, [0, ctrl.offers.length].concat(result.Services));
+                        ctrl.totalItems = result.TotalServices ? result.TotalServices : 1;
+                        ctrl.pagination.totalPages = Math.ceil(ctrl.totalItems / ctrl.pagination.itemsPerPage);
                     }).finally(function onFinally() {
                         ctrl.isLoadingOffers = false;
                         ctrl.isFullyLoaded();
@@ -60,9 +72,11 @@
                     ctrl.filters.Categories = filterSelectedCategories.length ? filterSelectedCategories : undefined;
                     ctrl.filters.IdCountry = ctrl.filterCountry ? ctrl.filterCountry.Id : undefined;
                     ctrl.filters.IdCity = ctrl.filterCity ? ctrl.filterCity.Id : undefined;
-                    ctrl.filters.Active = (ctrl.myOffers && !ctrl.chkInactives) ? undefined : true
-                    ctrl.filters.IdUser = ctrl.myOffers ? 1 : undefined;
+                    ctrl.filters.Active = !ctrl.myOffers ? undefined : !ctrl.showInactives;
+                    ctrl.filters.IdUser = $rootScope.session.getUserId();
                     ctrl.filters.Text = ctrl.searchText ? ctrl.searchText : undefined;
+                    ctrl.filters.NumberOfPage = ctrl.pagination.pageIndex;
+                    ctrl.filters.NumberOfRows = ctrl.pagination.itemsPerPage;
                 };
 
                 ctrl.search = function search() {
@@ -107,7 +121,6 @@
                 ctrl.onFinallyCities = function onFinallyCities() {
                     ctrl.isLoadingCities = false;
                     ctrl.isFullyLoaded();
-                    ctrl.cities.push({ id: 1, description: "Buenos Aires", code: "BSAS" });
                 };
 
                 ctrl.onSelectCountry = function onSelectCountry() {
@@ -121,7 +134,37 @@
                     });
                     ctrl.filterCountry = undefined;
                     ctrl.filterCity = undefined;
-                }
+                    ctrl.showInactives = ctrl.myOffers ? false : false;
+                    ctrl.searchText = undefined;
+
+                    ctrl.updateOffers();
+                };
+
+                ctrl.pagePrev = function pagePrev() {
+                    if (ctrl.pagination.pageIndex > 1) {
+                        ctrl.pagination.pageIndex--;
+                        ctrl.updateOffers();
+                    }
+                };
+
+                ctrl.pageNext = function pageNext() {
+                    if (!(ctrl.pagination.pageIndex + 1 > ctrl.pagination.totalPages)) {
+                        ctrl.pagination.pageIndex++;
+                        ctrl.updateOffers();
+                    }
+                };
+
+                ctrl.pageSpecific = function pageSpecific() {
+                    var isPageInRange = !(ctrl.pagination.pageSelected > ctrl.pagination.totalPages);
+                    var isPageAvailable = (1 <= ctrl.pagination.pageSelected) && isPageInRange;
+
+                    if (isPageAvailable) {
+                        ctrl.pagination.pageIndex = ctrl.pagination.pageSelected;
+                        ctrl.updateOffers();
+                    } else {
+                        toastr.error($translate.instant('offers.pageSelectedError'));
+                    }
+                };
 
                 ctrl.init();
             }

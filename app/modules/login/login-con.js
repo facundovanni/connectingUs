@@ -1,7 +1,7 @@
 (function usersGridScope(angular) {
   'use strict';
-  angular.module('connectingUsCenter.login').controller('LoginController', ['$scope', 'Login', '$translate', '$state',
-    function loginController($scope, Login, $translate, $state) {
+  angular.module('connectingUsCenter.login').controller('LoginController', ['$state','$rootScope',
+    function loginController($state, $rootScope) {
       var ctrl = this;
       ctrl.user = {};
       ctrl.error = false;
@@ -10,30 +10,34 @@
         $state.go('/account');
       }
 
-      ctrl.goToOffers = function goToOffers(result) {
+      ctrl.goToOffers = function goToOffers() {
         $state.go('/offers');
       }
 
+      ctrl.onCatchLogin = function onCatchLogin(result) {
+        console.log(result);
+        ctrl.error = true;
+        ctrl.isLoading = false;
+      };
+
       ctrl.check = function check() {
         ctrl.isLoading = true;
-        Login.getSession(ctrl.user).$promise
+        $rootScope.auth.logIn(ctrl.user)
           .then(ctrl.goToOffers)
-          .finally(ctrl.finallyLogin)
           .catch(ctrl.onCatchLogin);
       };
 
-      ctrl.onCatchLogin = function onCatchLogin() {
-        ctrl.error = true;
-      };
-
-      ctrl.finallyLogin = function finallyLogin(){
-        ctrl.isLoading = false;
-      }
       ctrl.singIn = function singIn() {
         if (ctrl.user.Mail && ctrl.user.Password && ctrl.user.Password.length > 7) {
           ctrl.check();
         }
       };
 
+      ctrl.init = function init() {
+        if ($rootScope.auth.isLoggedIn()) {
+          ctrl.goToOffers();
+        }
+      }
+      ctrl.init();
     }]);
 })(angular);

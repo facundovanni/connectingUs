@@ -1,12 +1,12 @@
 ﻿(function OffersList(angular) {
   'use strict';
-  angular.module('connectingUsCenter.directives',['ngResource', 'ui.router'])
+  angular.module('connectingUsCenter.directives', ['ngResource', 'ui.router'])
     .directive('offersList', [function OffersList() {
       var directive = {
         restrict: 'E',
         scope: {
           items: '=',
-          itemNew:'=',
+          itemNew: '=',
           openState: '='
         },
         templateUrl: 'content/directives/offers/offers-list.html',
@@ -23,9 +23,9 @@
         ctrl.itemNew = $scope.itemNew;
 
         ctrl.clickItem = function clickItem(item) {
-          if(!item){
+          if (!item) {
             item = {
-              Id:0
+              Id: 0
             };
           }
           $state.go($scope.openState, item);

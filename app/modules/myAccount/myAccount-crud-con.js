@@ -2,12 +2,13 @@
     'use strict';
 
     angular.module('connectingUsCenter.myAccount')
-        .controller('myAccountCRUDController', ['MyAccount', '$translate', '$state', 'Countries', 'Cities', '$stateParams',
-            function (MyAccount, $translate, $state, Countries, Cities, $stateParams) {
+        .controller('myAccountCRUDController', ['MyAccount', '$translate', '$state', 'Countries', 'Cities', '$stateParams', 'toastr', '$rootScope','ConfirmationBox',
+            function (MyAccount, $translate, $state, Countries, Cities, $stateParams, toastr, $rootScope,ConfirmationBox) {
                 var ctrl = this;
                 ctrl.userId = $stateParams.Id;
                 ctrl.today = new Date();
                 ctrl.modalVisible = false;
+                ctrl.myAccount = MyAccount.getDefaultEntity();
                 ctrl.termsAndConditionsChecked = false;
                 ctrl.validateError = {
                     show: {},
@@ -21,13 +22,6 @@
                         termsAndConditions: $translate.instant('myAccount.error.termsAndConditions'),
                     }
                 };
-
-                ctrl.alert = {
-                    show: false,
-                    message: undefined,
-                    type: undefined
-                }
-
                 ctrl.dateSelected = {
                     value: ctrl.today,
                     opened: false
@@ -39,7 +33,7 @@
                     startingDay: 0
                 };
 
-                ctrl.showModal = function showModal(state){
+                ctrl.showModal = function showModal(state) {
                     ctrl.modalVisible = state;
                 }
 
@@ -75,14 +69,14 @@
                     ctrl.countries = result;
                     ctrl.nationalities = result;
                 };
+
                 ctrl.onFinallyCountries = function onFinallyCountries() {
                     ctrl.isLoadingCountries = false;
                     ctrl.isLoadingOptions();
                 };
 
-                ctrl.myAccount = MyAccount.getDefaultEntity();
-
                 ctrl.init = function init() {
+                    ctrl.checkLog();
                     ctrl.fillArrays();
                     ctrl.getAccount();
                 };
@@ -93,7 +87,7 @@
                     }
                 };
 
-                ctrl.getCities = function getCities(){
+                ctrl.getCities = function getCities() {
                     ctrl.isLoadingCities = true;
                     ctrl.isLoadingOptions();
                     Cities.getAll({ idCountry: ctrl.myAccount.CountryOfResidence.Id }).$promise
@@ -110,7 +104,6 @@
                     ctrl.isLoadingOptions();
                 };
 
-
                 ctrl.setView = function setView() {
                     ctrl.title = ctrl.myAccount.Id ? $translate.instant('myAccount.title') : $translate.instant('myAccount.titleSignUp');
                     ctrl.isLoadingAccount = false;
@@ -122,8 +115,9 @@
                 };
 
                 ctrl.setAccount = function setAccount(result) {
+                    result.Account.Password = undefined;
                     ctrl.myAccount = result;
-                    ctrl.myAccount.Gender = ctrl.genders.find(function find(obj) {
+                    ctrl.selectedGender = ctrl.genders.find(function find(obj) {
                         return obj.code === ctrl.myAccount.Gender;
                     });
                     if (ctrl.myAccount.PhoneType) {
@@ -134,19 +128,21 @@
                     ctrl.getCities();
                     ctrl.dateSelected.value = new Date(ctrl.myAccount.DateOfBirth);
                 };
+
                 ctrl.onCatchAccount = function onCatchAccount(res) {
-                    console.log(res);
+                    toastr.error($translate.instant('global.message.saveError'));
+                    ctrl.isLoading = false;
                 };
 
                 ctrl.getAccount = function getAccount() {
                     ctrl.isLoading = true;
                     ctrl.myAccount.Id = ctrl.userId ? ctrl.userId : undefined;
                     if (ctrl.myAccount.Id) {
-                        MyAccount.get({Id: ctrl.myAccount.Id}).$promise
+                        MyAccount.get({ Id: ctrl.myAccount.Id }).$promise
                             .then(ctrl.setAccount)
                             .catch(ctrl.onCatchAccount)
                             .finally(ctrl.setView);
-                    }else{
+                    } else {
                         ctrl.setView();
                     }
                 };
@@ -160,36 +156,51 @@
                 ctrl.save = function save() {
                     ctrl.setDateJSON();
                     if (ctrl.validate()) {
-                        ctrl.myAccount.Gender = ctrl.myAccount.Gender.code;
-                        ctrl.myAccount.PhoneType = ctrl.myAccount.PhoneType ? ctrl.myAccount.PhoneType.code : undefined;
-                        ctrl.myAccount.Id = ctrl.myAccount.Id ?  ctrl.myAccount.Id : undefined;
-                        ctrl.saveData();
+                        ConfirmationBox.open().result.then(ctrl.setSave);
                     }
                 };
+
+                ctrl.setSave = function setSave(){
+                    ctrl.myAccount.Gender = ctrl.selectedGender ? ctrl.selectedGender.code : undefined;
+                    ctrl.myAccount.PhoneType = ctrl.selectedPhoneType ? ctrl.selectedPhoneType.code : undefined;
+                    ctrl.myAccount.Id = ctrl.myAccount.Id ? ctrl.myAccount.Id : undefined;
+                    ctrl.saveData();
+                }
 
                 ctrl.saveData = function saveData() {
                     ctrl.isLoading = true;
                     MyAccount.save(ctrl.myAccount).$promise
                         .then(ctrl.onThenNew)
-                        .catch(ctrl.onCatchSave)
-                        .finally(ctrl.onFinallySave);
+                        .catch(ctrl.onCatchSave);
                 };
 
-                ctrl.onFinallySave = function onFinally(result) {
-                    ctrl.isLoading = false;
-                };
-                
                 ctrl.onCatchSave = function onFinally(result) {
-                    ctrl.alert.show = true;
-                    ctrl.alert.message = $translate.instant('global.message.saveError');
-                    ctrl.alert.type = 'alert-danger';
+                    toastr.error($translate.instant('global.message.saveError'));
+                    ctrl.isLoading = false;
                 };
 
                 ctrl.onThenNew = function onThenNew(res) {
-                    ctrl.alert.show = true;
-                    ctrl.alert.message = $translate.instant(res ? 'global.message.saveSuccess' : 'global.message.saveError');
-                    ctrl.alert.type = res ? 'alert-success' : 'alert-danger';
+                    ctrl.isLoading = false;
+                    ctrl.myAccount.Id = res.Id;
+                    toastr.success($translate.instant('global.message.saveSuccess'));
+                    ctrl.loginUser();
+                };
+
+                ctrl.goToOffers = function goToOffers() {
                     $state.go('/offers');
+                }
+
+                ctrl.onCatchLogin = function onCatchLogin(result) {
+                    toastr.error($translate.instant('global.message.saveError'))
+                    ctrl.error = true;
+                    ctrl.isLoading = false;
+                };
+
+                ctrl.loginUser = function loginUser() {
+                    ctrl.isLoading = true;
+                    $rootScope.auth.logIn({Mail: ctrl.myAccount.Account.Mail, Password: ctrl.myAccount.Account.Password })
+                        .then(ctrl.goToOffers)
+                        .catch(ctrl.onCatchLogin);
                 };
 
                 ctrl.cancel = function () {
@@ -200,9 +211,9 @@
                     ctrl.hasValidated = false;
                     var validations = true;
                     ctrl.validateError.show.email = !ctrl.myAccount.Account.Mail || ctrl.myAccount.Account.Mail.indexOf('.') === -1;
-                    ctrl.validateError.show.emailConfirm = !ctrl.emailConfirm || ctrl.myAccount.Account.Mail !== ctrl.emailConfirm;
+                    ctrl.validateError.show.emailConfirm = ctrl.myAccount.Id ? false : !ctrl.emailConfirm || ctrl.myAccount.Account.Mail !== ctrl.emailConfirm;
                     ctrl.validateError.show.passwordConfirm = !ctrl.passwordConfirm || ctrl.myAccount.Account.Password !== ctrl.passwordConfirm;
-                    //ctrl.validateError.show.termsAndConditions = !ctrl.termsAndConditionsChecked;
+                    ctrl.validateError.show.termsAndConditions = ctrl.myAccount.Id ? false : !ctrl.termsAndConditionsChecked;
                     for (const prop in ctrl.validateError.show) {
                         if (ctrl.validateError.show[prop]) {
                             validations = false;
@@ -215,7 +226,13 @@
 
                 ctrl.isLoadingOptions = function isLoadingOptions() {
                     ctrl.isLoading = ctrl.isLoadingAccount || ctrl.isLoadingCountries || ctrl.isLoadingCities;
-                }
+                };
+
+                ctrl.checkLog = function checkLog() {
+                    if ($rootScope.auth.isLoggedIn() && !ctrl.userId) {
+                        ctrl.userId = $rootScope.session.getUserId();
+                    }
+                };
 
                 ctrl.init();
             }

@@ -12,6 +12,11 @@
   <link rel="stylesheet" href="content/styles/app.css">
   <link rel="stylesheet" href="content/styles/crud.css" />
   <link rel="stylesheet" href="content/styles/offers-dir.css">
+  <link rel="stylesheet" href="content/styles/chats.css">
+  <link rel="stylesheet" href="content/styles/rating.css">
+  <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
+  <link rel="stylesheet" href="bower_components/angular-simple-chat/dist/angular-simple-chat.css">
+
   <link rel="icon" href="content/images/connectingUsLogo.png">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
     crossorigin="" />
@@ -24,15 +29,17 @@
         <div class="col-md-12">
           <img class="header-logo" title="Connecting Us" src="content/images/connectingUsLogo.png">
           <a class="navbar-brand headerTitle" ui-sref="/offers">Connecting Us</a>
-          <span class="pull-right  header-account-name">
+          <span class="pull-right header-account-name">
             <span class="glyphicon glyphicon-question-sign" ng-click="ctrl.goToAbout()"></span>
             <div class="btn-group" uib-dropdown dropdown-append-to-body>
-              <div uib-dropdown-toggle>
-                Logged <span class="caret"></span>
+              <div uib-dropdown-toggle ng-if="auth.isLoggedIn()">
+                {{session.getUser().Account.Nickname}} <span class="glyphicon glyphicon-menu-hamburger"></span>
               </div>
               <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-to-body">
-                <li role="menuitem"><a href="" ng-click="ctrl.goToMyAccount()">My Account</a></li>
-                <li role="menuitem"><a href="" ng-click="ctrl.goToMyOffers()">My Offers</a></li>
+                <li role="menuitem"><a ng-click="ctrl.goToMyAccount()">{{'global.menu.myAccount' | translate}}</a></li>
+                <li role="menuitem"><a ng-click="ctrl.goToMyOffers()">{{'global.menu.myOffers' | translate}}</a></li>
+                <li role="menuitem"><a ng-click="ctrl.goToMyChats()">{{'global.menu.myChats' | translate}}</a></li>
+                <li role="menuitem"><a ng-click="ctrl.goToOffers()">{{'global.menu.offers' | translate}}</a></li>
                 <li class="divider"></li>
                 <li class="col-xs-12"><button class="btn btn-block btn-primary" type="submit" ng-click="ctrl.logout()"
                     translate="login.signOut"></button></li>
@@ -49,25 +56,39 @@
   <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.js "></script>
   <script type="text/javascript" src="bower_components/angular-touch/angular-touch.js "></script>
   <script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
-  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+  <script type="text/javascript" src="bower_components/moment/moment.js"></script>
+  <script type="text/javascript" src="bower_components/angular-moment/angular-moment.js"></script>
+  <script type="text/javascript" src="bower_components/angular-simple-chat/dist/angular-simple-chat.js"></script>
+  <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
   <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.js "></script>
-  <script src="bower_components/angular-spinner/dist/angular-spinner.js"></script>
+  <script type="text/javascript" src="bower_components/angular-spinner/dist/angular-spinner.js"></script>
   <script type="text/javascript" src="bower_components/angular-resource/angular-resource.js"></script>
   <script type="text/javascript" src="bower_components/angular-translate/angular-translate.js"></script>
   <script type="text/javascript" src="bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js"></script>
   <script type="text/javascript" src="bower_components/angular-translate-interpolation-messageformat/angular-translate-interpolation-messageformat.js"></script>
   <script type="text/javascript" src="bower_components/angular-translate-handler-log/angular-translate-handler-log.js"></script>
+  <script type="text/javascript" src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+  <script type="text/javascript" src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+  <script type="text/javascript" src="bower_components/angular-base64-upload/dist/angular-base64-upload.js"></script>
 
   <script type="text/javascript" src="env.js"></script>
 
   <script type="text/javascript" src="content/services/services-model.js"></script>
+  <script type="text/javascript" src="content/services/auth-srv.js"></script>
+  <script type="text/javascript" src="content/services/session-srv.js"></script>
+  <script type="text/javascript" src="content/services/local-storage-srv.js"></script>
   <script type="text/javascript" src="content/services/categories-srv.js"></script>
   <script type="text/javascript" src="content/services/countries-srv.js"></script>
   <script type="text/javascript" src="content/services/cities-srv.js"></script>
   <script type="text/javascript" src="content/services/categories-srv.js"></script>
-
+  <script type="text/javascript" src="content/services/user-srv.js"></script>
+  
   <script type="text/javascript" src="content/directives/offers/offers-list.js"></script>
   <script type="text/javascript" src="content/directives/offers/offers-item.js"></script>
+  <script type="text/javascript" src="content/directives/rate-user/rate-user.js"></script>
+  <script type="text/javascript" src="content/directives/date-locale/date-locale.js"></script>
+  <script type="text/javascript" src="content/components/confirmation-box/confirmation-box-fct.js"></script>
+  <script type="text/javascript" src="content/components/confirmation-box/confirmation-box.js"></script>
 
   <script type="text/javascript" src="modules/myAccount/myAccount-config.js "></script>
   <script type="text/javascript" src="modules/myAccount/services/myAccount-srv.js "></script>
@@ -78,14 +99,19 @@
   <script type="text/javascript" src="modules/offers/offers-con.js"></script>
   <script type="text/javascript" src="modules/offers/offers-crud-con.js"></script>
 
+  <script type="text/javascript" src="modules/chats/chats-config.js"></script>
+  <script type="text/javascript" src="modules/chats/services/chats-srv.js"></script>
+  <script type="text/javascript" src="modules/chats/chats-con.js"></script>
+  <script type="text/javascript" src="modules/chats/chats-crud-con.js"></script>
+  <script type="text/javascript" src="modules/chats/chats-crud-rate-con.js"></script>
+
   <script type="text/javascript" src="modules/about/about-config.js"></script>
   <script type="text/javascript" src="modules/about/about-con.js"></script>
 
   <script type="text/javascript" src="modules/login/login-config.js"></script>
-  <script type="text/javascript" src="modules/login/services/login-srv.js"></script>
   <script type="text/javascript" src="modules/login/login-con.js"></script>
   <script type="text/javascript" src="app-config.js"></script>
-  <script type="text/javascript" src="app.js "></script>
+  <script type="text/javascript" src="app.js"></script>
 
   <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
     crossorigin=""></script>
