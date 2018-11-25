@@ -63,7 +63,7 @@
                 ctrl.openChat = function openChat(chat, type) {
                     ctrl.modalInstance.resolve = {
                         idChat: function resolve() { return chat.Id },
-                        idAnotherUser: function resolve() { return type ? chat.UserOffertorId : chat.UserRequesterId },
+                        idAnotherUser: function resolve() { return type ? chat.UserRequesterId : chat.UserOffertorId},
                         idService: function resolve() { return chat.Service.Id },
                         type: type
                     };
