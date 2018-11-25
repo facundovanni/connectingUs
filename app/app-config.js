@@ -198,17 +198,25 @@
                             "doNotRate": "Don't rate",
                             "ratedOk": "The user has been qualificated.",
                             "ratedOkNo": "The user has not been qualificated."
-                        },
+                        }
                         "closed": "The conversation is closed",
                         "closedInfo": "Closed"
-
-
-
                     },
                     "confirmationBox": {
                         "title": "Do you confirm?",
                         "yes": "Yes",
                         "no": "No"
+                    },
+                    "notifications": {
+                        "newMessage": "New message",
+                        "noNotifications": "You don't have notifications",
+                        "from": "From",
+                        "service": "Service",
+                        "qualified": "You have been qualified",
+                        "by": "By",
+                        
+
+
                     }
                 };
 

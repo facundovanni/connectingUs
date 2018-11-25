@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('connectingUsCenter.offers')
-        .controller('OffersController', ['Offers', '$rootScope', '$state', 'Countries', 'Cities', 'Categories', 'isMyOwn', 'toastr','$translate',
+        .controller('OffersController', ['Offers', '$rootScope', '$state', 'Countries', 'Cities', 'Categories', 'isMyOwn', 'toastr', '$translate',
             function (Offers, $rootScope, $state, Countries, Cities, Categories, isMyOwn, toastr, $translate) {
                 var ctrl = this;
 
@@ -14,7 +14,7 @@
                 ctrl.categoriesSelected = [];
                 ctrl.myOffers = isMyOwn;
                 ctrl.pagination = {
-                    limits:[10, 25, 50, 100],
+                    limits: [10, 25, 50, 100],
                     pageIndex: 1,
                     itemsPerPage: 10
                 };
