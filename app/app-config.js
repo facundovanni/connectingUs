@@ -201,7 +201,7 @@
                             "doNotRate": "Don't rate",
                             "ratedOk": "The user has been qualificated.",
                             "ratedOkNo": "The user has not been qualificated."
-                        }
+                        },
                         "closed": "The conversation is closed",
                         "closedInfo": "Closed"
                     },

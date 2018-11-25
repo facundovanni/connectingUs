@@ -25,7 +25,7 @@
       };
 
       ctrl.logout = function logout() {
-        auth.logOut();
+        $rootScope.auth.logOut();
         $state.go('/login');
       };
 
