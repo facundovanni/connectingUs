@@ -74,17 +74,15 @@
       </div>
     </div>
     <div class="row cda-row">
-      <div ng-if="ctrl.offers.length">
-        <div ng-include="'modules/offers/templates/offers-page.html'"></div>
+      <div ng-if="!ctrl.offers.length" class="noItems">
         <div class="col-md-12">
-          <offers-list item-new="ctrl.myOffers" open-state="ctrl.myOffers ? '/my-offers/:Id' : '/offers/:Id' " items="ctrl.offers"></offers-list>
+          {{'offers.noItems' | translate}}
         </div>
-        <div ng-include="'modules/offers/templates/offers-page.html'"></div>
       </div>
-    </div>
-    <div ng-if="!ctrl.offers.length" class="noItems">
+      <div ng-if="ctrl.offers.length" ng-include="'modules/offers/templates/offers-page.html'"></div>
       <div class="col-md-12">
-        {{'offers.noItems' | translate}}
+        <offers-list item-new="ctrl.myOffers" open-state="ctrl.myOffers ? '/my-offers/:Id' : '/offers/:Id' " items="ctrl.offers"></offers-list>
       </div>
+      <div ng-if="ctrl.offers.length" ng-include="'modules/offers/templates/offers-page.html'"></div>
     </div>
   </div>

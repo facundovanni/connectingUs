@@ -30,10 +30,10 @@
           <img class="header-logo" title="Connecting Us" src="content/images/connectingUsLogo.png">
           <a class="navbar-brand headerTitle" ui-sref="/offers">Connecting Us</a>
           <span class="pull-right header-account-name">
-            <span ng-class="ctrl.notificationCount === 0 ? 'dot' : 'dot-red'">
+            <span  ng-if="auth.isLoggedIn()" ng-class="ctrl.notificationCount === 0 ? 'dot' : 'dot-red'">
               <p class="text-notification">{{ctrl.notificationCount}}</p>
             </span>
-            <div class="btn-group" uib-dropdown dropdown-append-to-body>
+            <div class="btn-group" uib-dropdown dropdown-append-to-body  ng-if="auth.isLoggedIn()">
               <div uib-dropdown-toggle ng-if="auth.isLoggedIn()"> 
                 <span ng-click="ctrl.updateNotifications()" class="glyphicon glyphicon-bell icon-margin"></span>
               </div>
