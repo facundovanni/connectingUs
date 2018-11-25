@@ -26,7 +26,6 @@ function messageComposer() {
         messageComposerCtrl.options = simpleChatCtrl.options;
         messageComposerCtrl.messages = simpleChatCtrl.messages;
         messageComposerCtrl.liveFlagFunction = simpleChatCtrl.liveFlagFunction;
-        messageComposerCtrl.simpleChatCtrl.readOnly;
     }
 }
 

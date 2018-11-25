@@ -56,23 +56,16 @@
                 };
 
                 ctrl.openChat = function openChat(chat, type) {
-                    if (chat.Active) {
+                    ctrl.modalInstance.resolve = {
+                        idChat: function resolve() { return chat.Id },
+                        idAnotherUser: function resolve() { return type ? chat.UserOffertorId : chat.UserRequesterId },
+                        idService: function resolve() { return chat.Service.Id },
+                        type: type
+                    };
 
-                        ctrl.modalInstance.resolve = {
-                            idChat: function resolve() { return chat.Id },
-                            idAnotherUser: function resolve() { return type ? chat.UserOffertorId : chat.UserRequesterId },
-                            idService: function resolve() { return chat.Service.Id },
-                            type: type
-                        };
-
-                        $uibModal.open(ctrl.modalInstance).result.then(function success() {
-                            ctrl.getChats();
-                        });
-                    } else {
-                        toastr.warning($translate.instant('chats.closed'))
-
-                    }
-
+                    $uibModal.open(ctrl.modalInstance).result.then(function success() {
+                        ctrl.getChats();
+                    });
                 };
 
                 ctrl.init();
