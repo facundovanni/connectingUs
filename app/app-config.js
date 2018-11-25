@@ -153,7 +153,8 @@
                         "show": "View: ",
                         "noVotes": "The user has not been rated yet",
                         "pageSelectedError":"The page number is bigger than the max of pages.",
-                        "noItems": "There is no services to show."
+                        "noItems": "There is no services to show.",
+                        "pageSelectedInvalid": "The number is invalid or incomplete."
                     },
                     "myOffer": {
                         "titleView": "Offer Details",
