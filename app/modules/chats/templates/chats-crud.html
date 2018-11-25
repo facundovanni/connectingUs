@@ -2,7 +2,7 @@
   <div class="modal-header">
     <div class="row cda-row">
       <span>
-        <h3 class="modal-title" id="modal-title">{{ctrl.chat.Service.Title}} <span class="close" ng-click="ctrl.cancel()">&times;</span></h3>
+        <h3 class="modal-title" id="modal-title">{{ctrl.chat.Service.Title}} <span class="label label-danger" ng-if="ctrl.chat.Service && !ctrl.chat.Active">{{'chats.closedInfo' | translate | uppercase}}</span> <span class="close" ng-click="ctrl.cancel()">&times;</span></h3>
       </span>
     </div>
   </div>

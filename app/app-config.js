@@ -147,11 +147,12 @@
                         "user": "User",
                         "rate": "Rate",
                         "votes": "votes",
-                        "votesOver": "over",
+                        "votesOver": "(Over {{votesCount}} votes)",
                         "pagesInfo": "Show page {{pageIndex}} of {{totalPages}} pages, over {{totalItems}} services",
                         "show": "View: ",
                         "noVotes": "The user has not been rated yet",
-                        "pageSelectedError":"The page number is bigger than the max of pages."
+                        "pageSelectedError":"The page number is bigger than the max of pages.",
+                        "noItems": "There is no services to show."
                     },
                     "myOffer": {
                         "titleView": "Offer Details",
@@ -196,7 +197,8 @@
                             "ratedOk": "The user has been qualificated.",
                             "ratedOkNo": "The user has not been qualificated."
                         },
-                        "closed": "The conversation is closed"
+                        "closed": "The conversation is closed",
+                        "closedInfo": "Closed"
 
 
 

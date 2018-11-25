@@ -6,8 +6,8 @@
             function (Chats, $rootScope, $state, $uibModal, $q, toastr, $translate) {
                 var ctrl = this;
                 ctrl.false = false;
-                ctrl.chatsOthers = [];
-                ctrl.chatsMy = [];
+                ctrl.chats = [];
+                ctrl.tabActive = 0;
 
                 ctrl.init = function init() {
                     //get the Chats
@@ -21,33 +21,38 @@
                     }
                 };
 
-                ctrl.getChats = function getChats() {
+                ctrl.getChatsOthers = function getChatsOthers() {
                     ctrl.isLoading = true;
-                    var promises = [];
                     Chats.getAllAsRequester({ idUser: $rootScope.session.getUserId() }).$promise
-                        .then(ctrl.setChatsRequester)
-                        .catch(ctrl.catchChats)
-                        .finally(ctrl.getOffertors);
+                        .then(ctrl.setChats)
+                        .catch(ctrl.catchChats);
                 };
 
-                ctrl.setChatsRequester = function setChats(result) {
+                ctrl.getChatsMy = function getChatsMy() {
+                    ctrl.isLoading = true;
+                    var promises = [];
+                    Chats.getAllAsOffertor({ idUser: $rootScope.session.getUserId() }).$promise
+                        .then(ctrl.setChats)
+                        .catch(ctrl.catchChats);
+                };
+
+                ctrl.getChats = function getChats(index) {
+                    ctrl.tabActive = index;
+                    if (index) {
+                        ctrl.getChatsMy();
+                    } else {
+                        ctrl.getChatsOthers();
+                    }
+                };
+
+                ctrl.setChats = function setChats(result) {
                     ctrl.isLoading = false;
-                    ctrl.chatsOthers = result;
+                    ctrl.chats = result;
                 };
                 ctrl.catchChats = function catchChats(result) {
                     toastr.error($translate.instant('global.message.saveError'));
                     ctrl.isLoading = false
                 };
-                ctrl.setChatsOffertors = function setChats(result) {
-                    ctrl.isLoading = false;
-                    ctrl.chatsMy = result;
-                };
-
-                ctrl.getOffertors = function getOffertors() {
-                    Chats.getAllAsOffertor({ idUser: $rootScope.session.getUserId() }).$promise
-                        .then(ctrl.setChatsOffertors)
-                        .catch(ctrl.catchChats);
-                }
 
                 ctrl.modalInstance = {
                     templateUrl: 'modules/chats/templates/chats-crud.html',
@@ -64,7 +69,7 @@
                     };
 
                     $uibModal.open(ctrl.modalInstance).result.then(function success() {
-                        ctrl.getChats();
+                        ctrl.getChats(ctrl.tabActive);
                     });
                 };
 

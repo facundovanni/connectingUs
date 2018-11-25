@@ -71,43 +71,46 @@
             </div>
           </div>
         </div>
-        <div class="row cda-row" ng-if="ctrl.offers">
-          <div class="col-md-12">
-            <ul class="pager">
-              <li><a ng-if="ctrl.pagination.pageIndex > 1" ng-click="ctrl.pagePrev()"><<</a></li>
-              <li><a ng-if="ctrl.pagination.pageIndex < ctrl.pagination.totalPages" ng-click="ctrl.pageNext()">>></a></li>
-              <li><a ng-click="ctrl.pageSpecific()">Go to page</a></li>
-              <li><input type="number" class="form-control input-page" ng-model="ctrl.pagination.pageSelected"></li>
-              <li>{{'offers.show'|translate}}<select class="custom-select d-block w-100  form-control input-page" id="limits" ng-change="ctrl.updateOffers()" ng-model="ctrl.pagination.itemsPerPage"
-                ng-options="x for x in ctrl.pagination.limits"></select></li>
-            </ul>
-          </div>
-          <div class="col-md-12 text-center">
-              {{ 'offers.pagesInfo' | translate : { pageIndex: ctrl.pagination.pageIndex, totalPages: ctrl.pagination.totalPages, totalItems: ctrl.totalItems } }}
-          </div>
-          <div class="col-md-12">
-            <offers-list item-new="ctrl.myOffers" open-state="ctrl.myOffers ? '/my-offers/:Id' : '/offers/:Id' " items="ctrl.offers"></offers-list>
-          </div>
-          <div class="col-md-12">
-              <ul class="pager">
-                <li><a ng-if="ctrl.pagination.pageIndex > 1" ng-click="ctrl.pagePrev()"><<</a></li>
-                <li><a ng-if="ctrl.pagination.pageIndex < ctrl.pagination.totalPages" ng-click="ctrl.pageNext()">>></a></li>
-                <li><a ng-click="ctrl.pageSpecific()">Go to page</a></li>
-                <li><input type="number" class="form-control input-page" ng-model="ctrl.pagination.pageSelected"></li>
-                <li>{{'offers.show'|translate}}<select class="custom-select d-block w-100  form-control input-page" id="limits" ng-change="ctrl.updateOffers()" ng-model="ctrl.pagination.itemsPerPage"
-                  ng-options="x for x in ctrl.pagination.limits"></select></li>
-              </ul>
-            </div>
-            <div class="col-md-12 text-center">
-                {{ 'offers.pagesInfo' | translate : { pageIndex: ctrl.pagination.pageIndex, totalPages: ctrl.pagination.totalPages, totalItems: ctrl.totalItems } }}
-            </div>  
-        </div>
       </div>
-      <div ng-if="!ctrl.offers || ctrl.offers.lenght == 0" class="noItems">
+    </div>
+    <div class="row cda-row">
+      <div ng-if="ctrl.offers.length">
         <div class="col-md-12">
-          {{'offers.noItems' | translate}}
+          <ul class="pager">
+            <li><a ng-if="ctrl.pagination.pageIndex > 1" ng-click="ctrl.pagePrev()">
+                <<</a> </li> <li><a ng-if="ctrl.pagination.pageIndex < ctrl.pagination.totalPages" ng-click="ctrl.pageNext()">>></a></li>
+            <li><a ng-click="ctrl.pageSpecific()">Go to page</a></li>
+            <li><input type="number" class="form-control input-page" ng-model="ctrl.pagination.pageSelected"></li>
+            <li>{{'offers.show'|translate}}<select class="custom-select d-block w-100  form-control input-page" id="limits"
+                ng-change="ctrl.updateOffers()" ng-model="ctrl.pagination.itemsPerPage" ng-options="x for x in ctrl.pagination.limits"></select></li>
+          </ul>
+        </div>
+        <div class="col-md-12 text-center">
+          {{ 'offers.pagesInfo' | translate : { pageIndex: ctrl.pagination.pageIndex, totalPages:
+          ctrl.pagination.totalPages, totalItems: ctrl.totalItems } }}
+        </div>
+        <div class="col-md-12">
+          <offers-list item-new="ctrl.myOffers" open-state="ctrl.myOffers ? '/my-offers/:Id' : '/offers/:Id' " items="ctrl.offers"></offers-list>
+        </div>
+        <div class="col-md-12">
+          <ul class="pager">
+            <li><a ng-if="ctrl.pagination.pageIndex > 1" ng-click="ctrl.pagePrev()">
+                <<</a> </li> <li><a ng-if="ctrl.pagination.pageIndex < ctrl.pagination.totalPages" ng-click="ctrl.pageNext()">>></a></li>
+            <li><a ng-click="ctrl.pageSpecific()">Go to page</a></li>
+            <li><input type="number" class="form-control input-page" ng-model="ctrl.pagination.pageSelected"></li>
+            <li>{{'offers.show'|translate}}<select class="custom-select d-block w-100  form-control input-page" id="limits"
+                ng-change="ctrl.updateOffers()" ng-model="ctrl.pagination.itemsPerPage" ng-options="x for x in ctrl.pagination.limits"></select></li>
+          </ul>
+        </div>
+        <div class="col-md-12 text-center">
+          {{ 'offers.pagesInfo' | translate : { pageIndex: ctrl.pagination.pageIndex, totalPages:
+          ctrl.pagination.totalPages, totalItems: ctrl.totalItems } }}
         </div>
       </div>
     </div>
+    <div ng-if="!ctrl.offers.length" class="noItems">
+      <div class="col-md-12">
+        {{'offers.noItems' | translate}}
+      </div>
+    </div>
   </div>
-</div>

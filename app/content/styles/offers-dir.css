@@ -81,6 +81,10 @@ a.list-group-item:hover {
   margin: 20px auto 1px;
 }
 
+.chat-list-container{
+  background: var(--white);
+}
+
 .remove-left {
   margin-left: -40px;
 }

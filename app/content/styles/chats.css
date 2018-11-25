@@ -40,6 +40,7 @@ a.chat-item:hover {
 
 .chat-lastMsg {
     font-size: 1.6rem;
+    word-break: break-all;
 }
 
 .chat-italic {

@@ -1,5 +1,5 @@
 <div class="simple-chat-container"
-    ng-class="{'full-height': !sc.options.showComposer}">
+    ng-class="{'full-height': !sc.showComposer}">
     <div ng-repeat="message in sc.messages track by message.id" class="message-wrapper">
         <chat-bubble
             message="message"

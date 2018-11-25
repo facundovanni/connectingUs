@@ -7,7 +7,7 @@
       modalConfiguration = modalConfiguration || {};
       modalConfiguration.controller = 'ConfirmationBoxController as ctrl';
       modalConfiguration.templateUrl = 'content/components/confirmation-box/confirmation-box.html';
-      modalConfiguration.size = 'md',
+      modalConfiguration.size = 'sm',
         modalConfiguration.resolve = {
           title: function () { return modalConfiguration.title || 'confirmationBox.title'; }
         }

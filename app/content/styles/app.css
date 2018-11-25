@@ -185,3 +185,7 @@ a {
 .float-right {
   float: right;
 }
+
+.confirm-buttons{
+  margin-top: 15px;
+}
