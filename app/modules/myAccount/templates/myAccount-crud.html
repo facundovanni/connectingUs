@@ -81,7 +81,7 @@
     <div class="row cda-row">
       <div ng-class="ctrl.myAccount.Id ? 'col-md-12' : 'col-md-6'">
         <label for="email" class="label-crud label-required" translate="myAccount.account.email"></label>
-        <input type="email" class="form-control" id="email" ng-pattern="/^[a-zA-Z0-9\s]*$/" name="email" ng-model="ctrl.myAccount.Account.Mail"
+        <input type="email" class="form-control" id="email" ng-pattern="/^[a-zA-Z0-9_.@\s]*$/" name="email" ng-model="ctrl.myAccount.Account.Mail"
           placeholder="mail@example.com" required ng-disabled="ctrl.myAccount.Id">
         <div class="validate-error ng-cloak" ng-show="CRUDMyAccountForm.email.$error.pattern">{{ctrl.validateError.message.email}}</div>
         <div class="validate-error ng-cloak" ng-show="ctrl.validateError.show.email">{{ctrl.validateError.message.email}}</div>

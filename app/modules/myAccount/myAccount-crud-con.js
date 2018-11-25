@@ -213,7 +213,7 @@
 
                     ctrl.validateError.show.FirstName = !ctrl.myAccount.Firstname;
                     ctrl.validateError.show.LastName = !ctrl.myAccount.LastName;
-                    ctrl.validateError.show.email = !ctrl.myAccount.Account.Mail || ctrl.myAccount.Account.Mail.indexOf('.') === -1;
+                    ctrl.validateError.show.email = !ctrl.myAccount.Account.Mail || ctrl.myAccount.Account.Mail.split('@')[1].indexOf('.') === -1;
                     ctrl.validateError.show.emailConfirm = ctrl.myAccount.Id ? false : !ctrl.emailConfirm || ctrl.myAccount.Account.Mail !== ctrl.emailConfirm;
                     ctrl.validateError.show.passwordConfirm = !ctrl.passwordConfirm || ctrl.myAccount.Account.Password !== ctrl.passwordConfirm;
                     ctrl.validateError.show.termsAndConditions = ctrl.myAccount.Id ? false : !ctrl.termsAndConditionsChecked;
