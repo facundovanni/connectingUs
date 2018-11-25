@@ -53,7 +53,8 @@
                             "other": "Other"
                         },
                         "error": {
-                            "textRequired": "This field is required"
+                            "textRequired": "This field is required",
+                            "invalidFormat": "Invalid format"
                         },
                         "phoneType": {
                             "mobile": "Mobile",
@@ -118,7 +119,7 @@
                         "error": {
                             "emailConfirm": "The emails must be equals",
                             "passwordConfirm": "The passwords are not equals",
-                            "email": "Set an valid email. The email must have a '@' and a '.'",
+                            "email": "Set an valid email. The email must have a '@' and a '.', only letters or numbers",
                             "password": "The password must have at least eight characters.",
                             "termsAndConditions": "You must accept terms and conditions",
                             "phoneNumber": "Set a valid number. Only numbers and -"
@@ -147,11 +148,13 @@
                         "user": "User",
                         "rate": "Rate",
                         "votes": "votes",
-                        "votesOver": "over",
+                        "votesOver": "(Over {{votesCount}} votes)",
                         "pagesInfo": "Show page {{pageIndex}} of {{totalPages}} pages, over {{totalItems}} services",
                         "show": "View: ",
                         "noVotes": "The user has not been rated yet",
-                        "pageSelectedError":"The page number is bigger than the max of pages."
+                        "pageSelectedError":"The page number is bigger than the max of pages.",
+                        "noItems": "There is no services to show.",
+                        "pageSelectedInvalid": "The number is invalid or incomplete."
                     },
                     "myOffer": {
                         "titleView": "Offer Details",
@@ -195,8 +198,9 @@
                             "doNotRate": "Don't rate",
                             "ratedOk": "The user has been qualificated.",
                             "ratedOkNo": "The user has not been qualificated."
-                        },
-                        "closed": "The conversation is closed"
+                        }
+                        "closed": "The conversation is closed",
+                        "closedInfo": "Closed"
                     },
                     "confirmationBox": {
                         "title": "Do you confirm?",

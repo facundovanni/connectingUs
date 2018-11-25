@@ -2,13 +2,11 @@
     <div class="modal-body">
         <div class="row cda-row">
             <div class="col-md-12">
-                <h4 class="modal-title text-center" id="modal-title">{{ctrl.title}}</h4>                
+                <h4 class="modal-title text-center" id="modal-title">{{ctrl.title}}</h4>
             </div>
         </div>
-    </div>
-    <div class="modal-footer">
         <div class="row cda-row">
-            <div class="col-md-12">
+            <div class="col-md-12 text-center confirm-buttons">
                 <button class="btn btn-lg btn-success" type="button" ng-click="ctrl.yes()">{{'confirmationBox.yes'|translate}}</button>
                 <button class="btn btn-lg btn-cancel" type="button" ng-click="ctrl.no()">{{'confirmationBox.no'|translate}}</button>
             </div>

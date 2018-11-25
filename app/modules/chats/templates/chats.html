@@ -8,44 +8,25 @@
     </div>
     <div class="row cda-row">
       <div class="col-md-12">
-        <uib-accordion close-others="true">
-          <div uib-accordion-group class="panel-default" heading="{{'chats.others' | translate}}">
-            <div class="row cda-row">
-              <div class="col-md-12">
-                <ul class="remove-left" ng-repeat="chat in ctrl.chatsOthers track by chat.Id">
-                  <li class="chat-list">
-                    <a href="" ng-click="ctrl.openChat(chat, 0)" class="chat-item">
-                      <span class="chat-user-r">{{chat.UserOffertorNickname}}</span>
-                      <span class="chat-italic">{{'chats.byServices' | translate}}</span> <span class="chat-title-srv">{{chat.Service.Title}}</span>
-                      <span class="chat-info pull-right">{{chat.LastMessageDate | date:'short'}}</span>
-                      <br>
-                      <span class="chat-lastMsg">{{chat.Messages[chat.Messages.length -1].Text}}</span>
-                    </a>
-                    <hr>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div uib-accordion-group class="panel-default" heading="{{'chats.my' | translate}}">
-            <div class="row cda-row">
-              <div class="col-md-12">
-                <ul class="remove-left" ng-repeat="chat in ctrl.chatsMy track by chat.Id">
-                  <li class="chat-list">
-                    <a href="" ng-click="ctrl.openChat(chat, 1)" class="chat-item">
-                      <span class="chat-user-r">{{chat.UserRequesterNickname}}</span>
-                      <span class="chat-italic">{{'chats.byServices' | translate}}</span> <span class="chat-title-srv">{{chat.Service.Title}}</span>
-                      <span class="chat-info pull-right">{{chat.LastMessageDate | date:'short'}}</span>
-                      <br>
-                      <span class="chat-lastMsg">{{chat.Messages[chat.Messages.length -1].Text}}</span>
-                    </a>
-                    <hr>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </uib-accordion>
+        <ul class="nav nav-tabs">
+          <li role="presentation" ng-class="ctrl.tabActive ? '' : 'active'"><a ng-click="ctrl.getChats(0)">{{'chats.others' | translate}}</a></li>
+          <li role="presentation" ng-class="ctrl.tabActive === 1 ? 'active' : ''"><a ng-click="ctrl.getChats(1)">{{'chats.my' | translate}}</a></li>
+        </ul>
+        <div class="well chat-list-container">
+          <ul class="remove-left" ng-repeat="chat in ctrl.chats track by chat.Id">
+            <li class="chat-list" ng-click="ctrl.openChat(chat)">
+              <a class="chat-item">
+                <span class="chat-user-r">{{chat.UserOffertorNickname}}</span>
+                <span class="chat-italic">{{'chats.byServices' | translate}}</span> <span class="chat-title-srv">{{chat.Service.Title}}</span>
+                <span class="label label-danger" ng-if="!chat.Active">{{'chats.closedInfo' | translate | uppercase}}</span>
+                <span class="chat-info pull-right">{{chat.LastMessageDate | date:'short'}}</span>
+                <br>
+                <span class="chat-lastMsg">{{chat.Messages[chat.Messages.length -1].Text}}</span>
+              </a>
+              <hr>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>

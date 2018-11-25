@@ -227,3 +227,7 @@ a {
 .no-notifications{
   padding: 5px;
 }
+
+.confirm-buttons{
+  margin-top: 15px;
+}

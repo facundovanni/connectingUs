@@ -162,7 +162,7 @@
                         ctrl.pagination.pageIndex = ctrl.pagination.pageSelected;
                         ctrl.updateOffers();
                     } else {
-                        toastr.error($translate.instant('offers.pageSelectedError'));
+                        ctrl.pagination.pageSelected ? toastr.error($translate.instant('offers.pageSelectedError')) : toastr.error($translate.instant('offers.pageSelectedInvalid'));
                     }
                 };
 
