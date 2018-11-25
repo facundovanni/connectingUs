@@ -30,10 +30,37 @@
           <img class="header-logo" title="Connecting Us" src="content/images/connectingUsLogo.png">
           <a class="navbar-brand headerTitle" ui-sref="/offers">Connecting Us</a>
           <span class="pull-right header-account-name">
-            <span class="glyphicon glyphicon-question-sign" ng-click="ctrl.goToAbout()"></span>
+            <span ng-class="ctrl.notificationCount === 0 ? 'dot' : 'dot-red'">
+              <p class="text-notification">{{ctrl.notificationCount}}</p>
+            </span>
+            <div class="btn-group" uib-dropdown dropdown-append-to-body>
+              <div uib-dropdown-toggle ng-if="auth.isLoggedIn()"> 
+                <span ng-click="ctrl.updateNotifications()" class="glyphicon glyphicon-bell icon-margin"></span>
+              </div>
+              <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-to-body">
+                <div ng-if="ctrl.showNoNotification">
+                    <span class="no-notifications">{{'notifications.noNotifications' | translate}}</span><br>        
+                </div>
+                <li class="notification" role="menuitem" ng-repeat="notif in ctrl.notifications">
+                <div ng-if="notif.IdType === ctrl.types.message">
+                  <span class="new-message"> {{'notifications.newMessage' | translate}}</span><br>
+                  <span>{{'notifications.from' | translate}}: {{notif.NicknameUserSender}}</span>
+                  <p>{{'notifications.service' | translate}}: {{notif.ServiceTitle}}</span>
+                    <hr class="notification-separator">
+                </div>
+                <div ng-if="notif.IdType === ctrl.types.qualification">
+                    <span class="new-message">{{'notifications.qualified' | translate}}</span><br>
+                    <span>{{'notifications.by' | translate}}: {{notif.NicknameUserSender}}</span>
+                    <p>{{'notifications.service' | translate}}: {{notif.ServiceTitle}}</span>
+                    <hr class="notification-separator">
+                </div>
+                </li>
+              </ul>
+            </div>
+            <span class="glyphicon glyphicon-question-sign icon-margin" ng-click="ctrl.goToAbout()"></span>
             <div class="btn-group" uib-dropdown dropdown-append-to-body>
               <div uib-dropdown-toggle ng-if="auth.isLoggedIn()">
-                {{session.getUser().Account.Nickname}} <span class="glyphicon glyphicon-menu-hamburger"></span>
+                {{session.getUser().Account.Nickname}} <span class="glyphicon glyphicon-menu-hamburger icon-margin"></span>
               </div>
               <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-to-body">
                 <li role="menuitem"><a ng-click="ctrl.goToMyAccount()">{{'global.menu.myAccount' | translate}}</a></li>
@@ -81,6 +108,7 @@
   <script type="text/javascript" src="content/services/cities-srv.js"></script>
   <script type="text/javascript" src="content/services/categories-srv.js"></script>
   <script type="text/javascript" src="content/services/user-srv.js"></script>
+  <script type="text/javascript" src="content/services/notifications-srv.js"></script>
   
   <script type="text/javascript" src="content/directives/offers/offers-list.js"></script>
   <script type="text/javascript" src="content/directives/offers/offers-item.js"></script>
