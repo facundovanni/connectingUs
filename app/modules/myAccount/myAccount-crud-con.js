@@ -10,6 +10,10 @@
                 ctrl.modalVisible = false;
                 ctrl.myAccount = MyAccount.getDefaultEntity();
                 ctrl.termsAndConditionsChecked = false;
+                ctrl.reputation = {
+                    value: 1
+                };
+
                 ctrl.validateError = {
                     show: {},
                     message: {
@@ -125,6 +129,8 @@
                             return obj.code === ctrl.myAccount.PhoneType;
                         });
                     };
+                    ctrl.reputation.value = Math.round(result.Reputation.Average);
+                    ctrl.reputation.votesCount = result.Reputation.Votes;
                     ctrl.getCities();
                     ctrl.dateSelected.value = new Date(ctrl.myAccount.DateOfBirth);
                 };
@@ -217,7 +223,7 @@
                     ctrl.validateError.show.emailConfirm = ctrl.myAccount.Id ? false : !ctrl.emailConfirm || ctrl.myAccount.Account.Mail !== ctrl.emailConfirm;
                     ctrl.validateError.show.passwordConfirm = !ctrl.passwordConfirm || ctrl.myAccount.Account.Password !== ctrl.passwordConfirm;
                     ctrl.validateError.show.termsAndConditions = ctrl.myAccount.Id ? false : !ctrl.termsAndConditionsChecked;
-                    
+
                     for (const prop in ctrl.validateError.show) {
                         if (ctrl.validateError.show[prop]) {
                             validations = false;

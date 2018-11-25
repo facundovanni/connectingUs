@@ -100,6 +100,9 @@
                             "country": "Country of residence",
                             "city": "City"
                         },
+                        "reputation":{
+                            "title": "My Reputation"
+                        },
                         "account": {
                             "title": "Account",
                             "email": "Email",

@@ -189,3 +189,10 @@ a {
 .confirm-buttons{
   margin-top: 15px;
 }
+
+.account-votes {
+  display: inline;
+}
+.reputation-title{
+  font-size:20px;
+}

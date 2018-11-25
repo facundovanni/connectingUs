@@ -5,6 +5,18 @@
       <h1 class="col-md-12 title">{{ctrl.title}}</h1>
     </div>
     <!--SubTitle-->
+    <div class="row cda-row" ng-if="ctrl.myAccount.Id">
+      <div class="col-md-12">
+        <span class="title reputation-title">{{'myAccount.reputation.title' | translate}}</span>
+          <span class="account-votes">
+              <star-rating class="account-votes" rating-value="ctrl.reputation.value" max="5" disable="true"></star-rating>
+          </span>
+          <span ng-if="!ctrl.reputation.votesCount">{{'offers.noVotes' | translate}}</span>
+          <span ng-if="ctrl.reputation.votesCount">{{'offers.votesOver' | translate: {votesCount:
+            ctrl.reputation.votesCount} }}</span>
+        
+      </div>
+    </div>
     <div class="row cda-row">
       <h2 class="col-md-12 title">{{'myAccount.general.title' | translate}}</h2>
     </div>
@@ -88,8 +100,8 @@
       </div>
       <div class="col-md-6" ng-if="!ctrl.myAccount.Id">
         <label for="emailConfirm" class="label-crud label-required" translate="myAccount.account.emailConfirm"></label>
-        <input type="email" id="emailConfirm" ng-model="ctrl.emailConfirm"
-          placeholder="mail@example.com" class="form-control" required>
+        <input type="email" id="emailConfirm" ng-model="ctrl.emailConfirm" placeholder="mail@example.com" class="form-control"
+          required>
         <div class="validate-error ng-cloak" ng-if="!CRUDMyAccountForm.email.$error.pattern && ctrl.validateError.show.emailConfirm">{{ctrl.validateError.message.emailConfirm}}</div>
       </div>
     </div>
