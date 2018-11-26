@@ -10,6 +10,7 @@
                 ctrl.tabActive = 0;
 
                 ctrl.init = function init() {
+                    ctrl.isLoading = true;
                     //get the Chats
                     ctrl.checkLog();
                     ctrl.getChats();
@@ -22,7 +23,7 @@
                 };
 
                 ctrl.getChatsOthers = function getChatsOthers() {
-                    ctrl.isLoading = true;
+                    
                     Chats.getAllAsRequester({ idUser: $rootScope.session.getUserId() }).$promise
                         .then(ctrl.setChats)
                         .catch(ctrl.catchChats);

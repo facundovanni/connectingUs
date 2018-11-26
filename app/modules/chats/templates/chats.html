@@ -19,7 +19,7 @@
                 <span class="chat-user-r">{{chat.UserOffertorNickname}}</span>
                 <span class="chat-italic">{{'chats.byServices' | translate}}</span> <span class="chat-title-srv">{{chat.Service.Title}}</span>
                 <span class="label label-danger" ng-if="!chat.Active">{{'chats.closedInfo' | translate | uppercase}}</span>
-                <span class="chat-info pull-right">{{chat.LastMessageDate | date:'short'}}</span>
+                <span class="chat-info pull-right"><date-locale date="chat.LastMessageDate"></date-locale></span>
                 <br>
                 <span class="chat-lastMsg">{{chat.Messages[chat.Messages.length -1].Text}}</span>
               </a>
