@@ -1,0 +1,23 @@
+<div class="btn-group" uib-dropdown dropdown-append-to-body ng-if="auth.isLoggedIn()">
+    <div uib-dropdown-toggle ng-if="auth.isLoggedIn()" ng-click="ctrl.updateNotifications()"><span class="glyphicon glyphicon-bell icon-margin"></span>
+        <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
+            <div ng-if="ctrl.showNoNotification">
+                <span class="no-notifications">{{'notifications.noNotifications' | translate}}</span><br>
+            </div>
+            <li class="notification" role="menuitem" ng-repeat="notif in ctrl.notifications">
+                <a ui-sref="/chats" ng-if="notif.IdType === ctrl.types.message">
+                    <span class="new-message"> {{'notifications.newMessage' | translate}}</span><br>
+                    <span>{{'notifications.from' | translate}}: {{notif.NicknameUserSender}}</span>
+                    <p>{{'notifications.service' | translate}}: {{notif.ServiceTitle}}</p>
+                    <hr class="notification-separator">
+                </a>
+            </li>
+            <li ng-if="notif.IdType === ctrl.types.qualification">
+                <span class="new-message">{{'notifications.qualified' | translate}}</span><br>
+                <span>{{'notifications.by' | translate}}: {{notif.NicknameUserSender}}</span>
+                <p>{{'notifications.service' | translate}}: {{notif.ServiceTitle}}</p>
+                <hr class="notification-separator">
+            </li>
+        </ul>
+    </div>
+</div>

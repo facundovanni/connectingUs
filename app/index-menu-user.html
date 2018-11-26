@@ -1,0 +1,16 @@
+<div class="btn-group" uib-dropdown dropdown-append-to-body>
+    <div uib-dropdown-toggle ng-if="auth.isLoggedIn()"><span class="glyphicon glyphicon-menu-hamburger icon-margin"></span>
+    </div>
+    <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
+        <li role="menuitem"><a ng-click="ctrl.goToMyAccount()"><span class="glyphicon glyphicon-user"></span>
+                {{ctrl.nickName}}</a></li>
+        <li class="divider"></li>
+        <li role="menuitem"><a ng-click="ctrl.goToMyAccount()">{{'global.menu.myAccount' | translate}}</a></li>
+        <li role="menuitem"><a ng-click="ctrl.goToMyOffers()">{{'global.menu.myOffers' | translate}}</a></li>
+        <li role="menuitem"><a ng-click="ctrl.goToMyChats()">{{'global.menu.myChats' | translate}}</a></li>
+        <li role="menuitem"><a ng-click="ctrl.goToOffers()">{{'global.menu.offers' | translate}}</a></li>
+        <li class="divider"></li>
+        <li class="col-xs-12"><button class="btn btn-block btn-primary" type="submit" ng-click="ctrl.logout()"
+                translate="login.signOut"></button></li>
+    </ul>
+</div>

@@ -8,7 +8,8 @@
       ctrl.types = {
         message: 1,
         qualification: 2,
-      }
+      };
+      ctrl.nickName = $rootScope.session.getUser().Account.Nickname;
       ctrl.notificationCount = 0;
       ctrl.showNoNotification = false;
 
