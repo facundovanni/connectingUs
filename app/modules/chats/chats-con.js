@@ -23,13 +23,15 @@
                 };
 
                 ctrl.getChatsOthers = function getChatsOthers() {
-                    
+                    ctrl.chats = [];
+                    ctrl.isLoading = true;
                     Chats.getAllAsRequester({ idUser: $rootScope.session.getUserId() }).$promise
                         .then(ctrl.setChats)
                         .catch(ctrl.catchChats);
                 };
 
                 ctrl.getChatsMy = function getChatsMy() {
+                    ctrl.chats=[];
                     ctrl.isLoading = true;
                     var promises = [];
                     Chats.getAllAsOffertor({ idUser: $rootScope.session.getUserId() }).$promise
@@ -64,7 +66,7 @@
                 ctrl.openChat = function openChat(chat) {
                     ctrl.modalInstance.resolve = {
                         idChat: function resolve() { return chat.Id },
-                        idAnotherUser: function resolve() { return ctrl.tabActive ? chat.UserRequesterId : chat.UserOffertorId},
+                        idAnotherUser: function resolve() { return ctrl.tabActive ? chat.UserRequesterId : chat.UserOffertorId },
                         idService: function resolve() { return chat.Service.Id },
                         type: ctrl.tabActive
                     };
