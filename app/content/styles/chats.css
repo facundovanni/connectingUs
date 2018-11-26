@@ -40,7 +40,9 @@ a.chat-item:hover {
 
 .chat-lastMsg {
     font-size: 1.6rem;
-    word-break: break-all;
+    line-height: 1.5em;
+    height: 3em;       /* height is 2x line-height, so two lines will display */
+    overflow: hidden;  /* prevents extra lines from being visible */
 }
 
 .chat-italic {
