@@ -30,55 +30,54 @@
           <img class="header-logo" title="Connecting Us" src="content/images/connectingUsLogo.png">
           <a class="navbar-brand headerTitle" ui-sref="/offers">Connecting Us</a>
           <span class="pull-right header-account-name">
-            <span ng-if="auth.isLoggedIn()" ng-class="ctrl.notificationCount === 0 ? 'dot' : 'dot-red'">
+            <div ng-if="auth.isLoggedIn()" ng-class="ctrl.notificationCount === 0 ? 'dot' : 'dot-red'">
               <p class="text-notification">{{ctrl.notificationCount}}</p>
-            </span>
+            </div>
             <div class="btn-group" uib-dropdown dropdown-append-to-body ng-if="auth.isLoggedIn()">
-              <div uib-dropdown-toggle ng-if="auth.isLoggedIn()">
-                <span ng-click="ctrl.updateNotifications()" class="glyphicon glyphicon-bell icon-margin"></span>
+              <div uib-dropdown-toggle ng-if="auth.isLoggedIn()" ng-click="ctrl.updateNotifications()"><span class="glyphicon glyphicon-bell icon-margin"></span>
+                <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
+                  <div ng-if="ctrl.showNoNotification">
+                    <span class="no-notifications">{{'notifications.noNotifications' | translate}}</span><br>
+                  </div>
+                  <li class="notification" role="menuitem" ng-repeat="notif in ctrl.notifications">
+                    <a ui-sref="/chats" ng-if="notif.IdType === ctrl.types.message">
+                      <span class="new-message"> {{'notifications.newMessage' | translate}}</span><br>
+                      <span>{{'notifications.from' | translate}}: {{notif.NicknameUserSender}}</span>
+                      <p>{{'notifications.service' | translate}}: {{notif.ServiceTitle}}</p>
+                      <hr class="notification-separator">
+                    </a>
+                  </li>
+                  <li ng-if="notif.IdType === ctrl.types.qualification">
+                    <span class="new-message">{{'notifications.qualified' | translate}}</span><br>
+                    <span>{{'notifications.by' | translate}}: {{notif.NicknameUserSender}}</span>
+                    <p>{{'notifications.service' | translate}}: {{notif.ServiceTitle}}</p>
+                    <hr class="notification-separator">
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <span class="glyphicon glyphicon-question-sign icon-margin" ng-click="ctrl.goToAbout()"></span>
+            <div class="btn-group" uib-dropdown dropdown-append-to-body>
+              <div uib-dropdown-toggle ng-if="auth.isLoggedIn()"><span class="glyphicon glyphicon-menu-hamburger icon-margin"></span>
               </div>
               <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
-                <div ng-if="ctrl.showNoNotification">
-                  <span class="no-notifications">{{'notifications.noNotifications' | translate}}</span><br>
-                </div>
-                <li class="notification" role="menuitem" ng-repeat="notif in ctrl.notifications">
-                  <div ng-if="notif.IdType === ctrl.types.message">
-                    <span class="new-message"> {{'notifications.newMessage' | translate}}</span><br>
-                    <span>{{'notifications.from' | translate}}: {{notif.NicknameUserSender}}</span>
-                    <p>{{'notifications.service' | translate}}: {{notif.ServiceTitle}}
+                <li role="menuitem"><a ng-click="ctrl.goToMyAccount()"><span class="glyphicon glyphicon-user"></span>
+                    {{session.getUser().Account.Nickname}}</a></li>
+                <li class="divider"></li>
+                <li role="menuitem"><a ng-click="ctrl.goToMyAccount()">{{'global.menu.myAccount' | translate}}</a></li>
+                <li role="menuitem"><a ng-click="ctrl.goToMyOffers()">{{'global.menu.myOffers' | translate}}</a></li>
+                <li role="menuitem"><a ng-click="ctrl.goToMyChats()">{{'global.menu.myChats' | translate}}</a></li>
+                <li role="menuitem"><a ng-click="ctrl.goToOffers()">{{'global.menu.offers' | translate}}</a></li>
+                <li class="divider"></li>
+                <li class="col-xs-12"><button class="btn btn-block btn-primary" type="submit" ng-click="ctrl.logout()"
+                    translate="login.signOut"></button></li>
+              </ul>
+            </div>
           </span>
-          <hr class="notification-separator">
         </div>
-        <div ng-if="notif.IdType === ctrl.types.qualification">
-          <span class="new-message">{{'notifications.qualified' | translate}}</span><br>
-          <span>{{'notifications.by' | translate}}: {{notif.NicknameUserSender}}</span>
-          <p>{{'notifications.service' | translate}}: {{notif.ServiceTitle}}</span>
-            <hr class="notification-separator">
-        </div>
-        </li>
-        </ul>
       </div>
-      <span class="glyphicon glyphicon-question-sign icon-margin" ng-click="ctrl.goToAbout()"></span>
-      <div class="btn-group" uib-dropdown dropdown-append-to-body>
-        <div uib-dropdown-toggle ng-if="auth.isLoggedIn()"><span class="glyphicon glyphicon-menu-hamburger icon-margin"></span>
-        </div>
-        <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
-          <li role="menuitem"><a ng-click="ctrl.goToMyAccount()"><span class="glyphicon glyphicon-user"></span> {{session.getUser().Account.Nickname}}</a></li>
-          <li class="divider"></li>
-          <li role="menuitem"><a ng-click="ctrl.goToMyAccount()">{{'global.menu.myAccount' | translate}}</a></li>
-          <li role="menuitem"><a ng-click="ctrl.goToMyOffers()">{{'global.menu.myOffers' | translate}}</a></li>
-          <li role="menuitem"><a ng-click="ctrl.goToMyChats()">{{'global.menu.myChats' | translate}}</a></li>
-          <li role="menuitem"><a ng-click="ctrl.goToOffers()">{{'global.menu.offers' | translate}}</a></li>
-          <li class="divider"></li>
-          <li class="col-xs-12"><button class="btn btn-block btn-primary" type="submit" ng-click="ctrl.logout()"
-              translate="login.signOut"></button></li>
-        </ul>
-      </div>
-      </span>
-  </div>
-  </div>
-  </nav>
-  <div class="main" ng-view></div>
+    </nav>
+    <div class="main" ng-view></div>
   </div>
   <script type="text/javascript" src="bower_components/angular/angular.js"></script>
   <script type="text/javascript" src="bower_components/angular-animate/angular-animate.js "></script>
