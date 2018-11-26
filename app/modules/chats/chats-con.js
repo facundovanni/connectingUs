@@ -33,7 +33,6 @@
                 ctrl.getChatsMy = function getChatsMy() {
                     ctrl.chats=[];
                     ctrl.isLoading = true;
-                    var promises = [];
                     Chats.getAllAsOffertor({ idUser: $rootScope.session.getUserId() }).$promise
                         .then(ctrl.setChats)
                         .catch(ctrl.catchChats);

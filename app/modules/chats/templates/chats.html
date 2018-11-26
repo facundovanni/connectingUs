@@ -9,18 +9,25 @@
     <div class="row cda-row">
       <div class="col-md-12">
         <ul class="nav nav-tabs">
-          <li role="presentation" ng-class="ctrl.tabActive ? '' : 'active'"><a ng-click="ctrl.getChats(0)">{{'chats.others' | translate}}</a></li>
-          <li role="presentation" ng-class="ctrl.tabActive ? 'active' : ''"><a ng-click="ctrl.getChats(1)">{{'chats.my' | translate}}</a></li>
+          <li role="presentation" ng-class="ctrl.tabActive ? '' : 'active'"><a ng-click="ctrl.getChats(0)">{{'chats.others'
+              | translate}}</a></li>
+          <li role="presentation" ng-class="ctrl.tabActive ? 'active' : ''"><a ng-click="ctrl.getChats(1)">{{'chats.my'
+              | translate}}</a></li>
         </ul>
         <div class="well chat-list-container">
+          <button type="button" class="remove-left btn btn-md btn-info btn-save-myOffer" ng-click="ctrl.getChats(ctrl.tabActive)">{{'chats.refresh'|
+            translate}}</button>
+            <hr>
           <ul class="remove-left" ng-repeat="chat in ctrl.chats track by chat.Id">
             <li class="chat-list" ng-click="ctrl.openChat(chat)">
               <a class="chat-item">
-                  <span class="chat-user-r" ng-if="!ctrl.tabActive">{{chat.UserOffertorNickname}}</span>
+                <span class="chat-user-r" ng-if="!ctrl.tabActive">{{chat.UserOffertorNickname}}</span>
                 <span class="chat-user-r" ng-if="ctrl.tabActive">{{chat.UserRequesterNickname}}</span>
                 <span class="chat-italic">{{'chats.byServices' | translate}}</span> <span class="chat-title-srv">{{chat.Service.Title}}</span>
                 <span class="label label-danger" ng-if="!chat.Active">{{'chats.closedInfo' | translate | uppercase}}</span>
-                <span class="chat-info pull-right"><date-locale date="chat.LastMessageDate"></date-locale></span>
+                <span class="chat-info pull-right">
+                  <date-locale date="chat.LastMessageDate"></date-locale>
+                </span>
                 <br>
                 <span class="chat-lastMsg">{{chat.Messages[chat.Messages.length -1].Text}}</span>
               </a>

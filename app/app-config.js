@@ -204,7 +204,8 @@
                             "ratedOkNo": "The user has not been qualificated."
                         },
                         "closed": "The conversation is closed",
-                        "closedInfo": "Closed"
+                        "closedInfo": "Closed",
+                        "refresh":"Refresh list"
                     },
                     "confirmationBox": {
                         "title": "Do you confirm?",
