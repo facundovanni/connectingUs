@@ -87,7 +87,6 @@ body {
 
 .header-logo {
   float: left;
-  margin-right: 10px;
   height: 40px;
   width: 40px;
 }
@@ -184,4 +183,57 @@ a {
 
 .float-right {
   float: right;
+}
+
+.notification{
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.new-message{
+  font-weight: bold;
+}
+
+.notification-separator{
+  margin: 2px;
+}
+
+.icon-margin{
+  margin-right: 10px;
+}
+
+.dot{
+  height: 20px;
+  width: 20px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-red{
+  height: 20px;
+  width: 20px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.text-notification{
+  margin-left: 4px;
+  font-size: 14px;
+}
+
+.no-notifications{
+  padding: 5px;
+}
+
+.confirm-buttons{
+  margin-top: 15px;
+}
+
+.account-votes {
+  display: inline;
+}
+.reputation-title{
+  font-size:20px;
 }

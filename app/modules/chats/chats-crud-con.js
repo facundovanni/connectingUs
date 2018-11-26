@@ -82,8 +82,6 @@
                 ctrl.sendSuccesfull = function sendSuccesfull(res) {
                     toastr.success($translate.instant('chats.message.sendOk'));
                     res.UserSenderNickname = ctrl.me.userName;
-                    var newChat = ctrl.transformChat(res);
-                    ctrl.chat.Messages.push(newChat);
                 };
 
                 ctrl.sendError = function sendError() {

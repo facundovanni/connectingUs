@@ -10,7 +10,6 @@
 }
 
 .offers-filter .noItems {
-  height: 544px;
   font-family: var(--main-font);
   font-size: 16px;
   color: var(--black);
@@ -79,6 +78,10 @@ a.list-group-item:hover {
 
 .stars {
   margin: 20px auto 1px;
+}
+
+.chat-list-container{
+  background: var(--white);
 }
 
 .remove-left {

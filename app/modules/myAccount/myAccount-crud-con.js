@@ -2,14 +2,18 @@
     'use strict';
 
     angular.module('connectingUsCenter.myAccount')
-        .controller('myAccountCRUDController', ['MyAccount', '$translate', '$state', 'Countries', 'Cities', '$stateParams', 'toastr', '$rootScope','ConfirmationBox',
-            function (MyAccount, $translate, $state, Countries, Cities, $stateParams, toastr, $rootScope,ConfirmationBox) {
+        .controller('myAccountCRUDController', ['MyAccount', '$translate', '$state', 'Countries', 'Cities', '$stateParams', 'toastr', '$rootScope', 'ConfirmationBox',
+            function (MyAccount, $translate, $state, Countries, Cities, $stateParams, toastr, $rootScope, ConfirmationBox) {
                 var ctrl = this;
                 ctrl.userId = $stateParams.Id;
                 ctrl.today = new Date();
                 ctrl.modalVisible = false;
                 ctrl.myAccount = MyAccount.getDefaultEntity();
                 ctrl.termsAndConditionsChecked = false;
+                ctrl.reputation = {
+                    value: 1
+                };
+
                 ctrl.validateError = {
                     show: {},
                     message: {
@@ -125,6 +129,8 @@
                             return obj.code === ctrl.myAccount.PhoneType;
                         });
                     };
+                    ctrl.reputation.value = Math.round(result.Reputation.Average);
+                    ctrl.reputation.votesCount = result.Reputation.Votes;
                     ctrl.getCities();
                     ctrl.dateSelected.value = new Date(ctrl.myAccount.DateOfBirth);
                 };
@@ -149,7 +155,7 @@
 
                 ctrl.setDateJSON = function setDateJSON() {
                     var auxDate = ctrl.dateSelected.value.toJSON().split('T');
-                    auxDate[1] = '00:00:00';
+                    auxDate[1] = '00:00:00Z';
                     ctrl.myAccount.DateOfBirth = auxDate.join('T');
                 };
 
@@ -160,7 +166,7 @@
                     }
                 };
 
-                ctrl.setSave = function setSave(){
+                ctrl.setSave = function setSave() {
                     ctrl.myAccount.Gender = ctrl.selectedGender ? ctrl.selectedGender.code : undefined;
                     ctrl.myAccount.PhoneType = ctrl.selectedPhoneType ? ctrl.selectedPhoneType.code : undefined;
                     ctrl.myAccount.Id = ctrl.myAccount.Id ? ctrl.myAccount.Id : undefined;
@@ -198,7 +204,7 @@
 
                 ctrl.loginUser = function loginUser() {
                     ctrl.isLoading = true;
-                    $rootScope.auth.logIn({Mail: ctrl.myAccount.Account.Mail, Password: ctrl.myAccount.Account.Password })
+                    $rootScope.auth.logIn({ Mail: ctrl.myAccount.Account.Mail, Password: ctrl.myAccount.Account.Password })
                         .then(ctrl.goToOffers)
                         .catch(ctrl.onCatchLogin);
                 };
@@ -210,10 +216,14 @@
                 ctrl.validate = function validate() {
                     ctrl.hasValidated = false;
                     var validations = true;
-                    ctrl.validateError.show.email = !ctrl.myAccount.Account.Mail || ctrl.myAccount.Account.Mail.indexOf('.') === -1;
+
+                    ctrl.validateError.show.FirstName = !ctrl.myAccount.FirstName;
+                    ctrl.validateError.show.LastName = !ctrl.myAccount.LastName;
+                    ctrl.validateError.show.email = !ctrl.myAccount.Account.Mail || ctrl.myAccount.Account.Mail.split('@')[1].indexOf('.') === -1;
                     ctrl.validateError.show.emailConfirm = ctrl.myAccount.Id ? false : !ctrl.emailConfirm || ctrl.myAccount.Account.Mail !== ctrl.emailConfirm;
                     ctrl.validateError.show.passwordConfirm = !ctrl.passwordConfirm || ctrl.myAccount.Account.Password !== ctrl.passwordConfirm;
                     ctrl.validateError.show.termsAndConditions = ctrl.myAccount.Id ? false : !ctrl.termsAndConditionsChecked;
+
                     for (const prop in ctrl.validateError.show) {
                         if (ctrl.validateError.show[prop]) {
                             validations = false;

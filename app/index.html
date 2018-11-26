@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="content/styles/chats.css">
   <link rel="stylesheet" href="content/styles/rating.css">
   <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
-  <link rel="stylesheet" href="bower_components/angular-simple-chat/dist/angular-simple-chat.css">
+  <link rel="stylesheet" href="content/directives/angular-simple-chat/dist/angular-simple-chat.css">
 
   <link rel="icon" href="content/images/connectingUsLogo.png">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
@@ -30,26 +30,55 @@
           <img class="header-logo" title="Connecting Us" src="content/images/connectingUsLogo.png">
           <a class="navbar-brand headerTitle" ui-sref="/offers">Connecting Us</a>
           <span class="pull-right header-account-name">
-            <span class="glyphicon glyphicon-question-sign" ng-click="ctrl.goToAbout()"></span>
-            <div class="btn-group" uib-dropdown dropdown-append-to-body>
+            <span ng-if="auth.isLoggedIn()" ng-class="ctrl.notificationCount === 0 ? 'dot' : 'dot-red'">
+              <p class="text-notification">{{ctrl.notificationCount}}</p>
+            </span>
+            <div class="btn-group" uib-dropdown dropdown-append-to-body ng-if="auth.isLoggedIn()">
               <div uib-dropdown-toggle ng-if="auth.isLoggedIn()">
-                {{session.getUser().Account.Nickname}} <span class="glyphicon glyphicon-menu-hamburger"></span>
+                <span ng-click="ctrl.updateNotifications()" class="glyphicon glyphicon-bell icon-margin"></span>
               </div>
-              <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-to-body">
-                <li role="menuitem"><a ng-click="ctrl.goToMyAccount()">{{'global.menu.myAccount' | translate}}</a></li>
-                <li role="menuitem"><a ng-click="ctrl.goToMyOffers()">{{'global.menu.myOffers' | translate}}</a></li>
-                <li role="menuitem"><a ng-click="ctrl.goToMyChats()">{{'global.menu.myChats' | translate}}</a></li>
-                <li role="menuitem"><a ng-click="ctrl.goToOffers()">{{'global.menu.offers' | translate}}</a></li>
-                <li class="divider"></li>
-                <li class="col-xs-12"><button class="btn btn-block btn-primary" type="submit" ng-click="ctrl.logout()"
-                    translate="login.signOut"></button></li>
-              </ul>
-            </div>
+              <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
+                <div ng-if="ctrl.showNoNotification">
+                  <span class="no-notifications">{{'notifications.noNotifications' | translate}}</span><br>
+                </div>
+                <li class="notification" role="menuitem" ng-repeat="notif in ctrl.notifications">
+                  <div ng-if="notif.IdType === ctrl.types.message">
+                    <span class="new-message"> {{'notifications.newMessage' | translate}}</span><br>
+                    <span>{{'notifications.from' | translate}}: {{notif.NicknameUserSender}}</span>
+                    <p>{{'notifications.service' | translate}}: {{notif.ServiceTitle}}
           </span>
+          <hr class="notification-separator">
         </div>
+        <div ng-if="notif.IdType === ctrl.types.qualification">
+          <span class="new-message">{{'notifications.qualified' | translate}}</span><br>
+          <span>{{'notifications.by' | translate}}: {{notif.NicknameUserSender}}</span>
+          <p>{{'notifications.service' | translate}}: {{notif.ServiceTitle}}</span>
+            <hr class="notification-separator">
+        </div>
+        </li>
+        </ul>
       </div>
-    </nav>
-    <div class="main" ng-view></div>
+      <span class="glyphicon glyphicon-question-sign icon-margin" ng-click="ctrl.goToAbout()"></span>
+      <div class="btn-group" uib-dropdown dropdown-append-to-body>
+        <div uib-dropdown-toggle ng-if="auth.isLoggedIn()"><span class="glyphicon glyphicon-menu-hamburger icon-margin"></span>
+        </div>
+        <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
+          <li role="menuitem"><a ng-click="ctrl.goToMyAccount()"><span class="glyphicon glyphicon-user"></span> {{session.getUser().Account.Nickname}}</a></li>
+          <li class="divider"></li>
+          <li role="menuitem"><a ng-click="ctrl.goToMyAccount()">{{'global.menu.myAccount' | translate}}</a></li>
+          <li role="menuitem"><a ng-click="ctrl.goToMyOffers()">{{'global.menu.myOffers' | translate}}</a></li>
+          <li role="menuitem"><a ng-click="ctrl.goToMyChats()">{{'global.menu.myChats' | translate}}</a></li>
+          <li role="menuitem"><a ng-click="ctrl.goToOffers()">{{'global.menu.offers' | translate}}</a></li>
+          <li class="divider"></li>
+          <li class="col-xs-12"><button class="btn btn-block btn-primary" type="submit" ng-click="ctrl.logout()"
+              translate="login.signOut"></button></li>
+        </ul>
+      </div>
+      </span>
+  </div>
+  </div>
+  </nav>
+  <div class="main" ng-view></div>
   </div>
   <script type="text/javascript" src="bower_components/angular/angular.js"></script>
   <script type="text/javascript" src="bower_components/angular-animate/angular-animate.js "></script>
@@ -58,7 +87,6 @@
   <script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
   <script type="text/javascript" src="bower_components/moment/moment.js"></script>
   <script type="text/javascript" src="bower_components/angular-moment/angular-moment.js"></script>
-  <script type="text/javascript" src="bower_components/angular-simple-chat/dist/angular-simple-chat.js"></script>
   <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
   <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.js "></script>
   <script type="text/javascript" src="bower_components/angular-spinner/dist/angular-spinner.js"></script>
@@ -82,11 +110,13 @@
   <script type="text/javascript" src="content/services/cities-srv.js"></script>
   <script type="text/javascript" src="content/services/categories-srv.js"></script>
   <script type="text/javascript" src="content/services/user-srv.js"></script>
-  
+  <script type="text/javascript" src="content/services/notifications-srv.js"></script>
+
   <script type="text/javascript" src="content/directives/offers/offers-list.js"></script>
   <script type="text/javascript" src="content/directives/offers/offers-item.js"></script>
   <script type="text/javascript" src="content/directives/rate-user/rate-user.js"></script>
   <script type="text/javascript" src="content/directives/date-locale/date-locale.js"></script>
+  <script type="text/javascript" src="content/directives/angular-simple-chat/dist/angular-simple-chat.js"></script>
   <script type="text/javascript" src="content/components/confirmation-box/confirmation-box-fct.js"></script>
   <script type="text/javascript" src="content/components/confirmation-box/confirmation-box.js"></script>
 

@@ -121,13 +121,21 @@
       ctrl.setData = function setData(result) {
         ctrl.categories = result[0];
         ctrl.countries = result[1];
-        if (result[2][0]) {
-          ctrl.offer = result[2][0];
-          ctrl.getCities();
-        } else {
+        if (!result[2][0]) {
           ctrl.offer = {};
           ctrl.offer.userId = $rootScope.session.getUserId();
+          ctrl.isLoading = false;
+        } else {
+          ctrl.offer = result[2][0];
+          ctrl.getCities();
         }
+        if (ctrl.myOffer) {
+          ctrl.offer.Active = !ctrl.offer.Active;
+        }
+        ctrl.checkOffer();
+      };
+
+      ctrl.checkOffer = function checkOffer() {
         if (!ctrl.myOffer) {
           if (!ctrl.offer.Active) {
             toastr.error($translate.instant('offers.disabled'));
@@ -138,8 +146,6 @@
               .then(ctrl.getReputation)
               .catch(ctrl.getCatchReputacion);
           }
-        } else {
-          ctrl.offer.Active = !ctrl.offer.Active;
         }
       };
 
@@ -176,7 +182,7 @@
         $uibModal.open(ctrl.modalInstance);
       };
 
-      ctrl.setImg = function setImg() {
+      ctrl.setImg = function setImg(event, fileList, file) {
         ctrl.img = ctrl.img && (ctrl.img.filetype === 'image/jpeg' || ctrl.img.filetype === 'image/png') ? ctrl.img : undefined;
         if (ctrl.img && ctrl.img.base64) {
           ctrl.offer.Image = ctrl.img.base64;

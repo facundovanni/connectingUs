@@ -2,7 +2,7 @@
     <div class="modal-body">
         <div class="row cda-row">
             <span>
-                <h4 class="modal-title text-center" id="modal-title">{{'chats.rate.title'|translate}}<span class="close" ng-click="ctrl.cancel()">&times;</span></h4>
+                <h4 class="modal-title text-center" id="modal-title">{{'chats.rate.title'|translate}}</h4>
             </span>
         </div>
         <div class="row cda-row">
@@ -14,8 +14,8 @@
     <div class="modal-footer">
         <div class="row cda-row">
             <div class="col-md-12">
-                <button class="btn btn-lg btn-success" type="submit" ng-disabled="ctrl.isLoading" ng-click="ctrl.sendRate()">{{'global.button.save'|translate}}</button>
                 <button class="btn btn-lg btn-default" type="submit" ng-click="ctrl.cancel()">{{'chats.rate.doNotRate'|translate}}</button>
+                <button class="btn btn-lg btn-success" type="submit" ng-disabled="ctrl.isLoading" ng-click="ctrl.sendRate()">{{'global.button.save'|translate}}</button>
             </div>
         </div>
     </div>
