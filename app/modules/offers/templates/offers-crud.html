@@ -17,7 +17,7 @@
           <div class="row cda-row" ng-if="ctrl.myOffer">
             <div class="col-md-12 ">
               <span>{{'myOffer.selectImg'| translate}}</span><br>
-              <span class="file-upload"><input type="file" class="btn btn-md btn-info" on-after-validate="ctrl.setImg()"
+              <span class="file-upload"><input type="file" class="btn btn-md btn-info" on-after-validate="ctrl.setImg"
                   ng-model="ctrl.img" name="files" accept="image/*" maxsize="1000" required base-sixty-four-input
                   do-not-parse-if-oversize></span><br>
               <span class="validate-error" ng-show="CRUDOfferForm.files.$error.accept">{{ myOffer.error.image.accept |

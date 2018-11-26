@@ -126,7 +126,8 @@
                             "password": "The password must have at least eight characters.",
                             "termsAndConditions": "You must accept terms and conditions",
                             "phoneNumber": "Set a valid number. Only numbers and -"
-                        }
+                        },
+                        "noVotes":"Not votes yet"
                     },
                     "offers": {
                         "title": {

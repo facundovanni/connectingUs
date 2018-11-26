@@ -11,7 +11,7 @@
           <span class="account-votes">
               <star-rating class="account-votes" rating-value="ctrl.reputation.value" max="5" disable="true"></star-rating>
           </span>
-          <span ng-if="!ctrl.reputation.votesCount">{{'offers.noVotes' | translate}}</span>
+          <span ng-if="!ctrl.reputation.votesCount">{{'myAccount.noVotes' | translate}}</span>
           <span ng-if="ctrl.reputation.votesCount">{{'offers.votesOver' | translate: {votesCount:
             ctrl.reputation.votesCount} }}</span>
         

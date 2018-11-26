@@ -182,7 +182,7 @@
         $uibModal.open(ctrl.modalInstance);
       };
 
-      ctrl.setImg = function setImg() {
+      ctrl.setImg = function setImg(event, fileList, file) {
         ctrl.img = ctrl.img && (ctrl.img.filetype === 'image/jpeg' || ctrl.img.filetype === 'image/png') ? ctrl.img : undefined;
         if (ctrl.img && ctrl.img.base64) {
           ctrl.offer.Image = ctrl.img.base64;
