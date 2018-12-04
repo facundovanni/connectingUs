@@ -9,7 +9,7 @@
         message: 1,
         qualification: 2,
       };
-      ctrl.nickName = $rootScope.session.getUser().Account.Nickname;
+      ctrl.nickName = $rootScope.session.getUser() ? $rootScope.session.getUser().Account.Nickname : undefined;
       ctrl.notificationCount = 0;
       ctrl.showNoNotification = false;
 
