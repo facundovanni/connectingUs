@@ -121,7 +121,8 @@
                             "termsAndConditions": "You must accept terms and conditions",
                             "phoneNumber": "Set a valid number. Only numbers and -"
                         },
-                        "noVotes": "Not votes yet"
+                        "noVotes": "Not votes yet",
+                        "mailExisting": "The email is already registered"
                     },
                     "offers": {
                         "title": {

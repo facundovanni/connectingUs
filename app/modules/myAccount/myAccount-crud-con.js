@@ -178,7 +178,11 @@
                 };
 
                 ctrl.onCatchSave = function onFinally(result) {
-                    toastr.error($translate.instant('global.message.saveError'));
+                    if (result.status === 400) {
+                        toastr.error($translate.instant('myAccount.mailExisting'));
+                    } else {
+                        toastr.error($translate.instant('global.message.saveError'));
+                    }
                     ctrl.isLoading = false;
                 };
 
