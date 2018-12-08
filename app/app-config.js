@@ -286,7 +286,7 @@
 
                 $rootScope.$on('$locationChangeStart', function (event, next, current) {
                     // redirect to login page if not logged in and trying to access a restricted page
-                    var restrictedPage = !Boolean(['/login', '/register'].find(function find(path) {
+                    var restrictedPage = !Boolean(['/login', '/register', '/about'].find(function find(path) {
                         return $location.path() === path;
                     }))
                     if (restrictedPage && !$rootScope.auth.isLoggedIn()) {
