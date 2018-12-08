@@ -7,7 +7,7 @@
       ctrl.error = false;
 
       ctrl.goToSignUp = function goToSignUp() {
-        $state.go('/account');
+        $state.go('/register');
       }
 
       ctrl.goToOffers = function goToOffers() {

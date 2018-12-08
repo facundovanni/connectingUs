@@ -3,14 +3,14 @@
     // Export
     angular
         .module('connectingUsCenter.services')
-        .service('auth', ['$http', 'session','__env', function auth($http, session,__env) {
+        .service('auth', ['$http', 'session', '__env', function auth($http, session, __env) {
             var that = this;
             /**
              * Check whether the user is logged in
              * @returns boolean
              */
             that.isLoggedIn = function isLoggedIn() {
-                return session.getUser() !== null;
+                return session.getUserId();
             };
 
             /**
@@ -21,9 +21,14 @@
              */
             that.logIn = function (credentials) {
                 return $http
-                    .post(__env.apiUrl+'/api/login', credentials)
+                    .post(__env.apiUrl + '/api/login/authenticate', credentials)
                     .then(function (response) {
-                        session.setUser(response.data);
+                        session.setUser({ Id: response.data.User.Id, NickName: response.data.User.Account.Nickname });
+                        session.setAccessToken(response.data.Token);
+                        // add jwt token to auth header for all requests made by the $http service
+                        $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.Token;
+                        /*  */
+
                     });
             };
 
@@ -33,14 +38,8 @@
              * @returns {*|Promise}
              */
             that.logOut = function () {
-                // return $http
-                //     .get(__env.apiUrl+'/api/logout')
-                //     .then(function (response) {
-
-                //         Destroy session in the browser
-                //         session.destroy();
-                //     });
-                    session.destroy();
+                session.destroy();
+                $http.defaults.headers.common.Authorization = '';
             };
 
         }]);

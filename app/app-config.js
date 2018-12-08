@@ -7,15 +7,9 @@
         Object.assign(env, window.__env);
     }
 
-    function assignServicesToRootScope($rootScope, auth, session) {
-        $rootScope.auth = auth;
-        $rootScope.session = session;
-    }
-    assignServicesToRootScope.$inject = ['$rootScope', 'auth', 'session'];
-
     angular.module('connectingUsCenter', [
         'ngRoute', 'ngAnimate', 'toastr', 'angularMoment', 'angular-simple-chat', 'ngSanitize',
-        'ngTouch', 'ui.router',
+        'ngTouch', 'ui.router', 'ngCookies',
         'ui.bootstrap', 'angularSpinner',
         'connectingUsCenter.services',
         'connectingUsCenter.directives',
@@ -100,7 +94,7 @@
                             "country": "Country of residence",
                             "city": "City"
                         },
-                        "reputation":{
+                        "reputation": {
                             "title": "My Reputation"
                         },
                         "account": {
@@ -127,7 +121,7 @@
                             "termsAndConditions": "You must accept terms and conditions",
                             "phoneNumber": "Set a valid number. Only numbers and -"
                         },
-                        "noVotes":"Not votes yet"
+                        "noVotes": "Not votes yet"
                     },
                     "offers": {
                         "title": {
@@ -156,7 +150,7 @@
                         "pagesInfo": "Show page {{pageIndex}} of {{totalPages}} pages, over {{totalItems}} services",
                         "show": "View: ",
                         "noVotes": "The user has not been rated yet",
-                        "pageSelectedError":"The page number is bigger than the max of pages.",
+                        "pageSelectedError": "The page number is bigger than the max of pages.",
                         "noItems": "There is no services to show.",
                         "pageSelectedInvalid": "The number is invalid or incomplete."
                     },
@@ -205,7 +199,7 @@
                         },
                         "closed": "The conversation is closed",
                         "closedInfo": "Closed",
-                        "refresh":"Refresh list"
+                        "refresh": "Refresh list"
                     },
                     "confirmationBox": {
                         "title": "Do you confirm?",
@@ -219,7 +213,7 @@
                         "service": "Service",
                         "qualified": "You have been qualified",
                         "by": "By",
-                        
+
 
 
                     }
@@ -238,6 +232,13 @@
                 });
                 $stateProvider.state('/account', {
                     url: '/account',
+                    params: {
+                        Id: null
+                    }
+                });
+
+                $stateProvider.state('/register', {
+                    url: '/register',
                     params: {
                         Id: null
                     }
@@ -273,5 +274,24 @@
             }
         ])
         .constant('__env', env)
-        .run(assignServicesToRootScope);
+        .run(['$rootScope', 'auth', 'session', '$location', '$cookies', '$http',
+            function run($rootScope, auth, session, $location, $cookies, $http) {
+                // keep user logged in after page refresh
+                $rootScope.auth = auth;
+                $rootScope.session = session;
+                $rootScope.token = $cookies.getObject('token');
+                if ($rootScope.auth.isLoggedIn()) {
+                    $http.defaults.headers.common['Authorization'] = 'Bearer ' + $rootScope.token;
+                }
+
+                $rootScope.$on('$locationChangeStart', function (event, next, current) {
+                    // redirect to login page if not logged in and trying to access a restricted page
+                    var restrictedPage = !Boolean(['/login', '/register'].find(function find(path) {
+                        return $location.path() === path;
+                    }))
+                    if (restrictedPage && !$rootScope.auth.isLoggedIn()) {
+                        $location.path('/login');
+                    }
+                });
+            }]);
 })(angular);

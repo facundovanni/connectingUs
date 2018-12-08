@@ -80,7 +80,7 @@
                 };
 
                 ctrl.init = function init() {
-                    ctrl.checkLog();
+                    ctrl.userId = $rootScope.session.getUserId();
                     ctrl.fillArrays();
                     ctrl.getAccount();
                 };
@@ -236,12 +236,6 @@
 
                 ctrl.isLoadingOptions = function isLoadingOptions() {
                     ctrl.isLoading = ctrl.isLoadingAccount || ctrl.isLoadingCountries || ctrl.isLoadingCities;
-                };
-
-                ctrl.checkLog = function checkLog() {
-                    if ($rootScope.auth.isLoggedIn() && !ctrl.userId) {
-                        ctrl.userId = $rootScope.session.getUserId();
-                    }
                 };
 
                 ctrl.init();

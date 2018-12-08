@@ -8,7 +8,7 @@
                 ctrl.idService = idService;
                 ctrl.idChat = idChat;
                 ctrl.idAnotherUser = idAnotherUser;
-                ctrl.me = { userId: $rootScope.session.getUserId(), userName: $rootScope.session.getUser().Account.Nickname };
+                ctrl.me = { userId: $rootScope.session.getUserId(), userName: $rootScope.session.getUserNickName() };
 
                 ctrl.cancel = function () {
                     $uibModalInstance.close();

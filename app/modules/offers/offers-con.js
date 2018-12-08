@@ -20,16 +20,9 @@
                 };
                 ctrl.init = function init() {
                     //get the Offers
-                    ctrl.checkLog();
                     ctrl.getCategories();
                     ctrl.getCountries();
                     ctrl.updateOffers();
-                };
-
-                ctrl.checkLog = function checkLog() {
-                    if (!$rootScope.auth.isLoggedIn()) {
-                        $state.go('/login');
-                    }
                 };
 
                 ctrl.getCategories = function getCategories() {

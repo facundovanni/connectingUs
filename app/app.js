@@ -9,12 +9,11 @@
         message: 1,
         qualification: 2,
       };
-      ctrl.nickName = $rootScope.session.getUser() ? $rootScope.session.getUser().Account.Nickname : undefined;
       ctrl.notificationCount = 0;
       ctrl.showNoNotification = false;
-
+      ctrl.session = $rootScope.session;
       ctrl.goToMyAccount = function goToMyAccount() {
-        $state.go('/account', { Id: $rootScope.session.getUser().Id });
+        $state.go('/account', { Id: $rootScope.session.getUserId() });
       };
 
       ctrl.goToMyOffers = function goToOffers() {
@@ -39,19 +38,19 @@
       };
 
       ctrl.getNotifications = function getNotifications() {
-        Notifications.getNotificationsByUser({ idUser: $rootScope.session.getUser().Id }).$promise
+        Notifications.getNotificationsByUser({ idUser: $rootScope.session.getUserId() }).$promise
           .then(ctrl.setNotifications)
 
       };
 
       ctrl.updateNotifications = function updateNotifications() {
         if (ctrl.notificationCount > 0) {
-          Notifications.updateNotifications({ idUser: $rootScope.session.getUser().Id }).$promise
+          Notifications.updateNotifications({ idUser: $rootScope.session.getUserId() }).$promise
             .then(ctrl.afterUpdateNotifications)
         } else {
           ctrl.notifications = [];
           ctrl.showNoNotification = true;
-         
+
         }
       };
 
@@ -66,14 +65,14 @@
       };
 
 
-      setInterval(function(){
-        if($rootScope.auth.isLoggedIn()){
+      setInterval(function () {
+        if ($rootScope.auth.isLoggedIn()) {
           ctrl.getNotifications();
         }
       }, 60000)
 
-      ctrl.init = function init(){
-        if($rootScope.auth.isLoggedIn()){
+      ctrl.init = function init() {
+        if ($rootScope.auth.isLoggedIn()) {
           ctrl.getNotifications();
         }
       }

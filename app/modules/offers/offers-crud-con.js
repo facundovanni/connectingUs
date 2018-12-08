@@ -103,7 +103,6 @@
       };
 
       ctrl.init = function init() {
-        ctrl.checkLog();
         ctrl.isLoading = true;
         var promises = [];
 
@@ -157,12 +156,6 @@
       };
       ctrl.getCatchReputacion = function getCatchReputacion() {
         ctrl.isLoading = false;
-      };
-
-      ctrl.checkLog = function checkLog() {
-        if (!$rootScope.auth.isLoggedIn()) {
-          $state.go('/login');
-        }
       };
 
       ctrl.modalInstance = {

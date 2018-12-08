@@ -12,14 +12,7 @@
                 ctrl.init = function init() {
                     ctrl.isLoading = true;
                     //get the Chats
-                    ctrl.checkLog();
                     ctrl.getChats();
-                };
-
-                ctrl.checkLog = function checkLog() {
-                    if (!$rootScope.auth.isLoggedIn()) {
-                        $state.go('/login');
-                    }
                 };
 
                 ctrl.getChatsOthers = function getChatsOthers() {
