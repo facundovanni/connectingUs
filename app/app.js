@@ -66,7 +66,11 @@
 
       setInterval(function () {
         if ($rootScope.auth.isLoggedIn()) {
-          ctrl.getNotifications();
+          if(!ctrl.user){
+            User.getUserLogged().then(ctrl.setUser);  
+          }else{
+            ctrl.getNotifications();
+          }
         }
       }, 60000)
 
