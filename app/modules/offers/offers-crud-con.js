@@ -108,6 +108,7 @@
 
         promises.push(Categories.getAll().$promise);
         promises.push(Countries.getAll().$promise);
+        promises.push(User.getUserLogged());
         if (ctrl.offer.Id) {
           promises.push(Offers.getService({
             idService: ctrl.offer.Id
@@ -120,12 +121,13 @@
       ctrl.setData = function setData(result) {
         ctrl.categories = result[0];
         ctrl.countries = result[1];
-        if (!result[2][0]) {
+        ctrl.userId = result[2].Id;
+        if (!result[3][0]) {
           ctrl.offer = {};
-          ctrl.offer.userId = $rootScope.session.getUserId();
+          ctrl.offer.userId = ctrl.userId;
           ctrl.isLoading = false;
         } else {
-          ctrl.offer = result[2][0];
+          ctrl.offer = result[3][0];
           ctrl.getCities();
         }
         if (ctrl.myOffer) {

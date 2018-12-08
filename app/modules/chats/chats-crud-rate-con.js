@@ -1,12 +1,13 @@
 (function ChatsCRUDRateScope(angular) {
     'use strict';
     angular.module('connectingUsCenter.chats').controller('ChatsCRUDRRateController',
-        ['$uibModalInstance', '$rootScope', 'Chats', 'idChat', 'idUserRated', 'idService', 'toastr', '$translate',
-            function ChatsCRUDRateController($uibModalInstance, $rootScope, Chats, idChat, idUserRated, idService, toastr, $translate) {
+        ['$uibModalInstance', '$rootScope', 'Chats', 'idChat', 'idUserRated', 'idService','idUser', 'toastr', '$translate',
+            function ChatsCRUDRateController($uibModalInstance, $rootScope, Chats, idChat, idUserRated, idService, idUser, toastr, $translate) {
                 var ctrl = this;
                 ctrl.idService = idService;
                 ctrl.idChat = idChat;
                 ctrl.idUserRated = idUserRated;
+                ctrl.idUser = idUser;
                 ctrl.rating = {
                     current: 1,
                     max: 5
@@ -22,7 +23,7 @@
                 ctrl.sendRate = function sendRate() {
                     ctrl.rate = {
                         Id: ctrl.idChat,
-                        UserRequesterId: $rootScope.session.getUserId(),
+                        UserRequesterId: ctrl.idUser,
                         UserOffertorId: ctrl.idUserRated
                     };
                     if (ctrl.rating.current) {

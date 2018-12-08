@@ -2,7 +2,7 @@
   'use strict';
   // Declare app level module which depends on views, and components
   angular.module('connectingUsCenter')
-    .controller('AppController', ['$state', '$rootScope', 'Notifications', function AppController($state, $rootScope, Notifications) {
+    .controller('AppController', ['$state', '$rootScope', 'Notifications','User', function AppController($state, $rootScope, Notifications,User) {
       var ctrl = this;
       ctrl.notifications = [];
       ctrl.types = {
@@ -11,9 +11,8 @@
       };
       ctrl.notificationCount = 0;
       ctrl.showNoNotification = false;
-      ctrl.session = $rootScope.session;
       ctrl.goToMyAccount = function goToMyAccount() {
-        $state.go('/account', { Id: $rootScope.session.getUserId() });
+        $state.go('/account');
       };
 
       ctrl.goToMyOffers = function goToOffers() {
@@ -38,14 +37,14 @@
       };
 
       ctrl.getNotifications = function getNotifications() {
-        Notifications.getNotificationsByUser({ idUser: $rootScope.session.getUserId() }).$promise
+        Notifications.getNotificationsByUser({ idUser: ctrl.user.Id }).$promise
           .then(ctrl.setNotifications)
 
       };
 
       ctrl.updateNotifications = function updateNotifications() {
         if (ctrl.notificationCount > 0) {
-          Notifications.updateNotifications({ idUser: $rootScope.session.getUserId() }).$promise
+          Notifications.updateNotifications({ idUser: ctrl.user.Id }).$promise
             .then(ctrl.afterUpdateNotifications)
         } else {
           ctrl.notifications = [];
@@ -73,9 +72,15 @@
 
       ctrl.init = function init() {
         if ($rootScope.auth.isLoggedIn()) {
-          ctrl.getNotifications();
+          User.getUserLogged().then(ctrl.setUser);
         }
-      }
+      };
+
+      ctrl.setUser = function setUser(user){
+        ctrl.user = user;
+        ctrl.getNotifications();
+      };
+
 
       ctrl.init();
 

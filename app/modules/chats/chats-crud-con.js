@@ -1,20 +1,26 @@
 (function ChatsCRUDScope(angular) {
     'use strict';
     angular.module('connectingUsCenter.chats').controller('ChatsCRUDController',
-        ['$uibModalInstance', '$rootScope', 'Chats', 'idChat', 'idAnotherUser', 'idService', 'toastr', '$translate', 'type', '$uibModal', 'ConfirmationBox',
-            function ($uibModalInstance, $rootScope, Chats, idChat, idAnotherUser, idService, toastr, $translate, type, $uibModal, ConfirmationBox) {
+        ['$uibModalInstance', 'Chats', 'idChat', 'idAnotherUser', 'idService', 'toastr', '$translate', 'type', '$uibModal', 'ConfirmationBox', 'User',
+            function ($uibModalInstance, Chats, idChat, idAnotherUser, idService, toastr, $translate, type, $uibModal, ConfirmationBox, User) {
                 var ctrl = this;
                 ctrl.isMyOffer = type;
                 ctrl.idService = idService;
                 ctrl.idChat = idChat;
                 ctrl.idAnotherUser = idAnotherUser;
-                ctrl.me = { userId: $rootScope.session.getUserId(), userName: $rootScope.session.getUserNickName() };
 
                 ctrl.cancel = function () {
                     $uibModalInstance.close();
                 };
 
                 ctrl.init = function init() {
+
+                    User.getUserLogged().then(ctrl.setUser);
+                };
+
+                ctrl.setUser = function setUser(user) {
+                    ctrl.user = user;
+                    ctrl.me = { userId: ctrl.user.Id, userName: ctrl.user.Account.Nickname };
                     //get the Chats
                     if (!ctrl.idChat) {
                         ctrl.openChat();
@@ -39,7 +45,7 @@
                 };
 
                 ctrl.openChat = function openChat() {
-                    Chats.isChatOpened({ IdUser: $rootScope.session.getUserId(), IdService: ctrl.idService }).$promise
+                    Chats.isChatOpened({ IdUser: ctrl.user.Id, IdService: ctrl.idService }).$promise
                         .then(ctrl.configureChat);
                 };
 
@@ -51,8 +57,8 @@
                             Service: {
                                 Id: ctrl.idService
                             },
-                            UserRequesterId: ctrl.isMyOffer ? ctrl.idAnotherUser : $rootScope.session.getUserId(),
-                            UserOffertorId: ctrl.isMyOffer ? $rootScope.session.getUserId() : ctrl.idAnotherUser,
+                            UserRequesterId: ctrl.isMyOffer ? ctrl.idAnotherUser : ctrl.user.Id,
+                            UserOffertorId: ctrl.isMyOffer ? ctrl.user.Id : ctrl.idAnotherUser,
                             LastMessageDate: new Date()
                         };
                         Chats.save(chat).$promise
@@ -69,7 +75,7 @@
                 ctrl.sendMessage = function sendMessage(message) {
                     var msj = {
                         IdChat: ctrl.idChat,
-                        UserSenderId: $rootScope.session.getUserId(),
+                        UserSenderId: ctrl.user.Id,
                         UserReceiverId: ctrl.idAnotherUser,
                         Text: message.text,
                         Date: new Date(message.date).toJSON()
@@ -102,7 +108,8 @@
                     modalInstance.resolve = {
                         idChat: function resolve() { return ctrl.chat.Id },
                         idUserRated: function resolve() { return ctrl.idAnotherUser },
-                        idService: function resolve() { return ctrl.idService }
+                        idService: function resolve() { return ctrl.idService },
+                        idUser: function resolve() { return ctrl.user.Id }
                     };
 
                     $uibModal.open(modalInstance).result.then(function success() {

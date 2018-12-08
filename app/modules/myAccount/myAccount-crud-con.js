@@ -2,10 +2,9 @@
     'use strict';
 
     angular.module('connectingUsCenter.myAccount')
-        .controller('myAccountCRUDController', ['MyAccount', '$translate', '$state', 'Countries', 'Cities', '$stateParams', 'toastr', '$rootScope', 'ConfirmationBox',
-            function (MyAccount, $translate, $state, Countries, Cities, $stateParams, toastr, $rootScope, ConfirmationBox) {
+        .controller('myAccountCRUDController', ['MyAccount', '$translate', '$state', 'Countries', 'Cities', 'User', 'toastr', '$rootScope', 'ConfirmationBox',
+            function (MyAccount, $translate, $state, Countries, Cities, User, toastr, $rootScope, ConfirmationBox) {
                 var ctrl = this;
-                ctrl.userId = $stateParams.Id;
                 ctrl.today = new Date();
                 ctrl.modalVisible = false;
                 ctrl.myAccount = MyAccount.getDefaultEntity();
@@ -80,7 +79,6 @@
                 };
 
                 ctrl.init = function init() {
-                    ctrl.userId = $rootScope.session.getUserId();
                     ctrl.fillArrays();
                     ctrl.getAccount();
                 };
@@ -142,9 +140,8 @@
 
                 ctrl.getAccount = function getAccount() {
                     ctrl.isLoading = true;
-                    ctrl.myAccount.Id = ctrl.userId ? ctrl.userId : undefined;
-                    if (ctrl.myAccount.Id) {
-                        MyAccount.get({ Id: ctrl.myAccount.Id }).$promise
+                    if ($rootScope.auth.isLoggedIn()) {
+                        User.getUserLogged()
                             .then(ctrl.setAccount)
                             .catch(ctrl.onCatchAccount)
                             .finally(ctrl.setView);

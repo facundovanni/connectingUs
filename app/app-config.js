@@ -231,17 +231,11 @@
                     url: '/about'
                 });
                 $stateProvider.state('/account', {
-                    url: '/account',
-                    params: {
-                        Id: null
-                    }
+                    url: '/account'
                 });
 
                 $stateProvider.state('/register', {
-                    url: '/register',
-                    params: {
-                        Id: null
-                    }
+                    url: '/register'
                 });
 
                 $stateProvider.state('/offers', {
@@ -265,7 +259,7 @@
 
                 $locationProvider.hashPrefix('');
 
-                $urlRouterProvider.otherwise(function ($injector, $location) {
+                $urlRouterProvider.otherwise(function ($injector) {
                     var $state = $injector.get('$state');
                     $state.go('/login');
                 });
@@ -274,11 +268,10 @@
             }
         ])
         .constant('__env', env)
-        .run(['$rootScope', 'auth', 'session', '$location', '$cookies', '$http',
-            function run($rootScope, auth, session, $location, $cookies, $http) {
+        .run(['$rootScope', 'auth', '$location', '$cookies', '$http',
+            function run($rootScope, auth, $location, $cookies, $http) {
                 // keep user logged in after page refresh
                 $rootScope.auth = auth;
-                $rootScope.session = session;
                 $rootScope.token = $cookies.getObject('token');
                 if ($rootScope.auth.isLoggedIn()) {
                     $http.defaults.headers.common['Authorization'] = 'Bearer ' + $rootScope.token;

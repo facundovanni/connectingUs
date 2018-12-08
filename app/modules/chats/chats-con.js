@@ -2,8 +2,8 @@
     'use strict';
 
     angular.module('connectingUsCenter.chats')
-        .controller('ChatsController', ['Chats', '$rootScope', '$state', '$uibModal', '$q', 'toastr', '$translate',
-            function (Chats, $rootScope, $state, $uibModal, $q, toastr, $translate) {
+        .controller('ChatsController', ['Chats', 'User', '$uibModal', 'toastr', '$translate',
+            function (Chats, User, $uibModal, toastr, $translate) {
                 var ctrl = this;
                 ctrl.false = false;
                 ctrl.chats = [];
@@ -12,13 +12,18 @@
                 ctrl.init = function init() {
                     ctrl.isLoading = true;
                     //get the Chats
+                    User.getUserLogged().then(ctrl.setUser);
+               };
+
+                ctrl.setUser = function setUser(user) {
+                    ctrl.user = user;
                     ctrl.getChats();
                 };
 
                 ctrl.getChatsOthers = function getChatsOthers() {
                     ctrl.chats = [];
                     ctrl.isLoading = true;
-                    Chats.getAllAsRequester({ idUser: $rootScope.session.getUserId() }).$promise
+                    Chats.getAllAsRequester({ idUser: ctrl.user.Id }).$promise
                         .then(ctrl.setChats)
                         .catch(ctrl.catchChats);
                 };
@@ -26,7 +31,7 @@
                 ctrl.getChatsMy = function getChatsMy() {
                     ctrl.chats=[];
                     ctrl.isLoading = true;
-                    Chats.getAllAsOffertor({ idUser: $rootScope.session.getUserId() }).$promise
+                    Chats.getAllAsOffertor({ idUser: ctrl.user.Id }).$promise
                         .then(ctrl.setChats)
                         .catch(ctrl.catchChats);
                 };

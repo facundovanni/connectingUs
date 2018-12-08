@@ -2,8 +2,8 @@
     'use strict';
 
     angular.module('connectingUsCenter.offers')
-        .controller('OffersController', ['Offers', '$rootScope', '$state', 'Countries', 'Cities', 'Categories', 'isMyOwn', 'toastr', '$translate',
-            function (Offers, $rootScope, $state, Countries, Cities, Categories, isMyOwn, toastr, $translate) {
+        .controller('OffersController', ['Offers', '$rootScope', '$state', 'Countries', 'Cities', 'Categories', 'isMyOwn', 'toastr', '$translate', 'User',
+            function (Offers, $rootScope, $state, Countries, Cities, Categories, isMyOwn, toastr, $translate, User) {
                 var ctrl = this;
 
                 ctrl.offers = [];
@@ -22,6 +22,11 @@
                     //get the Offers
                     ctrl.getCategories();
                     ctrl.getCountries();
+                    User.getUserLogged().then(ctrl.setUser);
+                };
+
+                ctrl.setUser = function setUser(user) {
+                    ctrl.user = user;
                     ctrl.updateOffers();
                 };
 
@@ -66,7 +71,7 @@
                     ctrl.filters.IdCountry = ctrl.filterCountry ? ctrl.filterCountry.Id : undefined;
                     ctrl.filters.IdCity = ctrl.filterCity ? ctrl.filterCity.Id : undefined;
                     ctrl.filters.Active = !ctrl.myOffers ? undefined : !ctrl.showInactives;
-                    ctrl.filters.IdUser = $rootScope.session.getUserId();
+                    ctrl.filters.IdUser = ctrl.user.Id;
                     ctrl.filters.Text = ctrl.searchText ? ctrl.searchText : undefined;
                     ctrl.filters.NumberOfPage = ctrl.pagination.pageIndex;
                     ctrl.filters.NumberOfRows = ctrl.pagination.itemsPerPage;
