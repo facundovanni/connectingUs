@@ -122,7 +122,7 @@
                             "phoneNumber": "Set a valid number. Only numbers and -"
                         },
                         "noVotes": "Not votes yet",
-                        "mailExisting": "The email is already registered"
+                        "mailExisting": "The email or nickname is already registered"
                     },
                     "offers": {
                         "title": {
