@@ -2,7 +2,7 @@
   'use strict';
   // Declare app level module which depends on views, and components
   angular.module('connectingUsCenter')
-    .controller('AppController', ['$state', '$rootScope', 'Notifications','User', function AppController($state, $rootScope, Notifications,User) {
+    .controller('AppController', ['$state', '$rootScope', 'Notifications','User','$window', function AppController($state, $rootScope, Notifications,User,$window) {
       var ctrl = this;
       ctrl.notifications = [];
       ctrl.types = {
@@ -25,7 +25,7 @@
 
       ctrl.logout = function logout() {
         $rootScope.auth.logOut();
-        $state.go('/login');
+        $window.location.reload();
       };
 
       ctrl.goToAbout = function goToAbout() {
