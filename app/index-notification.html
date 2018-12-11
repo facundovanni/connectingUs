@@ -11,12 +11,12 @@
                     <p>{{'notifications.service' | translate}}: {{notif.ServiceTitle}}</p>
                     <hr class="notification-separator">
                 </a>
-            </li>
-            <li ng-if="notif.IdType === ctrl.types.qualification">
-                <span class="new-message">{{'notifications.qualified' | translate}}</span><br>
-                <span>{{'notifications.by' | translate}}: {{notif.NicknameUserSender}}</span>
-                <p>{{'notifications.service' | translate}}: {{notif.ServiceTitle}}</p>
-                <hr class="notification-separator">
+                <a ng-if="notif.IdType === ctrl.types.qualification">
+                    <span class="new-message">{{'notifications.qualified' | translate}}</span><br>
+                    <span>{{'notifications.by' | translate}}: {{notif.NicknameUserSender}}</span>
+                    <p>{{'notifications.service' | translate}}: {{notif.ServiceTitle}}</p>
+                    <hr class="notification-separator">
+                </a>
             </li>
         </ul>
     </div>
