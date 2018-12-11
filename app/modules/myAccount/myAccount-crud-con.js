@@ -2,8 +2,8 @@
     'use strict';
 
     angular.module('connectingUsCenter.myAccount')
-        .controller('myAccountCRUDController', ['MyAccount', '$translate', '$state', 'Countries', 'Cities', 'User', 'toastr', '$rootScope', 'ConfirmationBox',
-            function (MyAccount, $translate, $state, Countries, Cities, User, toastr, $rootScope, ConfirmationBox) {
+        .controller('myAccountCRUDController', ['MyAccount', '$translate', '$state', 'Countries', 'Cities', 'User', 'toastr', '$rootScope', 'ConfirmationBox','$window',
+            function (MyAccount, $translate, $state, Countries, Cities, User, toastr, $rootScope, ConfirmationBox,$window) {
                 var ctrl = this;
                 ctrl.today = new Date();
                 ctrl.modalVisible = false;
@@ -79,6 +79,9 @@
                 };
 
                 ctrl.init = function init() {
+                    if($state.current.name === '/register' && $rootScope.auth.isLoggedIn()){
+                        ctrl.goToOffers();
+                    }
                     ctrl.fillArrays();
                     ctrl.getAccount();
                 };
@@ -206,8 +209,12 @@
                 ctrl.loginUser = function loginUser() {
                     ctrl.isLoading = true;
                     $rootScope.auth.logIn({ Mail: ctrl.myAccount.Account.Mail, Password: ctrl.myAccount.Account.Password })
-                        .then(ctrl.goToOffers)
+                        .then(ctrl.onLoginSuccess)
                         .catch(ctrl.onCatchLogin);
+                };
+
+                ctrl.onLoginSuccess = function onLoginSuccess() {
+                    $window.location.reload();
                 };
 
                 ctrl.cancel = function () {
