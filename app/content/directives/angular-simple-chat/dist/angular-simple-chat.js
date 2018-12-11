@@ -606,7 +606,6 @@
                 scrollToBottom = function () {
                     $simpleChatContainer.scrollTop = $simpleChatContainer.scrollHeight;
                 };
-            console.log(scope.sc.showComposer);
             scope.$on('simple-chat-message-posted', function () {
                 $timeout(scrollToBottom, 0);
             });

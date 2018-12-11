@@ -144,7 +144,7 @@
                 ctrl.getAccount = function getAccount() {
                     ctrl.isLoading = true;
                     if ($rootScope.auth.isLoggedIn()) {
-                        User.getUserLogged()
+                        MyAccount.getUser()
                             .then(ctrl.setAccount)
                             .catch(ctrl.onCatchAccount)
                             .finally(ctrl.setView);

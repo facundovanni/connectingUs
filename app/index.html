@@ -30,7 +30,7 @@
           <img class="header-logo" title="Connecting Us" src="content/images/connectingUsLogo.png">
           <a class="navbar-brand headerTitle" ui-sref="/offers">Connecting Us</a>
           <span class="pull-right header-account-name">
-            <div ng-if="auth.isLoggedIn()" ng-class="ctrl.notificationCount === 0 ? 'dot' : 'dot-red'">
+            <div ng-if="auth.isLoggedIn() && ctrl.notificationCount" ng-class="ctrl.notificationCount === 0 ? 'dot' : 'dot-red'">
               <p class="text-notification">{{ctrl.notificationCount}}</p>
             </div>
             <span ng-include="'index-notification.html'"></span>
